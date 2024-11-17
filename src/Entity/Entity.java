@@ -17,8 +17,8 @@ public class Entity
     protected BufferedImage[] flipBook;
     protected BufferedImage sprite;
 
-    /**Refresh sprite frequently to simulate flipBook or animation*/
-    protected void animationFlow(float dt)
+    /**Refresh sprite frequently to run flipBook (or play animation)*/
+    protected void runFlipBook(float dt)
     {
         if(flipBook == null||flipBook.length < 1) return;
         passDelta += dt;
@@ -28,7 +28,7 @@ public class Entity
         currentFrame ++;
         if(currentFrame >= flipBook.length) currentFrame = 0;
         sprite = flipBook[currentFrame];
-        System.out.println("sprite has refreshed");
+        //System.out.println("sprite has refreshed");
     }
 
 }

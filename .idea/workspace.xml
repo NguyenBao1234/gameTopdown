@@ -4,15 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameTopdown.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoreGame/Main.java" afterDir="false" />
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add scripts">
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle0_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle10_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle11_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle1_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle2_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle3_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle4_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle5_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle6_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle7_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle8_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle9_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/Enums/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Enums/Direction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle0_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle0_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle10_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle10_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle11_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle11_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle1_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle1_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle2_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle2_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle3_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle3_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle4_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle4_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle5_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle5_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle6_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle6_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle7_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle7_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle8_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle8_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle9_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle9_0.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +56,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;NguyenBao1234&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown.git&quot;,
+    &quot;accountId&quot;: &quot;15fd9497-c104-4ab4-ab72-4a895a176465&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -38,15 +77,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "D:/ProjectSchool/OnClass/gameTopdown/src/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player\ImageSet" />
+      <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +107,56 @@
       <option name="presentableId" value="Default" />
       <updated>1731511338608</updated>
     </task>
+    <task id="LOCAL-00001" summary="- add scripts">
+      <option name="closed" value="true" />
+      <created>1731572824216</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731572824216</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="00ff3bdb-3691-497e-8eb3-b7d7f8c9f6ac" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="00ff3bdb-3691-497e-8eb3-b7d7f8c9f6ac">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- add scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add scripts" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="javax.imageio.IIOException" package="javax.imageio" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

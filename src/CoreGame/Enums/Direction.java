@@ -1,6 +1,6 @@
-package CoreGame;
+package CoreGame.Enums;
 
 public enum Direction
 {
-    left, right, up, down;
+    up, down, left, right;
 }

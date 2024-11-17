@@ -32,8 +32,7 @@ public class KeyHandler implements KeyListener
         //System.out.println("RELEASE");
     }
 
-    public static boolean isKeyPressed(int KeyCode)
-    {
+    public static boolean isKeyPressed(int KeyCode) {
         return getInstKeyHdl().bPressedButtons[KeyCode];
     }
 

@@ -23,7 +23,7 @@ public class ImageLoader
     public static BufferedImage[] makeFlipBook( String folderPath)
     {
         File folder = new File(folderPath);
-        if (!folder.isDirectory()) throw new IllegalArgumentException("Đường dẫn không phải là một thư mục!");
+        if (!folder.isDirectory()) throw new IllegalArgumentException("Đường dẫn không phải là một thư mục! ");
 
         // Lấy danh sách tất cả các file trong thư mục
         File[] files = folder.listFiles();

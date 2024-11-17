@@ -6,26 +6,30 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
-public class Character extends Entity
+public class BaseCharacter extends Entity
 {
     protected int vAxisX;
     protected int vAxisY;
 
-    private ArrayList<Direction> directionList = new ArrayList<>(2);
-    /**chi can truyen so dong cho mang animation*/
-    protected BufferedImage[][] animationArr;
+    private final ArrayList<Direction> directionList = new ArrayList<>(2);
 
-    public Character()
+    /**Mang chi can 'row' de chua bao nhieu flipBook (flipBook: buffered image array, tuong duong nhu 1 animation).
+     * vi du: flipBookArr = new BufferImage[x][_].*/
+    protected BufferedImage[][] flipBookArr;
+
+    public BaseCharacter()
     {
-
+        directionList.add(Direction.down);
     }
-
+    /** Chon mang Buffered Image nao lam flipBook. Truoc khi goi ham nay can khoi tao flipBookArr[][]truoc*/
     public void setAnimationToUse(int index, int FPSPerImage)
     {
-        if(index >= animationArr.length) return;
-        flipBook = animationArr[index];
+        if(index >= flipBookArr.length) return;
+        flipBook = flipBookArr[index];
         fpsPerImage = FPSPerImage;
+        //System.out.println("Setup Animation: successes");
     }
+
 
     protected void updateCurrentDirectionX(int AxisX)
     {
@@ -41,8 +45,8 @@ public class Character extends Entity
         if(directionList.contains(newDirection)) return;
         if(directionList.size() == 2) directionList.removeFirst();
         directionList.add(newDirection);
-
     }
+
     protected void updateCurrentDirectionY(int AxisY)
     {
         vAxisY = AxisY;
@@ -57,9 +61,8 @@ public class Character extends Entity
         if(directionList.contains(newDirection)) return;
         if(directionList.size() == 2) directionList.removeFirst();
         directionList.add(newDirection);
-
-
     }
+
     public Direction getCurrentDirection()
     {
         return directionList.getLast();
