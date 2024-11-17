@@ -4,42 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add scripts">
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle0_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle10_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle11_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle1_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle2_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle3_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle4_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle5_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle6_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle7_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle8_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Player/right/idle/spr_player_right_idle9_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/Enums/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Enums/Direction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/KeyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Player.java" afterDir="false" />
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)">
       <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle0_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle0_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle10_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle10_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle11_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle11_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle1_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle1_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle2_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle2_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle3_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle3_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle4_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle4_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle5_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle5_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle6_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle6_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle7_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle7_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle8_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle8_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resource/Player/Extracted/idle/spr_player_front_idle9_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resource/Player/front/idle/spr_player_front_idle9_0.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +81,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731572824216</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)">
+      <option name="closed" value="true" />
+      <created>1731860495046</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731860495046</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,7 +121,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- add scripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add scripts" />
+    <MESSAGE value="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
