@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)">
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add more image for animations">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +23,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -48,7 +56,7 @@
     &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
@@ -89,7 +97,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731860495046</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="- add more image for animations">
+      <option name="closed" value="true" />
+      <created>1731861370106</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731861370106</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -122,7 +138,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- add scripts" />
     <MESSAGE value="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)" />
-    <option name="LAST_COMMIT_MESSAGE" value="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)" />
+    <MESSAGE value="- add more image for animations" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add more image for animations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -130,6 +147,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="javax.imageio.IIOException" package="javax.imageio" />
           <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.NoSuchElementException" package="java.util" />
+          <option name="timeStamp" value="4" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
