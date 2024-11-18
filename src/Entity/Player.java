@@ -81,20 +81,24 @@ public class Player extends BaseCharacter
         switch (getCurrentDirection())
         {
             case Direction.up :
+                //System.out.println("up");
                 if(vAxisY == 0) setAnimationToUse(1,4);
-                else setAnimationToUse(4,4);
+                else setAnimationToUse(5,4);
                 break;
             case Direction.down:
+                //System.out.println("down");
                 if(vAxisY == 0) setAnimationToUse(0,4);
                 else setAnimationToUse(4,4);
                 break;
             case Direction.left:
+                //System.out.println("left");
                 if(vAxisX == 0) setAnimationToUse(2,4);
-                else setAnimationToUse(4,4);
+                else setAnimationToUse(6,4);
                 break;
             case Direction.right:
+                //System.out.println("right");
                 if(vAxisX == 0) setAnimationToUse(3,4);
-                else setAnimationToUse(4,4);
+                else setAnimationToUse(7,4);
                 break;
         }
 
@@ -115,7 +119,18 @@ public class Player extends BaseCharacter
         BufferedImage rightIdleFlipBook[] = ImageLoader.makeFlipBook("src/Resource/Player/right/idle");
         flipBookArr[3] = rightIdleFlipBook;
 
+        BufferedImage fontWalkFlipBook[] =  ImageLoader.makeFlipBook("src/Resource/Player/front/walk");
+        flipBookArr[4] = fontWalkFlipBook;
+
         BufferedImage backWalkFlipBook[] = ImageLoader.makeFlipBook("src/Resource/Player/back/walk");
-        flipBookArr[4] = backWalkFlipBook;
+        flipBookArr[5] = backWalkFlipBook;
+
+        BufferedImage leftWalkFlipBook[] =  ImageLoader.makeFlipBook("src/Resource/Player/left/walk");
+        flipBookArr[6] = leftWalkFlipBook;
+
+        BufferedImage rightWalkFlipBook[] =  ImageLoader.makeFlipBook("src/Resource/Player/right/walk");
+        flipBookArr[7] = rightWalkFlipBook;
+
+
     }
 }

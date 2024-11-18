@@ -38,11 +38,11 @@ public class BaseCharacter extends Entity
         {
             if(directionList.size() <= 1) return;
             if(!directionList.contains(Direction.left) && !directionList.contains(Direction.right)) return;
-            directionList.remove(Direction.left);
-            directionList.remove(Direction.right);
+            directionList.removeFirst();
+            return;
         }
         Direction newDirection = (AxisX < 0 ) ? Direction.left : Direction.right;
-        if(directionList.contains(newDirection)) return;
+        if(directionList.getLast() == newDirection) return;
         if(directionList.size() == 2) directionList.removeFirst();
         directionList.add(newDirection);
     }
@@ -54,11 +54,11 @@ public class BaseCharacter extends Entity
         {
             if(directionList.size() <= 1) return;
             if(!directionList.contains(Direction.up) && !directionList.contains(Direction.down)) return;
-            directionList.remove(Direction.up);
-            directionList.remove(Direction.down);
+            directionList.removeFirst();
+            return;
         }
-        Direction newDirection = (AxisY < 0 ) ? Direction.up : Direction.down;
-        if(directionList.contains(newDirection)) return;
+        Direction newDirection = (AxisY < 0 ) ? Direction.down : Direction.up;
+        if(directionList.getLast() == newDirection) return;
         if(directionList.size() == 2) directionList.removeFirst();
         directionList.add(newDirection);
     }
