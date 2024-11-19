@@ -19,8 +19,12 @@ public class GamePanel extends JPanel implements Runnable
     public final int screenWidth = tileSize*maxScreenCol;
     public final int screenHeight = tileSize*maxScreenRow;
 
+    // SYSTEM
+    Sound sound = new Sound();
+
     Thread gameThread;
 
+    // ENTITY AND OBJECT
     public Player player = new Player(this);
 
     public GamePanel()
@@ -33,6 +37,10 @@ public class GamePanel extends JPanel implements Runnable
         this.requestFocus();
     }
 
+    public void setupGame() {
+
+        playMusic(0); // play background music
+    }
     public void startGameThread()
     {
         gameThread = new Thread(this);
@@ -83,4 +91,20 @@ public class GamePanel extends JPanel implements Runnable
         Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
         player.renderSprite(g2);
     }
+
+    public void playMusic(int i) {
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+
+    public void stopMusic() {
+        sound.stop();
+    }
+
+    public void playSE(int i) {
+        sound.setFile(i);
+        sound.play();
+    }
+
 }

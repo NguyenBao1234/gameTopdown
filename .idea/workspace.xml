@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add more image for animations">
+      <change afterPath="$PROJECT_DIR$/src/CoreGame/Sound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/BlueBoyAdventure.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/coin.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/fanfare.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/powerup.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/unlock.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="workbranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,8 +43,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown.git&quot;,
-    &quot;accountId&quot;: &quot;15fd9497-c104-4ab4-ab72-4a895a176465&quot;
+    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown&quot;,
+    &quot;accountId&quot;: &quot;5bcfadae-ee6f-4a2c-9fb1-e6868b8ef68a&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -51,23 +56,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ImageGridSplitter.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Sound",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/ProjectSchool/OnClass/gameTopdown/resources/Player",
+    "onboarding.tips.debug.path": "D:/ProjectSchool/OnClass/gameTopdown/src/Main.java",
+    "settings.editor.selected.configurable": "editor.preferences.completion"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\linh\dai hoc\cong nghe Java\IdeaProjects\gameTopdown\src\Resource\Sound" />
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player\ImageSet" />
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
     </key>
@@ -129,7 +136,19 @@
         </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Sound" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
