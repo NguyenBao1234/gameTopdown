@@ -42,6 +42,7 @@ public class Player extends BaseCharacter
         g2.drawImage(sprite,screenX,screenY, 64*gamePanel.scale,64*gamePanel.scale, null);
     }
 
+    
     void InputAxisFlow()
     {
         float speedFactor = 1;
@@ -75,7 +76,7 @@ public class Player extends BaseCharacter
         }
     }
 
-
+    /**Choose animation*/
     void handelAnimation()
     {
         switch (getCurrentDirection())
@@ -107,20 +108,20 @@ public class Player extends BaseCharacter
     //Hardcode
     void setupAnimations()
     {
-        flipBookArr[0] = ImageLoader.makeFlipBook("src/Resource/Player/front/idle");
+        flipBookArr[0] = ImageLoader.makeFlipBook("/Player/front/idle");
 
-        flipBookArr[1] = ImageLoader.makeFlipBook("src/Resource/Player/back/idle");
+        flipBookArr[1] = ImageLoader.makeFlipBook("/Player/back/idle");
 
-        flipBookArr[2] = ImageLoader.makeFlipBook("src/Resource/Player/left/idle");
+        flipBookArr[2] = ImageLoader.makeFlipBook("/Player/left/idle");
 
-        flipBookArr[3] = ImageLoader.makeFlipBook("src/Resource/Player/right/idle");
+        flipBookArr[3] = ImageLoader.makeFlipBook("/Player/right/idle");
 
-        flipBookArr[4] = ImageLoader.makeFlipBook("src/Resource/Player/front/walk");
+        flipBookArr[4] = ImageLoader.makeFlipBook("/Player/front/walk");
 
-        flipBookArr[5] = ImageLoader.makeFlipBook("src/Resource/Player/back/walk");
+        flipBookArr[5] = ImageLoader.makeFlipBook("/Player/back/walk");
 
-        flipBookArr[6] = ImageLoader.makeFlipBook("src/Resource/Player/left/walk");
+        flipBookArr[6] = ImageLoader.makeFlipBook("/Player/left/walk");
 
-        flipBookArr[7] = ImageLoader.makeFlipBook("src/Resource/Player/right/walk");
+        flipBookArr[7] = ImageLoader.makeFlipBook("/Player/right/walk");
     }
 }

@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ImageLoader
@@ -19,10 +21,18 @@ public class ImageLoader
         }
         return false;
     }
-    /** make BufferedImage Array from images in specify folder */
+    /** make BufferedImage Array from images in specify folder in resources */
     public static BufferedImage[] makeFlipBook( String folderPath)
     {
-        File folder = new File(folderPath);
+        URL urlResFolder =  ImageLoader.class.getResource(folderPath);
+        File folder = null;
+        try {
+            assert urlResFolder != null;
+            folder = new File(urlResFolder.toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+
         if (!folder.isDirectory()) throw new IllegalArgumentException("Đường dẫn không phải là một thư mục! ");
 
         // Lấy danh sách tất cả các file trong thư mục
