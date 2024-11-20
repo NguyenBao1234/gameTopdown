@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add more image for animations">
-      <change afterPath="$PROJECT_DIR$/src/CoreGame/Sound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/BlueBoyAdventure.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/coin.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/fanfare.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/powerup.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resource/Sound/unlock.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="thêm chức năng Volume ở Sound.java&#10;thay biến phát âm thanh thành string + tìm đc tên file audio ở folder resources">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Sound.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,19 +50,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ImageGridSplitter.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Sound",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ProjectSchool/OnClass/gameTopdown/resources/Player",
-    "onboarding.tips.debug.path": "D:/ProjectSchool/OnClass/gameTopdown/src/Main.java",
-    "settings.editor.selected.configurable": "editor.preferences.completion"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Sound&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
@@ -112,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731861370106</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java">
+      <option name="closed" value="true" />
+      <created>1731987855015</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731987855015</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,7 +160,8 @@
     <MESSAGE value="- add scripts" />
     <MESSAGE value="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)" />
     <MESSAGE value="- add more image for animations" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add more image for animations" />
+    <MESSAGE value="add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

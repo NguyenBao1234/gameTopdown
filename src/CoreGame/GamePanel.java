@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable
     public final int screenHeight = tileSize*maxScreenRow;
 
     // SYSTEM
-    Sound sound = new Sound();
+     Sound sound = new Sound();
 
     Thread gameThread;
 
@@ -37,9 +37,10 @@ public class GamePanel extends JPanel implements Runnable
         this.requestFocus();
     }
 
+
     public void setupGame() {
 
-        playMusic(0); // play background music
+        sound.playBackgroundMusic("BlueBoyAdventure.wav"); // play background music
     }
     public void startGameThread()
     {
@@ -92,19 +93,5 @@ public class GamePanel extends JPanel implements Runnable
         player.renderSprite(g2);
     }
 
-    public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
-    }
-
-    public void stopMusic() {
-        sound.stop();
-    }
-
-    public void playSE(int i) {
-        sound.setFile(i);
-        sound.play();
-    }
 
 }
