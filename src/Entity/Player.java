@@ -46,7 +46,7 @@ public class Player extends BaseCharacter
     void InputAxisFlow()
     {
         float speedFactor = 1;
-        if( vAxisX !=0 && vAxisY !=0 ) speedFactor =  0.5f;
+        if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) updateCurrentDirectionX(0);
 
