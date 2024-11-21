@@ -1,11 +1,9 @@
-package tile;
+package Tile;
 
 import CoreGame.GamePanel;
-import Entity.Entity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,17 +20,17 @@ public class TileManager {
         tile = new Tile[20]; //if ya want more kinda tile, ya can change 20 to the number ya want
         mapTileNum = new int[50][50];
         getTileImage();
-        loadMap("/tileMap/map3.txt");
+        loadMap("/Map/map3.txt");
     }
 
     public void getTileImage() {
         try {
 
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tileMap/sand.png")));
+            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tile/sand.png")));
 
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tileMap/water.png")));
+            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tile/water.png")));
 
 
         } catch (IOException e) {

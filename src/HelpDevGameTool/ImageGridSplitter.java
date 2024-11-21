@@ -81,7 +81,7 @@ public class ImageGridSplitter {
 
 
     public static void main(String[] args) {
-        SplitImage(64,64,"AssetSource/Player/ImageSet/Side animations/spr_player_right_hit.png","src/Resource/Player/right/hit");
+        SplitImage(64,64,"AssetSource/Player/ImageSet/Side animations/spr_player_right_walk.png","src/Resource/Player/right/walk");
 
     }
 }
