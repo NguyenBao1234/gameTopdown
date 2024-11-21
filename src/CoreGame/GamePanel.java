@@ -1,6 +1,7 @@
 package CoreGame;
 
 import Entity.Player;
+import Tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,13 +15,16 @@ public class GamePanel extends JPanel implements Runnable
     public final int scale = 3;
     public final int tileSize = originalTileSize * scale;
 
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
+    public final int maxScreenCol = 16; // sau them public
+    public final int maxScreenRow = 12; //them public
     public final int screenWidth = tileSize*maxScreenCol;
     public final int screenHeight = tileSize*maxScreenRow;
 
     // SYSTEM
      Sound sound = new Sound();
+
+    //them code
+    TileManager tileM = new TileManager(this);
 
     Thread gameThread;
 
@@ -90,7 +94,10 @@ public class GamePanel extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
+        tileM.draw(g2); //  add
         player.renderSprite(g2);
+
+        g2.dispose();
     }
 
 

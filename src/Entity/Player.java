@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 public class Player extends BaseCharacter
 {
     GamePanel gamePanel;
-    private final int screenX;
-    private final int screenY;
+    public final int screenX;  //private to public
+    public final int screenY;  //private to public
 
     public Player(GamePanel gamePanel)
     {
@@ -42,6 +42,7 @@ public class Player extends BaseCharacter
         g2.drawImage(sprite,screenX,screenY, 64*gamePanel.scale,64*gamePanel.scale, null);
     }
 
+    
     void InputAxisFlow()
     {
         float speedFactor = 1;
@@ -71,11 +72,11 @@ public class Player extends BaseCharacter
         if(KeyHandler.isKeyPressed(KeyEvent.VK_W))
         {
             updateCurrentDirectionY(1);
-            worldY -= speed * speedFactor;
+            worldY -= (int)(speed * speedFactor);
         }
     }
 
-
+    /**Choose animation*/
     void handelAnimation()
     {
         switch (getCurrentDirection())
@@ -107,30 +108,20 @@ public class Player extends BaseCharacter
     //Hardcode
     void setupAnimations()
     {
-        BufferedImage fontIdleFlipBook[] =  ImageLoader.makeFlipBook("src/Resource/Player/front/idle");
-        flipBookArr[0] = fontIdleFlipBook;
+        flipBookArr[0] = ImageLoader.makeFlipBook("/Player/front/idle");
 
-        BufferedImage backIdleFlipBook[] = ImageLoader.makeFlipBook("src/Resource/Player/back/idle");
-        flipBookArr[1] = backIdleFlipBook;
+        flipBookArr[1] = ImageLoader.makeFlipBook("/Player/back/idle");
 
-        BufferedImage leftIdleFlipBook[] = ImageLoader.makeFlipBook("src/Resource/Player/left/idle");
-        flipBookArr[2] = leftIdleFlipBook;
+        flipBookArr[2] = ImageLoader.makeFlipBook("/Player/left/idle");
 
-        BufferedImage rightIdleFlipBook[] = ImageLoader.makeFlipBook("src/Resource/Player/right/idle");
-        flipBookArr[3] = rightIdleFlipBook;
+        flipBookArr[3] = ImageLoader.makeFlipBook("/Player/right/idle");
 
-        BufferedImage fontWalkFlipBook[] =  ImageLoader.makeFlipBook("src/Resource/Player/front/walk");
-        flipBookArr[4] = fontWalkFlipBook;
+        flipBookArr[4] = ImageLoader.makeFlipBook("/Player/front/walk");
 
-        BufferedImage backWalkFlipBook[] = ImageLoader.makeFlipBook("src/Resource/Player/back/walk");
-        flipBookArr[5] = backWalkFlipBook;
+        flipBookArr[5] = ImageLoader.makeFlipBook("/Player/back/walk");
 
-        BufferedImage leftWalkFlipBook[] =  ImageLoader.makeFlipBook("src/Resource/Player/left/walk");
-        flipBookArr[6] = leftWalkFlipBook;
+        flipBookArr[6] = ImageLoader.makeFlipBook("/Player/left/walk");
 
-        BufferedImage rightWalkFlipBook[] =  ImageLoader.makeFlipBook("src/Resource/Player/right/walk");
-        flipBookArr[7] = rightWalkFlipBook;
-
-
+        flipBookArr[7] = ImageLoader.makeFlipBook("/Player/right/walk");
     }
 }

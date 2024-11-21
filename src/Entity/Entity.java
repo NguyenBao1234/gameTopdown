@@ -10,7 +10,7 @@ public class Entity
     public Rectangle collisionArea;
 
     protected float passDelta = 0;
-    protected int currentFrame = 0;
+    protected int currentFrame = -1;
     protected int fpsPerImage;
 
     /**flipbook contain buffer images to make frame by frame animation. FlipBook=Animation*/
