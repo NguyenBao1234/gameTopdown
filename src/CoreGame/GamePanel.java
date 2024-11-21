@@ -1,7 +1,7 @@
 package CoreGame;
 
 import Entity.Player;
-import tile.TileManager;
+import Tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
