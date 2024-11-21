@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable
 
     public void setupGame() {
 
-        sound.playBackgroundMusic("BlueBoyAdventure.wav"); // play background music
+        sound.playBackgroundMusic("/Sound/Music/BlueBoyAdventure.wav"); // play background music
     }
     public void startGameThread()
     {

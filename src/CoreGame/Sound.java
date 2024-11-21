@@ -12,13 +12,13 @@ public class Sound {
     float volume;
 
 
-    public void playSound(String file) {
-        // https://github.com/Abhi5h3k/Java-project-2D-game-Fight-Zone/blob/3683ae8e1274af06ddf0e26f8170801a0ed09880/src/game_abhi/SoundEffects.java
+    public void playSound(String soundPath)
+    {
         try {
             // Open an audio input stream.
-            URL url = this.getClass().getClassLoader().getResource("Resource/Sound/" + file);
+            URL url = Sound.class.getResource(soundPath);
             if (url == null) {
-                throw new RuntimeException("File not found: Resource/Sound/" + file);
+                throw new RuntimeException("File not found: " + soundPath);
             }
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
             // Get a sound clip resource.
