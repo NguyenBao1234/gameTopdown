@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 public class Player extends BaseCharacter
 {
     GamePanel gamePanel;
-    private final int screenX;
-    private final int screenY;
+    public final int screenX;  //private to public
+    public final int screenY;  //private to public
 
     public Player(GamePanel gamePanel)
     {
