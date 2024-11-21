@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add more image for animations">
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="thêm chức năng Volume ở Sound.java&#10;thay biến phát âm thanh thành string + tìm đc tên file audio ở folder resources">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Sound.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="workbranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,8 +37,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown.git&quot;,
-    &quot;accountId&quot;: &quot;15fd9497-c104-4ab4-ab72-4a895a176465&quot;
+    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown&quot;,
+    &quot;accountId&quot;: &quot;5bcfadae-ee6f-4a2c-9fb1-e6868b8ef68a&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -56,7 +55,8 @@
     &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Sound&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
@@ -68,6 +68,7 @@
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\linh\dai hoc\cong nghe Java\IdeaProjects\gameTopdown\src\Resource\Sound" />
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player\ImageSet" />
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
     </key>
@@ -105,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731861370106</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java">
+      <option name="closed" value="true" />
+      <created>1731987855015</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731987855015</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,7 +138,19 @@
         </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Sound" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -139,7 +160,8 @@
     <MESSAGE value="- add scripts" />
     <MESSAGE value="- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)" />
     <MESSAGE value="- add more image for animations" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add more image for animations" />
+    <MESSAGE value="add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

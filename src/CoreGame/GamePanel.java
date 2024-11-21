@@ -1,5 +1,7 @@
 package CoreGame;
 
+import CoreGame.SoundComponent.Sound;
+import CoreGame.SoundComponent.SoundManager;
 import Entity.Player;
 import Tile.TileManager;
 
@@ -20,11 +22,13 @@ public class GamePanel extends JPanel implements Runnable
     public final int screenWidth = tileSize*maxScreenCol;
     public final int screenHeight = tileSize*maxScreenRow;
 
+
     //them code
     TileManager tileM = new TileManager(this);
 
     Thread gameThread;
 
+    // ENTITY AND OBJECT
     public Player player = new Player(this);
 
     public GamePanel()
@@ -37,6 +41,11 @@ public class GamePanel extends JPanel implements Runnable
         this.requestFocus();
     }
 
+
+    public void setupGame()
+    {
+        SoundManager.playSound(0.5f,true,"/Sound/SFX/fanfare.wav");
+    }
     public void startGameThread()
     {
         gameThread = new Thread(this);
@@ -90,4 +99,6 @@ public class GamePanel extends JPanel implements Runnable
 
         g2.dispose();
     }
+
+
 }
