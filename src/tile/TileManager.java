@@ -13,12 +13,12 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class TileManager {
-    GamePanel gp;
+    GamePanel gamePanel;
     Tile[] tile;
     int mapTileNum[][];
 
-    public TileManager(GamePanel gp) {
-        this.gp = gp;
+    public TileManager(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
         tile = new Tile[20]; //if ya want more kinda tile, ya can change 20 to the number ya want
         mapTileNum = new int[50][50];
         getTileImage();
@@ -34,7 +34,6 @@ public class TileManager {
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tileMap/water.png")));
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,11 +42,11 @@ public class TileManager {
     public void loadMap(String filePath) {
         try {
             InputStream is = getClass().getResourceAsStream(filePath);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;
             while (col < 50 && row < 50) {
-                String line = br.readLine();
+                String line = bufferedReader.readLine();
                 while (col < 50) {
                     String numbers[] = line.split("");
                     int num = Integer.parseInt(numbers[col]);
@@ -58,10 +57,8 @@ public class TileManager {
                     col=0;
                     row++;
                 }
-
-
             }
-            br.close();
+            bufferedReader.close();
         } catch (Exception e) {
 
         }
@@ -73,18 +70,18 @@ public class TileManager {
 
         while (worldcol < 50 && worldrow < 50) {
             int tileNum = mapTileNum[worldcol][worldrow];
-            int worldX = worldcol * 64*gp.scale;
-            int worldY = worldrow * 64*gp.scale;
-            int screenX = worldX - gp.player.worldX + gp.player.screenX;
-            int screenY = worldY - gp.player.worldY + gp.player.screenY;
+            int worldX = worldcol * gamePanel.tileSize;
+            int worldY = worldrow * gamePanel.tileSize;
+            int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
+            int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
 
-            if (worldX + 64*gp.scale > gp.player.worldX - gp.player.screenX
-                    && worldX + 64*gp.scale < gp.player.worldX + gp.player.screenX
-                    && worldY + 64*gp.scale > gp.player.worldY - gp.player.screenY
-                    && worldY - 64*gp.scale < gp.player.worldY + gp.player.screenY) {
+            if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX
+                    && worldX + gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX
+                    && worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY
+                    && worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
                 //g2.drawImage(tile[tileNum].image, screenX, screenY, 64*gp.scale, 64*gp.scale, null);
             }
-            g2.drawImage(tile[tileNum].image, screenX, screenY, 64*gp.scale, 64*gp.scale, null);
+            g2.drawImage(tile[tileNum].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
             worldcol++;
             if (worldcol == 50){
                 worldcol=0;
