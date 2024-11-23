@@ -1,5 +1,6 @@
 package Entity;
 
+import CoreGame.Enums.Collision;
 import CoreGame.Enums.Direction;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandler;
@@ -14,6 +15,7 @@ public class Player extends BaseCharacter
     GamePanel gamePanel;
     public final int screenX;  //private to public
     public final int screenY;  //private to public
+    private float speedFactor = 1;
 
     public Player(GamePanel gamePanel)
     {
@@ -27,12 +29,14 @@ public class Player extends BaseCharacter
         screenY = gamePanel.screenHeight/2 - 64*3/2;
 
         collisionArea = new Rectangle(8,16,32,32);
+        collisionMode = Collision.Block;
 
     }
 
     public void update(float DeltaTime)
     {
-        InputAxisFlow();
+        InputAxisMove();
+        handleLocationByCollision();
         runFlipBook(DeltaTime);
         handelAnimation();
     }
@@ -43,9 +47,8 @@ public class Player extends BaseCharacter
     }
 
     
-    void InputAxisFlow()
+    void InputAxisMove()
     {
-        float speedFactor = 1;
         if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) updateCurrentDirectionX(0);
@@ -76,6 +79,28 @@ public class Player extends BaseCharacter
         }
     }
 
+    void handleLocationByCollision()
+    {
+        if(collisionMode == Collision.NoCollision) return;
+        if(bOverlapping)
+        {
+            switch(getCurrentDirection())
+            {
+                case Direction.down:
+                    worldY -= (int) (speed * speedFactor);
+                    break;
+                case Direction.up:
+                    worldY += (int) (speed * speedFactor);
+                    break;
+                case Direction.left:
+                    worldX += (int) (speed * speedFactor);
+                    break;
+                case Direction.right:
+                    worldX -= (int) (speed * speedFactor);
+                    break;
+            }
+        }
+    }
     /**Choose animation*/
     void handelAnimation()
     {

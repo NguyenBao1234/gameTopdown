@@ -1,5 +1,7 @@
 package Entity;
 
+import CoreGame.Enums.Collision;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -16,6 +18,10 @@ public class Entity
     /**flipbook contain buffer images to make frame by frame animation. FlipBook=Animation*/
     protected BufferedImage[] flipBook;
     protected BufferedImage sprite;
+
+    public Collision collisionMode = Collision.NoCollision;
+    public boolean bOverlapping = false;
+
 
     /**Refresh sprite frequently to run flipBook (or play animation)*/
     protected void runFlipBook(float dt)
