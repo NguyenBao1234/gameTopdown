@@ -1,7 +1,8 @@
 package Entity;
 
+import CoreGame.CollisionChecker;
 import CoreGame.Enums.Collision;
-import CoreGame.Enums.Direction;
+
 import CoreGame.GamePanel;
 import CoreGame.KeyHandler;
 import HelpDevGameTool.ImageLoader;
@@ -10,27 +11,28 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+
 public class Player extends BaseCharacter
 {
-    GamePanel gamePanel;
-    public final int screenX;  //private to public
-    public final int screenY;  //private to public
-    private float speedFactor = 1;
 
-    public Player(GamePanel gamePanel)
+    public final int screenX;
+    public final int screenY;
+    private float speedFactor = 1;
+    CollisionChecker collisionChecker;
+
+    public Player()
     {
         //Setup Basic character property:
         flipBookArr = new BufferedImage[8][];
         setupAnimations();
         setAnimationToUse(0,4);
 
-        this.gamePanel = gamePanel;
-        screenX = gamePanel.screenWidth/2 - 64*3/2;
-        screenY = gamePanel.screenHeight/2 - 64*3/2;
+        screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
+        screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2;
 
-        collisionArea = new Rectangle(8,16,32,32);
+        collisionArea = new Rectangle(27* GamePanel.scale,32* GamePanel.scale,9* GamePanel.scale,9* GamePanel.scale);
         collisionMode = Collision.Block;
-
+        collisionChecker = new CollisionChecker();
     }
 
     public void update(float DeltaTime)
@@ -43,7 +45,7 @@ public class Player extends BaseCharacter
 
     public void renderSprite(Graphics2D g2)
     {
-        g2.drawImage(sprite,screenX,screenY, 64*gamePanel.scale,64*gamePanel.scale, null);
+        g2.drawImage(sprite,screenX,screenY, 64* GamePanel.scale,64* GamePanel.scale, null);
     }
 
     
@@ -82,20 +84,21 @@ public class Player extends BaseCharacter
     void handleLocationByCollision()
     {
         if(collisionMode == Collision.NoCollision) return;
+        collisionChecker.RespondToMap(this);
         if(bOverlapping)
         {
             switch(getCurrentDirection())
             {
-                case Direction.down:
+                case down:
                     worldY -= (int) (speed * speedFactor);
                     break;
-                case Direction.up:
+                case up:
                     worldY += (int) (speed * speedFactor);
                     break;
-                case Direction.left:
+                case left:
                     worldX += (int) (speed * speedFactor);
                     break;
-                case Direction.right:
+                case right:
                     worldX -= (int) (speed * speedFactor);
                     break;
             }
@@ -106,22 +109,22 @@ public class Player extends BaseCharacter
     {
         switch (getCurrentDirection())
         {
-            case Direction.up :
+            case up :
                 //System.out.println("up");
                 if(vAxisY == 0) setAnimationToUse(1,4);
                 else setAnimationToUse(5,4);
                 break;
-            case Direction.down:
+            case down:
                 //System.out.println("down");
                 if(vAxisY == 0) setAnimationToUse(0,4);
                 else setAnimationToUse(4,4);
                 break;
-            case Direction.left:
+            case left:
                 //System.out.println("left");
                 if(vAxisX == 0) setAnimationToUse(2,4);
                 else setAnimationToUse(6,4);
                 break;
-            case Direction.right:
+            case right:
                 //System.out.println("right");
                 if(vAxisX == 0) setAnimationToUse(3,4);
                 else setAnimationToUse(7,4);

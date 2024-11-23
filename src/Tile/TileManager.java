@@ -12,18 +12,16 @@ import java.util.Objects;
 
 public class TileManager
 {
-    GamePanel gamePanel;
-    Tile[] tile;
-    int mapTileNum[][];
+    public Tile[] tiles;
+    public int tileTypeMap[][];
     int normalizedPlayerScreenX;
     int normalizedPlayerScreenY;
-    public TileManager(GamePanel gamePanel)
+    public TileManager()
     {
-        this.gamePanel = gamePanel;
-        normalizedPlayerScreenX = gamePanel.screenWidth / 2 - gamePanel.tileSize/2;
-        normalizedPlayerScreenY = gamePanel.screenHeight / 2 - gamePanel.tileSize/2;
-        tile = new Tile[20]; //if ya want more kinda tile, ya can change 20 to the number ya want
-        mapTileNum = new int[50][50];
+        normalizedPlayerScreenX = GamePanel.screenWidth / 2 - GamePanel.tileSize/2;
+        normalizedPlayerScreenY = GamePanel.screenHeight / 2 - GamePanel.tileSize/2;
+        tiles = new Tile[20]; //if ya want more kinda tile, ya can change 20 to the number ya want
+        tileTypeMap = new int[50][50];
         getTileImage();
 
         loadMap("/Map/map3.txt");
@@ -33,11 +31,12 @@ public class TileManager
     {
         try
         {
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tile/sand.png")));
+            tiles[1] = new Tile();
+            tiles[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tile/sand.png")));
+            tiles[1].collision = true;
 
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tile/water.png")));
+            tiles[0] = new Tile();
+            tiles[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tile/water.png")));
 
         }
         catch (IOException e)
@@ -61,7 +60,7 @@ public class TileManager
                 {
                     String numbers[] = line.split("");
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[col][row] = num;
+                    tileTypeMap[col][row] = num;
                     col++;
                 }
                 if(col== 50){
@@ -81,20 +80,22 @@ public class TileManager
     {
         int worldcol = 0;
         int worldrow = 0;
+        int playerWorldX = GamePanel.getInstGamePanel().player.worldX;
+        int playerWorldY = GamePanel.getInstGamePanel().player.worldY;
 
         while (worldcol < 50 && worldrow < 50) {
-            int tileNum = mapTileNum[worldcol][worldrow];
-            int worldX = worldcol * gamePanel.tileSize;
-            int worldY = worldrow * gamePanel.tileSize;
-            int screenX = worldX - gamePanel.player.worldX + normalizedPlayerScreenX;
-            int screenY = worldY - gamePanel.player.worldY + normalizedPlayerScreenY;
+            int tileNum = tileTypeMap[worldcol][worldrow];
+            int worldX = worldcol * GamePanel.tileSize;
+            int worldY = worldrow * GamePanel.tileSize;
+            int screenX = worldX - playerWorldX + normalizedPlayerScreenX;
+            int screenY = worldY - playerWorldY + normalizedPlayerScreenY;
 
-            if (worldX + gamePanel.tileSize > gamePanel.player.worldX - normalizedPlayerScreenX
-                    && worldX < gamePanel.player.worldX + normalizedPlayerScreenX + 48
-                    && worldY + gamePanel.tileSize > gamePanel.player.worldY - normalizedPlayerScreenY
-                    && worldY < gamePanel.player.worldY + normalizedPlayerScreenY + 48){
+            if (worldX + GamePanel.tileSize > playerWorldX - normalizedPlayerScreenX
+                    && worldX < playerWorldX + normalizedPlayerScreenX + 48
+                    && worldY + GamePanel.tileSize > playerWorldY - normalizedPlayerScreenY
+                    && worldY < playerWorldY + normalizedPlayerScreenY + 48){
                 //g2.drawImage(tile[tileNum].image, screenX, screenY, 64*gp.scale, 64*gp.scale, null);
-                g2.drawImage(tile[tileNum].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+                g2.drawImage(tiles[tileNum].image, screenX, screenY, GamePanel.tileSize, GamePanel.tileSize, null);
             }
 
             worldcol++;

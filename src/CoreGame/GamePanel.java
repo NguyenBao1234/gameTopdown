@@ -1,35 +1,34 @@
 package CoreGame;
 
-import CoreGame.SoundComponent.Sound;
 import CoreGame.SoundComponent.SoundManager;
 import Entity.Player;
 import Tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 
 public class GamePanel extends JPanel implements Runnable
 {
-    private static final int FPS = 60;
+    private static GamePanel instance;
+    public static final int FPS = 60;
     //Screen Setting property://
-    final int originalTileSize = 16;
-    public final int scale = 3;
-    public final int tileSize = originalTileSize * scale;
+    static final int originalTileSize = 16;
+    public static final int scale = 3;
+    public static final int tileSize = originalTileSize * scale;
 
-    public final int maxScreenCol = 16; // sau them public
-    public final int maxScreenRow = 12; //them public
-    public final int screenWidth = tileSize*maxScreenCol;
-    public final int screenHeight = tileSize*maxScreenRow;
+    public static final int maxScreenCol = 16; // sau them public
+    public static final int maxScreenRow = 12; //them public
+    public static final int screenWidth = tileSize*maxScreenCol;
+    public static final int screenHeight = tileSize*maxScreenRow;
 
-
-    //them code
-    TileManager tileM = new TileManager(this);
+    TileManager tileManager = new TileManager();
 
     Thread gameThread;
 
     // ENTITY AND OBJECT
-    public Player player = new Player(this);
+    public Player player;
 
     public GamePanel()
     {
@@ -39,17 +38,44 @@ public class GamePanel extends JPanel implements Runnable
         this.addKeyListener(KeyHandler.getInstKeyHdl());
         this.setFocusable(true);
         this.requestFocus();
+        player = new Player();
     }
 
+    public static GamePanel getInstGamePanel()
+    {
+        if (instance == null) instance = new GamePanel();
+        return instance;
+    }
 
     public void setupGame()
     {
         SoundManager.playSound(0.5f,true,"/Sound/SFX/fanfare.wav");
     }
+
     public void startGameThread()
     {
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    /**this function call every frame*/
+    public void update(float DeltaTime)
+    {
+        player.update(DeltaTime);
+        if(KeyHandler.isKeyPressed(KeyEvent.VK_SPACE))
+        {
+            SoundManager.playSound(1,false,"/Sound/SFX/powerup.wav");
+        }
+    }
+    /**this draw function call every frame*/
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
+        tileManager.draw(g2); //  add
+        player.renderSprite(g2);
+
+        g2.dispose();
     }
 
     @Override
@@ -84,21 +110,4 @@ public class GamePanel extends JPanel implements Runnable
             }
         }
     }
-
-    public void update(float DeltaTime)
-    {
-        player.update(DeltaTime);
-    }
-
-    public void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
-        tileM.draw(g2); //  add
-        player.renderSprite(g2);
-
-        g2.dispose();
-    }
-
-
 }
