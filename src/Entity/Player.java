@@ -26,8 +26,8 @@ public class Player extends BaseCharacter
         flipBookArr = new BufferedImage[8][];
         setupAnimations();
         setAnimationToUse(0,4);
-        worldX = 0;
-        worldY = 0;
+        worldX = 25*GamePanel.tileSize;
+        worldY = 15* GamePanel.tileSize;
         screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
         screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2;
 
