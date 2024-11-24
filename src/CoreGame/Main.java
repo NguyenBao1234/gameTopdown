@@ -1,7 +1,6 @@
 package CoreGame;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class Main {
     public static void main (String[] args)
@@ -12,7 +11,7 @@ public class Main {
         window.setTitle("Game adventure 2D");
         window.setLocationRelativeTo(null);
 
-        GamePanel gamePanel =new GamePanel();
+        GamePanel gamePanel = GamePanel.getInstGamePanel();
 
         gamePanel.setupGame();
         gamePanel.startGameThread();

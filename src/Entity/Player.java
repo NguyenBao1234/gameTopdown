@@ -1,6 +1,8 @@
 package Entity;
 
-import CoreGame.Enums.Direction;
+import CoreGame.CollisionChecker;
+import CoreGame.Enums.Collision;
+
 import CoreGame.GamePanel;
 import CoreGame.KeyHandler;
 import HelpDevGameTool.ImageLoader;
@@ -9,43 +11,47 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+
 public class Player extends BaseCharacter
 {
-    GamePanel gamePanel;
-    public final int screenX;  //private to public
-    public final int screenY;  //private to public
 
-    public Player(GamePanel gamePanel)
+    public final int screenX;
+    public final int screenY;
+    private float speedFactor = 1;
+    CollisionChecker collisionChecker;
+
+    public Player()
     {
         //Setup Basic character property:
         flipBookArr = new BufferedImage[8][];
         setupAnimations();
         setAnimationToUse(0,4);
+        worldX = 25*GamePanel.tileSize;
+        worldY = 15* GamePanel.tileSize;
+        screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
+        screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2;
 
-        this.gamePanel = gamePanel;
-        screenX = gamePanel.screenWidth/2 - 64*3/2;
-        screenY = gamePanel.screenHeight/2 - 64*3/2;
-
-        collisionArea = new Rectangle(8,16,32,32);
-
+        collisionArea = new Rectangle(2* GamePanel.scale,17* GamePanel.scale,11* GamePanel.scale,5* GamePanel.scale);
+        collisionMode = Collision.Block;
+        collisionChecker = new CollisionChecker();
     }
 
     public void update(float DeltaTime)
     {
-        InputAxisFlow();
+        InputAxisMove();
+        handleLocationByCollision();
         runFlipBook(DeltaTime);
         handelAnimation();
     }
 
     public void renderSprite(Graphics2D g2)
     {
-        g2.drawImage(sprite,screenX,screenY, 64*gamePanel.scale,64*gamePanel.scale, null);
+        g2.drawImage(sprite,screenX,screenY, 64* GamePanel.scale,64* GamePanel.scale, null);
     }
 
     
-    void InputAxisFlow()
+    void InputAxisMove()
     {
-        float speedFactor = 1;
         if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) updateCurrentDirectionX(0);
@@ -76,27 +82,50 @@ public class Player extends BaseCharacter
         }
     }
 
+    void handleLocationByCollision()
+    {
+        if(collisionMode == Collision.NoCollision) return;
+        collisionChecker.RespondToMap(this);
+        if(bOverlapping)
+        {
+            switch(getCurrentDirection())
+            {
+                case down:
+                    worldY -= (int) (speed * speedFactor);
+                    break;
+                case up:
+                    worldY += (int) (speed * speedFactor);
+                    break;
+                case left:
+                    worldX += (int) (speed * speedFactor);
+                    break;
+                case right:
+                    worldX -= (int) (speed * speedFactor);
+                    break;
+            }
+        }
+    }
     /**Choose animation*/
     void handelAnimation()
     {
         switch (getCurrentDirection())
         {
-            case Direction.up :
+            case up :
                 //System.out.println("up");
                 if(vAxisY == 0) setAnimationToUse(1,4);
                 else setAnimationToUse(5,4);
                 break;
-            case Direction.down:
+            case down:
                 //System.out.println("down");
                 if(vAxisY == 0) setAnimationToUse(0,4);
                 else setAnimationToUse(4,4);
                 break;
-            case Direction.left:
+            case left:
                 //System.out.println("left");
                 if(vAxisX == 0) setAnimationToUse(2,4);
                 else setAnimationToUse(6,4);
                 break;
-            case Direction.right:
+            case right:
                 //System.out.println("right");
                 if(vAxisX == 0) setAnimationToUse(3,4);
                 else setAnimationToUse(7,4);
