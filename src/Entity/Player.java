@@ -26,11 +26,12 @@ public class Player extends BaseCharacter
         flipBookArr = new BufferedImage[8][];
         setupAnimations();
         setAnimationToUse(0,4);
-
+        worldX = 0;
+        worldY = 0;
         screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
         screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2;
 
-        collisionArea = new Rectangle(27* GamePanel.scale,32* GamePanel.scale,9* GamePanel.scale,9* GamePanel.scale);
+        collisionArea = new Rectangle(2* GamePanel.scale,17* GamePanel.scale,11* GamePanel.scale,5* GamePanel.scale);
         collisionMode = Collision.Block;
         collisionChecker = new CollisionChecker();
     }
