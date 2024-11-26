@@ -17,7 +17,7 @@ public class Player extends BaseCharacter
 
     public final int screenX;
     public final int screenY;
-    private float speedFactor = 1;
+    public float speedFactor = 1;
     CollisionChecker collisionChecker;
 
     public Player()
@@ -31,9 +31,17 @@ public class Player extends BaseCharacter
         screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
         screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2;
 
-        collisionArea = new Rectangle(2* GamePanel.scale,17* GamePanel.scale,11* GamePanel.scale,5* GamePanel.scale);
+        collisionArea = new Rectangle();
+        collisionArea.x = 2* GamePanel.scale;
+        collisionArea.y = 17* GamePanel.scale;
+        solidAreaDefaultX = collisionArea.x;
+        solidAreaDefaultY = collisionArea.y;
+        collisionArea.width = 11* GamePanel.scale;
+        collisionArea.height = 5* GamePanel.scale;
         collisionMode = Collision.Block;
         collisionChecker = new CollisionChecker();
+
+
     }
 
     public void update(float DeltaTime)
@@ -42,6 +50,8 @@ public class Player extends BaseCharacter
         handleLocationByCollision();
         runFlipBook(DeltaTime);
         handelAnimation();
+        collisionChecker.RespondToObject(this,true);
+
     }
 
     public void renderSprite(Graphics2D g2)
