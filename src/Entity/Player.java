@@ -4,7 +4,7 @@ import CoreGame.CollisionChecker;
 import CoreGame.Enums.Collision;
 
 import CoreGame.GamePanel;
-import CoreGame.KeyHandler;
+import CoreGame.KeyHandlerComponent.KeyHandler;
 import HelpDevGameTool.ImageLoader;
 
 import java.awt.*;
@@ -34,8 +34,7 @@ public class Player extends BaseCharacter
         collisionArea = new Rectangle();
         collisionArea.x = 2* GamePanel.scale;
         collisionArea.y = 17* GamePanel.scale;
-        solidAreaDefaultX = collisionArea.x;
-        solidAreaDefaultY = collisionArea.y;
+
         collisionArea.width = 11* GamePanel.scale;
         collisionArea.height = 5* GamePanel.scale;
         collisionMode = Collision.Block;

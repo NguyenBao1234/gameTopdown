@@ -8,8 +8,11 @@ import java.awt.image.BufferedImage;
 public class Entity
 {
     public int worldX,worldY;
-    public int speed = 4;
-    public static Rectangle collisionArea;
+    protected int speed = 4;
+
+    public Collision collisionMode = Collision.NoCollision;
+    public boolean bOverlapping = false;
+    public Rectangle collisionArea;
 
     protected float passDelta = 0;
     protected int currentFrame = -1;
@@ -19,9 +22,7 @@ public class Entity
     protected BufferedImage[] flipBook;
     protected BufferedImage sprite;
 
-    public Collision collisionMode = Collision.NoCollision;
-    public int solidAreaDefaultX, solidAreaDefaultY;
-    public boolean bOverlapping = false;
+    public int getSpeed(){return speed;}
 
 
     /**Refresh sprite frequently to run flipBook (or play animation)*/
@@ -35,7 +36,7 @@ public class Entity
         currentFrame ++;
         if(currentFrame >= flipBook.length) currentFrame = 0;
         sprite = flipBook[currentFrame];
-        //System.out.println("sprite has refreshed");
+        //System.out.println("sprite has refresh
     }
 
 }
