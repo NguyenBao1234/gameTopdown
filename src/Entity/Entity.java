@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 public class Entity
 {
     public int worldX,worldY;
-    protected int speed = 4;
-    public Rectangle collisionArea;
+    public int speed = 4;
+    public static Rectangle collisionArea;
 
     protected float passDelta = 0;
     protected int currentFrame = -1;
@@ -20,6 +20,7 @@ public class Entity
     protected BufferedImage sprite;
 
     public Collision collisionMode = Collision.NoCollision;
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean bOverlapping = false;
 
 

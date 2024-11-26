@@ -3,6 +3,7 @@ package CoreGame;
 import CoreGame.SoundComponent.SoundManager;
 import Entity.Player;
 import Tile.TileManager;
+import Object.SuperOject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +29,9 @@ public class GamePanel extends JPanel implements Runnable
     Thread gameThread;
 
     // ENTITY AND OBJECT
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player;
+    public SuperOject obj[] = new SuperOject[10];
 
     public GamePanel()
     {
@@ -50,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable
     public void setupGame()
     {
         SoundManager.playSound(0.5f,true,"/Sound/SFX/fanfare.wav");
+        aSetter.setObject();
     }
 
     public void startGameThread()
@@ -73,6 +77,11 @@ public class GamePanel extends JPanel implements Runnable
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
         tileManager.draw(g2); //  add
+        for (int i = 0; i < obj.length;i++){
+            if (obj[i] != null){
+                obj[i].draw(g2);
+            }
+        }
         player.renderSprite(g2);
 
         g2.dispose();
