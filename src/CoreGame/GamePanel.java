@@ -1,9 +1,10 @@
 package CoreGame;
 
+import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import Entity.Player;
 import Tile.TileManager;
-import Object.SuperOject;
+import Entity.Object.BaseObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,15 +24,16 @@ public class GamePanel extends JPanel implements Runnable
     public static final int maxScreenRow = 12; //them public
     public static final int screenWidth = tileSize*maxScreenCol;
     public static final int screenHeight = tileSize*maxScreenRow;
-
+    public static int truePlayerScreenX = screenWidth/2 - tileSize/2;
+    public static int truePlayerScreenY = screenHeight/2 - tileSize/2;
     TileManager tileManager = new TileManager();
 
     Thread gameThread;
 
     // ENTITY AND OBJECT
-    public AssetSetter aSetter = new AssetSetter(this);
     public Player player;
-    public SuperOject obj[] = new SuperOject[10];
+    public BaseObject obj[] = new BaseObject[4];
+    AssetSetter aSetter = new AssetSetter();
 
     public GamePanel()
     {

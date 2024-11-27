@@ -95,7 +95,7 @@ public class Player extends BaseCharacter
     {
         if(collisionMode == Collision.NoCollision) return;
         collisionChecker.RespondToMap(this);
-        if(bOverlapping)
+        if(bColliding)
         {
             switch(getCurrentDirection())
             {

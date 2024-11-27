@@ -1,18 +1,17 @@
 package Entity;
 
 import CoreGame.Enums.Collision;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity
 {
     public int worldX,worldY;
-    protected int speed = 4;
 
-    public Collision collisionMode = Collision.NoCollision;
-    public boolean bOverlapping = false;
-    public Rectangle collisionArea;
+    public boolean bColliding = false;
+
+    protected Collision collisionMode = Collision.NoCollision;
+    protected Rectangle collisionArea;
 
     protected float passDelta = 0;
     protected int currentFrame = -1;
@@ -21,9 +20,6 @@ public class Entity
     /**flipbook contain buffer images to make frame by frame animation. FlipBook=Animation*/
     protected BufferedImage[] flipBook;
     protected BufferedImage sprite;
-
-    public int getSpeed(){return speed;}
-
 
     /**Refresh sprite frequently to run flipBook (or play animation)*/
     protected void runFlipBook(float dt)
@@ -36,7 +32,10 @@ public class Entity
         currentFrame ++;
         if(currentFrame >= flipBook.length) currentFrame = 0;
         sprite = flipBook[currentFrame];
-        //System.out.println("sprite has refresh
+        //System.out.println("sprite has refresh)
     }
 
+    public final Rectangle getCollisionArea(){ return collisionArea;}
+    public final Collision getCollisionMode(){return collisionMode;}
+    public final void setCollisionMode(Collision collision){collisionMode = collision;}
 }
