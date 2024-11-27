@@ -1,14 +1,13 @@
 package CoreGame;
 
 import Entity.BaseCharacter;
-import Entity.Entity;
 import Tile.TileManager;
-import Entity.Player;
+
+import java.awt.*;
 
 
 public class CollisionChecker
 {
-    public int collisionAreaX, collisionAreaY;
     public CollisionChecker()
     {
 
@@ -16,10 +15,10 @@ public class CollisionChecker
 
     public void RespondToMap(BaseCharacter character)
     {
-        int collisionLeftX = character.worldX + character.collisionArea.x;
-        int collisionRightX = character.worldX + character.collisionArea.x + character.collisionArea.width;
-        int collisionTopY = character.worldY + character.collisionArea.y;
-        int collisionBottomY = character.worldY + character.collisionArea.y + character.collisionArea.height;
+        int collisionLeftX = character.worldX + character.getCollisionArea().x;
+        int collisionRightX = character.worldX + character.getCollisionArea().x + character.getCollisionArea().width;
+        int collisionTopY = character.worldY + character.getCollisionArea().y;
+        int collisionBottomY = character.worldY + character.getCollisionArea().y + character.getCollisionArea().height;
 
         int leftOverlapTileCol = collisionLeftX/GamePanel.tileSize ;
         int rightOverlapTileCol = collisionRightX/GamePanel.tileSize;
@@ -33,59 +32,57 @@ public class CollisionChecker
 
         tile1Type = tileManager.tileTypeMap[leftOverlapTileCol][topOverlapTileRow];
         tile2Type = tileManager.tileTypeMap[rightOverlapTileCol][topOverlapTileRow];
-        character.bOverlapping = tileManager.tiles[tile1Type].collision || tileManager.tiles[tile2Type].collision;
+        character.bColliding = tileManager.tiles[tile1Type].collision || tileManager.tiles[tile2Type].collision;
     }
-    public int RespondToObject(Entity Entity, boolean player)
+
+    public void RespondToObject(BaseCharacter character, boolean player)
     {
-        int index = 999;
+        Rectangle characterCollisionWorld = new Rectangle();
+        characterCollisionWorld.x = character.worldX + character.getCollisionArea().x;
+        characterCollisionWorld.y = character.worldY + character.getCollisionArea().y;
+        characterCollisionWorld.width = character.getCollisionArea().width;
+        characterCollisionWorld.height = character.getCollisionArea().height;
+
+        Rectangle objectCollisionWorld = new Rectangle();
+
         for( int i= 0; i< GamePanel.getInstGamePanel().obj.length; i++ )
         {
             if (GamePanel.getInstGamePanel().obj[i] != null)
             {
-                Player.collisionArea.x= Entity.worldX + Player.collisionArea.x;
-                Player.collisionArea.y = Entity.worldY + Player.collisionArea.y;
+                objectCollisionWorld.x =  GamePanel.getInstGamePanel().obj[i].worldX + GamePanel.getInstGamePanel().obj[i].getCollisionArea().x;
+                objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[i].worldY + GamePanel.getInstGamePanel().obj[i].getCollisionArea().y;
+                objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[i].getCollisionArea().height;
+                objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[i].getCollisionArea().width;
 
-                GamePanel.getInstGamePanel().obj[i].solidArea.x =  GamePanel.getInstGamePanel().obj[i].worldX + GamePanel.getInstGamePanel().obj[i].solidArea.x;
-                GamePanel.getInstGamePanel().obj[i].solidArea.y = GamePanel.getInstGamePanel().obj[i].worldY + GamePanel.getInstGamePanel().obj[i].solidArea.y;
-
-                switch(BaseCharacter.getCurrentDirection())
+                switch(character.getCurrentDirection())
                 {
                     case up :
-                        //Player.collisionArea.y -= 4;
-                        if (Player.collisionArea.intersects(GamePanel.getInstGamePanel().obj[i].solidArea)) {
+                        if (characterCollisionWorld.intersects(objectCollisionWorld))
+                        {
                             System.out.println("up");
-
-
-
                             break;
                         }
                     case down :
-                        Player.collisionArea.y += 4;
-                        if (Player.collisionArea.intersects(GamePanel.getInstGamePanel().obj[i].solidArea)) {
+                        if (characterCollisionWorld.intersects(objectCollisionWorld))
+                        {
                             System.out.println("down");
                             break;
                         }
                     case left :
-                        Player.collisionArea.x -= 4;
-                        if (Player.collisionArea.intersects(GamePanel.getInstGamePanel().obj[i].solidArea)) {
+                        if (characterCollisionWorld.intersects(objectCollisionWorld))
+                        {
                             System.out.println("left");
                             break;
                         }
                     case right :
-                        Player.collisionArea.x += 4;
-                        if (Player.collisionArea.intersects(GamePanel.getInstGamePanel().obj[i].solidArea)) {
+                        if (characterCollisionWorld.intersects(objectCollisionWorld))
+                        {
                             System.out.println("right");
                             break;
                         }
-
                 }
-                Player.collisionArea.x = Entity.solidAreaDefaultX;
-                Player.collisionArea.y = Entity.solidAreaDefaultY;
-                GamePanel.getInstGamePanel().obj[i].solidArea.x = GamePanel.getInstGamePanel().obj[i].solidAreaDefaultX;
-                GamePanel.getInstGamePanel().obj[i].solidArea.y = GamePanel.getInstGamePanel().obj[i].solidAreaDefaultY;
             }
         }
 
-        return index;
     }
 }

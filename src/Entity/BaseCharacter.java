@@ -11,10 +11,14 @@ public class BaseCharacter extends Entity
 {
     protected int vAxisX;
     protected int vAxisY;
+    protected int speed = 4;
+
     private boolean bPlayingMontage;
     private BaseAnimNotify animNotify;
 
     private static final ArrayList<Direction> directionList = new ArrayList<>(2);
+
+    public int getSpeed(){return speed;}
 
     /**Mang chi can 'row' de chua bao nhieu flipBook (flipBook: buffered image array, tuong duong nhu 1 animation).
      * vi du: flipBookArr = new BufferImage[x][_].*/
@@ -101,7 +105,7 @@ public class BaseCharacter extends Entity
         directionList.add(newDirection);
     }
 
-    public static Direction getCurrentDirection()
+    public Direction getCurrentDirection()
     {
         return directionList.getLast();
     }

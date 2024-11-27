@@ -1,4 +1,4 @@
-package CoreGame;
+package CoreGame.KeyHandlerComponent;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -35,5 +35,4 @@ public class KeyHandler implements KeyListener
     public static boolean isKeyPressed(int KeyCode) {
         return getInstKeyHdl().bPressedButtons[KeyCode];
     }
-
 }
