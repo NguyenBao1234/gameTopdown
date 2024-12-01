@@ -5,6 +5,7 @@ import CoreGame.Enums.Collision;
 
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
+import CoreGame.SoundComponent.SoundManager;
 import HelpDevGameTool.ImageLoader;
 
 import java.awt.*;
@@ -40,9 +41,14 @@ public class Player extends BaseCharacter
         collisionMode = Collision.Block;
         collisionChecker = new CollisionChecker();
 
-
+        SetupPlayerInputComponent();
     }
 
+    private void SetupPlayerInputComponent()
+    {
+        KeyHandler ControllerComp = KeyHandler.getInstance();
+        ControllerComp.BindAction(KeyEvent.VK_Q, true,this::TestBindAction);
+    }
     public void update(float DeltaTime)
     {
         InputAxisMove();
@@ -57,7 +63,6 @@ public class Player extends BaseCharacter
     {
         g2.drawImage(sprite,screenX,screenY, 64* GamePanel.scale,64* GamePanel.scale, null);
     }
-
     
     void InputAxisMove()
     {
@@ -161,5 +166,11 @@ public class Player extends BaseCharacter
         flipBookArr[6] = ImageLoader.makeFlipBook("/Player/left/walk");
 
         flipBookArr[7] = ImageLoader.makeFlipBook("/Player/right/walk");
+    }
+
+    void TestBindAction()
+    {
+        System.out.println("Bind Function 'TestBindAction' called");
+        SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
     }
 }

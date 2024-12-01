@@ -49,7 +49,7 @@ public class CollisionChecker
         {
             if (GamePanel.getInstGamePanel().obj[i] != null)
             {
-                objectCollisionWorld.x =  GamePanel.getInstGamePanel().obj[i].worldX + GamePanel.getInstGamePanel().obj[i].getCollisionArea().x;
+                objectCollisionWorld.x = GamePanel.getInstGamePanel().obj[i].worldX + GamePanel.getInstGamePanel().obj[i].getCollisionArea().x;
                 objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[i].worldY + GamePanel.getInstGamePanel().obj[i].getCollisionArea().y;
                 objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[i].getCollisionArea().height;
                 objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[i].getCollisionArea().width;

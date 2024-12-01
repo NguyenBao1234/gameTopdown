@@ -5,23 +5,24 @@ import java.util.List;
 
 public class MultiBinder
 {
+    private final List<Runnable> runnableAssignedFunctions = new ArrayList<>();
 
-    private List<CallbackFunction> assignedFunction = new ArrayList<>();
-
-    public void bind(CallbackFunction function)
+    public void bind(Runnable function)
     {
-        assignedFunction.add(function);
+        runnableAssignedFunctions.add(function);
     }
 
-    public boolean execute()
+    public boolean executeAll()
     {
-        if (!assignedFunction.isEmpty()) {
-            for (CallbackFunction function : assignedFunction) {
-                function.execute();
+        if (!runnableAssignedFunctions.isEmpty())
+        {
+            for (Runnable function : runnableAssignedFunctions)
+            {
+                function.run();
+                System.out.println("Executed");
             }
             return true;
-        } else {
-            return false;
         }
+        else return false;
     }
 }

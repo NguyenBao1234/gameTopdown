@@ -35,12 +35,14 @@ public class GamePanel extends JPanel implements Runnable
     public BaseObject obj[] = new BaseObject[4];
     AssetSetter aSetter = new AssetSetter();
 
+
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground((Color.blue));
         this.setDoubleBuffered(true);
-        this.addKeyListener(KeyHandler.getInstKeyHdl());
+        //this.addKeyListener(KeyHandler.getInstKeyHdl());
+        addKeyListener(KeyHandler.getInstance());
         this.setFocusable(true);
         this.requestFocus();
         player = new Player();
@@ -54,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable
 
     public void setupGame()
     {
-        SoundManager.playSound(0.5f,true,"/Sound/SFX/fanfare.wav");
+        SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
         aSetter.setObject();
     }
 
@@ -68,10 +70,6 @@ public class GamePanel extends JPanel implements Runnable
     public void update(float DeltaTime)
     {
         player.update(DeltaTime);
-        if(KeyHandler.isKeyPressed(KeyEvent.VK_SPACE))
-        {
-            SoundManager.playSound(1,false,"/Sound/SFX/powerup.wav");
-        }
     }
     /**this draw function call every frame*/
     public void paintComponent(Graphics g)
