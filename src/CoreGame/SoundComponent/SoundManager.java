@@ -8,7 +8,9 @@ public class SoundManager
 {
     public static Sound SpawnSound(float volume, boolean bLoop, String soundPath)
     {
-        return new Sound(volume, bLoop, soundPath);
+        Sound spawnedSound = new Sound(volume, bLoop, soundPath);
+        spawnedSound.Play(bLoop);
+        return spawnedSound;
     }
     public static void playSound(float volume, boolean bLoop, String soundPath)
     {

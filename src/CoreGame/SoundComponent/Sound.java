@@ -43,7 +43,13 @@ public class Sound
         else clip.loop(0);
         clip.start();
     }
-
+    public void Play(boolean Loop)
+    {
+        if (clip == null) return;
+        if (Loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
+        else clip.loop(0);
+        clip.start();
+    }
     public void Stop()
     {
         if (clip == null || !clip.isRunning()) return;
