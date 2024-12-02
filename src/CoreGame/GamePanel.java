@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable
     public static final int screenHeight = tileSize*maxScreenRow;
     public static int truePlayerScreenX = screenWidth/2 - tileSize/2;
     public static int truePlayerScreenY = screenHeight/2 - tileSize/2;
+
     TileManager tileManager = new TileManager();
 
     Thread gameThread;
@@ -34,6 +35,10 @@ public class GamePanel extends JPanel implements Runnable
     public Player player;
     public BaseObject obj[] = new BaseObject[4];
     AssetSetter aSetter = new AssetSetter();
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
 
 
     public GamePanel()
@@ -58,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
         aSetter.setObject();
+        gameState = playState;
     }
 
     public void startGameThread()
@@ -69,7 +75,12 @@ public class GamePanel extends JPanel implements Runnable
     /**this function call every frame*/
     public void update(float DeltaTime)
     {
-        player.update(DeltaTime);
+        if (gameState == playState){
+            player.update(DeltaTime);
+        }
+        if (gameState == pauseState){
+            //nothing
+        }
     }
     /**this draw function call every frame*/
     public void paintComponent(Graphics g)

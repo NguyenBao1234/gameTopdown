@@ -35,12 +35,10 @@ public class Player extends BaseCharacter
         collisionArea = new Rectangle();
         collisionArea.x = 2* GamePanel.scale;
         collisionArea.y = 17* GamePanel.scale;
-
         collisionArea.width = 11* GamePanel.scale;
         collisionArea.height = 5* GamePanel.scale;
         collisionMode = Collision.Block;
         collisionChecker = new CollisionChecker();
-
         SetupPlayerInputComponent();
     }
 
@@ -48,6 +46,7 @@ public class Player extends BaseCharacter
     {
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.BindAction(KeyEvent.VK_Q, true,this::TestBindAction);
+        ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseState);
     }
     public void update(float DeltaTime)
     {
@@ -63,6 +62,7 @@ public class Player extends BaseCharacter
     {
         g2.drawImage(sprite,screenX,screenY, 64* GamePanel.scale,64* GamePanel.scale, null);
     }
+
     
     void InputAxisMove()
     {
@@ -116,6 +116,15 @@ public class Player extends BaseCharacter
                 case right:
                     worldX -= (int) (speed * speedFactor);
                     break;
+            }
+        }
+    }
+    void PauseState() {
+        if (KeyHandler.isKeyPressed(KeyEvent.VK_P)) {
+            if (GamePanel.getInstGamePanel().gameState == GamePanel.getInstGamePanel().playState) {
+                GamePanel.getInstGamePanel().gameState = GamePanel.getInstGamePanel().pauseState;
+            } else if (GamePanel.getInstGamePanel().gameState == GamePanel.getInstGamePanel().pauseState) {
+                GamePanel.getInstGamePanel().gameState = GamePanel.getInstGamePanel().playState;
             }
         }
     }
