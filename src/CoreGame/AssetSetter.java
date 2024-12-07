@@ -1,26 +1,26 @@
 package CoreGame;
 
-import Entity.Object.OBJ_Chest;
-import Entity.Object.OBJ_Door;
-import Entity.Object.OBJ_Key;
+import Entity.Object.Instance.ChestObj;
+import Entity.Object.Instance.DoorObj;
+import Entity.Object.Master.KeyItemObject;
 
-public class AssetSetter 
+public class AssetSetter
 {
     public AssetSetter (){}
     
-    public void setObject()
+    public static void SetUpObject()
     {
-        GamePanel.getInstGamePanel().obj[0] = new OBJ_Key();
-        GamePanel.getInstGamePanel().obj[0].worldX = 0 ;//* GamePanel.getInstGamePanel().tileSize;
-        GamePanel.getInstGamePanel().obj[0].worldY = 0 ;//* GamePanel.getInstGamePanel().tileSize;
+        GamePanel.getInstGamePanel().obj[0] = new DoorObj();
+        GamePanel.getInstGamePanel().obj[0].worldX = 2 * GamePanel.tileSize;
+        GamePanel.getInstGamePanel().obj[0].worldY = 4 * GamePanel.tileSize;
 
-        GamePanel.getInstGamePanel().obj[1] = new OBJ_Door();
-        GamePanel.getInstGamePanel().obj[1].worldX = 2 * GamePanel.tileSize;
-        GamePanel.getInstGamePanel().obj[1].worldY = 4 * GamePanel.tileSize;
+        GamePanel.getInstGamePanel().obj[1] = new KeyItemObject(GamePanel.getInstGamePanel().obj[0]);
+        GamePanel.getInstGamePanel().obj[1].worldX = 0 ;//* GamePanel.getInstGamePanel().tileSize;
+        GamePanel.getInstGamePanel().obj[1].worldY = 0 ;//* GamePanel.getInstGamePanel().tileSize;
 
-        GamePanel.getInstGamePanel().obj[2] = new OBJ_Chest();
+        GamePanel.getInstGamePanel().obj[2] = new ChestObj();
         GamePanel.getInstGamePanel().obj[2].worldX = 4 * GamePanel.tileSize;
-        GamePanel.getInstGamePanel().obj[2].worldY = 8 * GamePanel.tileSize;
+        GamePanel.getInstGamePanel().obj[2].worldY = 6 * GamePanel.tileSize;
 
     }
 }

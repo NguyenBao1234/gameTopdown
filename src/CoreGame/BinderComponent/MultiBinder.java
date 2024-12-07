@@ -19,7 +19,7 @@ public class MultiBinder
             for (Runnable function : runnableAssignedFunctions)
             {
                 function.run();
-                System.out.println("Executed");
+                //System.out.println("Multil Executed");
             }
             return true;
         }
