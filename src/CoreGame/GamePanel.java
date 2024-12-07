@@ -1,14 +1,14 @@
 package CoreGame;
 
+import CoreGame.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import Entity.Player;
 import Tile.TileManager;
-import Entity.Object.BaseObject;
+import Entity.Object.Master.BaseObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 
 public class GamePanel extends JPanel implements Runnable
@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable
     public static final int screenHeight = tileSize*maxScreenRow;
     public static int truePlayerScreenX = screenWidth/2 - tileSize/2;
     public static int truePlayerScreenY = screenHeight/2 - tileSize/2;
+
     TileManager tileManager = new TileManager();
 
     Thread gameThread;
@@ -33,7 +34,10 @@ public class GamePanel extends JPanel implements Runnable
     // ENTITY AND OBJECT
     public Player player;
     public BaseObject obj[] = new BaseObject[4];
-    AssetSetter aSetter = new AssetSetter();
+    public GameState gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
 
 
     public GamePanel()
@@ -57,7 +61,8 @@ public class GamePanel extends JPanel implements Runnable
     public void setupGame()
     {
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
-        aSetter.setObject();
+        AssetSetter.SetUpObject();
+        gameState = GameState.Run;
     }
 
     public void startGameThread()
@@ -69,7 +74,8 @@ public class GamePanel extends JPanel implements Runnable
     /**this function call every frame*/
     public void update(float DeltaTime)
     {
-        player.update(DeltaTime);
+        if (gameState == GameState.Run) player.update(DeltaTime);
+        if (gameState == GameState.Pause) return;
     }
     /**this draw function call every frame*/
     public void paintComponent(Graphics g)
@@ -113,7 +119,7 @@ public class GamePanel extends JPanel implements Runnable
             lastTime = currentTime;
             if(timer > 1000000000)
             {
-                System.out.println("Fps: "+ drawCallCount);
+                //System.out.println("Fps: "+ drawCallCount);
                 timer = 0;
                 drawCallCount = 0;
             }
