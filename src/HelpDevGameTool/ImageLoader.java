@@ -54,7 +54,6 @@ public class ImageLoader
         return imageList.toArray(new BufferedImage[0]);
     }
 
-
     public static BufferedImage flipImage(boolean flipX , BufferedImage originalImage)
     {
         int width = originalImage.getWidth();
@@ -78,5 +77,20 @@ public class ImageLoader
             flippedFrames[i] = flipImage(flipX, originalFlipBook[i]);
         }
         return flippedFrames;
+    }
+
+    /** load image as BufferedImage from specify image path in resources */
+    public static BufferedImage LoadImage(String imagePath)
+    {
+        try{
+            BufferedImage sprite = ImageIO.read(ImageLoader.class.getResourceAsStream(imagePath));
+            return sprite;
+        }
+        catch(IOException e)
+        {
+            System.err.println("Lỗi khi tải ảnh: " + imagePath);
+            e.printStackTrace();
+        }
+        return null;
     }
 }
