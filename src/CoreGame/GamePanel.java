@@ -19,24 +19,29 @@ public class GamePanel extends JPanel implements Runnable
     static final int originalTileSize = 16;
     public static final int scale = 3;
     public static final int tileSize = originalTileSize * scale;
+    public static final int maxMap = 10;
+    public int currentMap = 0;
 
-    public static final int maxScreenCol = 16; // sau them public
-    public static final int maxScreenRow = 12; //them public
+    public static final int maxScreenCol = 16;
+    public static final int maxScreenRow = 12;
     public static final int screenWidth = tileSize*maxScreenCol;
     public static final int screenHeight = tileSize*maxScreenRow;
     public static int truePlayerScreenX = screenWidth/2 - tileSize/2;
     public static int truePlayerScreenY = screenHeight/2 - tileSize/2;
 
-    TileManager tileManager = new TileManager();
+    public static TileManager tileManager = new TileManager();
+    public static EventHandler EventHandler;
+
+    EventHandler eventHandler; // if this not working then we all dead
+
 
     Thread gameThread;
 
     // ENTITY AND OBJECT
     public Player player;
-    public BaseObject obj[] = new BaseObject[4];
+
+    public BaseObject obj[][] = new BaseObject[maxMap][5];//[amount of Maps][object each map]
     public GameState gameState;
-    public final int playState = 1;
-    public final int pauseState = 2;
 
 
 
@@ -50,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable
         this.setFocusable(true);
         this.requestFocus();
         player = new Player();
+        eventHandler = new EventHandler();
     }
 
     public static GamePanel getInstGamePanel()
@@ -74,7 +80,11 @@ public class GamePanel extends JPanel implements Runnable
     /**this function call every frame*/
     public void update(float DeltaTime)
     {
-        if (gameState == GameState.Run) player.update(DeltaTime);
+        if (gameState == GameState.Run)
+        {
+            player.update(DeltaTime);
+            eventHandler.checkEvent();
+        }
         if (gameState == GameState.Pause) return;
     }
     /**this draw function call every frame*/
@@ -83,9 +93,9 @@ public class GamePanel extends JPanel implements Runnable
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
         tileManager.draw(g2); //  add
-        for (int i = 0; i < obj.length;i++){
-            if (obj[i] != null){
-                obj[i].draw(g2);
+        for (int i = 0; i < obj[1].length;i++){
+            if (obj[currentMap][i] != null){
+                obj[currentMap][i].draw(g2); // add [currentMap] here too
             }
         }
         player.renderSprite(g2);
