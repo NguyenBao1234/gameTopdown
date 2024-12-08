@@ -34,8 +34,8 @@ public class CollisionChecker
         TileManager tileManager = GamePanel.getInstGamePanel().tileManager;
         int tile1Type, tile2Type;
 
-        tile1Type = tileManager.tileTypeMap[leftOverlapTileCol][topOverlapTileRow];
-        tile2Type = tileManager.tileTypeMap[rightOverlapTileCol][topOverlapTileRow];
+        tile1Type = tileManager.tileTypeMap[GamePanel.getInstGamePanel().currentMap][leftOverlapTileCol][topOverlapTileRow];
+        tile2Type = tileManager.tileTypeMap[GamePanel.getInstGamePanel().currentMap][rightOverlapTileCol][topOverlapTileRow];
         boolean bColidingWithObject = false;
         if(entity.getCollisionMode() == Collision.Block)
         {
@@ -47,16 +47,16 @@ public class CollisionChecker
             entityCollisionWorld.height = entity.getCollisionArea().height;
 
             Rectangle objectCollisionWorld = new Rectangle();
-
-            for (int i = 0; i < GamePanel.getInstGamePanel().obj.length; i++)
+            int curMap = GamePanel.getInstGamePanel().currentMap;
+            for (int i = 0; i < GamePanel.getInstGamePanel().obj[curMap].length; i++)
             {
-                if (GamePanel.getInstGamePanel().obj[i] != null)
+                if (GamePanel.getInstGamePanel().obj[curMap][i] != null)
                 {
-                    if(GamePanel.getInstGamePanel().obj[i].getCollisionMode() != Collision.Block) continue;
-                    objectCollisionWorld.x = GamePanel.getInstGamePanel().obj[i].worldX + GamePanel.getInstGamePanel().obj[i].getCollisionArea().x;
-                    objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[i].worldY + GamePanel.getInstGamePanel().obj[i].getCollisionArea().y;
-                    objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[i].getCollisionArea().height;
-                    objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[i].getCollisionArea().width;
+                    if(GamePanel.getInstGamePanel().obj[curMap][i].getCollisionMode() != Collision.Block) continue;
+                    objectCollisionWorld.x = GamePanel.getInstGamePanel().obj[curMap][i].worldX + GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().x;
+                    objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[curMap][i].worldY + GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().y;
+                    objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().height;
+                    objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().width;
                     if (entityCollisionWorld.intersects(objectCollisionWorld)) bColidingWithObject = true;
                 }
             }
@@ -78,19 +78,20 @@ public class CollisionChecker
         List <BaseObject> OverlappedObjects = new ArrayList<>();
 
         boolean bIntersecting = false;
-        for( int i= 0; i< GamePanel.getInstGamePanel().obj.length; i++ )
+        int curMap = GamePanel.getInstGamePanel().currentMap;
+        for( int i= 0; i< GamePanel.getInstGamePanel().obj[curMap].length; i++ )
         {
-            if (GamePanel.getInstGamePanel().obj[i] != null)
+            if (GamePanel.getInstGamePanel().obj[curMap][i] != null)
             {
-                if(GamePanel.getInstGamePanel().obj[i].getCollisionMode() == Collision.NoCollision ) continue;
-                objectCollisionWorld.x = GamePanel.getInstGamePanel().obj[i].worldX + GamePanel.getInstGamePanel().obj[i].getCollisionArea().x;
-                objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[i].worldY + GamePanel.getInstGamePanel().obj[i].getCollisionArea().y;
-                objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[i].getCollisionArea().height;
-                objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[i].getCollisionArea().width;
+                if(GamePanel.getInstGamePanel().obj[curMap][i].getCollisionMode() == Collision.NoCollision ) continue;
+                objectCollisionWorld.x = GamePanel.getInstGamePanel().obj[curMap][i].worldX + GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().x;
+                objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[curMap][i].worldY + GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().y;
+                objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().height;
+                objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().width;
                 if (characterCollisionWorld.intersects(objectCollisionWorld))
                 {
                     bIntersecting = true;
-                    OverlappedObjects.add(GamePanel.getInstGamePanel().obj[i]);
+                    OverlappedObjects.add(GamePanel.getInstGamePanel().obj[curMap][i]);
                 }
             }
         }
@@ -109,17 +110,17 @@ public class CollisionChecker
         Rectangle objectCollisionWorld = new Rectangle();
 
         List <BaseObject> OverlappedObjects = new ArrayList<>();
-
-        for( int i= 0; i< GamePanel.getInstGamePanel().obj.length; i++ )
+        int curMap = GamePanel.getInstGamePanel().currentMap;
+        for( int i= 0; i< GamePanel.getInstGamePanel().obj[curMap].length; i++ )
         {
-            if (GamePanel.getInstGamePanel().obj[i] != null )
+            if (GamePanel.getInstGamePanel().obj[curMap][i] != null )
             {
-                if(GamePanel.getInstGamePanel().obj[i].getCollisionMode() == Collision.NoCollision ) continue;
-                objectCollisionWorld.x = GamePanel.getInstGamePanel().obj[i].worldX + GamePanel.getInstGamePanel().obj[i].getCollisionArea().x;
-                objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[i].worldY + GamePanel.getInstGamePanel().obj[i].getCollisionArea().y;
-                objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[i].getCollisionArea().height;
-                objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[i].getCollisionArea().width;
-                if (Box.intersects(objectCollisionWorld)) OverlappedObjects.add(GamePanel.getInstGamePanel().obj[i]);
+                if(GamePanel.getInstGamePanel().obj[curMap][i].getCollisionMode() == Collision.NoCollision ) continue;
+                objectCollisionWorld.x = GamePanel.getInstGamePanel().obj[curMap][i].worldX + GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().x;
+                objectCollisionWorld.y = GamePanel.getInstGamePanel().obj[curMap][i].worldY + GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().y;
+                objectCollisionWorld.height = GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().height;
+                objectCollisionWorld.width = GamePanel.getInstGamePanel().obj[curMap][i].getCollisionArea().width;
+                if (Box.intersects(objectCollisionWorld)) OverlappedObjects.add(GamePanel.getInstGamePanel().obj[curMap][i]);
             }
         }
         return OverlappedObjects.toArray(BaseObject[]::new);
