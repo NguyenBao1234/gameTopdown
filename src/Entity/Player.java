@@ -21,7 +21,6 @@ public class Player extends BaseCharacter
     public final int screenX;
     public final int screenY;
     public float speedFactor = 1;
-    private CollisionChecker collisionChecker;
 
     public Player()
     {
@@ -29,8 +28,8 @@ public class Player extends BaseCharacter
         flipBookArr = new BufferedImage[8][];
         setupAnimations();
         setAnimationToUse(0,4);
-        worldX = 2*GamePanel.tileSize;
-        worldY = 5* GamePanel.tileSize;
+        worldX = 0*GamePanel.tileSize;
+        worldY = 0* GamePanel.tileSize;
         screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
         screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2;
 
@@ -40,7 +39,6 @@ public class Player extends BaseCharacter
         collisionArea.width = 11* GamePanel.scale;
         collisionArea.height = 5* GamePanel.scale;
         collisionMode = Collision.Block;
-        collisionChecker = new CollisionChecker();
         SetupPlayerInputComponent();
     }
 
@@ -56,7 +54,7 @@ public class Player extends BaseCharacter
         handleLocationByCollision();
         runFlipBook(DeltaTime);
         handelAnimation();
-        collisionChecker.getOverlappedObjects(this);
+        CollisionChecker.getOverlappedObjects(this);
 
     }
 
@@ -101,7 +99,7 @@ public class Player extends BaseCharacter
     void handleLocationByCollision()
     {
         if(collisionMode == Collision.NoCollision) return;
-        collisionChecker.RespondToMap(this);
+        CollisionChecker.RespondToMap(this);
         if(bColliding)
         {
             switch(getCurrentDirection())
@@ -121,18 +119,7 @@ public class Player extends BaseCharacter
             }
         }
     }
-    void PauseGame() {
-        if (KeyHandler.isKeyPressed(KeyEvent.VK_P)) {
-            if (GamePanel.getInstGamePanel().gameState == GameState.Run)
-            {
-                GamePanel.getInstGamePanel().gameState = GameState.Pause;
-            }
-            else if (GamePanel.getInstGamePanel().gameState == GameState.Pause)
-            {
-                GamePanel.getInstGamePanel().gameState = GameState.Run;
-            }
-        }
-    }
+
     /**Choose animation*/
     void handelAnimation()
     {
@@ -182,21 +169,29 @@ public class Player extends BaseCharacter
         flipBookArr[7] = ImageLoader.makeFlipBook("/Player/right/walk");
     }
 
-    void Pause()
-    {
-        System.out.println("Bind Function 'TestBindAction' called");
-        SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
-    }
     void Interact()
     {
         int BiasInteractBox = 4* GamePanel.scale;
-        for(BaseObject overlappedObject : collisionChecker.getOverlappedObjectsInBox(worldX + collisionArea.x - BiasInteractBox,worldY + collisionArea.y - BiasInteractBox, collisionArea.width +BiasInteractBox*2,collisionArea.height + BiasInteractBox*2))
+        for(BaseObject overlappedObject : CollisionChecker.getOverlappedObjectsInBox(worldX + collisionArea.x - BiasInteractBox,worldY + collisionArea.y - BiasInteractBox, collisionArea.width +BiasInteractBox*2,collisionArea.height + BiasInteractBox*2))
         {
             if(overlappedObject instanceof InteractInterface)
             {
                 boolean interactSuccess = ((InteractInterface) overlappedObject).interact();
                 System.out.println("Interact:"+interactSuccess);
             }
+        }
+    }
+
+    void PauseGame()
+    {
+        SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
+        if (GamePanel.getInstGamePanel().gameState == GameState.Run)
+        {
+            GamePanel.getInstGamePanel().gameState = GameState.Pause;
+        }
+        else if (GamePanel.getInstGamePanel().gameState == GameState.Pause)
+        {
+            GamePanel.getInstGamePanel().gameState = GameState.Run;
         }
     }
 }

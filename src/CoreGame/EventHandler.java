@@ -1,7 +1,5 @@
 package CoreGame;
 
-import java.awt.*;
-
 public class EventHandler
 {
     EventRect eventRect[][][];
@@ -15,7 +13,8 @@ public class EventHandler
         int map = 0;
         int col = 0;
         int row = 0;
-        while (map < GamePanel.maxMap && col < 50 && row < 50){
+        while (map < GamePanel.maxMap && col < 50 && row < 50)
+        {
             eventRect[map][col][row]= new EventRect();
             eventRect[map][col][row].x = 23;
             eventRect[map][col][row].y = 23;
@@ -24,10 +23,12 @@ public class EventHandler
             eventRect[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
             eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
             col++;
-            if(col== 50){
+            if(col== 50)
+            {
                 col = 0;
                 row++;
-                if(row == 50){
+                if(row == 50)
+                {
                     row = 0;
                     map++;
                 }
@@ -35,14 +36,13 @@ public class EventHandler
         }
     }
 
-    public void checkEvent(){
+    public void checkEvent()
+    {
         int xDistance = Math.abs(GamePanel.getInstGamePanel().player.worldX - previousEventX);
         int yDistance = Math.abs(GamePanel.getInstGamePanel().player.worldY - previousEventY);
         int distance = Math.max(xDistance,yDistance);
 
-        if (distance > GamePanel.tileSize){
-            canTouchEvent = true;
-        }
+        if (distance > GamePanel.tileSize)canTouchEvent = true;
         if(canTouchEvent == true) {
             if (hit(0,10,2,"any") == true){teleport(1,0,5);} // mọi thứ dều trừ 1 tính theo map
             else if (hit(1,0,5,"any") == true){teleport(0,10,2);}
@@ -50,7 +50,7 @@ public class EventHandler
     }
     public boolean hit(int map, int col, int row, String reqDirection){
         boolean hit = false;
-        if(map == GamePanel.getInstGamePanel().currentMap){
+        if(map == GamePanel.getInstGamePanel().currentMapIndex){
             GamePanel.getInstGamePanel().player.getCollisionArea().x = GamePanel.getInstGamePanel().player.worldX + GamePanel.getInstGamePanel().player.getCollisionArea().x;
             GamePanel.getInstGamePanel().player.getCollisionArea().y = GamePanel.getInstGamePanel().player.worldY + GamePanel.getInstGamePanel().player.getCollisionArea().y;
             eventRect[map][col][row].x = col* GamePanel.tileSize + eventRect[map][col][row].x;
@@ -72,8 +72,10 @@ public class EventHandler
         }
         return hit;
     }
-    public void teleport(int map, int col, int row){
-        GamePanel.getInstGamePanel().currentMap = map;
+
+    public void teleport(int map, int col, int row)
+    {
+        GamePanel.getInstGamePanel().currentMapIndex = map;
         GamePanel.getInstGamePanel().player.worldX = col* GamePanel.tileSize;
         GamePanel.getInstGamePanel().player.worldY = row* GamePanel.tileSize;
         previousEventX = GamePanel.getInstGamePanel().player.worldX;  //bỏ 2 dòng này thì xảy ra liên tiếp

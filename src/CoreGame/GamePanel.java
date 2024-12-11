@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable
     public static final int scale = 3;
     public static final int tileSize = originalTileSize * scale;
     public static final int maxMap = 10;
-    public int currentMap = 0;
+    public int currentMapIndex = 0;
 
     public static final int maxScreenCol = 16;
     public static final int maxScreenRow = 12;
@@ -47,13 +47,12 @@ public class GamePanel extends JPanel implements Runnable
 
     public GamePanel()
     {
-        this.setPreferredSize(new Dimension(screenWidth,screenHeight));
-        this.setBackground((Color.blue));
-        this.setDoubleBuffered(true);
-        //this.addKeyListener(KeyHandler.getInstKeyHdl());
+        setPreferredSize(new Dimension(screenWidth,screenHeight));
+        setBackground((Color.blue));
+        setDoubleBuffered(true);
         addKeyListener(KeyHandler.getInstance());
-        this.setFocusable(true);
-        this.requestFocus();
+        setFocusable(true);
+        requestFocus();
         player = new Player();
         eventHandler = new EventHandler();
     }
@@ -92,10 +91,10 @@ public class GamePanel extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
-        tileManager.draw(g2); //  add
+        tileManager.DrawTiles(g2); //  add
         for (int i = 0; i < obj[1].length;i++){
-            if (obj[currentMap][i] != null){
-                obj[currentMap][i].draw(g2); // add [currentMap] here too
+            if (obj[currentMapIndex][i] != null){
+                obj[currentMapIndex][i].draw(g2); // add [currentMap] here too
             }
         }
         player.renderSprite(g2);

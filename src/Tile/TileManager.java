@@ -2,8 +2,6 @@ package Tile;
 
 import CoreGame.GamePanel;
 import HelpDevGameTool.ImageLoader;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,61 +9,67 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+import static CoreGame.Enums.Collision.Block;
+import static CoreGame.Enums.Collision.NoCollision;
+
 public class TileManager
 {
-    public Tile[] tiles;
-    public int tileTypeMap[][][]; // maps/cols/rows
-    int normalizedPlayerScreenX;
-    int normalizedPlayerScreenY;
+    public Tile[] tiles; // Types of tile
+    public static int tileTypeMap[][][]; // [map index][col][row]
+
+    private final int normalizedPlayerScreenX;
+    private final int normalizedPlayerScreenY;
+
     public TileManager()
     {
         normalizedPlayerScreenX = GamePanel.screenWidth / 2 - GamePanel.tileSize/2;
         normalizedPlayerScreenY = GamePanel.screenHeight / 2 - GamePanel.tileSize/2;
-        tiles = new Tile[20]; //if ya want more kinda tile, ya can change 20 to the number ya want
+        tiles = new Tile[20]; //if ya want more kinda tile, ya can change 20 to the number ya want ,or you can use List
         tileTypeMap = new int[GamePanel.maxMap][50][50];
         getTileImage();
 
-        loadMap("/Map/map3.txt",0);
-        loadMap("/Map/map4.txt",1);
+        LoadMap("/Map/map3.txt",0);
+        LoadMap("/Map/map4.txt",1);
     }
 
     public void getTileImage()
     {
             tiles[0] = new Tile();
             tiles[0].image = ImageLoader.LoadImage("/Tile/water.png");
-            tiles[0].collision = true;
+            tiles[0].collision = Block;
 
             tiles[1] = new Tile();
             tiles[1].image = ImageLoader.LoadImage("/Tile/sand.png");
-            tiles[1].collision = false;
+            tiles[1].collision = NoCollision;
 
             tiles[2] = new Tile();
             tiles[2].image = ImageLoader.LoadImage("/Tile/wall.png");
-            tiles[2].collision = false;
+            tiles[2].collision = NoCollision;
     }
 
-    public void loadMap(String filePath,int map)
+    public void LoadMap(final String filePath,final int mapIndex)
     {
         try
         {
-            InputStream is = getClass().getResourceAsStream(filePath);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
+            InputStream inputStream = getClass().getResourceAsStream(filePath);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
             int col = 0;
             int row = 0;
-            while (col < 50 && row < 50)
+            String line;
+            while ((line = bufferedReader.readLine())!=null)
             {
-                String line = bufferedReader.readLine();
-                while (col < 50)
+                String typeIndexes[] = line.split("");
+                while (col<typeIndexes.length)
                 {
-                    String numbers[] = line.split("");
-                    int num = Integer.parseInt(numbers[col]);
-                    tileTypeMap[map][col][row] = num;
+                    String numberString = typeIndexes[col];
+                    int typeIndex;
+                    if (numberString.isBlank()||!numberString.matches("-?\\d+")) typeIndex = -1;
+                    else typeIndex = Integer.parseInt(numberString);
+                    tileTypeMap[mapIndex][row][col] = typeIndex;
                     col++;
                 }
-                if(col== 50){
-                    col=0;
-                    row++;
-                }
+                col = 0;
+                row++;
             }
             bufferedReader.close();
         }
@@ -75,33 +79,48 @@ public class TileManager
         }
     }
 
-    public void draw(Graphics2D g2)
+    public void DrawTiles(final Graphics2D g2)
     {
-        int worldcol = 0;
-        int worldrow = 0;
+        int currMapIndex = GamePanel.getInstGamePanel().currentMapIndex;
         int playerWorldX = GamePanel.getInstGamePanel().player.worldX;
         int playerWorldY = GamePanel.getInstGamePanel().player.worldY;
-
-        while (worldcol < 50 && worldrow < 50) {
-            int tileNum = tileTypeMap[GamePanel.getInstGamePanel().currentMap][worldcol][worldrow];
-            int worldX = worldcol * GamePanel.tileSize;
-            int worldY = worldrow * GamePanel.tileSize;
-            int screenX = worldX - playerWorldX + normalizedPlayerScreenX;
-            int screenY = worldY - playerWorldY + normalizedPlayerScreenY;
-
-            if (worldX + GamePanel.tileSize > playerWorldX - normalizedPlayerScreenX
-                    && worldX < playerWorldX + normalizedPlayerScreenX + 48
-                    && worldY + GamePanel.tileSize > playerWorldY - normalizedPlayerScreenY
-                    && worldY < playerWorldY + normalizedPlayerScreenY + 48){
-                //g2.drawImage(tile[tileNum].image, screenX, screenY, 64*gp.scale, 64*gp.scale, null);
-                g2.drawImage(tiles[tileNum].image, screenX, screenY, GamePanel.tileSize, GamePanel.tileSize, null);
-            }
-
-            worldcol++;
-            if (worldcol == 50){
-                worldcol=0;
-                worldrow++;
+        for(int i = 0; i < tileTypeMap[currMapIndex].length; i++)
+        {
+            for(int j = 0; j < tileTypeMap[currMapIndex][i].length; j++)
+            {
+                int typeTileIndex = tileTypeMap[currMapIndex][i][j];
+                if(typeTileIndex<0) continue;
+                int worldX = j * GamePanel.tileSize;
+                int worldY = i * GamePanel.tileSize;
+                int screenX = worldX - playerWorldX + normalizedPlayerScreenX;
+                int screenY = worldY - playerWorldY + normalizedPlayerScreenY;
+                if
+                (
+                        worldX + GamePanel.tileSize > playerWorldX - normalizedPlayerScreenX
+                        && worldX < playerWorldX + normalizedPlayerScreenX + GamePanel.tileSize
+                        && worldY + GamePanel.tileSize > playerWorldY - normalizedPlayerScreenY
+                        && worldY < playerWorldY + normalizedPlayerScreenY + GamePanel.tileSize
+                )
+                {
+                    g2.drawImage(tiles[typeTileIndex].image, screenX, screenY, GamePanel.tileSize, GamePanel.tileSize, null);
+                }
             }
         }
+    }
+
+    public static int GetWidthOfCurrentMap() {return tileTypeMap[GamePanel.getInstGamePanel().currentMapIndex][1].length;}
+
+    public static int GetHeightOfCurrentMap(){return tileTypeMap[GamePanel.getInstGamePanel().currentMapIndex].length;}
+
+    public static int GetWidthOfMap( int currentMap)
+    {
+        if (currentMap >= tileTypeMap.length) return 0;
+        return tileTypeMap[currentMap][1].length;
+    }
+
+    public static int GetHeightOfMap( int currentMap)
+    {
+        if (currentMap >= tileTypeMap.length) return 0;
+        return tileTypeMap[currentMap].length;
     }
 }

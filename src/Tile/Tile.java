@@ -1,9 +1,11 @@
 package Tile;
 
+import CoreGame.Enums.Collision;
+
 import java.awt.image.BufferedImage;
 
 public class Tile
 {
     public BufferedImage image;
-    public boolean collision = false;
+    public Collision collision = Collision.NoCollision;
 }
