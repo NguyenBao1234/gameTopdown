@@ -1,4 +1,4 @@
-package Tile;
+package CoreGame.MapComponent;
 
 import CoreGame.Enums.Collision;
 

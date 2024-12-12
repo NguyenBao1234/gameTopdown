@@ -1,8 +1,9 @@
-package CoreGame;
+package CoreGame.CollisionComponent;
 
 import java.awt.*;
 
-public class EventRect extends Rectangle {
+public class EventRect extends Rectangle
+{
     int eventRectDefaultX, eventRectDefaultY;
     boolean eventDone = false;
 }

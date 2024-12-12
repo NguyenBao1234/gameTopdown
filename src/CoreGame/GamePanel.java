@@ -1,12 +1,12 @@
 package CoreGame;
 
+import CoreGame.CollisionComponent.EventHandler;
 import CoreGame.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import Entity.Player;
-import Tile.TileManager;
-import Entity.Object.Master.BaseObject;
-
+import CoreGame.MapComponent.TileManager;
+import CoreGame.EntityComponent.BaseObject;
 import javax.swing.*;
 import java.awt.*;
 
@@ -30,20 +30,15 @@ public class GamePanel extends JPanel implements Runnable
     public static int truePlayerScreenY = screenHeight/2 - tileSize/2;
 
     public static TileManager tileManager = new TileManager();
-    public static EventHandler EventHandler;
+    public static CoreGame.CollisionComponent.EventHandler EventHandler;
 
     EventHandler eventHandler; // if this not working then we all dead
 
-
     Thread gameThread;
-
     // ENTITY AND OBJECT
     public Player player;
-
     public BaseObject obj[][] = new BaseObject[maxMap][5];//[amount of Maps][object each map]
     public GameState gameState;
-
-
 
     public GamePanel()
     {
@@ -66,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable
     public void setupGame()
     {
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
-        AssetSetter.SetUpObject();
+        WorldManager.SetUpObject();
         gameState = GameState.Run;
     }
 
@@ -83,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable
         {
             player.update(DeltaTime);
             eventHandler.checkEvent();
+            WorldManager.SimulateObject();
         }
         if (gameState == GameState.Pause) return;
     }
@@ -92,7 +88,8 @@ public class GamePanel extends JPanel implements Runnable
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
         tileManager.DrawTiles(g2); //  add
-        for (int i = 0; i < obj[1].length;i++){
+        for (int i = 0; i < obj[1].length;i++)
+        {
             if (obj[currentMapIndex][i] != null){
                 obj[currentMapIndex][i].draw(g2); // add [currentMap] here too
             }

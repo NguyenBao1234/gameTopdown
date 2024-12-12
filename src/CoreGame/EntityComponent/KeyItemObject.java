@@ -1,4 +1,4 @@
-package Entity.Object.Master;
+package CoreGame.EntityComponent;
 
 import CoreGame.Enums.Collision;
 import HelpDevGameTool.ImageLoader;
@@ -7,10 +7,7 @@ import HelpDevGameTool.ImageLoader;
 public class KeyItemObject extends BaseObject implements InteractInterface
 {
     protected ObjectNeedKeyItem targetInteractObject;
-    public KeyItemObject()
-    {
-        sprite = ImageLoader.LoadImage("/Objects/key.png");
-    }
+
     public KeyItemObject(ObjectNeedKeyItem ObjectNeedInteract)
     {
         sprite = ImageLoader.LoadImage("/Objects/key.png");
@@ -32,5 +29,20 @@ public class KeyItemObject extends BaseObject implements InteractInterface
         setCollisionMode(Collision.NoCollision);
         targetInteractObject.SetUnlock(true);
         return true;
+    }
+
+    @Override
+    public void Tick() {
+
+    }
+
+    @Override
+    public void OnBeginOverlapped(Entity otherEntity) {
+        System.out.println("Overlap with"+otherEntity );
+    }
+
+    @Override
+    public void OnEndOverlapped(Entity otherEntity) {
+
     }
 }

@@ -1,4 +1,8 @@
-package CoreGame;
+package CoreGame.CollisionComponent;
+
+import CoreGame.GamePanel;
+
+import java.awt.*;
 
 public class EventHandler
 {
@@ -9,10 +13,10 @@ public class EventHandler
     public EventHandler()
     {
         eventRect = new EventRect[GamePanel.maxMap][50][50];
-
         int map = 0;
         int col = 0;
         int row = 0;
+        //set default world location to reset after calculating
         while (map < GamePanel.maxMap && col < 50 && row < 50)
         {
             eventRect[map][col][row]= new EventRect();
@@ -50,7 +54,9 @@ public class EventHandler
     }
     public boolean hit(int map, int col, int row, String reqDirection){
         boolean hit = false;
-        if(map == GamePanel.getInstGamePanel().currentMapIndex){
+        if(map == GamePanel.getInstGamePanel().currentMapIndex)
+        {
+//            Rectangle WorldCollisionEntity
             GamePanel.getInstGamePanel().player.getCollisionArea().x = GamePanel.getInstGamePanel().player.worldX + GamePanel.getInstGamePanel().player.getCollisionArea().x;
             GamePanel.getInstGamePanel().player.getCollisionArea().y = GamePanel.getInstGamePanel().player.worldY + GamePanel.getInstGamePanel().player.getCollisionArea().y;
             eventRect[map][col][row].x = col* GamePanel.tileSize + eventRect[map][col][row].x;

@@ -1,14 +1,14 @@
 package Entity;
 
-import CoreGame.CollisionChecker;
+import CoreGame.CollisionComponent.CollisionChecker;
 import CoreGame.Enums.Collision;
 
 import CoreGame.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
-import Entity.Object.Master.BaseObject;
-import Entity.Object.Master.InteractInterface;
+import CoreGame.EntityComponent.BaseObject;
+import CoreGame.EntityComponent.InteractInterface;
 import HelpDevGameTool.ImageLoader;
 
 import java.awt.*;
@@ -54,8 +54,6 @@ public class Player extends BaseCharacter
         handleLocationByCollision();
         runFlipBook(DeltaTime);
         handelAnimation();
-        CollisionChecker.getOverlappedObjects(this);
-
     }
 
     public void renderSprite(Graphics2D g2)

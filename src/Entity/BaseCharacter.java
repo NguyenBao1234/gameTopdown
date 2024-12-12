@@ -1,6 +1,7 @@
 package Entity;
 
 import CoreGame.AnimNotifyComponent.BaseAnimNotify;
+import CoreGame.EntityComponent.Entity;
 import CoreGame.Enums.Direction;
 
 import java.awt.image.BufferedImage;

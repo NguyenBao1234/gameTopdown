@@ -1,13 +1,12 @@
 package CoreGame;
 
-import Entity.Object.Instance.ChestObj;
-import Entity.Object.Instance.DoorObj;
-import Entity.Object.Master.KeyItemObject;
+import Entity.Object.ChestObj;
+import Entity.Object.DoorObj;
+import CoreGame.EntityComponent.BaseObject;
+import CoreGame.EntityComponent.KeyItemObject;
 
-public class AssetSetter
+public class WorldManager
 {
-    public AssetSetter (){}
-    
     public static void SetUpObject()
     {
         GamePanel.getInstGamePanel().obj[GamePanel.getInstGamePanel().currentMapIndex][0] = new DoorObj();
@@ -22,5 +21,14 @@ public class AssetSetter
         GamePanel.getInstGamePanel().obj[GamePanel.getInstGamePanel().currentMapIndex][2].worldX = 4 * GamePanel.tileSize;
         GamePanel.getInstGamePanel().obj[GamePanel.getInstGamePanel().currentMapIndex][2].worldY = 6 * GamePanel.tileSize;
 
+    }
+    public static void SimulateObject()
+    {
+        BaseObject Objects[] = GamePanel.getInstGamePanel().obj[GamePanel.getInstGamePanel().currentMapIndex];
+        for(BaseObject object : Objects)
+        {
+            if (object == null) return;
+            object.SimulateOverlapping(GamePanel.getInstGamePanel().player);
+        }
     }
 }

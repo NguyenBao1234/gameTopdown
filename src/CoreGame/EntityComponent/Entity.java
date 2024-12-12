@@ -1,4 +1,4 @@
-package Entity;
+package CoreGame.EntityComponent;
 
 import CoreGame.Enums.Collision;
 import java.awt.*;
@@ -9,7 +9,6 @@ public class Entity
     public int worldX,worldY;
 
     protected boolean bColliding = false;
-    protected boolean bOverlapping = false;
 
     protected Collision collisionMode = Collision.NoCollision;
     protected Rectangle collisionArea;
@@ -39,8 +38,6 @@ public class Entity
     public final Rectangle getCollisionArea(){ return collisionArea;}
     public final Collision getCollisionMode(){return collisionMode;}
     public final void setCollisionMode(Collision collision){collisionMode = collision;}
-    public final boolean isbOverlapping(){return bOverlapping;}
-    public final void setOverlapping(boolean bOverlap){bOverlapping = bOverlap;}
     public final boolean IsColliding(){return bColliding;}
     public final void SetColliding(boolean bCollide){bColliding = bCollide; }
 }
