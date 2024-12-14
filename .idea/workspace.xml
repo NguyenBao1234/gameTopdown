@@ -5,29 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add simulate overlapping feature for base object&#10;- rename and sort file to folder">
-      <change afterPath="$PROJECT_DIR$/Resource/Objects/hint_tile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameContent/EventTriggerBox/MapPortal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoreGame/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resource/Map/map3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Resource/Map/map3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/BaseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/BaseObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/InteractInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Object/InteractInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/KeyItemObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Object/KeyItemObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/ObjectNeedKeyItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Object/ObjectNeedKeyItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/Enums/Collision.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Data/Enums/Collision.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/Enums/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Data/Enums/Direction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/Enums/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Data/Enums/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/Data/Enums/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Data/Enums/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/MapComponent/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/MapComponent/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/MapComponent/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/MapComponent/TileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BaseCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/BaseCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Object/ChestObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Object/ChestObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Object/DoorObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Object/DoorObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameContent/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,19 +65,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ImageGridSplitter.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Hiếu",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/ProjectSchool/OnClass/gameTopdown/resources/Player",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "D:/ProjectSchool/OnClass/gameTopdown/src/Main.java",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
