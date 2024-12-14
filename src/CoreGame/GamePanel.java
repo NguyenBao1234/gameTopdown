@@ -4,6 +4,7 @@ import CoreGame.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import Entity.Player;
+import Environment.EnvironmentManager;
 import Tile.TileManager;
 import Entity.Object.Master.BaseObject;
 
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable
     public static EventHandler EventHandler;
 
     EventHandler eventHandler; // if this not working then we all dead
-
+    EnvironmentManager environmentManager = new EnvironmentManager(this);
 
     Thread gameThread;
 
@@ -68,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
         AssetSetter.SetUpObject();
+        environmentManager.setup();
         gameState = GameState.Run;
     }
 
@@ -99,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable
             }
         }
         player.renderSprite(g2);
-
+        environmentManager.draw(g2);
         g2.dispose();
     }
 

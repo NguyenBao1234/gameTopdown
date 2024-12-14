@@ -57,7 +57,6 @@ public class Player extends BaseCharacter
         runFlipBook(DeltaTime);
         handelAnimation();
         collisionChecker.getOverlappedObjects(this);
-
     }
 
     public void renderSprite(Graphics2D g2)
