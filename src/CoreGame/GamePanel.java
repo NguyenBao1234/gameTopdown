@@ -1,10 +1,9 @@
 package CoreGame;
 
-import CoreGame.CollisionComponent.EventHandler;
-import CoreGame.Enums.GameState;
+import CoreGame.Data.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
-import Entity.Player;
+import GameContent.Player;
 import CoreGame.MapComponent.TileManager;
 import CoreGame.EntityComponent.BaseObject;
 import javax.swing.*;
@@ -19,8 +18,6 @@ public class GamePanel extends JPanel implements Runnable
     static final int originalTileSize = 16;
     public static final int scale = 3;
     public static final int tileSize = originalTileSize * scale;
-    public static final int maxMap = 10;
-    public int currentMapIndex = 0;
 
     public static final int maxScreenCol = 16;
     public static final int maxScreenRow = 12;
@@ -29,10 +26,8 @@ public class GamePanel extends JPanel implements Runnable
     public static int truePlayerScreenX = screenWidth/2 - tileSize/2;
     public static int truePlayerScreenY = screenHeight/2 - tileSize/2;
 
-    public static TileManager tileManager = new TileManager();
-    public static CoreGame.CollisionComponent.EventHandler EventHandler;
-
-    EventHandler eventHandler; // if this not working then we all dead
+    public static final int maxMap = 10;
+    public int currentMapIndex = 0;
 
     Thread gameThread;
     // ENTITY AND OBJECT
@@ -49,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable
         setFocusable(true);
         requestFocus();
         player = new Player();
-        eventHandler = new EventHandler();
+        new TileManager();
     }
 
     public static GamePanel getInstGamePanel()
@@ -77,7 +72,6 @@ public class GamePanel extends JPanel implements Runnable
         if (gameState == GameState.Run)
         {
             player.update(DeltaTime);
-            eventHandler.checkEvent();
             WorldManager.SimulateObject();
         }
         if (gameState == GameState.Pause) return;
@@ -87,7 +81,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
-        tileManager.DrawTiles(g2); //  add
+        TileManager.DrawTiles(g2); //  add
         for (int i = 0; i < obj[1].length;i++)
         {
             if (obj[currentMapIndex][i] != null){

@@ -1,6 +1,6 @@
 package CoreGame.MapComponent;
 
-import CoreGame.Enums.Collision;
+import CoreGame.Data.Enums.Collision;
 
 import java.awt.image.BufferedImage;
 

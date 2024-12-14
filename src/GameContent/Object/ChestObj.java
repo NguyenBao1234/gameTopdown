@@ -1,4 +1,4 @@
-package Entity.Object;
+package GameContent.Object;
 
 import CoreGame.EntityComponent.Entity;
 import CoreGame.EntityComponent.BaseObject;
@@ -13,12 +13,10 @@ public class ChestObj extends BaseObject
 
     @Override
     public void Tick() {
-
     }
 
     @Override
     public void OnEndOverlapped(Entity otherEntity) {
-
     }
 
     @Override

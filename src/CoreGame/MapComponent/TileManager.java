@@ -9,27 +9,29 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
-import static CoreGame.Enums.Collision.Block;
-import static CoreGame.Enums.Collision.NoCollision;
+import static CoreGame.Data.Enums.Collision.Block;
+import static CoreGame.Data.Enums.Collision.NoCollision;
 
 public class TileManager
 {
-    public Tile[] tiles; // Types of tile
-    public static int tileTypeMap[][][]; // [map index][col][row]
+    private static TileManager Inst;
+    public static final Tile[] tiles = new Tile[10]; // Types of tile
+    public static int tileTypeMap[][][] = new int[GamePanel.maxMap][50][50]; // [map index][col][row]
 
-    private final int normalizedPlayerScreenX;
-    private final int normalizedPlayerScreenY;
+    private static final int normalizedPlayerScreenX= GamePanel.screenWidth / 2 - GamePanel.tileSize/2;
+    private static final int normalizedPlayerScreenY= GamePanel.screenHeight / 2 - GamePanel.tileSize/2;
 
     public TileManager()
     {
-        normalizedPlayerScreenX = GamePanel.screenWidth / 2 - GamePanel.tileSize/2;
-        normalizedPlayerScreenY = GamePanel.screenHeight / 2 - GamePanel.tileSize/2;
-        tiles = new Tile[20]; //if ya want more kinda tile, ya can change 20 to the number ya want ,or you can use List
-        tileTypeMap = new int[GamePanel.maxMap][50][50];
         getTileImage();
-
         LoadMap("/Map/map3.txt",0);
         LoadMap("/Map/map4.txt",1);
+    }
+
+    public static TileManager GetInst()
+    {
+        if (Inst != null) Inst = new TileManager();
+        return Inst;
     }
 
     public void getTileImage()
@@ -79,7 +81,7 @@ public class TileManager
         }
     }
 
-    public void DrawTiles(final Graphics2D g2)
+    public static void DrawTiles(final Graphics2D g2)
     {
         int currMapIndex = GamePanel.getInstGamePanel().currentMapIndex;
         int playerWorldX = GamePanel.getInstGamePanel().player.worldX;

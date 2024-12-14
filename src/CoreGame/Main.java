@@ -18,6 +18,6 @@ public class Main
         window.setVisible(true);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 }

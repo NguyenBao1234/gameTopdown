@@ -1,7 +1,6 @@
-package Entity.Object;
+package GameContent.Object;
 
-import CoreGame.Enums.Collision;
-import CoreGame.EntityComponent.ObjectNeedKeyItem;
+import CoreGame.Data.Enums.Collision;
 import HelpDevGameTool.ImageLoader;
 
 public class DoorObj extends ObjectNeedKeyItem

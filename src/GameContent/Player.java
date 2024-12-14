@@ -1,14 +1,15 @@
-package Entity;
+package GameContent;
 
 import CoreGame.CollisionComponent.CollisionChecker;
-import CoreGame.Enums.Collision;
+import CoreGame.EntityComponent.BaseCharacter;
+import CoreGame.Data.Enums.Collision;
 
-import CoreGame.Enums.GameState;
+import CoreGame.Data.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import CoreGame.EntityComponent.BaseObject;
-import CoreGame.EntityComponent.InteractInterface;
+import GameContent.Object.InteractInterface;
 import HelpDevGameTool.ImageLoader;
 
 import java.awt.*;
@@ -31,11 +32,11 @@ public class Player extends BaseCharacter
         worldX = 0*GamePanel.tileSize;
         worldY = 0* GamePanel.tileSize;
         screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
-        screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2;
+        screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2 -16;
 
         collisionArea = new Rectangle();
         collisionArea.x = 2* GamePanel.scale;
-        collisionArea.y = 17* GamePanel.scale;
+        collisionArea.y = 13* GamePanel.scale;
         collisionArea.width = 11* GamePanel.scale;
         collisionArea.height = 5* GamePanel.scale;
         collisionMode = Collision.Block;

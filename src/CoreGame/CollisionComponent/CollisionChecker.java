@@ -1,6 +1,6 @@
 package CoreGame.CollisionComponent;
 
-import CoreGame.Enums.Collision;
+import CoreGame.Data.Enums.Collision;
 import CoreGame.GamePanel;
 import CoreGame.EntityComponent.Entity;
 import CoreGame.EntityComponent.BaseObject;
@@ -75,11 +75,10 @@ public class CollisionChecker
             //Co the thong bao vi tri tren world cua player tai day
         }
 
-        TileManager tileManager = GamePanel.getInstGamePanel().tileManager;
         int tile1Type, tile2Type;
         //To check colliding with the map:
-        tile1Type = tileManager.tileTypeMap[curMap][topOverlapTileRow][leftOverlapTileCol];
-        tile2Type = tileManager.tileTypeMap[curMap][topOverlapTileRow][rightOverlapTileCol];
+        tile1Type = TileManager.tileTypeMap[curMap][topOverlapTileRow][leftOverlapTileCol];
+        tile2Type = TileManager.tileTypeMap[curMap][topOverlapTileRow][rightOverlapTileCol];
         //To check colliding with objects in the map:
         boolean bColidingWithObject = false;
         if(entity.getCollisionMode() == Collision.Block)
@@ -106,7 +105,7 @@ public class CollisionChecker
             }
         }
         if(tile1Type < 0 || tile2Type < 0){ entity.SetColliding(true);return;}
-        entity.SetColliding((tileManager.tiles[tile1Type].collision == Collision.Block )|| tileManager.tiles[tile2Type].collision == Collision.Block || bColidingWithObject);
+        entity.SetColliding((TileManager.tiles[tile1Type].collision == Collision.Block )|| TileManager.tiles[tile2Type].collision == Collision.Block || bColidingWithObject);
     }
 
     /**Get objects overlap with specified entity*/

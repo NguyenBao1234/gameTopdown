@@ -1,4 +1,7 @@
-package CoreGame.EntityComponent;
+package GameContent.Object;
+
+import CoreGame.EntityComponent.BaseObject;
+import CoreGame.EntityComponent.Entity;
 
 public class ObjectNeedKeyItem extends BaseObject implements InteractInterface
 {

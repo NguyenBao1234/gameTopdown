@@ -1,6 +1,6 @@
 package CoreGame.EntityComponent;
 
-import CoreGame.Enums.Collision;
+import CoreGame.Data.Enums.Collision;
 import CoreGame.GamePanel;
 
 import java.awt.*;
@@ -11,6 +11,7 @@ public abstract class BaseObject extends Entity
     protected boolean bVisible = true;
     public BaseObject()
     {
+        setCollisionMode(Collision.Overlap);
         collisionArea = new Rectangle(0,0,48,48);
     }
 
@@ -23,7 +24,7 @@ public abstract class BaseObject extends Entity
     }
 
 
-    private ArrayList<Entity> OtherEntity = new ArrayList<>();
+    private final ArrayList<Entity> OtherEntity = new ArrayList<>();
     public void SimulateOverlapping(Entity otherEntity)
     {
         Tick();
@@ -35,17 +36,21 @@ public abstract class BaseObject extends Entity
         entityCollision.width = otherEntity.getCollisionArea().width;
         entityCollision.height = otherEntity.getCollisionArea().height;
 
-        Rectangle worldObjecCollision = new Rectangle();
+        Rectangle worldObjectCollision = new Rectangle();
 
-        worldObjecCollision.x = worldX + getCollisionArea().x;
-        worldObjecCollision.y = worldY + getCollisionArea().y;
-        worldObjecCollision.height = getCollisionArea().height;
-        worldObjecCollision.width = getCollisionArea().width;
+        worldObjectCollision.x = worldX + getCollisionArea().x;
+        worldObjectCollision.y = worldY + getCollisionArea().y;
+        worldObjectCollision.height = getCollisionArea().height;
+        worldObjectCollision.width = getCollisionArea().width;
 
-        if (entityCollision.intersects(worldObjecCollision))
+        if (entityCollision.intersects(worldObjectCollision))
         {
-            if(!OtherEntity .contains(otherEntity)) OnBeginOverlapped(otherEntity);
-            OtherEntity.add(otherEntity);
+            if(!OtherEntity .contains(otherEntity))
+            {
+                OnBeginOverlapped(otherEntity);
+                OtherEntity.add(otherEntity);
+            }
+
         }
         else if(OtherEntity .contains(otherEntity))
         {
