@@ -12,6 +12,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
+
     private static GamePanel instance;
     public static final int FPS = 60;
     //Screen Setting property://
@@ -30,19 +31,23 @@ public class GamePanel extends JPanel implements Runnable
     public int currentMapIndex = 0;
 
     Thread gameThread;
+
     // ENTITY AND OBJECT
     public Player player;
     public BaseObject obj[][] = new BaseObject[maxMap][5];//[amount of Maps][object each map]
+    public UI ui = new UI (this);
+
     public GameState gameState;
 
     public GamePanel()
     {
-        setPreferredSize(new Dimension(screenWidth,screenHeight));
-        setBackground((Color.blue));
-        setDoubleBuffered(true);
+        this.setPreferredSize(new Dimension(screenWidth,screenHeight));
+        this.setBackground((Color.blue));
+        this.setDoubleBuffered(true);
+        //this.addKeyListener(KeyHandler.getInstKeyHdl());
         addKeyListener(KeyHandler.getInstance());
-        setFocusable(true);
-        requestFocus();
+        this.setFocusable(true);
+        this.requestFocus();
         player = new Player();
         new TileManager();
     }
@@ -56,8 +61,8 @@ public class GamePanel extends JPanel implements Runnable
     public void setupGame()
     {
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
+        gameState = GameState.Tittle;
         WorldManager.SetUpObject();
-        gameState = GameState.Run;
     }
 
     public void startGameThread()
@@ -80,16 +85,21 @@ public class GamePanel extends JPanel implements Runnable
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
-        TileManager.DrawTiles(g2); //  add
-        for (int i = 0; i < obj[1].length;i++)
+        Graphics2D g2 = (Graphics2D)g;
+        ui.draw(g2);
+        if(gameState == GameState.Tittle) ui.draw(g2);
+        else
         {
-            if (obj[currentMapIndex][i] != null){
-                obj[currentMapIndex][i].draw(g2); // add [currentMap] here too
+            TileManager.DrawTiles(g2);
+            for (int i = 0; i < obj[1].length;i++)
+            {
+                if (obj[currentMapIndex][i] != null){
+                    obj[currentMapIndex][i].draw(g2); // add [currentMap] here too
+                }
             }
+            player.renderSprite(g2);
+            ui.draw(g2); // need call after map for displaying head up
         }
-        player.renderSprite(g2);
-
         g2.dispose();
     }
 

@@ -17,8 +17,10 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 
+
 public class Player extends BaseCharacter
 {
+    GamePanel gamePanel;
     public final int screenX;
     public final int screenY;
     public float speedFactor = 1;
@@ -48,6 +50,9 @@ public class Player extends BaseCharacter
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
+        ControllerComp.BindAction(KeyEvent.VK_W, true,this::Up);
+        ControllerComp.BindAction(KeyEvent.VK_S, true,this::Down);
+        ControllerComp.BindAction(KeyEvent.VK_ENTER, true,this::Enter);
     }
     public void update(float DeltaTime)
     {
@@ -93,6 +98,10 @@ public class Player extends BaseCharacter
             updateCurrentDirectionY(1);
             worldY -= (int)(speed * speedFactor);
         }
+
+
+
+
     }
 
     void handleLocationByCollision()
@@ -118,6 +127,36 @@ public class Player extends BaseCharacter
             }
         }
     }
+    void Up (){
+        if (KeyHandler.isKeyPressed(KeyEvent.VK_W)) {
+            GamePanel.getInstGamePanel().ui.commandNum--;
+            if (GamePanel.getInstGamePanel().ui.commandNum < 0){
+                GamePanel.getInstGamePanel().ui.commandNum = 2;
+            }
+        }
+    }
+    void Down (){
+        if (KeyHandler.isKeyPressed(KeyEvent.VK_S)) {
+            GamePanel.getInstGamePanel().ui.commandNum++;
+            if (GamePanel.getInstGamePanel().ui.commandNum > 2){
+                GamePanel.getInstGamePanel().ui.commandNum = 0;
+            }
+        }
+    }
+    void Enter ()
+    {
+        if(GamePanel.getInstGamePanel().gameState != GameState.Tittle) return;
+        if (GamePanel.getInstGamePanel().ui.commandNum == 0)
+        {
+            GamePanel.getInstGamePanel().gameState = GameState.Run;
+        }
+        if(GamePanel.getInstGamePanel().ui.commandNum == 2 ){
+            System.exit(0);
+        }
+
+
+    }
+
 
     /**Choose animation*/
     void handelAnimation()

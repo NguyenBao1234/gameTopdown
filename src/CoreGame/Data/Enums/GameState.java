@@ -1,5 +1,5 @@
 package CoreGame.Data.Enums;
 
 public enum GameState {
-    Run, Pause;
+    Run, Pause, Tittle;
 }
