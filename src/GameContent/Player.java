@@ -20,7 +20,6 @@ import java.awt.image.BufferedImage;
 
 public class Player extends BaseCharacter
 {
-    GamePanel gamePanel;
     public final int screenX;
     public final int screenY;
     public float speedFactor = 1;
@@ -98,10 +97,6 @@ public class Player extends BaseCharacter
             updateCurrentDirectionY(1);
             worldY -= (int)(speed * speedFactor);
         }
-
-
-
-
     }
 
     void handleLocationByCollision()
@@ -153,11 +148,7 @@ public class Player extends BaseCharacter
         if(GamePanel.getInstGamePanel().ui.commandNum == 2 ){
             System.exit(0);
         }
-
-
     }
-
-
     /**Choose animation*/
     void handelAnimation()
     {
@@ -207,6 +198,11 @@ public class Player extends BaseCharacter
         flipBookArr[7] = ImageLoader.makeFlipBook("/Player/right/walk");
     }
 
+    void Pause()
+    {
+        System.out.println("Bind Function 'TestBindAction' called");
+        SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
+    }
     void Interact()
     {
         int BiasInteractBox = 4* GamePanel.scale;

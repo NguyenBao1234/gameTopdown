@@ -12,7 +12,6 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
-
     private static GamePanel instance;
     public static final int FPS = 60;
     //Screen Setting property://
@@ -29,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable
 
     public static final int maxMap = 10;
     public int currentMapIndex = 0;
+    public static TileManager tileManager = new TileManager();
 
     Thread gameThread;
 
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable
     public Player player;
     public BaseObject obj[][] = new BaseObject[maxMap][5];//[amount of Maps][object each map]
     public UI ui = new UI (this);
-
+    EnvironmentManager environmentManager = new EnvironmentManager(this);
     public GameState gameState;
 
     public GamePanel()
@@ -63,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
         gameState = GameState.Tittle;
         WorldManager.SetUpObject();
+        environmentManager.setup();
     }
 
     public void startGameThread()
@@ -99,6 +100,7 @@ public class GamePanel extends JPanel implements Runnable
             }
             player.renderSprite(g2);
             ui.draw(g2); // need call after map for displaying head up
+            environmentManager.draw(g2);
         }
         g2.dispose();
     }
