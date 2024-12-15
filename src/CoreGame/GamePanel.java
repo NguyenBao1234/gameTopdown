@@ -3,9 +3,13 @@ package CoreGame;
 import CoreGame.Data.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
+import CoreGame.WidgetComponent.HUD;
+import Environment.PostProcessing;
 import GameContent.Player;
 import CoreGame.MapComponent.TileManager;
 import CoreGame.EntityComponent.BaseObject;
+import GameContent.WidgetInstances.MainMenuWD;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -28,23 +32,21 @@ public class GamePanel extends JPanel implements Runnable
 
     public static final int maxMap = 10;
     public int currentMapIndex = 0;
-    public static TileManager tileManager = new TileManager();
 
     Thread gameThread;
 
     // ENTITY AND OBJECT
     public Player player;
-    public BaseObject obj[][] = new BaseObject[maxMap][5];//[amount of Maps][object each map]
-    public UI ui = new UI (this);
-    EnvironmentManager environmentManager = new EnvironmentManager(this);
+    public BaseObject obj[][] = new BaseObject[maxMap][10];//[amount of Maps][object each map]
+    PostProcessing postProcessing = new PostProcessing();
     public GameState gameState;
+    private final MainMenuWD mainMenuWD = new MainMenuWD();
 
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground((Color.blue));
-        this.setDoubleBuffered(true);
-        //this.addKeyListener(KeyHandler.getInstKeyHdl());
+//        this.setDoubleBuffered(true);
         addKeyListener(KeyHandler.getInstance());
         this.setFocusable(true);
         this.requestFocus();
@@ -52,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable
         new TileManager();
     }
 
-    public static GamePanel getInstGamePanel()
+    public static GamePanel GetInst()
     {
         if (instance == null) instance = new GamePanel();
         return instance;
@@ -63,7 +65,8 @@ public class GamePanel extends JPanel implements Runnable
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
         gameState = GameState.Tittle;
         WorldManager.SetUpObject();
-        environmentManager.setup();
+        postProcessing.setup();
+        HUD.AddWidget(mainMenuWD);
     }
 
     public void startGameThread()
@@ -87,8 +90,8 @@ public class GamePanel extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        ui.draw(g2);
-        if(gameState == GameState.Tittle) ui.draw(g2);
+        HUD.Draw(g2);
+        if(gameState == GameState.Tittle) HUD.Draw(g2);
         else
         {
             TileManager.DrawTiles(g2);
@@ -99,8 +102,8 @@ public class GamePanel extends JPanel implements Runnable
                 }
             }
             player.renderSprite(g2);
-            ui.draw(g2); // need call after map for displaying head up
-            environmentManager.draw(g2);
+            postProcessing.draw(g2);
+            HUD.Draw(g2); // need call after map for displaying head up
         }
         g2.dispose();
     }
@@ -136,5 +139,9 @@ public class GamePanel extends JPanel implements Runnable
                 drawCallCount = 0;
             }
         }
+    }
+
+    public MainMenuWD getMainMenuWD() {
+        return mainMenuWD;
     }
 }

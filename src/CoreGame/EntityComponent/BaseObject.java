@@ -18,8 +18,8 @@ public abstract class BaseObject extends Entity
     public void draw (Graphics2D g2)
     {
         if(!bVisible || sprite == null) return;
-        int screenX = worldX - GamePanel.getInstGamePanel().player.worldX + GamePanel.truePlayerScreenX;
-        int screenY = worldY - GamePanel.getInstGamePanel().player.worldY + GamePanel.truePlayerScreenY;
+        int screenX = worldX - GamePanel.GetInst().player.worldX + GamePanel.truePlayerScreenX;
+        int screenY = worldY - GamePanel.GetInst().player.worldY + GamePanel.truePlayerScreenY;
         g2.drawImage(sprite, screenX, screenY, 16*GamePanel.scale, 16*GamePanel.scale, null );
     }
 

@@ -1,16 +1,15 @@
 package Environment;
 
 import CoreGame.GamePanel;
-
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
 public class Lightning {
     GamePanel GamePanel;
     BufferedImage darknessFilter;
 
-    public Lightning(GamePanel GamePanel, int circleSize){
+    public Lightning(int circleSize)
+    {
         // Create a buffered image
         darknessFilter = new BufferedImage(CoreGame.GamePanel.screenWidth, CoreGame.GamePanel.screenHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = (Graphics2D)darknessFilter.getGraphics();
@@ -20,8 +19,8 @@ public class Lightning {
         int centerY = CoreGame.GamePanel.truePlayerScreenY + (CoreGame.GamePanel.tileSize)/2;
 
         // Create a gradation effect
-        Color color[] = new Color[12];
-        float fraction[] = new float[12];
+        Color[] color = new Color[12];
+        float[] fraction = new float[12];
 
         color[0] = new Color(0,0,0,0.1f);
         color[1] = new Color(0,0,0,0.42f);

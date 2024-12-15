@@ -9,7 +9,9 @@ import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import CoreGame.EntityComponent.BaseObject;
+import CoreGame.WidgetComponent.HUD;
 import GameContent.Object.InteractInterface;
+import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageLoader;
 
 import java.awt.*;
@@ -23,6 +25,7 @@ public class Player extends BaseCharacter
     public final int screenX;
     public final int screenY;
     public float speedFactor = 1;
+    private final PauseWD pauseWD;
 
     public Player()
     {
@@ -41,7 +44,9 @@ public class Player extends BaseCharacter
         collisionArea.width = 11* GamePanel.scale;
         collisionArea.height = 5* GamePanel.scale;
         collisionMode = Collision.Block;
+
         SetupPlayerInputComponent();
+        pauseWD = new PauseWD();
     }
 
     private void SetupPlayerInputComponent()
@@ -49,9 +54,6 @@ public class Player extends BaseCharacter
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
-        ControllerComp.BindAction(KeyEvent.VK_W, true,this::Up);
-        ControllerComp.BindAction(KeyEvent.VK_S, true,this::Down);
-        ControllerComp.BindAction(KeyEvent.VK_ENTER, true,this::Enter);
     }
     public void update(float DeltaTime)
     {
@@ -122,33 +124,7 @@ public class Player extends BaseCharacter
             }
         }
     }
-    void Up (){
-        if (KeyHandler.isKeyPressed(KeyEvent.VK_W)) {
-            GamePanel.getInstGamePanel().ui.commandNum--;
-            if (GamePanel.getInstGamePanel().ui.commandNum < 0){
-                GamePanel.getInstGamePanel().ui.commandNum = 2;
-            }
-        }
-    }
-    void Down (){
-        if (KeyHandler.isKeyPressed(KeyEvent.VK_S)) {
-            GamePanel.getInstGamePanel().ui.commandNum++;
-            if (GamePanel.getInstGamePanel().ui.commandNum > 2){
-                GamePanel.getInstGamePanel().ui.commandNum = 0;
-            }
-        }
-    }
-    void Enter ()
-    {
-        if(GamePanel.getInstGamePanel().gameState != GameState.Tittle) return;
-        if (GamePanel.getInstGamePanel().ui.commandNum == 0)
-        {
-            GamePanel.getInstGamePanel().gameState = GameState.Run;
-        }
-        if(GamePanel.getInstGamePanel().ui.commandNum == 2 ){
-            System.exit(0);
-        }
-    }
+
     /**Choose animation*/
     void handelAnimation()
     {
@@ -198,11 +174,6 @@ public class Player extends BaseCharacter
         flipBookArr[7] = ImageLoader.makeFlipBook("/Player/right/walk");
     }
 
-    void Pause()
-    {
-        System.out.println("Bind Function 'TestBindAction' called");
-        SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
-    }
     void Interact()
     {
         int BiasInteractBox = 4* GamePanel.scale;
@@ -218,14 +189,17 @@ public class Player extends BaseCharacter
 
     void PauseGame()
     {
-        SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
-        if (GamePanel.getInstGamePanel().gameState == GameState.Run)
+        if (GamePanel.GetInst().gameState == GameState.Run)
         {
-            GamePanel.getInstGamePanel().gameState = GameState.Pause;
+            GamePanel.GetInst().gameState = GameState.Pause;
+            SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
+            HUD.AddWidget(pauseWD);
         }
-        else if (GamePanel.getInstGamePanel().gameState == GameState.Pause)
+        else if (GamePanel.GetInst().gameState == GameState.Pause)
         {
-            GamePanel.getInstGamePanel().gameState = GameState.Run;
+            GamePanel.GetInst().gameState = GameState.Run;
+            HUD.RemoveWidget(pauseWD);
+            SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
         }
     }
 }

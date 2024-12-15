@@ -48,15 +48,15 @@ public class MapPortal extends BaseObject
 
     public static void Telepot(int MapIndex, int StartLocationX, int StartLocationY)
     {
-        GamePanel.getInstGamePanel().currentMapIndex = MapIndex;
-        GamePanel.getInstGamePanel().player.worldX = StartLocationX * GamePanel.tileSize;
-        GamePanel.getInstGamePanel().player.worldY = StartLocationY * GamePanel.tileSize;
+        GamePanel.GetInst().currentMapIndex = MapIndex;
+        GamePanel.GetInst().player.worldX = StartLocationX * GamePanel.tileSize;
+        GamePanel.GetInst().player.worldY = StartLocationY * GamePanel.tileSize;
     }
 
     public static void Telepot(int MapIndex, Point StartLocation)
     {
-        GamePanel.getInstGamePanel().currentMapIndex = MapIndex;
-        GamePanel.getInstGamePanel().player.worldX = StartLocation.x * GamePanel.tileSize;
-        GamePanel.getInstGamePanel().player.worldY = StartLocation.y * GamePanel.tileSize;
+        GamePanel.GetInst().currentMapIndex = MapIndex;
+        GamePanel.GetInst().player.worldX = StartLocation.x * GamePanel.tileSize;
+        GamePanel.GetInst().player.worldY = StartLocation.y * GamePanel.tileSize;
     }
 }

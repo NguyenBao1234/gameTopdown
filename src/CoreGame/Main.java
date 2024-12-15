@@ -9,7 +9,7 @@ public class Main
         JFrame window = new JFrame();
         window.setTitle("Game adventure 2D");
 
-        GamePanel gamePanel = GamePanel.getInstGamePanel();
+        GamePanel gamePanel = GamePanel.GetInst();
         gamePanel.setupGame();
         gamePanel.startGameThread();
         window.add(gamePanel);

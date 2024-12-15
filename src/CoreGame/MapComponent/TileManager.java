@@ -83,9 +83,9 @@ public class TileManager
 
     public static void DrawTiles(final Graphics2D g2)
     {
-        int currMapIndex = GamePanel.getInstGamePanel().currentMapIndex;
-        int playerWorldX = GamePanel.getInstGamePanel().player.worldX;
-        int playerWorldY = GamePanel.getInstGamePanel().player.worldY;
+        int currMapIndex = GamePanel.GetInst().currentMapIndex;
+        int playerWorldX = GamePanel.GetInst().player.worldX;
+        int playerWorldY = GamePanel.GetInst().player.worldY;
         for(int i = 0; i < tileTypeMap[currMapIndex].length; i++)
         {
             for(int j = 0; j < tileTypeMap[currMapIndex][i].length; j++)
@@ -110,9 +110,9 @@ public class TileManager
         }
     }
 
-    public static int GetWidthOfCurrentMap() {return tileTypeMap[GamePanel.getInstGamePanel().currentMapIndex][1].length;}
+    public static int GetWidthOfCurrentMap() {return tileTypeMap[GamePanel.GetInst().currentMapIndex][1].length;}
 
-    public static int GetHeightOfCurrentMap(){return tileTypeMap[GamePanel.getInstGamePanel().currentMapIndex].length;}
+    public static int GetHeightOfCurrentMap(){return tileTypeMap[GamePanel.GetInst().currentMapIndex].length;}
 
     public static int GetWidthOfMap( int currentMap)
     {
