@@ -21,7 +21,7 @@ public class KeyHandler implements KeyListener
 
     public void BindAction(int KeyCode, boolean bPress, Runnable function)
     {
-        ActionBinder[KeyCode] = new MultiBinder();
+        if(ActionBinder[KeyCode] == null) ActionBinder[KeyCode]= new MultiBinder();
         ActionBinder[KeyCode].bind(function);
         bPressedActions[KeyCode] = bPress;
         System.out.println("Bind action Success");
@@ -29,7 +29,7 @@ public class KeyHandler implements KeyListener
     //Bind
     public <T> void BindAxis(int KeyCode, float valueScale, Consumer<T> function)
     {
-        AxisBinder[KeyCode] = new MultiBinderWithParam();
+        if(AxisBinder[KeyCode] == null) AxisBinder[KeyCode] = new MultiBinderWithParam();
         AxisBinder[KeyCode].bind(function);
         AxisValues[KeyCode] = valueScale;
         System.out.println("Bind axis Success");

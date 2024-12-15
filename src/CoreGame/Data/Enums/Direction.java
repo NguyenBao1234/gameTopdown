@@ -1,4 +1,4 @@
-package CoreGame.Enums;
+package CoreGame.Data.Enums;
 
 public enum Direction
 {

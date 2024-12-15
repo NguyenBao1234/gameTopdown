@@ -1,11 +1,14 @@
 package CoreGame;
 
-import CoreGame.Enums.GameState;
+import CoreGame.Data.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
-import Entity.Player;
-import Tile.TileManager;
-import Entity.Object.Master.BaseObject;
+import CoreGame.WidgetComponent.HUD;
+import Environment.PostProcessing;
+import GameContent.Player;
+import CoreGame.MapComponent.TileManager;
+import CoreGame.EntityComponent.BaseObject;
+import GameContent.WidgetInstances.MainMenuWD;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,39 +23,38 @@ public class GamePanel extends JPanel implements Runnable
     public static final int scale = 3;
     public static final int tileSize = originalTileSize * scale;
 
-    public static final int maxScreenCol = 16; // sau them public
-    public static final int maxScreenRow = 12; //them public
+    public static final int maxScreenCol = 16;
+    public static final int maxScreenRow = 12;
     public static final int screenWidth = tileSize*maxScreenCol;
     public static final int screenHeight = tileSize*maxScreenRow;
     public static int truePlayerScreenX = screenWidth/2 - tileSize/2;
     public static int truePlayerScreenY = screenHeight/2 - tileSize/2;
 
-    TileManager tileManager = new TileManager();
+    public static final int maxMap = 10;
+    public int currentMapIndex = 0;
 
     Thread gameThread;
 
     // ENTITY AND OBJECT
     public Player player;
-    public BaseObject obj[] = new BaseObject[4];
+    public BaseObject obj[][] = new BaseObject[maxMap][10];//[amount of Maps][object each map]
+    PostProcessing postProcessing = new PostProcessing();
     public GameState gameState;
-    public final int playState = 1;
-    public final int pauseState = 2;
-
-
+    private final MainMenuWD mainMenuWD = new MainMenuWD();
 
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground((Color.blue));
-        this.setDoubleBuffered(true);
-        //this.addKeyListener(KeyHandler.getInstKeyHdl());
+//        this.setDoubleBuffered(true);
         addKeyListener(KeyHandler.getInstance());
         this.setFocusable(true);
         this.requestFocus();
         player = new Player();
+        new TileManager();
     }
 
-    public static GamePanel getInstGamePanel()
+    public static GamePanel GetInst()
     {
         if (instance == null) instance = new GamePanel();
         return instance;
@@ -61,8 +63,10 @@ public class GamePanel extends JPanel implements Runnable
     public void setupGame()
     {
         SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
-        AssetSetter.SetUpObject();
-        gameState = GameState.Run;
+        gameState = GameState.Tittle;
+        WorldManager.SetUpObject();
+        postProcessing.setup();
+        HUD.AddWidget(mainMenuWD);
     }
 
     public void startGameThread()
@@ -74,22 +78,33 @@ public class GamePanel extends JPanel implements Runnable
     /**this function call every frame*/
     public void update(float DeltaTime)
     {
-        if (gameState == GameState.Run) player.update(DeltaTime);
+        if (gameState == GameState.Run)
+        {
+            player.update(DeltaTime);
+            WorldManager.SimulateObject();
+        }
         if (gameState == GameState.Pause) return;
     }
     /**this draw function call every frame*/
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g; //convert 'g' from Graphics type  into Graphics2D to create 'g2'
-        tileManager.draw(g2); //  add
-        for (int i = 0; i < obj.length;i++){
-            if (obj[i] != null){
-                obj[i].draw(g2);
+        Graphics2D g2 = (Graphics2D)g;
+        HUD.Draw(g2);
+        if(gameState == GameState.Tittle) HUD.Draw(g2);
+        else
+        {
+            TileManager.DrawTiles(g2);
+            for (int i = 0; i < obj[1].length;i++)
+            {
+                if (obj[currentMapIndex][i] != null){
+                    obj[currentMapIndex][i].draw(g2); // add [currentMap] here too
+                }
             }
+            player.renderSprite(g2);
+            postProcessing.draw(g2);
+            HUD.Draw(g2); // need call after map for displaying head up
         }
-        player.renderSprite(g2);
-
         g2.dispose();
     }
 
@@ -124,5 +139,9 @@ public class GamePanel extends JPanel implements Runnable
                 drawCallCount = 0;
             }
         }
+    }
+
+    public MainMenuWD getMainMenuWD() {
+        return mainMenuWD;
     }
 }

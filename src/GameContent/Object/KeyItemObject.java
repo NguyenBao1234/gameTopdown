@@ -1,18 +1,18 @@
-package Entity.Object.Master;
+package GameContent.Object;
 
-import CoreGame.Enums.Collision;
+import CoreGame.EntityComponent.BaseObject;
+import CoreGame.EntityComponent.Entity;
+import CoreGame.Data.Enums.Collision;
 import HelpDevGameTool.ImageLoader;
 
 
 public class KeyItemObject extends BaseObject implements InteractInterface
 {
     protected ObjectNeedKeyItem targetInteractObject;
-    public KeyItemObject()
-    {
-        sprite = ImageLoader.LoadImage("/Objects/key.png");
-    }
+
     public KeyItemObject(ObjectNeedKeyItem ObjectNeedInteract)
     {
+        collisionMode = Collision.Overlap;
         sprite = ImageLoader.LoadImage("/Objects/key.png");
         targetInteractObject = ObjectNeedInteract;
     }
@@ -33,4 +33,13 @@ public class KeyItemObject extends BaseObject implements InteractInterface
         targetInteractObject.SetUnlock(true);
         return true;
     }
+
+    @Override
+    public void Tick() {}
+
+    @Override
+    public void OnBeginOverlapped(Entity otherEntity) {}
+
+    @Override
+    public void OnEndOverlapped(Entity otherEntity) {}
 }

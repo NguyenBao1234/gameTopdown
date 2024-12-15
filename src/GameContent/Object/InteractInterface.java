@@ -1,4 +1,4 @@
-package Entity.Object.Master;
+package GameContent.Object;
 
 public interface InteractInterface {
     boolean interact();
