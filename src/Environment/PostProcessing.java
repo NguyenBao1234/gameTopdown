@@ -11,10 +11,10 @@ public class PostProcessing
 
     public void setup()
     {
-        lightning = new Lightning(200);
+        lightning = new Lightning(130);
     }
 
-    public void draw(Graphics2D g2){
+    public void Render(Graphics2D g2){
         lightning.draw(g2);
     }
 }

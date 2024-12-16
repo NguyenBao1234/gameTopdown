@@ -2,12 +2,13 @@ package CoreGame.EntityComponent;
 
 import CoreGame.AnimNotifyComponent.BaseAnimNotify;
 import CoreGame.Data.Enums.Direction;
+import CoreGame.GamePanel;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
-public class BaseCharacter extends Entity
+public class BaseCharacter extends BaseObject
 {
     protected int vAxisX;
     protected int vAxisY;
@@ -27,6 +28,21 @@ public class BaseCharacter extends Entity
     public BaseCharacter()
     {
         directionList.add(Direction.down);
+    }
+
+    @Override
+    public void Tick(float delta) {
+        runFlipBook(delta);
+    }
+
+    @Override
+    public void OnBeginOverlapped(Entity otherEntity) {
+
+    }
+
+    @Override
+    public void OnEndOverlapped(Entity otherEntity) {
+
     }
 
     /** Chon mang Buffered Image nao lam flipBook. Truoc khi goi ham nay can khoi tao flipBookArr[][]truoc*/

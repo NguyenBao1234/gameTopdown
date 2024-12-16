@@ -3,13 +3,13 @@ package GameContent;
 import CoreGame.CollisionComponent.CollisionChecker;
 import CoreGame.EntityComponent.BaseCharacter;
 import CoreGame.Data.Enums.Collision;
-
 import CoreGame.Data.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import CoreGame.EntityComponent.BaseObject;
 import CoreGame.WidgetComponent.HUD;
+
 import GameContent.Object.InteractInterface;
 import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageLoader;
@@ -18,12 +18,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-
-
 public class Player extends BaseCharacter
 {
-    public final int screenX;
-    public final int screenY;
     public float speedFactor = 1;
     private final PauseWD pauseWD;
 
@@ -37,6 +33,8 @@ public class Player extends BaseCharacter
         worldY = 0* GamePanel.tileSize;
         screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
         screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2 -16;
+        SpriteRenderSizeX = 64*GamePanel.scale;
+        SpriteRenderSizeY = 64*GamePanel.scale;
 
         collisionArea = new Rectangle();
         collisionArea.x = 2* GamePanel.scale;
@@ -55,17 +53,19 @@ public class Player extends BaseCharacter
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
     }
-    public void update(float DeltaTime)
-    {
+
+    @Override
+    public void Tick(float delta) {
+        super.Tick(delta);
         InputAxisMove();
         handleLocationByCollision();
-        runFlipBook(DeltaTime);
         handelAnimation();
     }
 
-    public void renderSprite(Graphics2D g2)
+    @Override
+    public void Render(Graphics2D g2)
     {
-        g2.drawImage(sprite,screenX,screenY, 64* GamePanel.scale,64* GamePanel.scale, null);
+        super.Render(g2);
     }
 
     

@@ -9,25 +9,26 @@ import java.util.ArrayList;
 public abstract class BaseObject extends Entity
 {
     protected boolean bVisible = true;
+    protected int screenX,screenY;
+    protected int SpriteRenderSizeX, SpriteRenderSizeY;
+
     public BaseObject()
     {
         setCollisionMode(Collision.Overlap);
         collisionArea = new Rectangle(0,0,48,48);
     }
 
-    public void draw (Graphics2D g2)
+    public void Render(Graphics2D g2)
     {
         if(!bVisible || sprite == null) return;
-        int screenX = worldX - GamePanel.GetInst().player.worldX + GamePanel.truePlayerScreenX;
-        int screenY = worldY - GamePanel.GetInst().player.worldY + GamePanel.truePlayerScreenY;
-        g2.drawImage(sprite, screenX, screenY, 16*GamePanel.scale, 16*GamePanel.scale, null );
+        g2.drawImage(sprite, screenX, screenY, SpriteRenderSizeX, SpriteRenderSizeY, null );
     }
 
 
     private final ArrayList<Entity> OtherEntity = new ArrayList<>();
     public void SimulateOverlapping(Entity otherEntity)
     {
-        Tick();
+        Tick(1f/GamePanel.FPS);
         if (getCollisionMode() == Collision.NoCollision || getCollisionMode() == Collision.Block) return;
 
         Rectangle entityCollision = new Rectangle();
@@ -60,7 +61,7 @@ public abstract class BaseObject extends Entity
 
     }
 
-    abstract public void Tick();
+    abstract public void Tick(float delta);
 
     abstract public void OnBeginOverlapped(Entity otherEntity);
 
