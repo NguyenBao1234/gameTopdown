@@ -13,6 +13,7 @@ public class HangingNPC extends BaseCharacterPendOnPlayer
         SetupAnimations();
         SpriteRenderSizeX = 64;
         SpriteRenderSizeY = 64;
+        Speed = 1;
     }
     @Override
     public void Tick(float delta)
@@ -33,26 +34,26 @@ public class HangingNPC extends BaseCharacterPendOnPlayer
 
     void SimulateMoving()
     {
-        switch (random.nextInt(3))
+        switch (random.nextInt(6))
         {
             case 0:
-                worldX += speed;
+                worldX += Speed;
                 UpdateCurrentDirectionX(1);
                 break;
             case 1:
-                worldX -= speed;
+                worldX -= Speed;
                 UpdateCurrentDirectionX(-1);
                 break;
             case 2:
-                worldY += speed;
+                worldY += Speed;
                 UpdateCurrentDirectionY(-1);
                 break;
             case 3:
-                worldY += speed;
+                worldY -= Speed;
                 UpdateCurrentDirectionY(1);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + random.nextInt(3));
+                break;
         }
     }
 

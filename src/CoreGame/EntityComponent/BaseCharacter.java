@@ -11,14 +11,14 @@ public abstract class BaseCharacter extends BaseObject
 {
     protected int vAxisX;
     protected int vAxisY;
-    protected int speed = 4;
+    protected int Speed = 4;
 
     private boolean bPlayingMontage;
     private BaseAnimNotify animNotify;
 
     private final ArrayList<Direction> directionList = new ArrayList<>(2);
 
-    public int getSpeed(){return speed;}
+    public int getSpeed(){return Speed;}
 
     /**Mang chi can 'row' de chua bao nhieu flipBook (flipBook: buffered image array, tuong duong nhu 1 animation).
      * vi du: flipBookArr = new BufferImage[x][_].*/

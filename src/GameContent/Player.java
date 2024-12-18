@@ -78,13 +78,13 @@ public class Player extends BaseCharacter
         if(KeyHandler.isKeyPressed(KeyEvent.VK_A))
         {
             UpdateCurrentDirectionX(-1);
-            worldX -= (int) (speed * speedFactor);
+            worldX -= (int) (Speed * speedFactor);
         }
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_D))
         {
             UpdateCurrentDirectionX(1);
-            worldX += (int) (speed * speedFactor);
+            worldX += (int) (Speed * speedFactor);
         }
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_W) && !KeyHandler.isKeyPressed(KeyEvent.VK_S)) UpdateCurrentDirectionY(0);
@@ -92,12 +92,12 @@ public class Player extends BaseCharacter
         if(KeyHandler.isKeyPressed(KeyEvent.VK_S))
         {
             UpdateCurrentDirectionY(-1);
-            worldY += (int) (speed * speedFactor); // Y tang = di xuong duoi man hinh
+            worldY += (int) (Speed * speedFactor); // Y tang = di xuong duoi man hinh
         }
         if(KeyHandler.isKeyPressed(KeyEvent.VK_W))
         {
             UpdateCurrentDirectionY(1);
-            worldY -= (int)(speed * speedFactor);
+            worldY -= (int)(Speed * speedFactor);
         }
     }
 
@@ -110,16 +110,16 @@ public class Player extends BaseCharacter
             switch(GetCurrentDirection())
             {
                 case down:
-                    worldY -= (int) (speed * speedFactor);
+                    worldY -= (int) (Speed * speedFactor);
                     break;
                 case up:
-                    worldY += (int) (speed * speedFactor);
+                    worldY += (int) (Speed * speedFactor);
                     break;
                 case left:
-                    worldX += (int) (speed * speedFactor);
+                    worldX += (int) (Speed * speedFactor);
                     break;
                 case right:
-                    worldX -= (int) (speed * speedFactor);
+                    worldX -= (int) (Speed * speedFactor);
                     break;
             }
         }
