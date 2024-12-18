@@ -80,8 +80,8 @@ public class ImageGridSplitter {
     }
 
 
-    public static void main(String[] args) {
-        SplitImage(64,64,"AssetSource/Player/ImageSet/Side animations/spr_player_right_walk.png","src/Resource/Player/right/walk");
-
+    public static void main(String[] args)
+    {
+        SplitImage(64,64,"AssetSource/Slime/Slime1/Walk/Slime1_Walk_R.png","Resource/Slime/Slime1/Right/Walk");
     }
 }

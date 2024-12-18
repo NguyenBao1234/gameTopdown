@@ -1,6 +1,7 @@
 package CoreGame;
 
 import GameContent.EventTriggerBox.MapPortal;
+import GameContent.NPC.HangingNPC;
 import GameContent.Object.ChestObj;
 import GameContent.Object.DoorObj;
 import CoreGame.EntityComponent.BaseObject;
@@ -29,6 +30,10 @@ public class WorldManager
         GamePanel.GetInst().obj[1][0] = new MapPortal(0, 9,2);
         GamePanel.GetInst().obj[1][0].worldX = 0 * GamePanel.tileSize;
         GamePanel.GetInst().obj[1][0].worldY = 5 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][4] = new HangingNPC();
+        GamePanel.GetInst().obj[0][4].worldX = 1 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][4].worldY = 1 * GamePanel.tileSize;
 
     }
     public static void SimulateObject()

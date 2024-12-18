@@ -7,18 +7,18 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
-public class BaseCharacter extends Entity
+public abstract class BaseCharacter extends BaseObject
 {
     protected int vAxisX;
     protected int vAxisY;
-    protected int speed = 4;
+    protected int Speed = 4;
 
     private boolean bPlayingMontage;
     private BaseAnimNotify animNotify;
 
-    private static final ArrayList<Direction> directionList = new ArrayList<>(2);
+    private final ArrayList<Direction> directionList = new ArrayList<>(2);
 
-    public int getSpeed(){return speed;}
+    public int getSpeed(){return Speed;}
 
     /**Mang chi can 'row' de chua bao nhieu flipBook (flipBook: buffered image array, tuong duong nhu 1 animation).
      * vi du: flipBookArr = new BufferImage[x][_].*/
@@ -27,6 +27,21 @@ public class BaseCharacter extends Entity
     public BaseCharacter()
     {
         directionList.add(Direction.down);
+    }
+
+    @Override
+    public void Tick(float delta) {
+        runFlipBook(delta);
+    }
+
+    @Override
+    public void OnBeginOverlapped(Entity otherEntity) {
+
+    }
+
+    @Override
+    public void OnEndOverlapped(Entity otherEntity) {
+
     }
 
     /** Chon mang Buffered Image nao lam flipBook. Truoc khi goi ham nay can khoi tao flipBookArr[][]truoc*/
@@ -73,7 +88,7 @@ public class BaseCharacter extends Entity
         if(currentFrame + 1 >= flipBook.length) bPlayingMontage = false;
     }
 
-    protected void updateCurrentDirectionX(int AxisX)
+    protected void UpdateCurrentDirectionX(int AxisX)
     {
         vAxisX = AxisX;
         if (AxisX == 0)
@@ -89,7 +104,7 @@ public class BaseCharacter extends Entity
         directionList.add(newDirection);
     }
 
-    protected void updateCurrentDirectionY(int AxisY)
+    protected void UpdateCurrentDirectionY(int AxisY)
     {
         vAxisY = AxisY;
         if (AxisY == 0)
@@ -105,14 +120,14 @@ public class BaseCharacter extends Entity
         directionList.add(newDirection);
     }
 
-    public Direction getCurrentDirection()
+    public Direction GetCurrentDirection()
     {
         return directionList.getLast();
     }
 
-    public void setDirection(int directionX, int directionY)
+    public void SetDirection(int directionX, int directionY)
     {
-        updateCurrentDirectionX(directionX);
-        updateCurrentDirectionY(directionY);
+        UpdateCurrentDirectionX(directionX);
+        UpdateCurrentDirectionY(directionY);
     }
 }

@@ -80,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         if (gameState == GameState.Run)
         {
-            player.update(DeltaTime);
+            player.Tick(DeltaTime);
             WorldManager.SimulateObject();
         }
         if (gameState == GameState.Pause) return;
@@ -98,11 +98,11 @@ public class GamePanel extends JPanel implements Runnable
             for (int i = 0; i < obj[1].length;i++)
             {
                 if (obj[currentMapIndex][i] != null){
-                    obj[currentMapIndex][i].draw(g2); // add [currentMap] here too
+                    obj[currentMapIndex][i].Render(g2); // add [currentMap] here too
                 }
             }
-            player.renderSprite(g2);
-            postProcessing.draw(g2);
+            player.Render(g2);
+            postProcessing.Render(g2);
             HUD.Draw(g2); // need call after map for displaying head up
         }
         g2.dispose();

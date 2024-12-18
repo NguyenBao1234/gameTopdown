@@ -3,13 +3,13 @@ package GameContent;
 import CoreGame.CollisionComponent.CollisionChecker;
 import CoreGame.EntityComponent.BaseCharacter;
 import CoreGame.Data.Enums.Collision;
-
 import CoreGame.Data.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import CoreGame.EntityComponent.BaseObject;
 import CoreGame.WidgetComponent.HUD;
+
 import GameContent.Object.InteractInterface;
 import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageLoader;
@@ -18,12 +18,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-
-
 public class Player extends BaseCharacter
 {
-    public final int screenX;
-    public final int screenY;
     public float speedFactor = 1;
     private final PauseWD pauseWD;
 
@@ -31,12 +27,14 @@ public class Player extends BaseCharacter
     {
         //Setup Basic character property:
         flipBookArr = new BufferedImage[8][];
-        setupAnimations();
+        SetupAnimations();
         setAnimationToUse(0,4);
         worldX = 0*GamePanel.tileSize;
         worldY = 0* GamePanel.tileSize;
         screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
         screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2 -16;
+        SpriteRenderSizeX = 64*GamePanel.scale;
+        SpriteRenderSizeY = 64*GamePanel.scale;
 
         collisionArea = new Rectangle();
         collisionArea.x = 2* GamePanel.scale;
@@ -55,49 +53,52 @@ public class Player extends BaseCharacter
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
     }
-    public void update(float DeltaTime)
-    {
+
+    @Override
+    public void Tick(float delta) {
+        super.Tick(delta);
         InputAxisMove();
         handleLocationByCollision();
-        runFlipBook(DeltaTime);
         handelAnimation();
     }
 
-    public void renderSprite(Graphics2D g2)
+    @Override
+    public void Render(Graphics2D g2)
     {
-        g2.drawImage(sprite,screenX,screenY, 64* GamePanel.scale,64* GamePanel.scale, null);
+        super.Render(g2);
     }
 
     
     void InputAxisMove()
     {
         if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
+        else speedFactor = 1;
 
-        if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) updateCurrentDirectionX(0);
+        if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) UpdateCurrentDirectionX(0);
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_A))
         {
-            updateCurrentDirectionX(-1);
-            worldX -= (int) (speed * speedFactor);
+            UpdateCurrentDirectionX(-1);
+            worldX -= (int) (Speed * speedFactor);
         }
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_D))
         {
-            updateCurrentDirectionX(1);
-            worldX += (int) (speed * speedFactor);
+            UpdateCurrentDirectionX(1);
+            worldX += (int) (Speed * speedFactor);
         }
 
-        if (!KeyHandler.isKeyPressed(KeyEvent.VK_W) && !KeyHandler.isKeyPressed(KeyEvent.VK_S)) updateCurrentDirectionY(0);
+        if (!KeyHandler.isKeyPressed(KeyEvent.VK_W) && !KeyHandler.isKeyPressed(KeyEvent.VK_S)) UpdateCurrentDirectionY(0);
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_S))
         {
-            updateCurrentDirectionY(-1);
-            worldY += (int) (speed * speedFactor); // Y tang = di xuong duoi man hinh
+            UpdateCurrentDirectionY(-1);
+            worldY += (int) (Speed * speedFactor); // Y tang = di xuong duoi man hinh
         }
         if(KeyHandler.isKeyPressed(KeyEvent.VK_W))
         {
-            updateCurrentDirectionY(1);
-            worldY -= (int)(speed * speedFactor);
+            UpdateCurrentDirectionY(1);
+            worldY -= (int)(Speed * speedFactor);
         }
     }
 
@@ -107,19 +108,19 @@ public class Player extends BaseCharacter
         CollisionChecker.RespondToMap(this);
         if(bColliding)
         {
-            switch(getCurrentDirection())
+            switch(GetCurrentDirection())
             {
                 case down:
-                    worldY -= (int) (speed * speedFactor);
+                    worldY -= (int) (Speed * speedFactor);
                     break;
                 case up:
-                    worldY += (int) (speed * speedFactor);
+                    worldY += (int) (Speed * speedFactor);
                     break;
                 case left:
-                    worldX += (int) (speed * speedFactor);
+                    worldX += (int) (Speed * speedFactor);
                     break;
                 case right:
-                    worldX -= (int) (speed * speedFactor);
+                    worldX -= (int) (Speed * speedFactor);
                     break;
             }
         }
@@ -128,7 +129,7 @@ public class Player extends BaseCharacter
     /**Choose animation*/
     void handelAnimation()
     {
-        switch (getCurrentDirection())
+        switch (GetCurrentDirection())
         {
             case up :
                 //System.out.println("up");
@@ -151,11 +152,10 @@ public class Player extends BaseCharacter
                 else setAnimationToUse(7,4);
                 break;
         }
-
     }
 
     //Hardcode
-    void setupAnimations()
+    void SetupAnimations()
     {
         flipBookArr[0] = ImageLoader.makeFlipBook("/Player/front/idle");
 

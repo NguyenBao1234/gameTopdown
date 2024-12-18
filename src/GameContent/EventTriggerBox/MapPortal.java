@@ -1,14 +1,14 @@
 package GameContent.EventTriggerBox;
 
-import CoreGame.EntityComponent.BaseObject;
 import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
+import GameContent.Object.ObjectNeedKeyItem;
 import GameContent.Player;
 import HelpDevGameTool.ImageLoader;
 
 import java.awt.*;
 
-public class MapPortal extends BaseObject
+public class MapPortal extends ObjectNeedKeyItem
 {
     private int TargetMapIndex;
     private Point StartLocation = new Point();
@@ -30,20 +30,10 @@ public class MapPortal extends BaseObject
 
 
     @Override
-    public void Tick() {
-
-    }
-
-    @Override
     public void OnBeginOverlapped(Entity otherEntity)
     {
         System.out.println("ChuyenMap");
         if(otherEntity instanceof Player) Telepot(TargetMapIndex,StartLocation);
-    }
-
-    @Override
-    public void OnEndOverlapped(Entity otherEntity) {
-
     }
 
     public static void Telepot(int MapIndex, int StartLocationX, int StartLocationY)

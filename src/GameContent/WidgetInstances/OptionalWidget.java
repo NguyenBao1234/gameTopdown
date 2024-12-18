@@ -22,7 +22,6 @@ public abstract class OptionalWidget extends BaseWidget
 
     protected void Up ()
     {
-        System.out.println(HUD.IsWidgetOnScreen(this));
         if(!HUD.IsWidgetOnScreen(this)) return;
         SelectingRowOption --;
         if (SelectingRowOption < 0) SelectingRowOption = MaxRowOption;
@@ -30,6 +29,7 @@ public abstract class OptionalWidget extends BaseWidget
 
     protected void Down ()
     {
+        if(!HUD.IsWidgetOnScreen(this)) return;
         SelectingRowOption ++;
         if (SelectingRowOption > MaxRowOption) SelectingRowOption = 0;
     }

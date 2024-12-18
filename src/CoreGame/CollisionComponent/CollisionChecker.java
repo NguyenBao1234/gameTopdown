@@ -109,7 +109,7 @@ public class CollisionChecker
     }
 
     /**Get objects overlap with specified entity*/
-    public static BaseObject[] getOverlappedObjects(Entity entity)
+    public static Entity[] getOverlappedEntities(Entity entity)
     {
         Rectangle enityCollisionWorld = new Rectangle();
         enityCollisionWorld.x = entity.worldX + entity.getCollisionArea().x;
@@ -119,9 +119,8 @@ public class CollisionChecker
 
         Rectangle objectCollisionWorld = new Rectangle();
 
-        List <BaseObject> OverlappedObjects = new ArrayList<>();
+        List <Entity> OverlappedObjects = new ArrayList<>();
 
-        boolean bIntersecting = false;
         int curMap = GamePanel.GetInst().currentMapIndex;
         for(int i = 0; i< GamePanel.GetInst().obj[curMap].length; i++ )
         {
@@ -134,7 +133,6 @@ public class CollisionChecker
                 objectCollisionWorld.width = GamePanel.GetInst().obj[curMap][i].getCollisionArea().width;
                 if (enityCollisionWorld.intersects(objectCollisionWorld))
                 {
-                    bIntersecting = true;
                     OverlappedObjects.add(GamePanel.GetInst().obj[curMap][i]);
                 }
             }
