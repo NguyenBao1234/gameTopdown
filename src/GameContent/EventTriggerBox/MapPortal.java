@@ -1,10 +1,8 @@
 package GameContent.EventTriggerBox;
 
-import CoreGame.EntityComponent.BaseObject;
 import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
 import GameContent.Object.ObjectNeedKeyItem;
-import GameContent.Object.ObjectPendingOnPlayer;
 import GameContent.Player;
 import HelpDevGameTool.ImageLoader;
 

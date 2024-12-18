@@ -4,7 +4,7 @@ import CoreGame.Data.Enums.Collision;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Entity
+public abstract class Entity
 {
     public int worldX,worldY;
 
@@ -40,4 +40,11 @@ public class Entity
     public final void setCollisionMode(Collision collision){collisionMode = collision;}
     public final boolean IsColliding(){return bColliding;}
     public final void SetColliding(boolean bCollide){bColliding = bCollide; }
+    public final void Destroy(Entity entity)
+    {
+        entity.OnDestroy();
+        entity = null;
+    }
+    abstract public void OnDestroy();
+
 }

@@ -2,13 +2,12 @@ package CoreGame.EntityComponent;
 
 import CoreGame.AnimNotifyComponent.BaseAnimNotify;
 import CoreGame.Data.Enums.Direction;
-import CoreGame.GamePanel;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
-public class BaseCharacter extends BaseObject
+public abstract class BaseCharacter extends BaseObject
 {
     protected int vAxisX;
     protected int vAxisY;
@@ -17,7 +16,7 @@ public class BaseCharacter extends BaseObject
     private boolean bPlayingMontage;
     private BaseAnimNotify animNotify;
 
-    private static final ArrayList<Direction> directionList = new ArrayList<>(2);
+    private final ArrayList<Direction> directionList = new ArrayList<>(2);
 
     public int getSpeed(){return speed;}
 
@@ -89,7 +88,7 @@ public class BaseCharacter extends BaseObject
         if(currentFrame + 1 >= flipBook.length) bPlayingMontage = false;
     }
 
-    protected void updateCurrentDirectionX(int AxisX)
+    protected void UpdateCurrentDirectionX(int AxisX)
     {
         vAxisX = AxisX;
         if (AxisX == 0)
@@ -105,7 +104,7 @@ public class BaseCharacter extends BaseObject
         directionList.add(newDirection);
     }
 
-    protected void updateCurrentDirectionY(int AxisY)
+    protected void UpdateCurrentDirectionY(int AxisY)
     {
         vAxisY = AxisY;
         if (AxisY == 0)
@@ -121,14 +120,14 @@ public class BaseCharacter extends BaseObject
         directionList.add(newDirection);
     }
 
-    public Direction getCurrentDirection()
+    public Direction GetCurrentDirection()
     {
         return directionList.getLast();
     }
 
-    public void setDirection(int directionX, int directionY)
+    public void SetDirection(int directionX, int directionY)
     {
-        updateCurrentDirectionX(directionX);
-        updateCurrentDirectionY(directionY);
+        UpdateCurrentDirectionX(directionX);
+        UpdateCurrentDirectionY(directionY);
     }
 }

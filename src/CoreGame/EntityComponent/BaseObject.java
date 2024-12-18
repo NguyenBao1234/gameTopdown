@@ -67,6 +67,8 @@ public abstract class BaseObject extends Entity
 
     abstract public void OnEndOverlapped(Entity otherEntity);
 
+    @Override
+    public void OnDestroy() {}
 }
 
 

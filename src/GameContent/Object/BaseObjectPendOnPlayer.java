@@ -6,9 +6,9 @@ import CoreGame.GamePanel;
 
 import java.awt.*;
 
-public abstract class ObjectPendingOnPlayer extends BaseObject
+public abstract class BaseObjectPendOnPlayer extends BaseObject
 {
-    public ObjectPendingOnPlayer()
+    public BaseObjectPendOnPlayer()
     {
         SpriteRenderSizeX = 16*GamePanel.scale;
         SpriteRenderSizeY = 16*GamePanel.scale;

@@ -1,9 +1,6 @@
 package GameContent.Object;
 
-import CoreGame.EntityComponent.BaseObject;
-import CoreGame.EntityComponent.Entity;
-
-public class ObjectNeedKeyItem extends ObjectPendingOnPlayer implements InteractInterface
+public class ObjectNeedKeyItem extends BaseObjectPendOnPlayer implements InteractInterface
 {
     protected boolean bUnlock = false;
     public void SetUnlock(boolean unlock) {bUnlock = unlock;}

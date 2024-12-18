@@ -1,12 +1,11 @@
 package GameContent.Object;
 
-import CoreGame.EntityComponent.BaseObject;
 import CoreGame.EntityComponent.Entity;
 import CoreGame.Data.Enums.Collision;
 import HelpDevGameTool.ImageLoader;
 
 
-public class KeyItemObject extends ObjectPendingOnPlayer implements InteractInterface
+public class KeyItemObject extends BaseObjectPendOnPlayer implements InteractInterface
 {
     protected ObjectNeedKeyItem targetInteractObject;
 

@@ -27,7 +27,7 @@ public class Player extends BaseCharacter
     {
         //Setup Basic character property:
         flipBookArr = new BufferedImage[8][];
-        setupAnimations();
+        SetupAnimations();
         setAnimationToUse(0,4);
         worldX = 0*GamePanel.tileSize;
         worldY = 0* GamePanel.tileSize;
@@ -73,30 +73,30 @@ public class Player extends BaseCharacter
     {
         if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
 
-        if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) updateCurrentDirectionX(0);
+        if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) UpdateCurrentDirectionX(0);
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_A))
         {
-            updateCurrentDirectionX(-1);
+            UpdateCurrentDirectionX(-1);
             worldX -= (int) (speed * speedFactor);
         }
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_D))
         {
-            updateCurrentDirectionX(1);
+            UpdateCurrentDirectionX(1);
             worldX += (int) (speed * speedFactor);
         }
 
-        if (!KeyHandler.isKeyPressed(KeyEvent.VK_W) && !KeyHandler.isKeyPressed(KeyEvent.VK_S)) updateCurrentDirectionY(0);
+        if (!KeyHandler.isKeyPressed(KeyEvent.VK_W) && !KeyHandler.isKeyPressed(KeyEvent.VK_S)) UpdateCurrentDirectionY(0);
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_S))
         {
-            updateCurrentDirectionY(-1);
+            UpdateCurrentDirectionY(-1);
             worldY += (int) (speed * speedFactor); // Y tang = di xuong duoi man hinh
         }
         if(KeyHandler.isKeyPressed(KeyEvent.VK_W))
         {
-            updateCurrentDirectionY(1);
+            UpdateCurrentDirectionY(1);
             worldY -= (int)(speed * speedFactor);
         }
     }
@@ -107,7 +107,7 @@ public class Player extends BaseCharacter
         CollisionChecker.RespondToMap(this);
         if(bColliding)
         {
-            switch(getCurrentDirection())
+            switch(GetCurrentDirection())
             {
                 case down:
                     worldY -= (int) (speed * speedFactor);
@@ -128,7 +128,7 @@ public class Player extends BaseCharacter
     /**Choose animation*/
     void handelAnimation()
     {
-        switch (getCurrentDirection())
+        switch (GetCurrentDirection())
         {
             case up :
                 //System.out.println("up");
@@ -151,11 +151,10 @@ public class Player extends BaseCharacter
                 else setAnimationToUse(7,4);
                 break;
         }
-
     }
 
     //Hardcode
-    void setupAnimations()
+    void SetupAnimations()
     {
         flipBookArr[0] = ImageLoader.makeFlipBook("/Player/front/idle");
 

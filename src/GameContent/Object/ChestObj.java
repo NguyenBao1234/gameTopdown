@@ -1,10 +1,8 @@
 package GameContent.Object;
 
-import CoreGame.EntityComponent.Entity;
-import CoreGame.EntityComponent.BaseObject;
 import HelpDevGameTool.ImageLoader;
 
-public class ChestObj extends ObjectPendingOnPlayer
+public class ChestObj extends BaseObjectPendOnPlayer
 {
     public ChestObj()
     {
