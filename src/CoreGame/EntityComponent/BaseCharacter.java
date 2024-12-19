@@ -20,6 +20,8 @@ public abstract class BaseCharacter extends BaseObject
 
     public int getSpeed(){return Speed;}
 
+    public void setSpeed(int newSpeed) {Speed = newSpeed;}
+
     /**Mang chi can 'row' de chua bao nhieu flipBook (flipBook: buffered image array, tuong duong nhu 1 animation).
      * vi du: flipBookArr = new BufferImage[x][_].*/
     protected BufferedImage[][] flipBookArr;
@@ -27,11 +29,6 @@ public abstract class BaseCharacter extends BaseObject
     public BaseCharacter()
     {
         directionList.add(Direction.down);
-    }
-
-    @Override
-    public void Tick(float delta) {
-        runFlipBook(delta);
     }
 
     @Override
@@ -45,7 +42,7 @@ public abstract class BaseCharacter extends BaseObject
     }
 
     /** Chon mang Buffered Image nao lam flipBook. Truoc khi goi ham nay can khoi tao flipBookArr[][]truoc*/
-    public void setAnimationToUse(int index, int FPSPerImage)
+    public void SetAnimationToUse(int index, int FPSPerImage)
     {
         if(index > flipBookArr.length-1) return;
         if(bPlayingMontage) return;
@@ -55,7 +52,7 @@ public abstract class BaseCharacter extends BaseObject
     }
 
     /**Play the AnimMontage once. After that, back to the normal animation state */
-    public void playAnimMontage(BufferedImage[] AnimMontage, int FPSPerImage)
+    public void PlayAnimMontage(BufferedImage[] AnimMontage, int FPSPerImage)
     {
         bPlayingMontage = true;
         currentFrame = -1;//ensure playing Full AnimMontage
@@ -65,7 +62,7 @@ public abstract class BaseCharacter extends BaseObject
 
     /**Play the AnimMontage once. After that, back to the normal animation state.
      * While playing Anim, execute notify function */
-    public void playAnimMontageWithNotify(BufferedImage[] AnimMontage, int FPSPerImage, BaseAnimNotify notify)
+    public void PlayAnimMontageWithNotify(BufferedImage[] AnimMontage, int FPSPerImage, BaseAnimNotify notify)
     {
         bPlayingMontage = true;
         currentFrame = -1;//ensure playing Full AnimMontage
@@ -75,9 +72,9 @@ public abstract class BaseCharacter extends BaseObject
     }
 
     @Override
-    protected void runFlipBook(float dt)
+    protected void RunFlipBook(float dt)
     {
-        super.runFlipBook(dt);
+        super.RunFlipBook(dt);
         if(!bPlayingMontage) return;
         if (animNotify != null)
         {

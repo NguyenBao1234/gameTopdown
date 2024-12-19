@@ -1,4 +1,4 @@
-package Environment;
+package CoreGame.EffectComponent;
 
 import CoreGame.GamePanel;
 import java.awt.*;
@@ -17,7 +17,6 @@ public class Lightning {
         // Get the center x and y of the light circle
         int centerX = GamePanel.truePlayerScreenX + (GamePanel.tileSize)/2;
         int centerY = GamePanel.truePlayerScreenY + (GamePanel.tileSize)/2;
-
 
         //Create the 12 fraction-color segment key Gradient data :
         Color[] color = {

@@ -2,7 +2,7 @@ package GameContent.Object;
 
 import HelpDevGameTool.ImageLoader;
 
-public class ChestObj extends BaseObjectPendOnPlayer
+public class ChestObj extends ObjectPendOnPlayer
 {
     public ChestObj()
     {

@@ -4,18 +4,41 @@ import CoreGame.Data.Enums.Collision;
 import CoreGame.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class BaseObject extends Entity
 {
+    /**flipbook contain buffer images to make frame by frame animation. FlipBook=Animation*/
+    protected BufferedImage[] flipBook;
+    protected BufferedImage sprite;
+
     protected boolean bVisible = true;
     protected int screenX,screenY;
     protected int SpriteRenderSizeX, SpriteRenderSizeY;
 
+    protected float passDelta = 0;
+    protected int currentFrame = -1;
+    protected int fpsPerImage = 4;
+
+    /**Refresh sprite frequently to run flipBook (or play animation)*/
+    protected void RunFlipBook(float dt)
+    {
+        if(flipBook == null||flipBook.length < 2) return;
+        passDelta += dt;
+        if(passDelta < dt * fpsPerImage) return;
+        //refresh new sprite by new frame of flipBook
+        passDelta -= dt* fpsPerImage;
+        currentFrame ++;
+        if(currentFrame >= flipBook.length) currentFrame = 0;
+        sprite = flipBook[currentFrame];
+        //System.out.println("sprite has refresh)
+    }
+
     public BaseObject()
     {
         setCollisionMode(Collision.Overlap);
-        collisionArea = new Rectangle(0,0,48,48);
+        CollisionArea = new Rectangle(0,0,48,48);
     }
 
     public void Render(Graphics2D g2)
@@ -61,14 +84,24 @@ public abstract class BaseObject extends Entity
 
     }
 
-    abstract public void Tick(float delta);
+    public void Tick(float delta)
+    {
+        RunFlipBook(delta);
+    }
 
     abstract public void OnBeginOverlapped(Entity otherEntity);
 
     abstract public void OnEndOverlapped(Entity otherEntity);
 
+
     @Override
     public void OnDestroy() {}
+
+    @Override
+    protected void OnAnyDamage(Entity Causer, float Damage, int SourceWorldX, int SourceWorldY) {}
+
+    @Override
+    protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {}
 }
 
 

@@ -84,7 +84,6 @@ public class CollisionChecker
         if(entity.getCollisionMode() == Collision.Block)
         {
             Rectangle entityCollisionWorld = new Rectangle();
-
             entityCollisionWorld.x = entity.worldX + entity.getCollisionArea().x;
             entityCollisionWorld.y = entity.worldY + entity.getCollisionArea().y;
             entityCollisionWorld.width = entity.getCollisionArea().width;
@@ -95,7 +94,8 @@ public class CollisionChecker
             {
                 if (GamePanel.GetInst().obj[curMap][i] != null)
                 {
-                    if(GamePanel.GetInst().obj[curMap][i].getCollisionMode() != Collision.Block) continue;
+                    if(GamePanel.GetInst().obj[curMap][i].getCollisionMode() != Collision.Block
+                            || GamePanel.GetInst().obj[curMap][i] == entity) continue;
                     objectCollisionWorld.x = GamePanel.GetInst().obj[curMap][i].worldX + GamePanel.GetInst().obj[curMap][i].getCollisionArea().x;
                     objectCollisionWorld.y = GamePanel.GetInst().obj[curMap][i].worldY + GamePanel.GetInst().obj[curMap][i].getCollisionArea().y;
                     objectCollisionWorld.height = GamePanel.GetInst().obj[curMap][i].getCollisionArea().height;

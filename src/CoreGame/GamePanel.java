@@ -4,8 +4,8 @@ import CoreGame.Data.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.SoundManager;
 import CoreGame.WidgetComponent.HUD;
-import Environment.PostProcessing;
-import GameContent.Player;
+import CoreGame.EffectComponent.PostProcessing;
+import GameContent.MainPlayer;
 import CoreGame.MapComponent.TileManager;
 import CoreGame.EntityComponent.BaseObject;
 import GameContent.WidgetInstances.MainMenuWD;
@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable
     private static GamePanel instance;
     public static final int FPS = 60;
     //Screen Setting property://
-    static final int originalTileSize = 16;
+    public static final int originalTileSize = 16;
     public static final int scale = 3;
     public static final int tileSize = originalTileSize * scale;
 
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable
     Thread gameThread;
 
     // ENTITY AND OBJECT
-    public Player player;
+    public MainPlayer player;
     public BaseObject obj[][] = new BaseObject[maxMap][10];//[amount of Maps][object each map]
     PostProcessing postProcessing = new PostProcessing();
     public GameState gameState;
@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable
         addKeyListener(KeyHandler.getInstance());
         this.setFocusable(true);
         this.requestFocus();
-        player = new Player();
+        player = new MainPlayer();
         new TileManager();
     }
 

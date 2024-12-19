@@ -1,0 +1,52 @@
+package GameContent.NPC;
+
+import CoreGame.GamePanel;
+import CoreGame.WidgetComponent.HUD;
+import GameContent.Object.InteractInterface;
+import GameContent.Object.ObjectPendOnPlayer;
+import GameContent.WidgetInstances.NarrativeMessageWD;
+import HelpDevGameTool.ImageLoader;
+
+public class Morph_NonThreatening extends ObjectPendOnPlayer implements InteractInterface
+{
+    int interactCount = 0;
+    private NarrativeMessageWD DialogueWD = new NarrativeMessageWD
+            ("Chao ke lac loi toi nghiep",
+                    "Khong co bat ky con nguoi nao ngoai kia dau",
+                    "Chuc may man");
+    private int speedDefaultPlayer;
+    public Morph_NonThreatening()
+    {
+        flipBook = ImageLoader.makeFlipBook("/Morph/Idle");
+        fpsPerImage = 6;
+        SpriteRenderSizeX = 17 * GamePanel.scale;
+        SpriteRenderSizeY = 28 * GamePanel.scale;
+
+    }
+
+    @Override
+    public void interact()
+    {
+        if(DialogueWD.IsOnScreen())
+        {
+            DialogueWD.NextContent();
+            if(!DialogueWD.IsOnScreen())
+            {
+                interactCount ++;
+                GamePanel.GetInst().player.setSpeed(speedDefaultPlayer);
+            }
+
+        }
+        else
+        {
+            if(interactCount != 0) DialogueWD = new NarrativeMessageWD("...","Dung Lam phien ta");
+            if(interactCount == 3) DialogueWD = new NarrativeMessageWD("(0_0)","Dien a",
+                    "Nguoi co bi dien khong",
+                    "Ta mac ke nha nguoi ");
+            if(interactCount > 3) return;
+            HUD.AddWidget(DialogueWD);
+            speedDefaultPlayer = GamePanel.GetInst().player.getSpeed();
+            GamePanel.GetInst().player.setSpeed(0);
+        }
+    }
+}

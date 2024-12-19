@@ -6,9 +6,9 @@ import CoreGame.GamePanel;
 
 import java.awt.*;
 
-public abstract class BaseObjectPendOnPlayer extends BaseObject
+public abstract class ObjectPendOnPlayer extends BaseObject
 {
-    public BaseObjectPendOnPlayer()
+    public ObjectPendOnPlayer()
     {
         SpriteRenderSizeX = 16*GamePanel.scale;
         SpriteRenderSizeY = 16*GamePanel.scale;
@@ -16,14 +16,9 @@ public abstract class BaseObjectPendOnPlayer extends BaseObject
     @Override
     public void Render(Graphics2D g2)
     {
-        screenX = worldX - GamePanel.GetInst().player.worldX + GamePanel.truePlayerScreenX;
-        screenY = worldY - GamePanel.GetInst().player.worldY + GamePanel.truePlayerScreenY;
+        screenX = worldX - GamePanel.GetInst().player.worldX + GamePanel.truePlayerScreenX - (SpriteRenderSizeX - GamePanel.tileSize);
+        screenY = worldY - GamePanel.GetInst().player.worldY + GamePanel.truePlayerScreenY - (SpriteRenderSizeY - GamePanel.tileSize);
         super.Render(g2);
-    }
-
-    @Override
-    public void Tick(float delta) {
-
     }
 
     @Override

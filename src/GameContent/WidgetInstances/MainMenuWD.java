@@ -57,11 +57,6 @@ public class MainMenuWD extends OptionalWidget
 
     }
 
-    @Override
-    public void EnableInput() {
-
-    }
-
     protected void SelectOption()
     {
         if(GamePanel.GetInst().gameState != GameState.Tittle) return;

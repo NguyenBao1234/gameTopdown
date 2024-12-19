@@ -3,7 +3,7 @@ package GameContent.EventTriggerBox;
 import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
 import GameContent.Object.ObjectNeedKeyItem;
-import GameContent.Player;
+import CoreGame.PlayerComponent.Player;
 import HelpDevGameTool.ImageLoader;
 
 import java.awt.*;

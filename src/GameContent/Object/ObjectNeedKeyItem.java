@@ -1,15 +1,14 @@
 package GameContent.Object;
 
-public class ObjectNeedKeyItem extends BaseObjectPendOnPlayer implements InteractInterface
+public class ObjectNeedKeyItem extends ObjectPendOnPlayer implements InteractInterface
 {
     protected boolean bUnlock = false;
     public void SetUnlock(boolean unlock) {bUnlock = unlock;}
     @Override
-    public boolean interact()
+    public void interact()
     {
-        if(!bUnlock) return false;
+        if(!bUnlock) return ;
         System.out.println("ObjectNeedKeyItem has interacted at unlock state");
-        return true;
     }
 
 }

@@ -64,22 +64,22 @@ public class HangingNPC extends BaseCharacterPendOnPlayer
             case up :
                 //System.out.println("up");
                 //if(vAxisY == 0) setAnimationToUse(1,4);
-                setAnimationToUse(0,4);
+                SetAnimationToUse(0,4);
                 break;
             case down:
                 //System.out.println("down");
                 //if(vAxisY == 0) setAnimationToUse(0,4);
-                setAnimationToUse(1,4);
+                SetAnimationToUse(1,4);
                 break;
             case left:
                 //System.out.println("left");
                 //if(vAxisX == 0) setAnimationToUse(2,4);
-                setAnimationToUse(2,4);
+                SetAnimationToUse(2,4);
                 break;
             case right:
                 //System.out.println("right");
                 //if(vAxisX == 0) setAnimationToUse(3,4);
-                setAnimationToUse(3,4);
+                SetAnimationToUse(3,4);
                 break;
         }
     }

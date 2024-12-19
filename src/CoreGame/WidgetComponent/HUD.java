@@ -12,7 +12,7 @@ public class HUD
     private static Graphics2D g2;
     public int commandNum = 0;
 
-    private final static ArrayList<BaseWidget> ChildWidgets = new ArrayList<>();
+    private final static ArrayList<Widget> ChildWidgets = new ArrayList<>();
 
     public static HUD getInst()
     {
@@ -23,32 +23,31 @@ public class HUD
     public static void Draw(Graphics2D graphics2D)
     {
         if(ChildWidgets.isEmpty()) return;
-        for(BaseWidget widget : ChildWidgets)
+        for(Widget widget : ChildWidgets)
         {
             if(widget == null) continue;
             widget.Draw(graphics2D);
         }
     }
 
-    public static void AddWidget(BaseWidget Widget)
+    public static void AddWidget(Widget Widget)
     {
         if(getInst().ChildWidgets.contains(Widget)) return;
         getInst().ChildWidgets.add(Widget);
     }
 
-    public static void RemoveWidget(BaseWidget Widget)
+    public static void RemoveWidget(Widget Widget)
     {
         getInst().ChildWidgets.remove(Widget);
     }
 
-    public static BaseWidget[] GetAllChildWidgets()
+    public static Widget[] GetAllChildWidgets()
     {
-        return getInst().ChildWidgets.toArray(new BaseWidget[0]);
+        return getInst().ChildWidgets.toArray(new Widget[0]);
     }
 
-    public static boolean IsWidgetOnScreen(BaseWidget Widget)
+    public static boolean IsWidgetOnScreen(Widget Widget)
     {
         return ChildWidgets.contains(Widget);
     }
-
 }
