@@ -1,12 +1,9 @@
 package GameContent.WidgetInstances;
 
-import CoreGame.KeyHandlerComponent.KeyHandler;
-import CoreGame.WidgetComponent.BaseWidget;
+import CoreGame.WidgetComponent.Widget;
 import CoreGame.WidgetComponent.HUD;
 
-import java.awt.event.KeyEvent;
-
-public abstract class OptionalWidget extends BaseWidget
+public abstract class OptionalWidget extends Widget
 {
     protected int SelectingRowOption = 0;
     private int MaxRowOption;

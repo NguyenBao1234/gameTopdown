@@ -1,15 +1,16 @@
 package GameContent;
 
+import CoreGame.AnimationClass.AnimMontage;
 import CoreGame.CollisionComponent.CollisionChecker;
-import CoreGame.EntityComponent.BaseCharacter;
 import CoreGame.Data.Enums.Collision;
 import CoreGame.Data.Enums.GameState;
+import CoreGame.EntityComponent.BaseObject;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
+import CoreGame.PlayerComponent.Player;
 import CoreGame.SoundComponent.SoundManager;
-import CoreGame.EntityComponent.BaseObject;
 import CoreGame.WidgetComponent.HUD;
-
+import GameContent.NotifyInstances.TraceDamageNotify;
 import GameContent.Object.InteractInterface;
 import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageLoader;
@@ -18,33 +19,38 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-public class Player extends BaseCharacter
+public class MainPlayer extends Player
 {
     public float speedFactor = 1;
-    private final PauseWD pauseWD;
+    private final PauseWD pauseWD = new PauseWD();
+    private float DamageWeapon = 4;
 
-    public Player()
+    private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
+    private final AnimMontage AttackMontage = new AnimMontage();
+
+    public MainPlayer()
     {
         //Setup Basic character property:
         flipBookArr = new BufferedImage[8][];
         SetupAnimations();
-        setAnimationToUse(0,4);
-        worldX = 0*GamePanel.tileSize;
+        SetAnimationToUse(0,4);
+        worldX = 0* GamePanel.tileSize;
         worldY = 0* GamePanel.tileSize;
-        screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
-        screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2 -16;
+
         SpriteRenderSizeX = 64*GamePanel.scale;
         SpriteRenderSizeY = 64*GamePanel.scale;
 
-        collisionArea = new Rectangle();
-        collisionArea.x = 2* GamePanel.scale;
-        collisionArea.y = 13* GamePanel.scale;
-        collisionArea.width = 11* GamePanel.scale;
-        collisionArea.height = 5* GamePanel.scale;
-        collisionMode = Collision.Block;
+        screenX = GamePanel.screenWidth /2 - 64*GamePanel.scale/2;
+        screenY = GamePanel.screenHeight /2 - 64*GamePanel.scale/2 -16;
+
+        CollisionArea.x = 2* GamePanel.scale;
+        CollisionArea.y = 13* GamePanel.scale;
+        CollisionArea.width = 11* GamePanel.scale;
+        CollisionArea.height = 5* GamePanel.scale;
+        CollisionMode = Collision.Block;
 
         SetupPlayerInputComponent();
-        pauseWD = new PauseWD();
+        AttackMontage.AddNotify(DmgNotify);
     }
 
     private void SetupPlayerInputComponent()
@@ -52,6 +58,7 @@ public class Player extends BaseCharacter
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
+        ControllerComp.BindAction(KeyEvent.VK_J,true,this::Attack);
     }
 
     @Override
@@ -68,7 +75,7 @@ public class Player extends BaseCharacter
         super.Render(g2);
     }
 
-    
+
     void InputAxisMove()
     {
         if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
@@ -104,7 +111,7 @@ public class Player extends BaseCharacter
 
     void handleLocationByCollision()
     {
-        if(collisionMode == Collision.NoCollision) return;
+        if(CollisionMode == Collision.NoCollision) return;
         CollisionChecker.RespondToMap(this);
         if(bColliding)
         {
@@ -133,23 +140,23 @@ public class Player extends BaseCharacter
         {
             case up :
                 //System.out.println("up");
-                if(vAxisY == 0) setAnimationToUse(1,4);
-                else setAnimationToUse(5,4);
+                if(vAxisY == 0) SetAnimationToUse(1,4);
+                else SetAnimationToUse(5,4);
                 break;
             case down:
                 //System.out.println("down");
-                if(vAxisY == 0) setAnimationToUse(0,4);
-                else setAnimationToUse(4,4);
+                if(vAxisY == 0) SetAnimationToUse(0,4);
+                else SetAnimationToUse(4,4);
                 break;
             case left:
                 //System.out.println("left");
-                if(vAxisX == 0) setAnimationToUse(2,4);
-                else setAnimationToUse(6,4);
+                if(vAxisX == 0) SetAnimationToUse(2,4);
+                else SetAnimationToUse(6,4);
                 break;
             case right:
                 //System.out.println("right");
-                if(vAxisX == 0) setAnimationToUse(3,4);
-                else setAnimationToUse(7,4);
+                if(vAxisX == 0) SetAnimationToUse(3,4);
+                else SetAnimationToUse(7,4);
                 break;
         }
     }
@@ -176,13 +183,12 @@ public class Player extends BaseCharacter
 
     void Interact()
     {
-        int BiasInteractBox = 4* GamePanel.scale;
-        for(BaseObject overlappedObject : CollisionChecker.getOverlappedObjectsInBox(worldX + collisionArea.x - BiasInteractBox,worldY + collisionArea.y - BiasInteractBox, collisionArea.width +BiasInteractBox*2,collisionArea.height + BiasInteractBox*2))
+        int BiasInteractBox = 8* GamePanel.scale;
+        for(BaseObject overlappedObject : CollisionChecker.getOverlappedObjectsInBox(worldX + CollisionArea.x - BiasInteractBox,worldY + CollisionArea.y - BiasInteractBox, CollisionArea.width +BiasInteractBox*2, CollisionArea.height + BiasInteractBox*2))
         {
             if(overlappedObject instanceof InteractInterface)
             {
-                boolean interactSuccess = ((InteractInterface) overlappedObject).interact();
-                System.out.println("Interact:"+interactSuccess);
+                ((InteractInterface) overlappedObject).interact();
             }
         }
     }
@@ -201,5 +207,38 @@ public class Player extends BaseCharacter
             HUD.RemoveWidget(pauseWD);
             SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
         }
+    }
+
+    private void Attack()
+    {
+        if(animMontage != null) return;
+        switch (GetCurrentDirection())
+        {
+            case up :
+                DmgNotify.setFrameStart(0);
+                AttackMontage.setFlipBook(ImageLoader.makeFlipBook("/Player/back/attack"));
+                break;
+            case down:
+                DmgNotify.setFrameStart(0);
+                AttackMontage.setFlipBook(ImageLoader.makeFlipBook("/Player/front/attack"));
+                break;
+            case left:
+                DmgNotify.setFrameStart(0);
+                AttackMontage.setFlipBook( ImageLoader.makeFlipBook("/Player/left/attack"));
+                break;
+            case right:
+                DmgNotify.setFrameStart(5);
+                AttackMontage.setFlipBook( ImageLoader.makeFlipBook("/Player/right/attack"));
+                break;
+        }
+        PlayAnimMontage(AttackMontage, 4);
+    }
+
+    public float getDamageWeapon() {
+        return DamageWeapon;
+    }
+
+    public void setDamageWeapon(float damageWeapon) {
+        DamageWeapon = damageWeapon;
     }
 }

@@ -53,11 +53,6 @@ public class PauseWD extends OptionalWidget
     }
 
     @Override
-    public void EnableInput() {
-
-    }
-
-    @Override
     protected void SelectOption()
     {
         if(GamePanel.GetInst().gameState != GameState.Pause) return;

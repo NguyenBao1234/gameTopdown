@@ -1,4 +1,4 @@
-package Environment;
+package CoreGame.EffectComponent;
 
 import java.awt.*;
 
