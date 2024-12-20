@@ -5,6 +5,7 @@ import CoreGame.CollisionComponent.CollisionChecker;
 import CoreGame.Data.Enums.Collision;
 import CoreGame.Data.Enums.GameState;
 import CoreGame.EntityComponent.BaseObject;
+import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.PlayerComponent.Player;
@@ -24,6 +25,7 @@ public class MainPlayer extends Player
     public float speedFactor = 1;
     private final PauseWD pauseWD = new PauseWD();
     private float DamageWeapon = 4;
+    private float health = 100;
 
     private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
     private final AnimMontage AttackMontage = new AnimMontage();
@@ -234,11 +236,56 @@ public class MainPlayer extends Player
         PlayAnimMontage(AttackMontage, 4);
     }
 
+    @Override
+    protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
+        health -= Damage;
+        if(health > 0) ReceiveDamageAnim();
+        else DeathAnim();
+    }
+
+    private void ReceiveDamageAnim()
+    {
+        switch (GetCurrentDirection())
+        {
+            case up:
+                break;
+            case down:
+                break;
+            case left:
+                break;
+            case right:
+                break;
+        }
+    }
+
+    private void DeathAnim()
+    {
+        switch (GetCurrentDirection())
+        {
+            case up:
+                break;
+            case down:
+                break;
+            case left:
+                break;
+            case right:
+                break;
+        }
+    }
+
     public float getDamageWeapon() {
         return DamageWeapon;
     }
 
     public void setDamageWeapon(float damageWeapon) {
         DamageWeapon = damageWeapon;
+    }
+
+    public float getHealth() {
+        return health;
+    }
+
+    public void setHealth(float health) {
+        this.health = health;
     }
 }
