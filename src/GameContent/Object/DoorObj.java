@@ -7,7 +7,7 @@ public class DoorObj extends ObjectNeedKeyItem
 {
     public DoorObj()
     {
-        sprite = ImageLoader.LoadImage("/Objects/closed_door.png");
+        Sprite = ImageLoader.LoadImage("/Objects/closed_door.png");
         CollisionMode = Collision.Block;
     }
 
@@ -15,7 +15,7 @@ public class DoorObj extends ObjectNeedKeyItem
     public void interact() {
         super.interact();
         if(!bUnlock) return ;
-        sprite = ImageLoader.LoadImage("/Objects/opened_door.png");
+        Sprite = ImageLoader.LoadImage("/Objects/opened_door.png");
         setCollisionMode(Collision.NoCollision);
     }
 }

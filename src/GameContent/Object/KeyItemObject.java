@@ -12,14 +12,14 @@ public class KeyItemObject extends ObjectPendOnPlayer implements InteractInterfa
     public KeyItemObject(ObjectNeedKeyItem ObjectNeedInteract)
     {
         CollisionMode = Collision.Overlap;
-        sprite = ImageLoader.LoadImage("/Objects/key.png");
+        Sprite = ImageLoader.LoadImage("/Objects/key.png");
         targetInteractObject = ObjectNeedInteract;
     }
 
     public KeyItemObject(Entity ObjectNeedInteract)
     {
         CollisionMode = Collision.Overlap;
-        sprite = ImageLoader.LoadImage("/Objects/key.png");
+        Sprite = ImageLoader.LoadImage("/Objects/key.png");
         targetInteractObject = (ObjectNeedKeyItem) ObjectNeedInteract;
     }
 
@@ -27,7 +27,7 @@ public class KeyItemObject extends ObjectPendOnPlayer implements InteractInterfa
     public void interact()
     {
         System.out.println("Key was interacted");
-        sprite = null;
+        Sprite = null;
         setCollisionMode(Collision.NoCollision);
         targetInteractObject.SetUnlock(true);
     }

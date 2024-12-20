@@ -1,6 +1,7 @@
 package CoreGame.EntityComponent;
 
-import CoreGame.AnimNotifyComponent.BaseAnimNotify;
+import CoreGame.AnimNotifyComponent.AnimNotify;
+import CoreGame.AnimationClass.AnimMontage;
 import CoreGame.Data.Enums.Direction;
 
 import java.awt.image.BufferedImage;
@@ -13,8 +14,7 @@ public abstract class BaseCharacter extends BaseObject
     protected int vAxisY;
     protected int Speed = 4;
 
-    private boolean bPlayingMontage;
-    private BaseAnimNotify animNotify;
+    protected AnimMontage animMontage;
 
     private final ArrayList<Direction> directionList = new ArrayList<>(2);
 
@@ -45,44 +45,41 @@ public abstract class BaseCharacter extends BaseObject
     public void SetAnimationToUse(int index, int FPSPerImage)
     {
         if(index > flipBookArr.length-1) return;
-        if(bPlayingMontage) return;
+        if(animMontage != null) return;
         flipBook = flipBookArr[index];
         fpsPerImage = FPSPerImage;
         //System.out.println("Setup Animation: successes");
     }
 
     /**Play the AnimMontage once. After that, back to the normal animation state */
-    public void PlayAnimMontage(BufferedImage[] AnimMontage, int FPSPerImage)
+    public void PlayAnimMontage(AnimMontage animMontage, int FPSPerImage)
     {
-        bPlayingMontage = true;
-        currentFrame = -1;//ensure playing Full AnimMontage
-        flipBook = AnimMontage;
+        currFlipBookFrame = -1;//ensure playing Full AnimMontage
+        currFlipBookPage = -1;
+        this.animMontage = animMontage;
+        flipBook = animMontage.getFlipBook();
         fpsPerImage = FPSPerImage;
     }
 
-    /**Play the AnimMontage once. After that, back to the normal animation state.
-     * While playing Anim, execute notify function */
-    public void PlayAnimMontageWithNotify(BufferedImage[] AnimMontage, int FPSPerImage, BaseAnimNotify notify)
-    {
-        bPlayingMontage = true;
-        currentFrame = -1;//ensure playing Full AnimMontage
-        flipBook = AnimMontage;
-        fpsPerImage = FPSPerImage;
-        animNotify =  notify;
-    }
 
     @Override
     protected void RunFlipBook(float dt)
     {
         super.RunFlipBook(dt);
-        if(!bPlayingMontage) return;
-        if (animNotify != null)
+        if (animMontage != null)
         {
-            animNotify.ReceiveNotifyTick();
-            if(animNotify.getFrameStart() == currentFrame) animNotify.ReceiveNotifyBegin();
-            if(animNotify.getFrameFinish() == currentFrame) animNotify.ReceiveNotifyEnd();
+            for(AnimNotify animNotify : animMontage.getNotifies())
+            {
+                if(animNotify.getFrameStart() * fpsPerImage == currFlipBookFrame)
+                {
+                    animNotify.ReceiveNotifyBegin();
+                }
+                if(currFlipBookFrame >= animNotify.getFrameStart() * fpsPerImage && currFlipBookFrame <= animNotify.getFrameFinish() * fpsPerImage) animNotify.ReceiveNotifyTick();
+                if(animNotify.getFrameFinish() * fpsPerImage == currFlipBookFrame) animNotify.ReceiveNotifyEnd();
+            }
         }
-        if(currentFrame + 1 >= flipBook.length) bPlayingMontage = false;
+        else return;
+        if(!(currFlipBookPage + 1 < flipBook.length)) animMontage = null;
     }
 
     protected void UpdateCurrentDirectionX(int AxisX)

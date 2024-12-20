@@ -1,4 +1,4 @@
-package GameContent.NPC;
+package GameContent.NPC.NonThreatening;
 
 import CoreGame.GamePanel;
 import CoreGame.WidgetComponent.HUD;
@@ -7,7 +7,7 @@ import GameContent.Object.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.NarrativeMessageWD;
 import HelpDevGameTool.ImageLoader;
 
-public class Morph_NonThreatening extends ObjectPendOnPlayer implements InteractInterface
+public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
 {
     int interactCount = 0;
     private NarrativeMessageWD DialogueWD = new NarrativeMessageWD
@@ -15,7 +15,7 @@ public class Morph_NonThreatening extends ObjectPendOnPlayer implements Interact
                     "Khong co bat ky con nguoi nao ngoai kia dau",
                     "Chuc may man");
     private int speedDefaultPlayer;
-    public Morph_NonThreatening()
+    public Morph_Idle()
     {
         flipBook = ImageLoader.makeFlipBook("/Morph/Idle");
         fpsPerImage = 6;

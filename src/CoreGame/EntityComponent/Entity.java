@@ -70,11 +70,12 @@ public abstract class Entity
     public void ApplyPointDamage(Entity Receiver, Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY)
     {
         if(Damage == 0 ) return;
-        OnPointDamage(Causer, Damage, WorldX, WorldY, SourceWorldX, SourceWorldY);
+        Receiver.OnPointDamage(Causer, Damage, WorldX, WorldY, SourceWorldX, SourceWorldY);
+        Receiver.OnAnyDamage(Causer, Damage, SourceWorldX, SourceWorldY);
     }
 //------------------------------------------------------------------------
     /**
-     * When Apply Damage to this Entity, this Function is called
+     * When Apply any Damage to this Entity, this Function is called
      * @param Causer Entity make Damage
      * @param Damage Amount of Damage
      * @param SourceWorldX location X of Damage's Source

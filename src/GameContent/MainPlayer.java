@@ -1,5 +1,6 @@
 package GameContent;
 
+import CoreGame.AnimationClass.AnimMontage;
 import CoreGame.CollisionComponent.CollisionChecker;
 import CoreGame.Data.Enums.Collision;
 import CoreGame.Data.Enums.GameState;
@@ -9,6 +10,7 @@ import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.PlayerComponent.Player;
 import CoreGame.SoundComponent.SoundManager;
 import CoreGame.WidgetComponent.HUD;
+import GameContent.NotifyInstances.TraceDamageNotify;
 import GameContent.Object.InteractInterface;
 import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageLoader;
@@ -20,7 +22,11 @@ import java.awt.image.BufferedImage;
 public class MainPlayer extends Player
 {
     public float speedFactor = 1;
-    private final PauseWD pauseWD;
+    private final PauseWD pauseWD = new PauseWD();
+    private float DamageWeapon = 4;
+
+    private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
+    private final AnimMontage AttackMontage = new AnimMontage();
 
     public MainPlayer()
     {
@@ -44,7 +50,7 @@ public class MainPlayer extends Player
         CollisionMode = Collision.Block;
 
         SetupPlayerInputComponent();
-        pauseWD = new PauseWD();
+        AttackMontage.AddNotify(DmgNotify);
     }
 
     private void SetupPlayerInputComponent()
@@ -52,6 +58,7 @@ public class MainPlayer extends Player
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
+        ControllerComp.BindAction(KeyEvent.VK_J,true,this::Attack);
     }
 
     @Override
@@ -204,6 +211,34 @@ public class MainPlayer extends Player
 
     private void Attack()
     {
+        if(animMontage != null) return;
+        switch (GetCurrentDirection())
+        {
+            case up :
+                DmgNotify.setFrameStart(0);
+                AttackMontage.setFlipBook(ImageLoader.makeFlipBook("/Player/back/attack"));
+                break;
+            case down:
+                DmgNotify.setFrameStart(0);
+                AttackMontage.setFlipBook(ImageLoader.makeFlipBook("/Player/front/attack"));
+                break;
+            case left:
+                DmgNotify.setFrameStart(0);
+                AttackMontage.setFlipBook( ImageLoader.makeFlipBook("/Player/left/attack"));
+                break;
+            case right:
+                DmgNotify.setFrameStart(5);
+                AttackMontage.setFlipBook( ImageLoader.makeFlipBook("/Player/right/attack"));
+                break;
+        }
+        PlayAnimMontage(AttackMontage, 4);
+    }
 
+    public float getDamageWeapon() {
+        return DamageWeapon;
+    }
+
+    public void setDamageWeapon(float damageWeapon) {
+        DamageWeapon = damageWeapon;
     }
 }

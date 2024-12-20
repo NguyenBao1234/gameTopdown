@@ -15,7 +15,7 @@ public class MapPortal extends ObjectNeedKeyItem
 
     public MapPortal(int IndexTargetMap, int StartLocationX, int StarLocationY)
     {
-        sprite = ImageLoader.LoadImage("/Objects/hint_tile.png");
+        Sprite = ImageLoader.LoadImage("/Objects/hint_tile.png");
         TargetMapIndex = IndexTargetMap;
         StartLocation.x = StartLocationX;
         StartLocation.y = StarLocationY;
@@ -23,7 +23,7 @@ public class MapPortal extends ObjectNeedKeyItem
 
     public MapPortal(int IndexTargetMap, Point StartLocation)
     {
-        sprite = ImageLoader.LoadImage("/Objects/hint_tile.png");
+        Sprite = ImageLoader.LoadImage("/Objects/hint_tile.png");
         TargetMapIndex = IndexTargetMap;
         this.StartLocation = StartLocation;
     }
