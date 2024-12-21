@@ -19,7 +19,8 @@ public class Enemy extends BaseCharacter
         this.health = health;}
 
     @Override
-    protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
+    protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY)
+    {
         health -= Damage;
         if(health > 0) ReceiveDamageAnim();
         else DeathAnim();

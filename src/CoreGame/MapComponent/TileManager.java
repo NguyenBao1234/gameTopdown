@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static CoreGame.Data.Enums.Collision.Block;
@@ -16,16 +17,20 @@ public class TileManager
 {
     private static TileManager Inst;
     public static final Tile[] tiles = new Tile[10]; // Types of tile
-    public static int tileTypeMap[][][] = new int[GamePanel.maxMap][50][50]; // [map index][col][row]
+    private static final ArrayList<int[][]> tileTypeMapList = new ArrayList<>(GamePanel.maxMap);
+    public static int tileTypeMap[][][] ; // [map index][col][row]
+    private static final int[] maxWidth = new int[GamePanel.maxMap];
 
     private static final int normalizedPlayerScreenX= GamePanel.screenWidth / 2 - GamePanel.tileSize/2;
     private static final int normalizedPlayerScreenY= GamePanel.screenHeight / 2 - GamePanel.tileSize/2;
 
     public TileManager()
     {
+        Inst = this;
         getTileImage();
         LoadMap("/Map/map3.txt",0);
         LoadMap("/Map/map4.txt",1);
+        tileTypeMap = tileTypeMapList.toArray(new int[0][][]);
     }
 
     public static TileManager GetInst()
@@ -56,24 +61,36 @@ public class TileManager
             InputStream inputStream = getClass().getResourceAsStream(filePath);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
             int col = 0;
-            int row = 0;
+            int row ;
+            int maxRow = 0;
+
+            ArrayList<String> lines = new ArrayList<>();
             String line;
             while ((line = bufferedReader.readLine())!=null)
             {
-                String typeIndexes[] = line.split("");
-                while (col<typeIndexes.length)
-                {
-                    String numberString = typeIndexes[col];
+                maxRow++;
+                lines.add(line);
+                maxWidth[mapIndex] = Math.max(maxWidth[mapIndex], line.split(" +").length);
+            }
+            int [][] TempMap = new int[maxRow][];
+
+            for( row = 0 ; row< maxRow ; row++)
+            {
+                String typeStringIndexes[] = lines.get(row).split(" +");
+                int typeIndexes[] = new int[typeStringIndexes.length];
+                while (col < typeIndexes.length) {
+                    String numberString = typeStringIndexes[col];
                     int typeIndex;
-                    if (numberString.isBlank()||!numberString.matches("-?\\d+")) typeIndex = -1;
+                    if (numberString.isBlank() || !numberString.matches("-?\\d+")) typeIndex = -1;
                     else typeIndex = Integer.parseInt(numberString);
-                    tileTypeMap[mapIndex][row][col] = typeIndex;
+                    typeIndexes[col] = typeIndex;
                     col++;
                 }
                 col = 0;
-                row++;
+                TempMap[row] = typeIndexes;
+                bufferedReader.close();
             }
-            bufferedReader.close();
+            tileTypeMapList.add(TempMap);
         }
         catch (IOException e)
         {
@@ -86,8 +103,10 @@ public class TileManager
         int currMapIndex = GamePanel.GetInst().currentMapIndex;
         int playerWorldX = GamePanel.GetInst().player.worldX;
         int playerWorldY = GamePanel.GetInst().player.worldY;
+        if(tileTypeMap[currMapIndex] == null) return;
         for(int i = 0; i < tileTypeMap[currMapIndex].length; i++)
         {
+            if(tileTypeMap[currMapIndex][i] == null) return;
             for(int j = 0; j < tileTypeMap[currMapIndex][i].length; j++)
             {
                 int typeTileIndex = tileTypeMap[currMapIndex][i][j];
@@ -110,7 +129,7 @@ public class TileManager
         }
     }
 
-    public static int GetWidthOfCurrentMap() {return tileTypeMap[GamePanel.GetInst().currentMapIndex][1].length;}
+    public static int GetWidthOfCurrentMap() {return maxWidth[GamePanel.GetInst().currentMapIndex];}
 
     public static int GetHeightOfCurrentMap(){return tileTypeMap[GamePanel.GetInst().currentMapIndex].length;}
 

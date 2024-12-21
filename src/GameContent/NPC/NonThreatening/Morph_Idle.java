@@ -35,7 +35,6 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
                 interactCount ++;
                 GamePanel.GetInst().player.setSpeed(speedDefaultPlayer);
             }
-
         }
         else
         {

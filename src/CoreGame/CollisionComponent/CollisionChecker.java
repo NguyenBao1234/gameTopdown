@@ -13,7 +13,7 @@ import java.util.List;
 public class CollisionChecker
 {
     private static CollisionChecker Inst;
-    public CollisionChecker(){}
+    public CollisionChecker(){Inst = this;}
 
     public static void RespondToCollisionBox(Entity entity)
     {
@@ -52,6 +52,7 @@ public class CollisionChecker
 
     public static void RespondToMap(Entity entity)
     {
+        if(TileManager.GetInst() == null) return;
         int collisionLeftX = entity.worldX + entity.getCollisionArea().x;
         int collisionRightX = entity.worldX + entity.getCollisionArea().x + entity.getCollisionArea().width;
         int collisionTopY = entity.worldY + entity.getCollisionArea().y;
@@ -71,14 +72,18 @@ public class CollisionChecker
         if(leftOverlapTileCol < 0||rightOverlapTileCol < 0||topOverlapTileRow <0||bottomOverlapTileRow<0
         ||leftOverlapTileCol > WidthOfMap||rightOverlapTileCol > WidthOfMap || topOverlapTileRow > HeightOfMap || bottomOverlapTileRow > HeightOfMap)
         {
-            return;
             //Co the thong bao vi tri tren world cua player tai day
         }
 
         int tile1Type, tile2Type;
         //To check colliding with the map:
-        tile1Type = TileManager.tileTypeMap[curMap][topOverlapTileRow][leftOverlapTileCol];
-        tile2Type = TileManager.tileTypeMap[curMap][topOverlapTileRow][rightOverlapTileCol];
+        try {
+            tile1Type = TileManager.tileTypeMap[curMap][topOverlapTileRow][leftOverlapTileCol];
+            tile2Type = TileManager.tileTypeMap[curMap][topOverlapTileRow][rightOverlapTileCol];
+        } catch (Exception e) {
+            tile1Type = -1;
+            tile2Type = -1;
+        }
         //To check colliding with objects in the map:
         boolean bColidingWithObject = false;
         if(entity.getCollisionMode() == Collision.Block)

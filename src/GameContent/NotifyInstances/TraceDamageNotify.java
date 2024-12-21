@@ -17,7 +17,7 @@ public class TraceDamageNotify extends AnimNotify
 
     public TraceDamageNotify(int frameStart, BaseCharacter entityContain, int ScaleX, int ScaleY)
     {
-        super(frameStart, 5);
+        super(frameStart, 0);
         Container = entityContain;
         scaleX = ScaleX;
         scaleY = ScaleY;
