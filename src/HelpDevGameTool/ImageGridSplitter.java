@@ -27,7 +27,7 @@ public class ImageGridSplitter {
     }
 
 
-    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir)
+    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir, boolean bHorizontal, boolean bOneIndex, boolean bFormatDigit)
     {
 
         try
@@ -56,19 +56,28 @@ public class ImageGridSplitter {
             BufferedImage OriginalImageBf = ImageIO.read(new File(ImagePath));
             System.out.println("Loaded");
             int gridSizeWidth = sizeGridX;
-            int tileHeight = sizeGridY;
+            int gridSizeHeight = sizeGridY;
 
-            int rows = OriginalImageBf.getHeight() / tileHeight;
-            int cols = OriginalImageBf.getWidth() / gridSizeWidth;
+            int cols =  OriginalImageBf.getWidth() / gridSizeWidth;
+            int rows =  OriginalImageBf.getHeight() / gridSizeHeight;
 
             // Loop through each grid tile
+            int i = 0;
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++) {
                     // Crop the tile
-                    BufferedImage extractedImage = OriginalImageBf.getSubimage(x * gridSizeWidth,y * tileHeight,gridSizeWidth,tileHeight);
-
+                    BufferedImage extractedImage = OriginalImageBf.getSubimage(x * gridSizeWidth,y * gridSizeHeight,gridSizeWidth,gridSizeHeight);
                     // Optionally save each tile as a separate image file
-                    File outputfile = new File(OutputDir,baseName + x + "_" + y + "." + fileExtension);
+                    String FinalIndex;
+                    String fileName;
+                    if(bOneIndex)
+                    {
+                        FinalIndex = bFormatDigit?FormatDigit(i,3):String.valueOf(i) ;
+                        i++;
+                    }
+                    else FinalIndex = bHorizontal ? (y + "_" + x ): ( x + "_" + y );
+                    fileName = baseName + "_" + FinalIndex + "." + fileExtension;
+                    File outputfile = new File(OutputDir,fileName);
                     ImageIO.write(extractedImage, fileExtension, outputfile);
                 }
             }
@@ -79,9 +88,20 @@ public class ImageGridSplitter {
         }
     }
 
+    private static String FormatDigit(int value, int numDigits)
+    {
+        if (numDigits <= 0) throw new IllegalArgumentException("So chu so can lon hon 0");
+
+        String formatString = "%0" + numDigits + "d";
+        String formattedValue = String.format(formatString, value);
+
+        if (formattedValue.length() > numDigits) return formattedValue.substring(formattedValue.length() - numDigits);
+
+        return formattedValue;
+    }
 
     public static void main(String[] args)
     {
-        SplitImage(64,64,"AssetSource/Slime/Slime1/Walk/Slime1_Walk_R.png","Resource/Slime/Slime1/Right/Walk");
+        SplitImage(16,16,"AssetSource/TileSet/TileSet.png","Resource/ExtractedTileSet", true, true,true);
     }
 }

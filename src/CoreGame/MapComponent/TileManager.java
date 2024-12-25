@@ -18,7 +18,7 @@ public class TileManager
     private static TileManager Inst;
     private final ArrayList<String> tileNames = new ArrayList<>();
     private final ArrayList<String> tileCollisionStates = new ArrayList<>();
-    public static Tile[] tiles; // Types of tile
+    public static Tile[] tiles;// Types of tile
     private static final ArrayList<int[][]> tileTypeMapList = new ArrayList<>(GamePanel.maxMap);
     public static int tileTypeMap[][][] ; // [map index][col][row]
     private static final int[] maxWidth = new int[GamePanel.maxMap];
@@ -91,6 +91,7 @@ public class TileManager
     public void getTileImage()
     {
         //the below scripts will be removed when add Tile Set:
+        tiles = new Tile[3];
         tiles[0] = new Tile();
         tiles[0].bufferedImage = ImageLoader.LoadImage("/Tile/water.png");
         tiles[0].collision = Block;
