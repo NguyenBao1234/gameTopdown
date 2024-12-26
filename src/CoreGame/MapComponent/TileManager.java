@@ -15,7 +15,7 @@ import static CoreGame.Data.Enums.Collision.NoCollision;
 
 public class TileManager
 {
-    private static TileManager Inst;
+//    private static TileManager Inst;
     private final ArrayList<String> tileNames = new ArrayList<>();
     private final ArrayList<String> tileCollisionStates = new ArrayList<>();
     public static Tile[] tiles;// Types of tile
@@ -28,18 +28,17 @@ public class TileManager
 
     public TileManager()
     {
-        Inst = this;
         getTileImage();
         LoadMap("/Map/map3.txt",0);
         LoadMap("/Map/map4.txt",1);
         tileTypeMap = tileTypeMapList.toArray(new int[0][][]);
     }
 
-    public static TileManager GetInst()
-    {
-        if (Inst != null) Inst = new TileManager();
-        return Inst;
-    }
+//    public static TileManager GetInst()
+//    {
+//        if (Inst != null) Inst = new TileManager();
+//        return Inst;
+//    }
 
     public static void DrawTiles(final Graphics2D g2)
     {
@@ -93,15 +92,15 @@ public class TileManager
         //the below scripts will be removed when add Tile Set:
         tiles = new Tile[3];
         tiles[0] = new Tile();
-        tiles[0].bufferedImage = ImageLoader.LoadImage("/Tile/water.png");
+        tiles[0].bufferedImage = ImageLoader.LoadImage("/OldTile/water.png");
         tiles[0].collision = Block;
 
         tiles[1] = new Tile();
-        tiles[1].bufferedImage = ImageLoader.LoadImage("/Tile/sand.png");
+        tiles[1].bufferedImage = ImageLoader.LoadImage("/OldTile/sand.png");
         tiles[1].collision = NoCollision;
 
         tiles[2] = new Tile();
-        tiles[2].bufferedImage = ImageLoader.LoadImage("/Tile/wall.png");
+        tiles[2].bufferedImage = ImageLoader.LoadImage("/OldTile/wall.png");
         tiles[2].collision = NoCollision;
     }
 

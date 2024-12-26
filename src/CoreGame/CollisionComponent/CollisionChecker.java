@@ -12,8 +12,8 @@ import java.util.List;
 
 public class CollisionChecker
 {
-    private static CollisionChecker Inst;
-    public CollisionChecker(){Inst = this;}
+//    private static CollisionChecker Inst;
+//    public CollisionChecker(){Inst = this;}
 
     public static void RespondToCollisionBox(Entity entity)
     {
@@ -44,15 +44,15 @@ public class CollisionChecker
         }
     }
 
-    public static CollisionChecker getInst()
-    {
-        if(Inst==null) Inst = new CollisionChecker();
-        return Inst;
-    }
+//    public static CollisionChecker getInst()
+//    {
+//        if(Inst==null) Inst = new CollisionChecker();
+//        return Inst;
+//    }
 
     public static void RespondToMap(Entity entity)
     {
-        if(TileManager.GetInst() == null) return;
+        //if(TileManager.GetInst() == null) return;
         int collisionLeftX = entity.worldX + entity.getCollisionArea().x;
         int collisionRightX = entity.worldX + entity.getCollisionArea().x + entity.getCollisionArea().width;
         int collisionTopY = entity.worldY + entity.getCollisionArea().y;
