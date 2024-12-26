@@ -3,6 +3,7 @@ package CoreGame;
 import GameContent.EventTriggerBox.MapPortal;
 import GameContent.NPC.HangingNPC;
 import GameContent.NPC.NonThreatening.Morph_Idle;
+import GameContent.Object.CandleA;
 import GameContent.Object.ChestObj;
 import GameContent.Object.DoorObj;
 import CoreGame.EntityComponent.BaseObject;

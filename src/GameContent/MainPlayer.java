@@ -25,7 +25,7 @@ public class MainPlayer extends Player
     public float speedFactor = 1;
     private final PauseWD pauseWD = new PauseWD();
     private float DamageWeapon = 4;
-    private float health = 100;
+    public float health = 100;
 
     private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
     private final AnimMontage AttackMontage = new AnimMontage();
@@ -61,6 +61,7 @@ public class MainPlayer extends Player
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
         ControllerComp.BindAction(KeyEvent.VK_J,true,this::Attack);
+
     }
 
     @Override
@@ -235,6 +236,7 @@ public class MainPlayer extends Player
         }
         PlayAnimMontage(AttackMontage, 4);
     }
+
 
     @Override
     protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {

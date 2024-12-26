@@ -58,6 +58,7 @@ public class TileManager
                 int worldY = i * GamePanel.tileSize;
                 int screenX = worldX - playerWorldX + normalizedPlayerScreenX;
                 int screenY = worldY - playerWorldY + normalizedPlayerScreenY;
+                //if(tiles[typeTileIndex] == null) continue;
                 if
                 (
                         worldX + GamePanel.tileSize > playerWorldX - normalizedPlayerScreenX
@@ -66,6 +67,7 @@ public class TileManager
                         && worldY < playerWorldY + normalizedPlayerScreenY + GamePanel.tileSize
                 )
                 {
+                    System.out.println(typeTileIndex);
                     g2.drawImage(tiles[typeTileIndex].bufferedImage, screenX, screenY, GamePanel.tileSize, GamePanel.tileSize, null);
                 }
             }
@@ -93,15 +95,15 @@ public class TileManager
         //the below scripts will be removed when add Tile Set:
         tiles = new Tile[3];
         tiles[0] = new Tile();
-        tiles[0].bufferedImage = ImageLoader.LoadImage("/Tile/water.png");
+        tiles[0].bufferedImage = ImageLoader.LoadImage("/TileSet/ExtractedTileSet/TileSet_027.png");
         tiles[0].collision = Block;
 
         tiles[1] = new Tile();
-        tiles[1].bufferedImage = ImageLoader.LoadImage("/Tile/sand.png");
+        tiles[1].bufferedImage = ImageLoader.LoadImage("/OldTile/sand.png");
         tiles[1].collision = NoCollision;
 
         tiles[2] = new Tile();
-        tiles[2].bufferedImage = ImageLoader.LoadImage("/Tile/wall.png");
+        tiles[2].bufferedImage = ImageLoader.LoadImage("/OldTile/wall.png");
         tiles[2].collision = NoCollision;
     }
 
