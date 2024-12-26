@@ -27,9 +27,8 @@ public class ImageGridSplitter {
     }
 
 
-    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir, boolean bHorizontal, boolean bOneIndex, boolean bFormatDigit)
+    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir, boolean bHorizontal, boolean bOneIndex, boolean bFormatDigit, int StartIndex)
     {
-
         try
         {
             String baseName = getBaseName(ImagePath);
@@ -38,10 +37,7 @@ public class ImageGridSplitter {
                 System.out.println("Unsupported file type. Please use a valid image format.");
                 return;
             }
-
-
-            File outputDirectory = new File(OutputDir);
-
+           File outputDirectory = new File(OutputDir);
             // Check if output directory exists, if not, create it
             if (!outputDirectory.exists()) {
                 if (outputDirectory.mkdirs()) {
@@ -62,7 +58,7 @@ public class ImageGridSplitter {
             int rows =  OriginalImageBf.getHeight() / gridSizeHeight;
 
             // Loop through each grid tile
-            int i = 0;
+            int i = StartIndex;
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++) {
                     // Crop the tile
@@ -102,6 +98,6 @@ public class ImageGridSplitter {
 
     public static void main(String[] args)
     {
-        SplitImage(16,16,"AssetSource/TileSet/TileSet.png","Resource/ExtractedTileSet", true, true,true);
+        SplitImage(16,16,"AssetSource/TileSet/TileSet.png","Resource/ExtractedTileSet", true, true,true,520);
     }
 }
