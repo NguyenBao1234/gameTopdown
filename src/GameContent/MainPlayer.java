@@ -61,6 +61,7 @@ public class MainPlayer extends Player
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
         ControllerComp.BindAction(KeyEvent.VK_J,true,this::Attack);
+        ControllerComp.BindAction(KeyEvent.VK_SHIFT,true,this::Dash);
     }
 
     @Override
@@ -88,13 +89,11 @@ public class MainPlayer extends Player
         if(KeyHandler.isKeyPressed(KeyEvent.VK_A))
         {
             UpdateCurrentDirectionX(-1);
-            worldX -= (int) (Speed * speedFactor);
         }
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_D))
         {
             UpdateCurrentDirectionX(1);
-            worldX += (int) (Speed * speedFactor);
         }
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_W) && !KeyHandler.isKeyPressed(KeyEvent.VK_S)) UpdateCurrentDirectionY(0);
@@ -102,35 +101,48 @@ public class MainPlayer extends Player
         if(KeyHandler.isKeyPressed(KeyEvent.VK_S))
         {
             UpdateCurrentDirectionY(-1);
-            worldY += (int) (Speed * speedFactor); // Y tang = di xuong duoi man hinh
         }
         if(KeyHandler.isKeyPressed(KeyEvent.VK_W))
         {
             UpdateCurrentDirectionY(1);
-            worldY -= (int)(Speed * speedFactor);
         }
     }
 
     void handleLocationByCollision()
     {
-        if(CollisionMode == Collision.NoCollision) return;
-        CollisionChecker.RespondToMap(this);
-        if(bColliding)
+        if(vAxisX == 0 && vAxisY == 0) return;
+        int collX = worldX + CollisionArea.x;
+        int collY = worldY + CollisionArea.y;
+        if (vAxisY > 0)
         {
-            switch(GetCurrentDirection())
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height))
             {
-                case down:
-                    worldY -= (int) (Speed * speedFactor);
-                    break;
-                case up:
-                    worldY += (int) (Speed * speedFactor);
-                    break;
-                case left:
-                    worldX += (int) (Speed * speedFactor);
-                    break;
-                case right:
-                    worldX -= (int) (Speed * speedFactor);
-                    break;
+                worldY -= (int) (Speed * speedFactor);
+            }
+        }
+        if (vAxisY < 0)
+        {
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height))
+            {
+                worldY += (int) (Speed * speedFactor);
+            }
+        }
+        if (vAxisX > 0)
+        {
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height))
+            {
+                worldX += (int) (Speed * speedFactor);
+            }
+        }
+        if (vAxisX < 0)
+        {
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height))
+            {
+                worldX -= (int) (Speed * speedFactor);
             }
         }
     }
@@ -234,6 +246,23 @@ public class MainPlayer extends Player
                 break;
         }
         PlayAnimMontage(AttackMontage, 4);
+    }
+
+    private void Dash()
+    {
+        switch (GetCurrentDirection())
+        {
+            case up: worldY -= 6 * Speed;
+                break;
+            case down: worldY += 6 * Speed;
+                break;
+            case left:
+                worldX -= 6 * Speed;
+                break;
+            case right:
+                worldX += 6 * Speed;
+                break;
+        }
     }
 
     @Override
