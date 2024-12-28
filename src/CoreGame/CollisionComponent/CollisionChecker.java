@@ -1,7 +1,6 @@
 package CoreGame.CollisionComponent;
 
 import CoreGame.Data.Enums.Collision;
-import CoreGame.EntityComponent.BaseCharacter;
 import CoreGame.GamePanel;
 import CoreGame.EntityComponent.Entity;
 import CoreGame.EntityComponent.BaseObject;
@@ -137,7 +136,7 @@ public class CollisionChecker
 
     public static boolean IsCollidingWithObjectInBox(int x, int y, int width, int height)
     {
-        for( BaseObject object : getOverlappedObjectsInBox(x,y,width,height))
+        for( BaseObject object : GetOverlappedObjectsInBox(x,y,width,height))
         {
             if(object.getCollisionMode() == Collision.Overlap) continue;
             return true;
@@ -178,7 +177,7 @@ public class CollisionChecker
         return OverlappedObjects.toArray(Entity[]::new);
     }
 
-    public static BaseObject[] getOverlappedObjectsInBox(int worldX, int worldY, int width, int height)
+    public static BaseObject[] GetOverlappedObjectsInBox(int worldX, int worldY, int width, int height)
     {
         Rectangle Box = new Rectangle();
         Box.x = worldX;

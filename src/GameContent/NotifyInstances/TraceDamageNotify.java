@@ -55,7 +55,7 @@ public class TraceDamageNotify extends AnimNotify
                 worldY -= BiasX/2;
                 break;
         }
-        for (BaseObject enemy: CollisionChecker.getOverlappedObjectsInBox(worldX, worldY, width, height))
+        for (BaseObject enemy: CollisionChecker.GetOverlappedObjectsInBox(worldX, worldY, width, height))
         {
             Container.ApplyPointDamage( enemy,Container, damage,
                     enemy.getScreenX(), enemy.getScreenY(),

@@ -198,7 +198,7 @@ public class MainPlayer extends Player
     void Interact()
     {
         int BiasInteractBox = 8* GamePanel.scale;
-        for(BaseObject overlappedObject : CollisionChecker.getOverlappedObjectsInBox(worldX + CollisionArea.x - BiasInteractBox,worldY + CollisionArea.y - BiasInteractBox, CollisionArea.width +BiasInteractBox*2, CollisionArea.height + BiasInteractBox*2))
+        for(BaseObject overlappedObject : CollisionChecker.GetOverlappedObjectsInBox(worldX + CollisionArea.x - BiasInteractBox,worldY + CollisionArea.y - BiasInteractBox, CollisionArea.width +BiasInteractBox*2, CollisionArea.height + BiasInteractBox*2))
         {
             if(overlappedObject instanceof InteractInterface)
             {
