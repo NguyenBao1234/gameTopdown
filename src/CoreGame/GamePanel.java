@@ -68,11 +68,11 @@ public class GamePanel extends JPanel implements Runnable
 
     public void setupGame()
     {
-        SoundManager.playSound(0.25f,false,"/Sound/SFX/fanfare.wav");
         gameState = GameState.Tittle;
         WorldManager.SetUpObject();
         postProcessing.setup();
         HUD.AddWidget(mainMenuWD);
+
     }
 
     public void startGameThread()

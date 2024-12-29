@@ -1,5 +1,6 @@
 package GameContent.WidgetInstances;
 
+import CoreGame.SoundComponent.SoundManager;
 import CoreGame.WidgetComponent.Widget;
 import CoreGame.WidgetComponent.HUD;
 
@@ -22,6 +23,7 @@ public abstract class OptionalWidget extends Widget
         if(!HUD.IsWidgetOnScreen(this)) return;
         SelectingRowOption --;
         if (SelectingRowOption < 0) SelectingRowOption = MaxRowOption;
+        SoundManager.playSound(1,false,"/Sound/SFX/UI_Btn/btn_hover_3_405158__rayolf.wav");
     }
 
     protected void Down ()
@@ -29,6 +31,7 @@ public abstract class OptionalWidget extends Widget
         if(!HUD.IsWidgetOnScreen(this)) return;
         SelectingRowOption ++;
         if (SelectingRowOption > MaxRowOption) SelectingRowOption = 0;
+        SoundManager.playSound(1,false,"/Sound/SFX/UI_Btn/btn_hover_3_405158__rayolf.wav");
     }
 
     protected void Left ()
@@ -36,6 +39,7 @@ public abstract class OptionalWidget extends Widget
         if(!HUD.IsWidgetOnScreen(this)) return;
         SelectingColOption--;
         if (SelectingColOption < 0) SelectingColOption = MaxColOption;
+        SoundManager.playSound(1,false,"/Sound/SFX/UI_Btn/btn_hover_3_405158__rayolf.wav");
     }
 
     protected void Right()
@@ -43,7 +47,12 @@ public abstract class OptionalWidget extends Widget
         if(!HUD.IsWidgetOnScreen(this)) return;
         SelectingColOption++;
         if (SelectingColOption > MaxColOption) SelectingColOption = 0;
+        SoundManager.playSound(1,false,"/Sound/SFX/UI_Btn/btn_hover_3_405158__rayolf.wav");
     }
 
-    protected abstract void SelectOption();
+    protected void SelectOption()
+    {
+        if(!HUD.IsWidgetOnScreen(this)) return;
+        SoundManager.playSound(1,false,"/Sound/SFX/UI_Btn/button-click-03_707040__vilkas_sound__vs-.wav");
+    }
 }

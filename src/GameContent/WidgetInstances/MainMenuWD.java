@@ -3,6 +3,8 @@ package GameContent.WidgetInstances;
 import CoreGame.Data.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
+import CoreGame.SoundComponent.Sound;
+import CoreGame.SoundComponent.SoundManager;
 import CoreGame.WidgetComponent.HUD;
 import HelpDevGameTool.ImageLoader;
 
@@ -13,8 +15,10 @@ import java.io.IOException;
 public class MainMenuWD extends OptionalWidget
 {
     private Font customFont = null;
+    private Sound BGMusic;
     public MainMenuWD()
     {
+        BGMusic = SoundManager.SpawnSound(1,true,"/Sound/Music/The Otherside.wav");
         SetupInputComponent();
         SetMaxOption(3,0);
         // Load font tùy chỉnh
@@ -83,8 +87,11 @@ public class MainMenuWD extends OptionalWidget
     }
 
 
+
     protected void SelectOption()
     {
+        super.SelectOption();
+        BGMusic.Stop(true);
         if(GamePanel.GetInst().gameState != GameState.Tittle) return;
         if (SelectingRowOption == 0)
         {
@@ -105,4 +112,5 @@ public class MainMenuWD extends OptionalWidget
             System.exit(0);
         }
     }
+    public void PlayBGMusic(){BGMusic.Play();}
 }

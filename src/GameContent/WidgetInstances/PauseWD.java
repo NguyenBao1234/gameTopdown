@@ -73,6 +73,7 @@ public class PauseWD extends OptionalWidget
     @Override
     protected void SelectOption()
     {
+        super.SelectOption();
         if(GamePanel.GetInst().gameState != GameState.Pause) return;
         if (SelectingRowOption == 0)
         {
@@ -84,6 +85,7 @@ public class PauseWD extends OptionalWidget
             HUD.RemoveWidget(this);
             HUD.AddWidget(GamePanel.GetInst().getMainMenuWD());
             GamePanel.GetInst().gameState = GameState.Tittle;
+            GamePanel.GetInst().getMainMenuWD().PlayBGMusic();
         }
     }
 }
