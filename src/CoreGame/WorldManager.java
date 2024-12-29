@@ -14,12 +14,12 @@ public class WorldManager
     public static void SetUpObject()
     {
         GamePanel.GetInst().obj[0][0] = new DoorObj();
-        GamePanel.GetInst().obj[0][0].worldX = 2 * GamePanel.tileSize;
-        GamePanel.GetInst().obj[0][0].worldY = 4 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][0].worldX = 14 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][0].worldY = 19 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][1] = new KeyItemObject(GamePanel.GetInst().obj[GamePanel.GetInst().currentMapIndex][0]);
-        GamePanel.GetInst().obj[0][1].worldX = 0 ;//* GamePanel.getInstGamePanel().tileSize;
-        GamePanel.GetInst().obj[0][1].worldY = 0 ;//* GamePanel.getInstGamePanel().tileSize;
+        GamePanel.GetInst().obj[0][1].worldX = 5 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][1].worldY = 34 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][2] = new ChestObj();
         GamePanel.GetInst().obj[0][2].worldX = 4 * GamePanel.tileSize;
