@@ -25,11 +25,11 @@ public class WorldManager
         GamePanel.GetInst().obj[0][2].worldX = 4 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][2].worldY = 6 * GamePanel.tileSize;
 
-        GamePanel.GetInst().obj[0][3] = new MapPortal(1, 11,6);
+        GamePanel.GetInst().obj[0][3] = new MapPortal(1, 12,6);
         GamePanel.GetInst().obj[0][3].worldX = 40 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][3].worldY = 16 * GamePanel.tileSize;
 
-        GamePanel.GetInst().obj[1][0] = new MapPortal(0, 40,16);
+        GamePanel.GetInst().obj[1][0] = new MapPortal(0, 40,17);
         GamePanel.GetInst().obj[1][0].worldX = 11 * GamePanel.tileSize;
         GamePanel.GetInst().obj[1][0].worldY = 6 * GamePanel.tileSize;
 
