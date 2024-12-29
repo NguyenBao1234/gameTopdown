@@ -12,10 +12,19 @@ import java.io.IOException;
 
 public class MainMenuWD extends OptionalWidget
 {
+    private Font customFont = null;
     public MainMenuWD()
     {
         SetupInputComponent();
         SetMaxOption(3,0);
+        // Load font tùy chỉnh
+        try {
+            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/MedievalSharp.ttf"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            customFont = new Font("Arial", Font.BOLD, 64); // Dự phòng
+        }
+        options = new String[]{"New Game", "Load Game", "Quit"};
     }
 
     public void SetupInputComponent()
@@ -25,6 +34,10 @@ public class MainMenuWD extends OptionalWidget
         ControllerComp.BindAction(KeyEvent.VK_S, true,this::Down);
         ControllerComp.BindAction(KeyEvent.VK_A, true,this::Left);
         ControllerComp.BindAction(KeyEvent.VK_D, true,this::Right);
+        ControllerComp.BindAction(KeyEvent.VK_UP, true,this::Up);
+        ControllerComp.BindAction(KeyEvent.VK_DOWN, true,this::Down);
+        ControllerComp.BindAction(KeyEvent.VK_LEFT, true,this::Left);
+        ControllerComp.BindAction(KeyEvent.VK_RIGHT, true,this::Right);
         ControllerComp.BindAction(KeyEvent.VK_ENTER, true,this::SelectOption);
     }
 
@@ -33,22 +46,11 @@ public class MainMenuWD extends OptionalWidget
     {
         if (GamePanel.GetInst().gameState != GameState.Tittle) return;
 
-        // Load font tùy chỉnh
-        Font customFont = null;
-        try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/MedievalSharp.ttf"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            customFont = new Font("Arial", Font.BOLD, 64); // Dự phòng
-        }
-
         // Áp dụng font tùy chỉnh
         g2.setFont(customFont.deriveFont(Font.BOLD, 64));
+       // Vẽ hình nền
+        g2.drawImage(ImageLoader.LoadImage("/Player/MainMenu.png"), 0, 0, GamePanel.GetInst().getWidth(), GamePanel.GetInst().getHeight(), null);
 
-        // Vẽ hình nền
-        g2.drawImage(ImageLoader.LoadImage("/Player/main.jpg"), 0, 0, GamePanel.GetInst().getWidth(), GamePanel.GetInst().getHeight(), null);
-
-        // Tiêu đề game
         int x = 16 * GamePanel.scale + 96;
         int y = 32 * GamePanel.scale;
         g2.setColor(Color.BLACK); // Màu đổ bóng
@@ -59,7 +61,6 @@ public class MainMenuWD extends OptionalWidget
         // Hiển thị các tùy chọn
         g2.setFont(customFont.deriveFont(Font.BOLD, 32)); // Font nhỏ hơn cho các tùy chọn
         x += GamePanel.tileSize;
-        String[] options = {"New Game", "Load Game", "Quit"};
 
         for (int i = 0; i < options.length; i++) {
             if (i == SelectingRowOption) {

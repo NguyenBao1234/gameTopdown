@@ -9,7 +9,7 @@ public abstract class OptionalWidget extends Widget
     private int MaxRowOption;
     protected int SelectingColOption = 0;
     private int MaxColOption;
-
+    protected String[] options;
 
     public void SetMaxOption (int maxRowOption, int maxColOption)
     {

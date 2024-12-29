@@ -36,8 +36,8 @@ public class MainPlayer extends Player
         flipBookArr = new BufferedImage[8][];
         SetupAnimations();
         SetAnimationToUse(0,4);
-        worldX = 0* GamePanel.tileSize;
-        worldY = 0* GamePanel.tileSize;
+        worldX = 5* GamePanel.tileSize;
+        worldY = 12* GamePanel.tileSize;
 
         SpriteRenderSizeX = 64*GamePanel.scale;
         SpriteRenderSizeY = 64*GamePanel.scale;

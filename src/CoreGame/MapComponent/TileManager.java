@@ -29,8 +29,8 @@ public class TileManager
     public TileManager()
     {
         getTileImage();
-        LoadMap("/Map/map3.txt",0);
-        LoadMap("/Map/map4.txt",1);
+        LoadMap("/Map/Abyss1.txt",0);
+        LoadMap("/Map/Abyss2.txt",1);
         tileTypeMap = tileTypeMapList.toArray(new int[0][][]);
     }
 
@@ -89,19 +89,7 @@ public class TileManager
 
     public void getTileImage()
     {
-        //the below scripts will be removed when add Tile Set:
-        tiles = new Tile[3];
-        tiles[0] = new Tile();
-        tiles[0].bufferedImage = ImageLoader.LoadImage("/OldTile/water.png");
-        tiles[0].collision = Block;
-
-        tiles[1] = new Tile();
-        tiles[1].bufferedImage = ImageLoader.LoadImage("/OldTile/sand.png");
-        tiles[1].collision = NoCollision;
-
-        tiles[2] = new Tile();
-        tiles[2].bufferedImage = ImageLoader.LoadImage("/OldTile/wall.png");
-        tiles[2].collision = NoCollision;
+        LoadTileSet("/TileSet/ExtractedTileSet","/TileSet/TileSetData.txt");
     }
 
     private void ExtractMapDataFromTileSet(String tileDataPath)
@@ -147,14 +135,15 @@ public class TileManager
         }
     }
 
-    private void LoadTilesFromTilesFolder(String folderPath, String tileDataPath)
+    private void LoadTileSet(String imageFolderPath, String tileDataPath)
     {
         ExtractMapDataFromTileSet(tileDataPath);
-        BufferedImage[] TileArr = ImageLoader.makeFlipBook(folderPath);
+        BufferedImage[] TileArr = ImageLoader.makeFlipBook(imageFolderPath);
         tiles = new Tile[TileArr.length];
         int i = 0;
         for(BufferedImage tileImage : TileArr)
         {
+            tiles[i] = new Tile();
             tiles[i].bufferedImage = tileImage;
             tiles[i].collision = tileCollisionStates.get(i).equals("true") ? Block : NoCollision;
             i++;
