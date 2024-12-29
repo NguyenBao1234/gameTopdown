@@ -7,6 +7,8 @@ import GameContent.Object.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.NarrativeMessageWD;
 import HelpDevGameTool.ImageLoader;
 
+import java.io.IOException;
+
 public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
 {
     int interactCount = 0;
@@ -42,7 +44,15 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             if(interactCount == 3) DialogueWD = new NarrativeMessageWD("(0_0)","Dien a",
                     "Nguoi co bi dien khong",
                     "Ta mac ke nha nguoi ");
-            if(interactCount > 3) return;
+            if(interactCount >= 4)  {
+                DialogueWD = new NarrativeMessageWD("game save!");
+                try {
+                    GamePanel.saveLoad.save();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            //if(interactCount > 4) return;
             HUD.AddWidget(DialogueWD);
             speedDefaultPlayer = GamePanel.GetInst().player.getSpeed();
             GamePanel.GetInst().player.setSpeed(0);

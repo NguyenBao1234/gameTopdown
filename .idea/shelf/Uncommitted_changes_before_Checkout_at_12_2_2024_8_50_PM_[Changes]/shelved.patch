@@ -1,0 +1,43 @@
+Index: src/CoreGame/KeyHandlerComponent/KeyHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package CoreGame.KeyHandlerComponent;\r\n\r\nimport CoreGame.BinderComponent.MultiBinder;\r\nimport CoreGame.BinderComponent.MultiBinderWithParam;\r\n\r\nimport java.awt.event.KeyEvent;\r\nimport java.awt.event.KeyListener;\r\nimport java.util.function.Consumer;\r\n\r\npublic class KeyHandler implements KeyListener\r\n{\r\n    private static KeyHandler Inst;\r\n    private boolean[] bPressedButtons = new boolean[255];\r\n\r\n    private final MultiBinder ActionBinder[] = new MultiBinder[255];\r\n    private final boolean bPressedActions[] = new boolean[255];\r\n    private final int FrameCount[] = new int[255];\r\n\r\n    private final MultiBinderWithParam AxisBinder[] = new MultiBinderWithParam[255];\r\n    private final float AxisValues[] = new float[255];\r\n\r\n    public void BindAction(int KeyCode, boolean bPress, Runnable function)\r\n    {\r\n        ActionBinder[KeyCode] = new MultiBinder();\r\n        ActionBinder[KeyCode].bind(function);\r\n        bPressedActions[KeyCode] = bPress;\r\n        System.out.println(\"Bind action Success\");\r\n    }\r\n    //Bind\r\n    public <T> void BindAxis(int KeyCode, float valueScale, Consumer<T> function)\r\n    {\r\n        AxisBinder[KeyCode] = new MultiBinderWithParam();\r\n        AxisBinder[KeyCode].bind(function);\r\n        AxisValues[KeyCode] = valueScale;\r\n        System.out.println(\"Bind axis Success\");\r\n    }\r\n\r\n    @Override\r\n    public void keyPressed(KeyEvent e)\r\n    {\r\n        int keyCode = e.getKeyCode();\r\n        bPressedButtons[keyCode] = true;\r\n\r\n        if(AxisBinder[keyCode] != null) AxisBinder[keyCode].executeAll(AxisValues[keyCode]);\r\n\r\n        if(FrameCount[keyCode] != 0 || ActionBinder[keyCode] == null || !bPressedActions[keyCode]) return;\r\n        ActionBinder[keyCode].executeAll();\r\n        FrameCount [keyCode] ++;\r\n    }\r\n\r\n    @Override\r\n    public void keyReleased(KeyEvent e)\r\n    {\r\n        int keyCode = e.getKeyCode();\r\n        bPressedButtons[keyCode] = false;\r\n\r\n        if(AxisBinder[keyCode]!=null)  AxisBinder[keyCode].executeAll(0.f);\r\n\r\n        FrameCount[keyCode] = 0;\r\n        if(bPressedActions[keyCode]) return;\r\n        if(ActionBinder[keyCode] != null) ActionBinder[keyCode].executeAll();\r\n    }\r\n    @Override\r\n    public void keyTyped(KeyEvent e)\r\n    {\r\n    }\r\n\r\n    public static KeyHandler getInstance()\r\n    {\r\n        if(Inst==null) Inst = new KeyHandler();\r\n        return Inst;\r\n    }\r\n\r\n    public static boolean isKeyPressed(int KeyCode)\r\n    {\r\n        return getInstance().bPressedButtons[KeyCode];\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/CoreGame/KeyHandlerComponent/KeyHandler.java b/src/CoreGame/KeyHandlerComponent/KeyHandler.java
+--- a/src/CoreGame/KeyHandlerComponent/KeyHandler.java	(revision 8c3d7dd7b7f62df0462bcf38404657cc50bd03bc)
++++ b/src/CoreGame/KeyHandlerComponent/KeyHandler.java	(date 1733146149412)
+@@ -2,6 +2,7 @@
+ 
+ import CoreGame.BinderComponent.MultiBinder;
+ import CoreGame.BinderComponent.MultiBinderWithParam;
++import CoreGame.GamePanel;
+ 
+ import java.awt.event.KeyEvent;
+ import java.awt.event.KeyListener;
+@@ -9,6 +10,7 @@
+ 
+ public class KeyHandler implements KeyListener
+ {
++
+     private static KeyHandler Inst;
+     private boolean[] bPressedButtons = new boolean[255];
+ 
+@@ -46,7 +48,9 @@
+         if(FrameCount[keyCode] != 0 || ActionBinder[keyCode] == null || !bPressedActions[keyCode]) return;
+         ActionBinder[keyCode].executeAll();
+         FrameCount [keyCode] ++;
++
+     }
++
+ 
+     @Override
+     public void keyReleased(KeyEvent e)
+@@ -65,7 +69,7 @@
+     {
+     }
+ 
+-    public static KeyHandler getInstance()
++    public static KeyHandler getInstance( )
+     {
+         if(Inst==null) Inst = new KeyHandler();
+         return Inst;
