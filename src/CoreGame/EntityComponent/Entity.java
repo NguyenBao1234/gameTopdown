@@ -7,19 +7,14 @@ public abstract class Entity
 {
     public int worldX,worldY;
 
-    protected boolean bColliding = false;
-
     protected Collision CollisionMode = Collision.NoCollision;
     protected Rectangle CollisionArea;
-
-
 
     public final Rectangle getCollisionArea(){ return CollisionArea;}
     public final Collision getCollisionMode(){return CollisionMode;}
     public final void setCollisionMode(Collision collision){
         CollisionMode = collision;}
-    public final boolean IsColliding(){return bColliding;}
-    public final void SetColliding(boolean bCollide){bColliding = bCollide; }
+
     public final void Destroy(Entity entity)
     {
         entity.OnDestroy();

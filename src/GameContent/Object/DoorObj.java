@@ -18,4 +18,5 @@ public class DoorObj extends ObjectNeedKeyItem
         Sprite = ImageLoader.LoadImage("/Objects/opened_door.png");
         setCollisionMode(Collision.NoCollision);
     }
+
 }

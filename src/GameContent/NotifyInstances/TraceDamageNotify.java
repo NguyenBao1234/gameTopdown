@@ -17,7 +17,7 @@ public class TraceDamageNotify extends AnimNotify
 
     public TraceDamageNotify(int frameStart, BaseCharacter entityContain, int ScaleX, int ScaleY)
     {
-        super(frameStart, 5);
+        super(frameStart, 0);
         Container = entityContain;
         scaleX = ScaleX;
         scaleY = ScaleY;
@@ -55,7 +55,7 @@ public class TraceDamageNotify extends AnimNotify
                 worldY -= BiasX/2;
                 break;
         }
-        for (BaseObject enemy: CollisionChecker.getOverlappedObjectsInBox(worldX, worldY, width, height))
+        for (BaseObject enemy: CollisionChecker.GetOverlappedObjectsInBox(worldX, worldY, width, height))
         {
             Container.ApplyPointDamage( enemy,Container, damage,
                     enemy.getScreenX(), enemy.getScreenY(),

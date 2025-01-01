@@ -5,6 +5,7 @@ import CoreGame.CollisionComponent.CollisionChecker;
 import CoreGame.Data.Enums.Collision;
 import CoreGame.Data.Enums.GameState;
 import CoreGame.EntityComponent.BaseObject;
+import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.PlayerComponent.Player;
@@ -24,6 +25,7 @@ public class MainPlayer extends Player
     public float speedFactor = 1;
     private final PauseWD pauseWD = new PauseWD();
     private float DamageWeapon = 4;
+    public float health = 100;
 
     private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
     private final AnimMontage AttackMontage = new AnimMontage();
@@ -34,8 +36,8 @@ public class MainPlayer extends Player
         flipBookArr = new BufferedImage[8][];
         SetupAnimations();
         SetAnimationToUse(0,4);
-        worldX = 0* GamePanel.tileSize;
-        worldY = 0* GamePanel.tileSize;
+        worldX = 5* GamePanel.tileSize;
+        worldY = 12* GamePanel.tileSize;
 
         SpriteRenderSizeX = 64*GamePanel.scale;
         SpriteRenderSizeY = 64*GamePanel.scale;
@@ -59,6 +61,7 @@ public class MainPlayer extends Player
         ControllerComp.BindAction(KeyEvent.VK_E,true, this::Interact);
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
         ControllerComp.BindAction(KeyEvent.VK_J,true,this::Attack);
+        ControllerComp.BindAction(KeyEvent.VK_SHIFT,true,this::Dash);
     }
 
     @Override
@@ -86,13 +89,11 @@ public class MainPlayer extends Player
         if(KeyHandler.isKeyPressed(KeyEvent.VK_A))
         {
             UpdateCurrentDirectionX(-1);
-            worldX -= (int) (Speed * speedFactor);
         }
 
         if(KeyHandler.isKeyPressed(KeyEvent.VK_D))
         {
             UpdateCurrentDirectionX(1);
-            worldX += (int) (Speed * speedFactor);
         }
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_W) && !KeyHandler.isKeyPressed(KeyEvent.VK_S)) UpdateCurrentDirectionY(0);
@@ -100,35 +101,48 @@ public class MainPlayer extends Player
         if(KeyHandler.isKeyPressed(KeyEvent.VK_S))
         {
             UpdateCurrentDirectionY(-1);
-            worldY += (int) (Speed * speedFactor); // Y tang = di xuong duoi man hinh
         }
         if(KeyHandler.isKeyPressed(KeyEvent.VK_W))
         {
             UpdateCurrentDirectionY(1);
-            worldY -= (int)(Speed * speedFactor);
         }
     }
 
     void handleLocationByCollision()
     {
-        if(CollisionMode == Collision.NoCollision) return;
-        CollisionChecker.RespondToMap(this);
-        if(bColliding)
+        if(vAxisX == 0 && vAxisY == 0) return;
+        int collX = worldX + CollisionArea.x;
+        int collY = worldY + CollisionArea.y;
+        if (vAxisY > 0)
         {
-            switch(GetCurrentDirection())
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height))
             {
-                case down:
-                    worldY -= (int) (Speed * speedFactor);
-                    break;
-                case up:
-                    worldY += (int) (Speed * speedFactor);
-                    break;
-                case left:
-                    worldX += (int) (Speed * speedFactor);
-                    break;
-                case right:
-                    worldX -= (int) (Speed * speedFactor);
-                    break;
+                worldY -= (int) (Speed * speedFactor);
+            }
+        }
+        if (vAxisY < 0)
+        {
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height))
+            {
+                worldY += (int) (Speed * speedFactor);
+            }
+        }
+        if (vAxisX > 0)
+        {
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height))
+            {
+                worldX += (int) (Speed * speedFactor);
+            }
+        }
+        if (vAxisX < 0)
+        {
+            if(!CollisionChecker.IsCollidingWithTileInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height) &
+                    !CollisionChecker.IsCollidingWithObjectInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height))
+            {
+                worldX -= (int) (Speed * speedFactor);
             }
         }
     }
@@ -184,7 +198,7 @@ public class MainPlayer extends Player
     void Interact()
     {
         int BiasInteractBox = 8* GamePanel.scale;
-        for(BaseObject overlappedObject : CollisionChecker.getOverlappedObjectsInBox(worldX + CollisionArea.x - BiasInteractBox,worldY + CollisionArea.y - BiasInteractBox, CollisionArea.width +BiasInteractBox*2, CollisionArea.height + BiasInteractBox*2))
+        for(BaseObject overlappedObject : CollisionChecker.GetOverlappedObjectsInBox(worldX + CollisionArea.x - BiasInteractBox,worldY + CollisionArea.y - BiasInteractBox, CollisionArea.width +BiasInteractBox*2, CollisionArea.height + BiasInteractBox*2))
         {
             if(overlappedObject instanceof InteractInterface)
             {
@@ -234,11 +248,73 @@ public class MainPlayer extends Player
         PlayAnimMontage(AttackMontage, 4);
     }
 
+    private void Dash()
+    {
+        switch (GetCurrentDirection())
+        {
+            case up: worldY -= 6 * Speed;
+                break;
+            case down: worldY += 6 * Speed;
+                break;
+            case left:
+                worldX -= 6 * Speed;
+                break;
+            case right:
+                worldX += 6 * Speed;
+                break;
+        }
+    }
+
+    @Override
+    protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
+        health -= Damage;
+        if(health > 0) ReceiveDamageAnim();
+        else DeathAnim();
+    }
+
+    private void ReceiveDamageAnim()
+    {
+        switch (GetCurrentDirection())
+        {
+            case up:
+                break;
+            case down:
+                break;
+            case left:
+                break;
+            case right:
+                break;
+        }
+    }
+
+    private void DeathAnim()
+    {
+        switch (GetCurrentDirection())
+        {
+            case up:
+                break;
+            case down:
+                break;
+            case left:
+                break;
+            case right:
+                break;
+        }
+    }
+
     public float getDamageWeapon() {
         return DamageWeapon;
     }
 
     public void setDamageWeapon(float damageWeapon) {
         DamageWeapon = damageWeapon;
+    }
+
+    public float getHealth() {
+        return health;
+    }
+
+    public void setHealth(float health) {
+        this.health = health;
     }
 }
