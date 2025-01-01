@@ -27,7 +27,7 @@ public class ImageGridSplitter {
     }
 
 
-    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir, boolean bHorizontal, boolean bOneIndex, boolean bFormatDigit, int StartIndex)
+    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir, boolean bHorizontal, boolean bOneIndex, int numDigit, int StartIndex)
     {
         try
         {
@@ -68,7 +68,7 @@ public class ImageGridSplitter {
                     String fileName;
                     if(bOneIndex)
                     {
-                        FinalIndex = bFormatDigit?FormatDigit(i,3):String.valueOf(i) ;
+                        FinalIndex = (numDigit > 1)?FormatDigit(i,numDigit):String.valueOf(i) ;
                         i++;
                     }
                     else FinalIndex = bHorizontal ? (y + "_" + x ): ( x + "_" + y );
@@ -98,6 +98,6 @@ public class ImageGridSplitter {
 
     public static void main(String[] args)
     {
-        SplitImage(16,16,"AssetSource/TileSet/TileSet.png","Resource/ExtractedTileSet", true, true,true,520);
+        SplitImage(80,112,"AssetSource/AnimatedObject/Temple3Skulls/Temple3Skulls2.png","Resource/AnimatedObjects/Temple/Temple3Skulls2", true, true,1,0);
     }
 }
