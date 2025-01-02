@@ -2,10 +2,10 @@ package GameContent.NPC.NonThreatening;
 
 import CoreGame.GamePanel;
 import CoreGame.WidgetComponent.HUD;
-import GameContent.Object.InteractInterface;
-import GameContent.Object.ObjectPendOnPlayer;
+import GameContent.Object.MasterObject.InteractInterface;
+import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.NarrativeMessageWD;
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
     private int speedDefaultPlayer;
     public Morph_Idle()
     {
-        flipBook = ImageLoader.makeFlipBook("/Morph/Idle");
+        flipBook = ImageUtility.makeFlipBook("/Morph/Idle");
         fpsPerImage = 6;
         SpriteRenderSizeX = 17 * GamePanel.scale;
         SpriteRenderSizeY = 28 * GamePanel.scale;

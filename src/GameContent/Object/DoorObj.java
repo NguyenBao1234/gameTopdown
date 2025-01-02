@@ -1,22 +1,21 @@
 package GameContent.Object;
 
 import CoreGame.Data.Enums.Collision;
-import HelpDevGameTool.ImageLoader;
+import GameContent.Object.MasterObject.ObjectNeedKeyItem;
 
 public class DoorObj extends ObjectNeedKeyItem
 {
     public DoorObj()
     {
-        Sprite = ImageLoader.LoadImage("/Objects/closed_door.png");
+        super("/Objects/Door/closed_door.png","/Objects/Door/opened_door.png");
         CollisionMode = Collision.Block;
     }
 
     @Override
-    public void interact() {
-        super.interact();
+    public void interact()
+    {
         if(!bUnlock) return ;
-        Sprite = ImageLoader.LoadImage("/Objects/opened_door.png");
+        super.interact();
         setCollisionMode(Collision.NoCollision);
     }
-
 }

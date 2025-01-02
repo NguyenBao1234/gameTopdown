@@ -1,6 +1,8 @@
 package CoreGame.EntityComponent;
 
 import CoreGame.Data.Enums.Collision;
+import CoreGame.GamePanel;
+
 import java.awt.*;
 
 public abstract class Entity
@@ -17,8 +19,15 @@ public abstract class Entity
 
     public final void Destroy(Entity entity)
     {
-        entity.OnDestroy();
-        entity = null;
+        for (int i = 0; i < GamePanel.GetInst().obj.length; i++)
+        {
+            for (int j = 0; j < GamePanel.GetInst().obj[i].length; j++)
+            {
+                if (GamePanel.GetInst().obj[i][j] != entity) continue;
+                GamePanel.GetInst().obj[i][j] = null;
+                entity.OnDestroy();
+            }
+        }
     }
 
     /**

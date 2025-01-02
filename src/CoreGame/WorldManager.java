@@ -3,11 +3,10 @@ package CoreGame;
 import GameContent.EventTriggerBox.MapPortal;
 import GameContent.NPC.HangingNPC;
 import GameContent.NPC.NonThreatening.Morph_Idle;
-import GameContent.Object.CandleA;
-import GameContent.Object.ChestObj;
 import GameContent.Object.DoorObj;
 import CoreGame.EntityComponent.BaseObject;
-import GameContent.Object.KeyItemObject;
+import GameContent.Object.MasterObject.BreakableObject;
+import GameContent.Object.MasterObject.KeyItemObject;
 
 public class WorldManager
 {
@@ -21,9 +20,10 @@ public class WorldManager
         GamePanel.GetInst().obj[0][1].worldX = 5 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][1].worldY = 34 * GamePanel.tileSize;
 
-        GamePanel.GetInst().obj[0][2] = new ChestObj();
-        GamePanel.GetInst().obj[0][2].worldX = 4 * GamePanel.tileSize;
-        GamePanel.GetInst().obj[0][2].worldY = 6 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][2] = new BreakableObject("/Objects/BrokenTree/FallenTree.png",
+                "/Objects/BrokenTree/FallenTreeBroken.png",20, 90);
+        GamePanel.GetInst().obj[0][2].worldX = 37 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][2].worldY = (int) (15.5 * GamePanel.tileSize);
 
         GamePanel.GetInst().obj[0][3] = new MapPortal(1, 12,6);
         GamePanel.GetInst().obj[0][3].worldX = 40 * GamePanel.tileSize;
@@ -41,6 +41,15 @@ public class WorldManager
         GamePanel.GetInst().obj[0][5].worldX = 21 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][5].worldY = 15 * GamePanel.tileSize;
 
+        GamePanel.GetInst().obj[0][6] = new BreakableObject("/Objects/BrokenTree/FallenTree.png",
+                "/Objects/BrokenTree/FallenTreeBroken.png",20);
+        GamePanel.GetInst().obj[0][6].worldX = (int)(7.5 * GamePanel.tileSize);
+        GamePanel.GetInst().obj[0][6].worldY = 27 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][7] = new BreakableObject("/Objects/BrokenTree/FallenTree.png",
+                "/Objects/BrokenTree/FallenTreeBroken.png",20);
+        GamePanel.GetInst().obj[0][7].worldX = (int)(3.5 * GamePanel.tileSize);
+        GamePanel.GetInst().obj[0][7].worldY = 27 * GamePanel.tileSize;
 
     }
     public static void SimulateObject()

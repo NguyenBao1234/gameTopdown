@@ -98,6 +98,6 @@ public class ImageGridSplitter {
 
     public static void main(String[] args)
     {
-        SplitImage(80,112,"AssetSource/AnimatedObject/Temple3Skulls/Temple3Skulls2.png","Resource/AnimatedObjects/Temple/Temple3Skulls2", true, true,1,0);
+        SplitImage(48,80,"AssetSource/AnimatedObject/TempleMini/TempleMini3.png","Resource/AnimatedObjects/Temple/TempleMini3", true, true,1,0);
     }
 }

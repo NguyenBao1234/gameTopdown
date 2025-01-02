@@ -12,9 +12,9 @@ import CoreGame.PlayerComponent.Player;
 import CoreGame.SoundComponent.SoundManager;
 import CoreGame.WidgetComponent.HUD;
 import GameContent.NotifyInstances.TraceDamageNotify;
-import GameContent.Object.InteractInterface;
+import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.WidgetInstances.PauseWD;
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -178,21 +178,21 @@ public class MainPlayer extends Player
     //Hardcode
     void SetupAnimations()
     {
-        flipBookArr[0] = ImageLoader.makeFlipBook("/Player/front/idle");
+        flipBookArr[0] = ImageUtility.makeFlipBook("/Player/front/idle");
 
-        flipBookArr[1] = ImageLoader.makeFlipBook("/Player/back/idle");
+        flipBookArr[1] = ImageUtility.makeFlipBook("/Player/back/idle");
 
-        flipBookArr[2] = ImageLoader.makeFlipBook("/Player/left/idle");
+        flipBookArr[2] = ImageUtility.makeFlipBook("/Player/left/idle");
 
-        flipBookArr[3] = ImageLoader.makeFlipBook("/Player/right/idle");
+        flipBookArr[3] = ImageUtility.makeFlipBook("/Player/right/idle");
 
-        flipBookArr[4] = ImageLoader.makeFlipBook("/Player/front/walk");
+        flipBookArr[4] = ImageUtility.makeFlipBook("/Player/front/walk");
 
-        flipBookArr[5] = ImageLoader.makeFlipBook("/Player/back/walk");
+        flipBookArr[5] = ImageUtility.makeFlipBook("/Player/back/walk");
 
-        flipBookArr[6] = ImageLoader.makeFlipBook("/Player/left/walk");
+        flipBookArr[6] = ImageUtility.makeFlipBook("/Player/left/walk");
 
-        flipBookArr[7] = ImageLoader.makeFlipBook("/Player/right/walk");
+        flipBookArr[7] = ImageUtility.makeFlipBook("/Player/right/walk");
     }
 
     void Interact()
@@ -230,19 +230,19 @@ public class MainPlayer extends Player
         {
             case up :
                 DmgNotify.setFrameStart(0);
-                AttackMontage.setFlipBook(ImageLoader.makeFlipBook("/Player/back/attack"));
+                AttackMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/back/attack"));
                 break;
             case down:
                 DmgNotify.setFrameStart(0);
-                AttackMontage.setFlipBook(ImageLoader.makeFlipBook("/Player/front/attack"));
+                AttackMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/front/attack"));
                 break;
             case left:
                 DmgNotify.setFrameStart(0);
-                AttackMontage.setFlipBook( ImageLoader.makeFlipBook("/Player/left/attack"));
+                AttackMontage.setFlipBook( ImageUtility.makeFlipBook("/Player/left/attack"));
                 break;
             case right:
                 DmgNotify.setFrameStart(5);
-                AttackMontage.setFlipBook( ImageLoader.makeFlipBook("/Player/right/attack"));
+                AttackMontage.setFlipBook( ImageUtility.makeFlipBook("/Player/right/attack"));
                 break;
         }
         PlayAnimMontage(AttackMontage, 4);

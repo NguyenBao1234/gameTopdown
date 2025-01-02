@@ -4,7 +4,7 @@ import CoreGame.Data.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.WidgetComponent.HUD;
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -66,7 +66,7 @@ public class PauseWD extends OptionalWidget
         int iconX = x - GamePanel.tileSize;
         int iconY = y + GamePanel.tileSize * (2 + SelectingRowOption) - GamePanel.tileSize / 2;
 
-        Image selectorIcon = ImageLoader.LoadImage("/Objects/skull.png");
+        Image selectorIcon = ImageUtility.LoadImage("/Objects/skull.png");
         g2.drawImage(selectorIcon, iconX, iconY, GamePanel.tileSize/2, GamePanel.tileSize/2, null);
     }
 
