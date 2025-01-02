@@ -41,6 +41,10 @@ public class WorldManager
         GamePanel.GetInst().obj[0][5].worldX = 3 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][5].worldY = 3 * GamePanel.tileSize;
 
+        GamePanel.GetInst().obj[1][6] = new Morph_Idle();
+        GamePanel.GetInst().obj[1][6].worldX = 3 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[1][6].worldY = 5 * GamePanel.tileSize;
+
 
     }
     public static void SimulateObject()
