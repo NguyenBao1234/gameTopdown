@@ -4,9 +4,9 @@ import CoreGame.Data.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.Sound;
-import CoreGame.SoundComponent.SoundManager;
+import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -18,7 +18,7 @@ public class MainMenuWD extends OptionalWidget
     private Sound BGMusic;
     public MainMenuWD()
     {
-        BGMusic = SoundManager.SpawnSound(1,true,"/Sound/Music/The Otherside.wav");
+        BGMusic = SoundUtility.SpawnSound(1,true,"/Sound/Music/The Otherside.wav");
         SetupInputComponent();
         SetMaxOption(3,0);
         // Load font tùy chỉnh
@@ -53,7 +53,7 @@ public class MainMenuWD extends OptionalWidget
         // Áp dụng font tùy chỉnh
         g2.setFont(customFont.deriveFont(Font.BOLD, 64));
        // Vẽ hình nền
-        g2.drawImage(ImageLoader.LoadImage("/Player/MainMenu.png"), 0, 0, GamePanel.GetInst().getWidth(), GamePanel.GetInst().getHeight(), null);
+        g2.drawImage(ImageUtility.LoadImage("/Player/MainMenu.png"), 0, 0, GamePanel.GetInst().getWidth(), GamePanel.GetInst().getHeight(), null);
 
         int x = 16 * GamePanel.scale + 96;
         int y = 32 * GamePanel.scale;
@@ -81,7 +81,7 @@ public class MainMenuWD extends OptionalWidget
         int iconX = x - GamePanel.tileSize;
         int iconY = y + GamePanel.tileSize * (2 + SelectingRowOption) - GamePanel.tileSize / 2;
 
-        Image selectorIcon = ImageLoader.LoadImage("/Objects/skull.png");
+        Image selectorIcon = ImageUtility.LoadImage("/Objects/skull.png");
         g2.drawImage(selectorIcon, iconX, iconY, GamePanel.tileSize/2, GamePanel.tileSize/2, null);
 
     }
@@ -100,7 +100,9 @@ public class MainMenuWD extends OptionalWidget
         }
         if(SelectingRowOption == 1) {
             try {
-                GamePanel.saveLoad.load();
+                GamePanel.instance.saveLoad.load();
+                GamePanel.GetInst().gameState = GameState.Run;
+                HUD.RemoveWidget(this);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {

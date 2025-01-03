@@ -1,7 +1,7 @@
 package CoreGame.MapComponent;
 
 import CoreGame.GamePanel;
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -138,7 +138,7 @@ public class TileManager
     private void LoadTileSet(String imageFolderPath, String tileDataPath)
     {
         ExtractMapDataFromTileSet(tileDataPath);
-        BufferedImage[] TileArr = ImageLoader.makeFlipBook(imageFolderPath);
+        BufferedImage[] TileArr = ImageUtility.makeFlipBook(imageFolderPath);
         tiles = new Tile[TileArr.length];
         int i = 0;
         for(BufferedImage tileImage : TileArr)

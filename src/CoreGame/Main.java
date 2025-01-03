@@ -1,6 +1,6 @@
 package CoreGame;
 
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ public class Main
         
         window.add(gamePanel);
         window.pack();
-        window.setIconImage(ImageLoader.LoadImage("/game_icon.png"));
+        window.setIconImage(ImageUtility.LoadImage("/game_icon.png"));
         window.setVisible(true);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

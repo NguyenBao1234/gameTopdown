@@ -1,25 +1,26 @@
-package GameContent.Object;
+package GameContent.Object.MasterObject;
 
 import CoreGame.EntityComponent.Entity;
 import CoreGame.Data.Enums.Collision;
-import HelpDevGameTool.ImageLoader;
+import CoreGame.SoundComponent.SoundUtility;
+import HelpDevGameTool.ImageUtility;
 
 
-public class KeyItemObject extends ObjectPendOnPlayer implements InteractInterface
+public class KeyItemObject extends InteractObject
 {
     protected ObjectNeedKeyItem targetInteractObject;
 
     public KeyItemObject(ObjectNeedKeyItem ObjectNeedInteract)
     {
         CollisionMode = Collision.Overlap;
-        Sprite = ImageLoader.LoadImage("/Objects/key.png");
+        Sprite = ImageUtility.LoadImage("/Objects/key.png");
         targetInteractObject = ObjectNeedInteract;
     }
 
     public KeyItemObject(Entity ObjectNeedInteract)
     {
         CollisionMode = Collision.Overlap;
-        Sprite = ImageLoader.LoadImage("/Objects/key.png");
+        Sprite = ImageUtility.LoadImage("/Objects/key.png");
         targetInteractObject = (ObjectNeedKeyItem) ObjectNeedInteract;
     }
 
@@ -27,9 +28,8 @@ public class KeyItemObject extends ObjectPendOnPlayer implements InteractInterfa
     public void interact()
     {
         System.out.println("Key was interacted");
-        Sprite = null;
-        setCollisionMode(Collision.NoCollision);
-        targetInteractObject.SetUnlock(true);
+        if(targetInteractObject != null) targetInteractObject.SetUnlock(true);
+        SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
+        Destroy(this);
     }
-
 }

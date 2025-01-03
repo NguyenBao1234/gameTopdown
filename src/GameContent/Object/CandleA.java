@@ -1,9 +1,6 @@
 package GameContent.Object;
 
-import CoreGame.GamePanel;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 
 public class CandleA extends ObjectPendOnPlayer {
 //    public CandleA()

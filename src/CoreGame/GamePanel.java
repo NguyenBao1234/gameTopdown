@@ -2,7 +2,6 @@ package CoreGame;
 
 import CoreGame.Data.Enums.GameState;
 import CoreGame.KeyHandlerComponent.KeyHandler;
-import CoreGame.SoundComponent.SoundManager;
 import CoreGame.WidgetComponent.HUD;
 import CoreGame.EffectComponent.PostProcessing;
 import GameContent.DataSave.SaveLoad;
@@ -17,7 +16,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
-    private static GamePanel instance;
+    public static GamePanel instance;
     public static final int FPS = 60;
     //Screen Setting property://
     public static final int originalTileSize = 16;
@@ -39,9 +38,9 @@ public class GamePanel extends JPanel implements Runnable
 
     // ENTITY AND OBJECT
     public MainPlayer player;
-    public BaseObject obj[][] = new BaseObject[maxMap][10];//[amount of Maps][object each map]
+    public BaseObject obj[][] = new BaseObject[maxMap][25];//[amount of Maps][object each map]
     PostProcessing postProcessing = new PostProcessing();
-    public static SaveLoad saveLoad = new SaveLoad();
+    public SaveLoad saveLoad = new SaveLoad(this);
 
     public GameState gameState;
     private final MainMenuWD mainMenuWD = new MainMenuWD();
@@ -49,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
-        this.setBackground((Color.blue));
+        this.setBackground(new Color(0x0F5A00));
         instance = this;
 
         addKeyListener(KeyHandler.getInstance());

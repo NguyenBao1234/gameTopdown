@@ -1,6 +1,8 @@
 package CoreGame.EntityComponent;
 
 import CoreGame.Data.Enums.Collision;
+import CoreGame.GamePanel;
+
 import java.awt.*;
 
 public abstract class Entity
@@ -11,14 +13,28 @@ public abstract class Entity
     protected Rectangle CollisionArea;
 
     public final Rectangle getCollisionArea(){ return CollisionArea;}
+    public void setCollisionArea(int x, int y, int width, int height)
+    {
+        CollisionArea.x = x;
+        CollisionArea.y = y;
+        CollisionArea.width = width;
+        CollisionArea.height = height;
+    }
     public final Collision getCollisionMode(){return CollisionMode;}
     public final void setCollisionMode(Collision collision){
         CollisionMode = collision;}
 
     public final void Destroy(Entity entity)
     {
-        entity.OnDestroy();
-        entity = null;
+        for (int i = 0; i < GamePanel.GetInst().obj.length; i++)
+        {
+            for (int j = 0; j < GamePanel.GetInst().obj[i].length; j++)
+            {
+                if (GamePanel.GetInst().obj[i][j] != entity) continue;
+                GamePanel.GetInst().obj[i][j] = null;
+                entity.OnDestroy();
+            }
+        }
     }
 
     /**

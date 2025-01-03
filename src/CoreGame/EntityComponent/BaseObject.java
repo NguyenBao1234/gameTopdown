@@ -2,6 +2,7 @@ package CoreGame.EntityComponent;
 
 import CoreGame.Data.Enums.Collision;
 import CoreGame.GamePanel;
+import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -45,7 +46,28 @@ public abstract class BaseObject extends Entity
     public BaseObject()
     {
         setCollisionMode(Collision.Overlap);
-        CollisionArea = new Rectangle(0,0,48,48);
+        CollisionArea = new Rectangle(0,0,GamePanel.tileSize,GamePanel.tileSize);
+    }
+
+    public BaseObject(String DefaultImgPath)
+    {
+        Sprite = ImageUtility.LoadImage(DefaultImgPath);
+        if(Sprite == null) return;
+        SpriteRenderSizeX = Sprite.getWidth() * GamePanel.scale;
+        SpriteRenderSizeY = Sprite.getHeight() * GamePanel.scale;
+        CollisionArea = new Rectangle(0,0,SpriteRenderSizeX,SpriteRenderSizeY);
+        CollisionMode = Collision.Block;
+    }
+
+    public BaseObject(String FlipBookPath, int FPSPerImage)
+    {
+        flipBook = ImageUtility.makeFlipBook(FlipBookPath);
+        fpsPerImage = FPSPerImage;
+        if(flipBook == null||flipBook.length<1) return;
+        SpriteRenderSizeX = flipBook[0].getWidth() * GamePanel.scale;
+        SpriteRenderSizeY = flipBook[0].getHeight() * GamePanel.scale;
+        CollisionArea = new Rectangle(-SpriteRenderSizeX/2,-SpriteRenderSizeY/2,SpriteRenderSizeX,SpriteRenderSizeY);
+        CollisionMode = Collision.Block;
     }
 
     public void Render(Graphics2D g2)
