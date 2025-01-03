@@ -1,6 +1,7 @@
 package CoreGame;
 
 import GameContent.EventTriggerBox.MapPortal;
+import GameContent.NPC.Enemy.Monster1;
 import GameContent.NPC.HangingNPC;
 import GameContent.NPC.NonThreatening.Morph_Idle;
 import GameContent.Object.ChestObj;
@@ -39,6 +40,10 @@ public class WorldManager
         GamePanel.GetInst().obj[0][5] = new Morph_Idle();
         GamePanel.GetInst().obj[0][5].worldX = 3 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][5].worldY = 3 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][6] = new Monster1();
+        GamePanel.GetInst().obj[0][6].worldX = 4 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][6].worldY = 5 * GamePanel.tileSize;
 
 
     }

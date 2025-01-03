@@ -5,10 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long">
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/attack/mushroom10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/attack/mushroom11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/attack/mushroom12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/attack/mushroom9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/damaged/mushroom13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/damaged/mushroom14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/damaged/mushroom15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/damaged/mushroom16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/damaged/mushroom17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/death/mushroom18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/death/mushroom19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/death/mushroom20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/death/mushroom21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Mushroom/idle/mushroom8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameContent/NPC/Enemy/Monster1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameContent/NotifyInstances/TraceDamageNotify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/NotifyInstances/TraceDamageNotify.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,23 +60,23 @@
     &quot;assignee&quot;: &quot;NguyenBao1234&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown.git&quot;,
-    &quot;accountId&quot;: &quot;15fd9497-c104-4ab4-ab72-4a895a176465&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/NguyenBao1234/gameTopdown",
+    "accountId": "5bcfadae-ee6f-4a2c-9fb1-e6868b8ef68a"
   },
-  &quot;recentNewPullRequestHead&quot;: {
-    &quot;server&quot;: {
-      &quot;useHttp&quot;: false,
-      &quot;host&quot;: &quot;github.com&quot;,
-      &quot;port&quot;: null,
-      &quot;suffix&quot;: null
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
     },
-    &quot;owner&quot;: &quot;NguyenBao1234&quot;,
-    &quot;repository&quot;: &quot;gameTopdown&quot;
+    "owner": "NguyenBao1234",
+    "repository": "gameTopdown"
   },
-  &quot;highlightDiffLinesInEditor&quot;: true
-}</component>
+  "highlightDiffLinesInEditor": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -64,22 +86,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ImageGridSplitter.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "workbranch",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/linh/dai hoc/cong nghe Java/IdeaProjects/gameTopdown/Resource/Mushroom",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "D:/ProjectSchool/OnClass/gameTopdown/src/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\linh\dai hoc\cong nghe Java\IdeaProjects\gameTopdown\Resource\Mushroom" />
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
