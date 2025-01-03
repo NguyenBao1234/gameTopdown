@@ -55,6 +55,12 @@ public class Sound
         if (clip == null || !clip.isRunning()) return;
         clip.stop();
     }
+    public void Stop(boolean bClear)
+    {
+        if (clip == null || !clip.isRunning()) return;
+        clip.stop();
+        if(bClear) clip.setFramePosition(0);
+    }
 }
 
 

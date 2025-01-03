@@ -1,6 +1,6 @@
 package GameContent.NPC;
 
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -26,10 +26,10 @@ public class HangingNPC extends BaseCharacterPendOnPlayer
     private void SetupAnimations()
     {
         flipBookArr = new BufferedImage[4][];
-        flipBookArr[0] = ImageLoader.makeFlipBook("/Slime/Slime1/Back/Walk");
-        flipBookArr[1] = ImageLoader.makeFlipBook("/Slime/Slime1/Front/Walk");
-        flipBookArr[2] = ImageLoader.makeFlipBook("/Slime/Slime1/Left/Walk");
-        flipBookArr[3] = ImageLoader.makeFlipBook("/Slime/Slime1/Right/Walk");
+        flipBookArr[0] = ImageUtility.makeFlipBook("/Slime/Slime1/Back/Walk");
+        flipBookArr[1] = ImageUtility.makeFlipBook("/Slime/Slime1/Front/Walk");
+        flipBookArr[2] = ImageUtility.makeFlipBook("/Slime/Slime1/Left/Walk");
+        flipBookArr[3] = ImageUtility.makeFlipBook("/Slime/Slime1/Right/Walk");
     }
 
     void SimulateMoving()

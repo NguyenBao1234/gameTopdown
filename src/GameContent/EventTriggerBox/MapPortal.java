@@ -2,20 +2,20 @@ package GameContent.EventTriggerBox;
 
 import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
-import GameContent.Object.ObjectNeedKeyItem;
 import CoreGame.PlayerComponent.Player;
-import HelpDevGameTool.ImageLoader;
+import GameContent.Object.MasterObject.ObjectPendOnPlayer;
+import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 
-public class MapPortal extends ObjectNeedKeyItem
+public class MapPortal extends ObjectPendOnPlayer
 {
     private int TargetMapIndex;
     private Point StartLocation = new Point();
 
     public MapPortal(int IndexTargetMap, int StartLocationX, int StarLocationY)
     {
-        Sprite = ImageLoader.LoadImage("/Objects/hint_tile.png");
+        Sprite = ImageUtility.LoadImage("/Objects/hint_tile.png");
         TargetMapIndex = IndexTargetMap;
         StartLocation.x = StartLocationX;
         StartLocation.y = StarLocationY;
@@ -23,7 +23,7 @@ public class MapPortal extends ObjectNeedKeyItem
 
     public MapPortal(int IndexTargetMap, Point StartLocation)
     {
-        Sprite = ImageLoader.LoadImage("/Objects/hint_tile.png");
+        Sprite = ImageUtility.LoadImage("/Objects/hint_tile.png");
         TargetMapIndex = IndexTargetMap;
         this.StartLocation = StartLocation;
     }

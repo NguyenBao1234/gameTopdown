@@ -1,11 +1,11 @@
 package GameContent.NPC.Enemy;
 
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 public class TestEnemy extends Enemy
 {
     public TestEnemy()
     {
-        Sprite = ImageLoader.LoadImage("/Objects/blueheart.png");
+        Sprite = ImageUtility.LoadImage("/Objects/blueheart.png");
     }
 }

@@ -1,5 +1,7 @@
 package CoreGame;
 
+import HelpDevGameTool.ImageUtility;
+
 import javax.swing.*;
 
 public class Main
@@ -7,14 +9,15 @@ public class Main
     public static void main (String[] args)
     {
         JFrame window = new JFrame();
-        window.setTitle("Game adventure 2D");
+        window.setTitle("Abyss Walker");
 
         GamePanel gamePanel = GamePanel.GetInst();
         gamePanel.setupGame();
         gamePanel.startGameThread();
+        
         window.add(gamePanel);
         window.pack();
-
+        window.setIconImage(ImageUtility.LoadImage("/game_icon.png"));
         window.setVisible(true);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
