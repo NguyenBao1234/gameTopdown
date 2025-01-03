@@ -9,7 +9,7 @@ import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.PlayerComponent.Player;
-import CoreGame.SoundComponent.SoundManager;
+import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
 import GameContent.NotifyInstances.TraceDamageNotify;
 import GameContent.Object.MasterObject.InteractInterface;
@@ -212,20 +212,21 @@ public class MainPlayer extends Player
         if (GamePanel.GetInst().gameState == GameState.Run)
         {
             GamePanel.GetInst().gameState = GameState.Pause;
-            SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
+            SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
             HUD.AddWidget(pauseWD);
         }
         else if (GamePanel.GetInst().gameState == GameState.Pause)
         {
             GamePanel.GetInst().gameState = GameState.Run;
             HUD.RemoveWidget(pauseWD);
-            SoundManager.playSound(1,false,"/Sound/SFX/coin.wav");
+            SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
         }
     }
 
     private void Attack()
     {
         if(animMontage != null) return;
+        SoundUtility.playSound(1,false,"/Sound/SFX/SwordWhoose.wav");
         switch (GetCurrentDirection())
         {
             case up :

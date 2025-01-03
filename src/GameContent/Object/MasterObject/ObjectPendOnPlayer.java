@@ -7,7 +7,7 @@ import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 
-public abstract class ObjectPendOnPlayer extends BaseObject
+public class ObjectPendOnPlayer extends BaseObject
 {
     public ObjectPendOnPlayer()
     {
@@ -16,10 +16,11 @@ public abstract class ObjectPendOnPlayer extends BaseObject
     }
     public ObjectPendOnPlayer(String DefaultImgPath)
     {
-        Sprite = ImageUtility.LoadImage(DefaultImgPath);
-        if(Sprite == null) return;
-        SpriteRenderSizeX = Sprite.getWidth() * GamePanel.scale;
-        SpriteRenderSizeY = Sprite.getHeight() * GamePanel.scale;
+        super(DefaultImgPath);
+    }
+    public ObjectPendOnPlayer(String FlipBookPath, int FPSPerImage)
+    {
+        super(FlipBookPath,FPSPerImage);
     }
     @Override
     public void Render(Graphics2D g2)

@@ -4,7 +4,7 @@ import CoreGame.Data.Enums.GameState;
 import CoreGame.GamePanel;
 import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.SoundComponent.Sound;
-import CoreGame.SoundComponent.SoundManager;
+import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
 import HelpDevGameTool.ImageUtility;
 
@@ -18,7 +18,7 @@ public class MainMenuWD extends OptionalWidget
     private Sound BGMusic;
     public MainMenuWD()
     {
-        BGMusic = SoundManager.SpawnSound(1,true,"/Sound/Music/The Otherside.wav");
+        BGMusic = SoundUtility.SpawnSound(1,true,"/Sound/Music/The Otherside.wav");
         SetupInputComponent();
         SetMaxOption(3,0);
         // Load font tùy chỉnh

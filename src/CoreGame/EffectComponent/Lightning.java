@@ -26,12 +26,12 @@ public class Lightning {
                 new Color(0,0,0,0.5f),
                 new Color(0,0,0,0.59f),
                 new Color(0,0,0,0.67f),
-                new Color(0,0,0,0.74f),
-                new Color(0,0,0,0.80f),
-                new Color(0,0,0,0.85f),
-                new Color(0,0,0,0.89f),
-                new Color(0,0,0,0.92f),
-                new Color(0,0,0,0.94f)
+                new Color(0,0,0,0.72f),
+                new Color(0,0,0,0.76f),
+                new Color(0,0,0,0.79f),
+                new Color(0,0,0,0.81f),
+                new Color(0,0,0,0.82f),
+                new Color(0,0,0,0.825f)
             };
         float fraction[] = { 0f, 0.35f, 0.5f, 0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f,0.95f, 1f };
 

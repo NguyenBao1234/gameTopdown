@@ -32,17 +32,23 @@ public class ImageUtility {
         URL urlResFolder = ImageUtility.class.getResource(folderPath);
         File folder = null;
         try {
-            assert urlResFolder != null;
+            if (urlResFolder == null) return new BufferedImage[0];
             folder = new File(urlResFolder.toURI());
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            System.err.println("invalid for URL" + e.getMessage());
         }
 
-        if (!folder.isDirectory()) throw new IllegalArgumentException("Đường dẫn không phải là một thư mục! ");
+        if (!folder.isDirectory()) {
+            Logger.logError("Path is not Folder", null);
+            return null;
+        }
 
         // Lấy danh sách tất cả các file trong thư mục
         File[] files = folder.listFiles();
-        if (files == null) throw new IllegalArgumentException("Không thể đọc thư mục hoặc thư mục trống!");
+        if (files == null) {
+            Logger.logError("Empty Folder", null);
+            return new BufferedImage[0];
+        }
 
         ArrayList<BufferedImage> imageList = new ArrayList<>();
 
@@ -52,7 +58,7 @@ public class ImageUtility {
                 BufferedImage image = ImageIO.read(file);
                 if (image != null) imageList.add(image);
             } catch (IOException e) {
-                System.err.println("Không thể đọc ảnh: " + file.getName());
+                System.err.println("Can't read file: " + file.getName());
             }
         }
 
