@@ -1,7 +1,7 @@
 package CoreGame.MapComponent;
 
 import CoreGame.GamePanel;
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
