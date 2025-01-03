@@ -16,7 +16,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
-    private static GamePanel instance;
+    public static GamePanel instance;
     public static final int FPS = 60;
     //Screen Setting property://
     public static final int originalTileSize = 16;
@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable
     public MainPlayer player;
     public BaseObject obj[][] = new BaseObject[maxMap][25];//[amount of Maps][object each map]
     PostProcessing postProcessing = new PostProcessing();
-    public static SaveLoad saveLoad = new SaveLoad();
+    public SaveLoad saveLoad = new SaveLoad(this);
 
     public GameState gameState;
     private final MainMenuWD mainMenuWD = new MainMenuWD();

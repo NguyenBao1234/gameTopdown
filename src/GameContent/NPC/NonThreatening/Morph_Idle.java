@@ -44,12 +44,13 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             if(interactCount == 3) DialogueWD = new NarrativeMessageWD("(0_0)","Dien a",
                     "Nguoi co bi dien khong",
                     "Ta mac ke nha nguoi ");
-            if(interactCount >= 4)  {
+            if(interactCount == 4)  {
                 DialogueWD = new NarrativeMessageWD("game save!");
                 try {
-                    GamePanel.saveLoad.save();
+                    GamePanel.instance.saveLoad.save();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
+
                 }
             }
             //if(interactCount > 4) return;

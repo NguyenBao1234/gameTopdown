@@ -25,7 +25,7 @@ public class MainPlayer extends Player
     public float speedFactor = 1;
     private final PauseWD pauseWD = new PauseWD();
     private float DamageWeapon = 4;
-    public float health = 100;
+    private float health = 100;
 
     private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
     private final AnimMontage AttackMontage = new AnimMontage();

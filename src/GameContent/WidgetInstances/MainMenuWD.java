@@ -100,7 +100,9 @@ public class MainMenuWD extends OptionalWidget
         }
         if(SelectingRowOption == 1) {
             try {
-                GamePanel.saveLoad.load();
+                GamePanel.instance.saveLoad.load();
+                GamePanel.GetInst().gameState = GameState.Run;
+                HUD.RemoveWidget(this);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
