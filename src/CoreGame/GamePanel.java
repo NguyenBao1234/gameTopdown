@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable
     public MainPlayer player;
     public BaseObject obj[][] = new BaseObject[maxMap][25];//[amount of Maps][object each map]
     PostProcessing postProcessing = new PostProcessing();
-    public SaveLoad saveLoad = new SaveLoad(this);
+    public SaveLoad saveLoad = new SaveLoad();
 
     public GameState gameState;
     private final MainMenuWD mainMenuWD = new MainMenuWD();
