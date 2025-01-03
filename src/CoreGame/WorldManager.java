@@ -4,10 +4,10 @@ import GameContent.EventTriggerBox.MapPortal;
 import GameContent.NPC.Enemy.Monster1;
 import GameContent.NPC.HangingNPC;
 import GameContent.NPC.NonThreatening.Morph_Idle;
-import GameContent.Object.ChestObj;
 import GameContent.Object.DoorObj;
 import CoreGame.EntityComponent.BaseObject;
-import GameContent.Object.KeyItemObject;
+import GameContent.Object.MasterObject.BreakableObject;
+import GameContent.Object.MasterObject.KeyItemObject;
 
 public class WorldManager
 {
@@ -53,8 +53,8 @@ public class WorldManager
         GamePanel.GetInst().obj[0][7].worldY = 27 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][8] = new Monster1();
-        GamePanel.GetInst().obj[0][8].worldX = 4 * GamePanel.tileSize;
-        GamePanel.GetInst().obj[0][8].worldY = 5 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][8].worldX = 23 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][8].worldY = 15* GamePanel.tileSize;
 
     }
     public static void SimulateObject()

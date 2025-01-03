@@ -7,13 +7,14 @@ import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
 import GameContent.MainPlayer;
 import GameContent.NotifyInstances.TraceDamageNotify;
-import HelpDevGameTool.ImageLoader;
+import HelpDevGameTool.ImageUtility;
 
 import java.awt.image.BufferedImage;
 
 public class Monster1 extends Enemy {
     private TraceDamageNotify damageNotify= new TraceDamageNotify(0, this, 2, 2);;
     private AnimMontage AttackMontage= new AnimMontage();;
+    private BaseObject object;
     public Monster1()
     {
         flipBookArr = new BufferedImage[4][];
@@ -32,19 +33,15 @@ public class Monster1 extends Enemy {
     {
         super.Tick(delta);
         for (BaseObject object : CollisionChecker.GetOverlappedObjectsInBox(worldX, worldY, GamePanel.tileSize, GamePanel.tileSize)) {
-            if (object instanceof MainPlayer) {
-                MainPlayer player = (MainPlayer) object;
-                player.setHealth(player.getHealth() - getDamage());
-                attackPlayer();
-                System.out.println("Attacked player");
-                break; // Attack the first player found
-            }
+            object.ApplyPointDamage(this, getDamage(), worldX, worldY, object.worldX, object.worldY); // Apply damage to the object directly
+            attackPlayer();
+            break;
         }
     }
 
     void SetupAnimations()
     {
-        flipBookArr[0] = ImageLoader.makeFlipBook("/Mushroom/idle");
+        flipBookArr[0] = ImageUtility.makeFlipBook("/Mushroom/idle");
     }
 
     public void attack()
@@ -54,7 +51,7 @@ public class Monster1 extends Enemy {
         }
 
         damageNotify.setFrameStart(0);
-        AttackMontage.setFlipBook(ImageLoader.makeFlipBook("/Mushroom/attack"));
+        AttackMontage.setFlipBook(ImageUtility.makeFlipBook("/Mushroom/attack"));
 
         PlayAnimMontage(AttackMontage, 4); // Play animation with a frame duration of 4
     }
@@ -76,12 +73,10 @@ public class Monster1 extends Enemy {
         }
 
         private void ReceiveDamageAnim() {
-            // Implement damage animation logic here
 
         }
 
         private void DeathAnim() {
-            // Implement death animation logic here
 
         }
     }
