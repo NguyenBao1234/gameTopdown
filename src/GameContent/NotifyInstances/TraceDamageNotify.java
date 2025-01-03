@@ -8,6 +8,9 @@ import CoreGame.GamePanel;
 import GameContent.MainPlayer;
 import GameContent.NPC.Enemy.Enemy;
 
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 
 public class TraceDamageNotify extends AnimNotify
 {

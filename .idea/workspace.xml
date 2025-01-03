@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long">
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="temp Enemy1 - need fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/BaseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/BaseObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameContent/NPC/Enemy/Monster1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/NPC/Enemy/Monster1.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="gsFindBug" />
+        <entry key="$PROJECT_DIR$" value="workbranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,8 +40,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown.git&quot;,
-    &quot;accountId&quot;: &quot;15fd9497-c104-4ab4-ab72-4a895a176465&quot;
+    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown&quot;,
+    &quot;accountId&quot;: &quot;5bcfadae-ee6f-4a2c-9fb1-e6868b8ef68a&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -64,22 +64,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ImageGridSplitter.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "workbranchEnemy",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/linh/dai hoc/cong nghe Java/IdeaProjects/gameTopdown/Resource/Mushroom",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "D:/ProjectSchool/OnClass/gameTopdown/src/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\linh\dai hoc\cong nghe Java\IdeaProjects\gameTopdown\Resource\Mushroom" />
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
