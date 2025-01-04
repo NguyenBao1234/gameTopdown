@@ -13,7 +13,7 @@ public class SaveLoad {
     public void save() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Resource/SaveLoad.dat"));
         DataStorage dataStorage = new DataStorage();
-        dataStorage.health = GamePanel.player.getHealth();
+        dataStorage.health = GamePanel.player.getCurrentHealth();
         dataStorage.map = GamePanel.currentMapIndex;
 
         oos.writeObject(dataStorage);

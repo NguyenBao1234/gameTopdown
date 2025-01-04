@@ -25,7 +25,8 @@ public class MainPlayer extends Player
     public float speedFactor = 1;
     private final PauseWD pauseWD = new PauseWD();
     private float DamageWeapon = 4;
-    public float health = 100;
+    public float maxhealth = 100;
+    public float currenthealth = 100;
 
     private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
     private final AnimMontage AttackMontage = new AnimMontage();
@@ -62,6 +63,7 @@ public class MainPlayer extends Player
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
         ControllerComp.BindAction(KeyEvent.VK_J,true,this::Attack);
         ControllerComp.BindAction(KeyEvent.VK_SHIFT,true,this::Dash);
+        ControllerComp.BindAction(KeyEvent.VK_K,true,this::Dame);
     }
 
     @Override
@@ -148,6 +150,9 @@ public class MainPlayer extends Player
     }
 
     /**Choose animation*/
+    void Dame(){
+        currenthealth -= 10;
+    }
     void handelAnimation()
     {
         switch (GetCurrentDirection())
@@ -267,8 +272,8 @@ public class MainPlayer extends Player
 
     @Override
     protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
-        health -= Damage;
-        if(health > 0) ReceiveDamageAnim();
+        currenthealth -= Damage;
+        if(currenthealth > 0) ReceiveDamageAnim();
         else DeathAnim();
     }
 
@@ -310,11 +315,16 @@ public class MainPlayer extends Player
         DamageWeapon = damageWeapon;
     }
 
-    public float getHealth() {
-        return health;
-    }
+
 
     public void setHealth(float health) {
-        this.health = health;
+        this.currenthealth = health;
+    }
+    public float getMaxHealth() {
+        return maxhealth;
+    }
+
+    public float getCurrentHealth() {
+        return currenthealth;
     }
 }

@@ -1,0 +1,177 @@
+Index: src/HelpDevGameTool/ImageGridSplitter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package HelpDevGameTool;\r\n\r\nimport java.awt.image.BufferedImage;\r\nimport java.io.File;\r\n\r\nimport javax.imageio.ImageIO;\r\n\r\n\r\npublic class ImageGridSplitter {\r\n\r\n    public static String getBaseName(String filePath) {\r\n        int dotIndex = filePath.lastIndexOf('.');\r\n        int slashIndex = Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\\\'));\r\n        if (dotIndex > slashIndex) {\r\n            return filePath.substring(slashIndex + 1, dotIndex);\r\n        }\r\n        return null; // Invalid path or no base name found\r\n    }\r\n\r\n\r\n    private static String getFileExtension(String filePath) {\r\n        int dotIndex = filePath.lastIndexOf('.');\r\n        if (dotIndex > 0 && dotIndex < filePath.length() - 1) {\r\n            return filePath.substring(dotIndex + 1).toLowerCase();\r\n        }\r\n        return null; // No extension found or invalid format\r\n    }\r\n\r\n\r\n    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir, boolean bHorizontal, boolean bOneIndex, int numDigit, int StartIndex)\r\n    {\r\n        try\r\n        {\r\n            String baseName = getBaseName(ImagePath);\r\n            String fileExtension = getFileExtension(ImagePath);\r\n            if (fileExtension == null || baseName == null) {\r\n                System.out.println(\"Unsupported file type. Please use a valid image format.\");\r\n                return;\r\n            }\r\n           File outputDirectory = new File(OutputDir);\r\n            // Check if output directory exists, if not, create it\r\n            if (!outputDirectory.exists()) {\r\n                if (outputDirectory.mkdirs()) {\r\n                    System.out.println(\"Created output directory: \" + OutputDir);\r\n                } else {\r\n                    System.out.println(\"Failed to create output directory: \" + OutputDir);\r\n                    return;\r\n                }\r\n            }\r\n            // Load the image\r\n            System.out.println(\"Loading\");\r\n            BufferedImage OriginalImageBf = ImageIO.read(new File(ImagePath));\r\n            System.out.println(\"Loaded\");\r\n            int gridSizeWidth = sizeGridX;\r\n            int gridSizeHeight = sizeGridY;\r\n\r\n            int cols =  OriginalImageBf.getWidth() / gridSizeWidth;\r\n            int rows =  OriginalImageBf.getHeight() / gridSizeHeight;\r\n\r\n            // Loop through each grid tile\r\n            int i = StartIndex;\r\n            for (int y = 0; y < rows; y++) {\r\n                for (int x = 0; x < cols; x++) {\r\n                    // Crop the tile\r\n                    BufferedImage extractedImage = OriginalImageBf.getSubimage(x * gridSizeWidth,y * gridSizeHeight,gridSizeWidth,gridSizeHeight);\r\n                    // Optionally save each tile as a separate image file\r\n                    String FinalIndex;\r\n                    String fileName;\r\n                    if(bOneIndex)\r\n                    {\r\n                        FinalIndex = (numDigit > 1)?FormatDigit(i,numDigit):String.valueOf(i) ;\r\n                        i++;\r\n                    }\r\n                    else FinalIndex = bHorizontal ? (y + \"_\" + x ): ( x + \"_\" + y );\r\n                    fileName = baseName + \"_\" + FinalIndex + \".\" + fileExtension;\r\n                    File outputfile = new File(OutputDir,fileName);\r\n                    ImageIO.write(extractedImage, fileExtension, outputfile);\r\n                }\r\n            }\r\n            System.out.println(\"image extracted successfully.\");\r\n        }\r\n        catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    private static String FormatDigit(int value, int numDigits)\r\n    {\r\n        if (numDigits <= 0) throw new IllegalArgumentException(\"So chu so can lon hon 0\");\r\n\r\n        String formatString = \"%0\" + numDigits + \"d\";\r\n        String formattedValue = String.format(formatString, value);\r\n\r\n        if (formattedValue.length() > numDigits) return formattedValue.substring(formattedValue.length() - numDigits);\r\n\r\n        return formattedValue;\r\n    }\r\n\r\n    public static void main(String[] args)\r\n    {\r\n        SplitImage(48,80,\"AssetSource/AnimatedObject/TempleMini/TempleMini3.png\",\"Resource/AnimatedObjects/Temple/TempleMini3\", true, true,1,0);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/HelpDevGameTool/ImageGridSplitter.java b/src/HelpDevGameTool/ImageGridSplitter.java
+--- a/src/HelpDevGameTool/ImageGridSplitter.java	(revision 16203216c91cb7b445f7971f680a9bd375507784)
++++ b/src/HelpDevGameTool/ImageGridSplitter.java	(date 1735820168280)
+@@ -98,6 +98,6 @@
+ 
+     public static void main(String[] args)
+     {
+-        SplitImage(48,80,"AssetSource/AnimatedObject/TempleMini/TempleMini3.png","Resource/AnimatedObjects/Temple/TempleMini3", true, true,1,0);
++        SplitImage(100,128,"Resource/AnimatedObjects/tree1_2.png","Resource/AnimatedObjects/Tree/tree1_3", true, true,1,0);
+     }
+ }
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_.xml	(revision 16203216c91cb7b445f7971f680a9bd375507784)
++++ /dev/null	(revision 16203216c91cb7b445f7971f680a9bd375507784)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM_[Changes]" date="1735469702312" recycled="false" toDelete="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 12/29/2024 5:55 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml	(revision 16203216c91cb7b445f7971f680a9bd375507784)
++++ /dev/null	(revision 16203216c91cb7b445f7971f680a9bd375507784)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_rebase_[Changes]" date="1734981461276" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before rebase [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_1.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_1.xml	(revision 16203216c91cb7b445f7971f680a9bd375507784)
++++ /dev/null	(revision 16203216c91cb7b445f7971f680a9bd375507784)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM_[Changes]1" date="1735469710516" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 12/29/2024 5:55 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"072a3bad-9f41-43ec-a131-48b428e83134\" name=\"Changes\" comment=\"- Remove Singleton because no need instance properties and the old code changed to singleton will be too long\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/GameContent/MainPlayer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/GameContent/MainPlayer.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"gsFindBug\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;NguyenBao1234&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown.git&quot;,\r\n    &quot;accountId&quot;: &quot;15fd9497-c104-4ab4-ab72-4a895a176465&quot;\r\n  },\r\n  &quot;recentNewPullRequestHead&quot;: {\r\n    &quot;server&quot;: {\r\n      &quot;useHttp&quot;: false,\r\n      &quot;host&quot;: &quot;github.com&quot;,\r\n      &quot;port&quot;: null,\r\n      &quot;suffix&quot;: null\r\n    },\r\n    &quot;owner&quot;: &quot;NguyenBao1234&quot;,\r\n    &quot;repository&quot;: &quot;gameTopdown&quot;\r\n  },\r\n  &quot;highlightDiffLinesInEditor&quot;: true\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 7\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2onhdmAVjICdR1O0R6sgpyyG1mV\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\ProjectSchool\\OnClass\\gameTopdown\\resources\\Player\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\linh\\dai hoc\\cong nghe Java\\IdeaProjects\\gameTopdown\\src\\Resource\\Sound\" />\r\n      <recent name=\"D:\\ProjectSchool\\OnClass\\gameTopdown\\resources\\Player\\ImageSet\" />\r\n      <recent name=\"D:\\ProjectSchool\\OnClass\\gameTopdown\\resources\\Player\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"CoreGame.BinderComponent\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"072a3bad-9f41-43ec-a131-48b428e83134\" name=\"Changes\" comment=\"\" />\r\n      <created>1731511338608</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1731511338608</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"- add scripts\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1731572824216</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1731572824216</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1731860495046</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1731860495046</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"- add more image for animations\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1731861370106</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1731861370106</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1731987855015</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1731987855015</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"- Temporary solution for normalizing character's diagonal movement speed\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732203691522</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732203691522</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"- add collision property &amp; function for handle location by collision\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732346109247</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732346109247</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"- clean code;&#10;- reactive optimize map algorithm ;\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732363628248</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732363628248</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"- add CollisionChecker but it is not stable\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732382215026</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732382215026</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"- new collision by change CollisionChecker algorithm\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732424384225</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732424384225</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"- clean CollisionChecker\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732426309968</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732426309968</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"- pull Hieu branch for others use\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732635035472</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732635035472</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"- Optimize code:&#10;+) access scope&#10;+) SuperObject(now is BaseObject) inherit from Entity&#10;+) clean code AssetSetter\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732715321715</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732715321715</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"- Optimize code:&#10;+) access scope&#10;+) SuperObject(now is BaseObject) inherit from Entity&#10;+) clean code AssetSetter\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732715352511</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732715352511</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"- Fix null collisionArea\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1732724944157</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1732724944157</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"- Add Binder Feature&#10;+ add overloading Play function sound\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733064475226</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733064475226</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"- Procedural Interact: &#10;+)3 master Object&#10;+)Interact Interface&#10;The actual interaction logic is in the class object itself, the dev needs to define the implementation in the interact() function.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733585309984</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733585309984</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"- Procedural Interact: &#10;+)3 master Object&#10;+)Interact Interface&#10;The actual interaction logic is in the class object itself, the dev needs to define the implementation in the interact() function.&#10;- Polish Hieu's scripts for make sense better\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733585514923</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733585514923</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"- improve draw/load Map algorithm more flexible&#10;- design CollisionChecker into static&#10;- Rename some variables\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733927946073</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733927946073</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"- add simulate overlapping feature for base object&#10;- rename and sort file to folder\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1733995259004</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1733995259004</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"- Remove Singleton because no need instance properties\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1735228782536</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1735228782536</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"- Remove Singleton because no need instance properties and the old code changed to singleton will be too long\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1735229030153</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1735229030153</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"22\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"OPEN_GENERIC_TABS\">\r\n      <map>\r\n        <entry key=\"00ff3bdb-3691-497e-8eb3-b7d7f8c9f6ac\" value=\"TOOL_WINDOW\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"00ff3bdb-3691-497e-8eb3-b7d7f8c9f6ac\">\r\n          <value>\r\n            <State>\r\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\r\n                <map>\r\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"Sound\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"- add scripts\" />\r\n    <MESSAGE value=\"- KeyHandler: 255 Keys ( almost full key )&#10;- Entity has state for direction, it always holds the Last state when stop move &#10;- Animation Feature in Entity&#10;- Multi animation BaseCharacter : render, flipBook fps per frame,&#10;- HelpDevGameTool: ImageGridSplitter; ImageLoader (load image in folder to make flipBook)\" />\r\n    <MESSAGE value=\"- add more image for animations\" />\r\n    <MESSAGE value=\"add basic Sound packages + Sound class &#10;add setupGame() in GamePanel.java and call in Main.java\" />\r\n    <MESSAGE value=\"- Temporary solution for normalizing character's diagonal movement speed\" />\r\n    <MESSAGE value=\"- add collision property &amp; function for handle location by collision\" />\r\n    <MESSAGE value=\"- clean code;&#10;- reactive optimize map algorithm ;\" />\r\n    <MESSAGE value=\"- add CollisionChecker but it is not stable\" />\r\n    <MESSAGE value=\"- new collision by change CollisionChecker algorithm\" />\r\n    <MESSAGE value=\"- clean CollisionChecker\" />\r\n    <MESSAGE value=\"- pull Hieu branch for others use\" />\r\n    <MESSAGE value=\"- Optimize code:&#10;+) access scope&#10;+) SuperObject(now is BaseObject) inherit from Entity&#10;+) clean code AssetSetter\" />\r\n    <MESSAGE value=\"- Fix null collisionArea\" />\r\n    <MESSAGE value=\"- Add Binder Feature&#10;+ add overloading Play function sound\" />\r\n    <MESSAGE value=\"- Procedural Interact: &#10;+)3 master Object&#10;+)Interact Interface&#10;The actual interaction logic is in the class object itself, the dev needs to define the implementation in the interact() function.\" />\r\n    <MESSAGE value=\"- Procedural Interact: &#10;+)3 master Object&#10;+)Interact Interface&#10;The actual interaction logic is in the class object itself, the dev needs to define the implementation in the interact() function.&#10;- Polish Hieu's scripts for make sense better\" />\r\n    <MESSAGE value=\"- improve draw/load Map algorithm more flexible&#10;- design CollisionChecker into static&#10;- Rename some variables\" />\r\n    <MESSAGE value=\"- add simulate overlapping feature for base object&#10;- rename and sort file to folder\" />\r\n    <MESSAGE value=\"- Remove Singleton because no need instance properties\" />\r\n    <MESSAGE value=\"- Remove Singleton because no need instance properties and the old code changed to singleton will be too long\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"- Remove Singleton because no need instance properties and the old code changed to singleton will be too long\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"javax.imageio.IIOException\" package=\"javax.imageio\" />\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </breakpoint>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.util.NoSuchElementException\" package=\"java.util\" />\r\n          <option name=\"timeStamp\" value=\"4\" />\r\n        </breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 16203216c91cb7b445f7971f680a9bd375507784)
++++ b/.idea/workspace.xml	(date 1735816586164)
+@@ -4,11 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long">
++    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="- add simulate overlapping feature for base object&#10;- rename and sort file to folder">
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_29_2024_5_55_PM__Changes_1.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/CollisionComponent/CollisionChecker.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/Entity.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HelpDevGameTool/ImageGridSplitter.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -27,7 +28,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="gsFindBug" />
++        <entry key="$PROJECT_DIR$" value="Híu" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -38,23 +39,23 @@
+     &quot;assignee&quot;: &quot;NguyenBao1234&quot;
+   }
+ }</component>
+-  <component name="GithubPullRequestsUISettings">{
+-  &quot;selectedUrlAndAccountId&quot;: {
+-    &quot;url&quot;: &quot;https://github.com/NguyenBao1234/gameTopdown.git&quot;,
+-    &quot;accountId&quot;: &quot;15fd9497-c104-4ab4-ab72-4a895a176465&quot;
+-  },
+-  &quot;recentNewPullRequestHead&quot;: {
+-    &quot;server&quot;: {
+-      &quot;useHttp&quot;: false,
+-      &quot;host&quot;: &quot;github.com&quot;,
+-      &quot;port&quot;: null,
+-      &quot;suffix&quot;: null
+-    },
+-    &quot;owner&quot;: &quot;NguyenBao1234&quot;,
+-    &quot;repository&quot;: &quot;gameTopdown&quot;
+-  },
+-  &quot;highlightDiffLinesInEditor&quot;: true
+-}</component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/NguyenBao1234/gameTopdown.git",
++    "accountId": "870634f9-e42c-476d-8044-b0ee83a428bb"
++  },
++  "recentNewPullRequestHead": {
++    "server": {
++      "useHttp": false,
++      "host": "github.com",
++      "port": null,
++      "suffix": null
++    },
++    "owner": "NguyenBao1234",
++    "repository": "gameTopdown"
++  },
++  "highlightDiffLinesInEditor": true
++}]]></component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 7
+ }</component>
+@@ -70,7 +71,7 @@
+     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;UI&quot;,
+     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+     &quot;last_opened_file_path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/resources/Player&quot;,
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+@@ -255,23 +256,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1733995259004</updated>
+     </task>
+-    <task id="LOCAL-00020" summary="- Remove Singleton because no need instance properties">
+-      <option name="closed" value="true" />
+-      <created>1735228782536</created>
+-      <option name="number" value="00020" />
+-      <option name="presentableId" value="LOCAL-00020" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1735228782536</updated>
+-    </task>
+-    <task id="LOCAL-00021" summary="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long">
+-      <option name="closed" value="true" />
+-      <created>1735229030153</created>
+-      <option name="number" value="00021" />
+-      <option name="presentableId" value="LOCAL-00021" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1735229030153</updated>
+-    </task>
+-    <option name="localTasksCounter" value="22" />
++    <option name="localTasksCounter" value="20" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -332,9 +317,7 @@
+     <MESSAGE value="- Procedural Interact: &#10;+)3 master Object&#10;+)Interact Interface&#10;The actual interaction logic is in the class object itself, the dev needs to define the implementation in the interact() function.&#10;- Polish Hieu's scripts for make sense better" />
+     <MESSAGE value="- improve draw/load Map algorithm more flexible&#10;- design CollisionChecker into static&#10;- Rename some variables" />
+     <MESSAGE value="- add simulate overlapping feature for base object&#10;- rename and sort file to folder" />
+-    <MESSAGE value="- Remove Singleton because no need instance properties" />
+-    <MESSAGE value="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long" />
+-    <option name="LAST_COMMIT_MESSAGE" value="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long" />
++    <option name="LAST_COMMIT_MESSAGE" value="- add simulate overlapping feature for base object&#10;- rename and sort file to folder" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
