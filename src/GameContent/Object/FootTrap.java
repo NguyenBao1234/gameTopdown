@@ -66,7 +66,10 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
 
         currentInteractions++;
         if (currentInteractions >= requiredInteractions) {
-                releasePlayer(trappedPlayer);
+            releasePlayer(trappedPlayer);
+        } else {
+            // Update the message to show progress
+            DialogueWD.SetMessages("Press E to escape (" + currentInteractions + "/" + requiredInteractions + ")");
         }
     }
 
