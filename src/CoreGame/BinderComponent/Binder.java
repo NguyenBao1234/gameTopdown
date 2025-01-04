@@ -8,6 +8,10 @@ public class Binder
     {
         assignedFunction = function;
     }
+    public void unbind(Runnable function)
+    {
+        if(assignedFunction == function) assignedFunction = null;
+    }
     public boolean execute()
     {
         if(assignedFunction != null)

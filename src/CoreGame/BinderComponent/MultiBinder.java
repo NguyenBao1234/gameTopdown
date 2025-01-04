@@ -12,6 +12,10 @@ public class MultiBinder
         runnableAssignedFunctions.add(function);
     }
 
+    public void unbind(Runnable function)
+    {
+        runnableAssignedFunctions.remove(function);
+    }
     public boolean executeAll()
     {
         if (!runnableAssignedFunctions.isEmpty())

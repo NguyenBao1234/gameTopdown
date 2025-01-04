@@ -15,15 +15,15 @@ import java.util.ArrayList;
 public class TraceDamageNotify extends AnimNotify
 {
     private final BaseCharacter Container;
-    private final int scaleX, scaleY;
+    private int scaleX, scaleY;
     int width, height;
 
-    public TraceDamageNotify(int frameStart, BaseCharacter entityContain, int ScaleX, int ScaleY)
+    public TraceDamageNotify(int frameStart, BaseCharacter entityContain, int BoxScaleX, int BoxScaleY)
     {
         super(frameStart, 0);
         Container = entityContain;
-        scaleX = ScaleX;
-        scaleY = ScaleY;
+        scaleX = BoxScaleX;
+        scaleY = BoxScaleY;
     }
 
     @Override
@@ -73,6 +73,13 @@ public class TraceDamageNotify extends AnimNotify
         height = width - height;
         width = width - height;
     }
+
+    public void SetScaleOfTraceBox(int width, int height)
+    {
+        scaleY = height;
+        scaleX = width;
+    }
+
     @Override
     public void ReceiveNotifyEnd() {
 

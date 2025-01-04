@@ -10,8 +10,9 @@ import HelpDevGameTool.ImageUtility;
 
 import java.awt.event.KeyEvent;
 
-public class Loop_NPC extends ObjectPendOnPlayer implements InteractInterface {
-    String[] sentences = {
+public class Loop_NPC extends ObjectPendOnPlayer implements InteractInterface
+{
+    private final NarrativeMessageWD DialogueWD = new NarrativeMessageWD(false,
             "Ta đã thấy...","...rất nhiều người như ngươi đã đến đây",
             "...nhưng không ai có thể sống sót",
             "Rừng này đầy rẫy những cạm bẫy và quái vật...",
@@ -20,42 +21,36 @@ public class Loop_NPC extends ObjectPendOnPlayer implements InteractInterface {
             "Đừng bao giờ tin vào những gì ngươi nhìn thấy...",
             "Ta đã từng như ngươi...","đầy tham vọng và tò mò",
             "Nhưng rồi ta nhận ra...","lối thoát...?"," Nó chưa từng tồn tại đối với ta",
-            "Ngươi có thấy những bia mộ kia không? ", "Đó là lịch sử của rừng này...",
+            "Ngươi có thấy những bia mộ kia không?", "Đó là lịch sử của rừng này...",
             "là câu chuyện về những người đã từng đến đây...","...và thất bại",
             "Cái giá phải trả rất lớn...", "Liệu ngươi có sẵn sàng tiếp tục không..?",
-            "Hỡi người bạn nhỏ của ta..."
-    };
-    int speedDefaultPlayer;
-    public int length = sentences.length;
-    public NarrativeMessageWD DialogueWD = new NarrativeMessageWD(sentences);
+            "Hỡi người bạn nhỏ của ta...");
+
     public Loop_NPC()
     {
         flipBook = ImageUtility.makeFlipBook("/Morph/Idle");
         fpsPerImage = 6;
         SpriteRenderSizeX = 17 * GamePanel.scale;
         SpriteRenderSizeY = 28 * GamePanel.scale;
-
+        KeyHandler.getInstance().BindAction(KeyEvent.VK_Q,true, this::QuitDialog);
+        DialogueWD.SetSubtitle("Q - Leave \n E - Next");
     }
 
-
     @Override
-    public void interact(){
-        if(DialogueWD.IsOnScreen()){
-            DialogueWD.SetMessages(true,sentences);
-            if(KeyHandler.isKeyPressed(KeyEvent.VK_Q)){
-                HUD.RemoveWidget(DialogueWD); // an dong thoi q vs e thi se tat thoai
-            }
-            if(!DialogueWD.IsOnScreen() ){
-                GamePanel.GetInst().player.setSpeed(speedDefaultPlayer);
-                DialogueWD.setCurrMessageIndex(0);
-            }
-
-        }
-        else {
+    public void interact()
+    {
+        if(DialogueWD.IsOnScreen()) DialogueWD.NextContent();
+        else
+        {
             HUD.AddWidget(DialogueWD);
-            speedDefaultPlayer = GamePanel.GetInst().player.getSpeed();
-            GamePanel.GetInst().player.setSpeed(0);
-
+            GamePanel.GetInst().player.SetFreeToControl(false);
         }
+    }
+
+    private void QuitDialog()
+    {
+        DialogueWD.RemoveFromHUD();
+        GamePanel.GetInst().player.SetFreeToControl(true);
+        KeyHandler.getInstance().UnbindAction(KeyEvent.VK_Q,this::QuitDialog);
     }
 }

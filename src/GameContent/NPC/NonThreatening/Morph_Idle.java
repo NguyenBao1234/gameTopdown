@@ -35,7 +35,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             if(!DialogueWD.IsOnScreen())
             {
                 interactCount ++;
-                GamePanel.GetInst().player.setSpeed(speedDefaultPlayer);
+                GamePanel.GetInst().player.SetFreeToControl(true);
             }
         }
         else
@@ -54,8 +54,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             }
             if(interactCount > 4) return;
             HUD.AddWidget(DialogueWD);
-            speedDefaultPlayer = GamePanel.GetInst().player.getSpeed();
-            GamePanel.GetInst().player.setSpeed(0);
+            GamePanel.GetInst().player.SetFreeToControl(false);
         }
     }
 }

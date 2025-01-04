@@ -26,7 +26,7 @@ public class MainPlayer extends Player
     private final PauseWD pauseWD = new PauseWD();
     private float DamageWeapon = 4;
     private float health = 100;
-
+    private boolean bFreeToControl = true;
     private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
     private final AnimMontage AttackMontage = new AnimMontage();
 
@@ -81,6 +81,7 @@ public class MainPlayer extends Player
 
     void InputAxisMove()
     {
+        if(!bFreeToControl) return;
         if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
         else speedFactor = 1;
 
@@ -225,7 +226,7 @@ public class MainPlayer extends Player
 
     private void Attack()
     {
-        if(animMontage != null) return;
+        if(animMontage != null || !bFreeToControl) return;
         SoundUtility.playSound(1,false,"/Sound/SFX/SwordWhoose.wav");
         switch (GetCurrentDirection())
         {
@@ -251,6 +252,7 @@ public class MainPlayer extends Player
 
     private void Dash()
     {
+        if(!bFreeToControl) return;
         switch (GetCurrentDirection())
         {
             case up: worldY -= 6 * Speed;
@@ -318,4 +320,7 @@ public class MainPlayer extends Player
     public void setHealth(float health) {
         this.health = health;
     }
+
+    public void SetFreeToControl(boolean bCanControl) {
+        bFreeToControl = bCanControl;}
 }

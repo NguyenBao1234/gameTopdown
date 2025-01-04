@@ -39,9 +39,9 @@ public class WorldManager
         GamePanel.GetInst().obj[0][4].worldX = 2 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][4].worldY = 3 * GamePanel.tileSize;
 
-//        GamePanel.GetInst().obj[0][5] = new Morph_Idle();
-//        GamePanel.GetInst().obj[0][5].worldX = 21 * GamePanel.tileSize;
-//        GamePanel.GetInst().obj[0][5].worldY = 18 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][5] = new Morph_Idle();
+        GamePanel.GetInst().obj[0][5].worldX = 21 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][5].worldY = 18 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][6] = new BreakableObject("/Objects/BrokenTree/FallenTree.png",
                 "/Objects/BrokenTree/FallenTreeBroken.png",20,"/Sound/SFX/wood_iron.wav", "/Sound/SFX/wood_break.wav");
@@ -66,9 +66,9 @@ public class WorldManager
         GamePanel.GetInst().obj[0][10].worldY = 18 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][10].setCollisionArea(-64*3/2,-64*3/2,64*3,84*3);
 
-        GamePanel.GetInst().obj[0][5] = new Loop_NPC();
-        GamePanel.GetInst().obj[0][5].worldX = 5 * GamePanel.tileSize;
-        GamePanel.GetInst().obj[0][5].worldY = 13 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][11] = new Loop_NPC();
+        GamePanel.GetInst().obj[0][11].worldX = 5 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][11].worldY = 13 * GamePanel.tileSize;
     }
     public static void SimulateObject()
     {
