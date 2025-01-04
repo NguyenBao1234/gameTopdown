@@ -47,7 +47,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             if(interactCount == 4)  {
                 DialogueWD.SetMessages("game save!");
                 try {
-                    GamePanel.instance.saveLoad.save();
+                    GamePanel.GetInst().saveLoad.save();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

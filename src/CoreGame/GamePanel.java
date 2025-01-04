@@ -16,7 +16,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
-    public static GamePanel instance;
+    private static GamePanel instance;
     public static final int FPS = 60;
     //Screen Setting property://
     public static final int originalTileSize = 16;
