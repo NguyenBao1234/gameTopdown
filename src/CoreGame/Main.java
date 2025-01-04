@@ -14,7 +14,8 @@ public class Main
         GamePanel gamePanel = GamePanel.GetInst();
         gamePanel.setupGame();
         gamePanel.startGameThread();
-        
+
+
         window.add(gamePanel);
         window.pack();
         window.setIconImage(ImageUtility.LoadImage("/game_icon.png"));

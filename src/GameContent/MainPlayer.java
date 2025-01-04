@@ -27,6 +27,9 @@ public class MainPlayer extends Player
     private float DamageWeapon = 4;
     private float health = 100;
     private boolean bFreeToControl = true;
+    public float health = 100;
+    private boolean isLocked = false;
+
     private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
     private final AnimMontage AttackMontage = new AnimMontage();
 
@@ -109,8 +112,13 @@ public class MainPlayer extends Player
         }
     }
 
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
+
     void handleLocationByCollision()
     {
+        if (isLocked) return;
         if(vAxisX == 0 && vAxisY == 0) return;
         int collX = worldX + CollisionArea.x;
         int collY = worldY + CollisionArea.y;
