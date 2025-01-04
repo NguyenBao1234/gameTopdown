@@ -39,8 +39,12 @@ public class NarrativeMessageWD extends Widget
     public void SetMessages(String... newContent){Messages = newContent;}
     public void SetMessages(boolean bReset, String... newContent)
     {
+        CurrMessageIndex++;
         Messages = newContent;
-        if(bReset) CurrMessageIndex = 0;
+        if(CurrMessageIndex >= Messages.length ){
+            CurrMessageIndex = 0;
+        }
+        //if(bReset) CurrMessageIndex = 0;
     }
 
 
