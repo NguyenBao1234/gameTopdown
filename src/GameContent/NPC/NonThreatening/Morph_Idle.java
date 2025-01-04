@@ -40,20 +40,19 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
         }
         else
         {
-            if(interactCount != 0) DialogueWD = new NarrativeMessageWD("...","Dung Lam phien ta");
-            if(interactCount == 3) DialogueWD = new NarrativeMessageWD("(0_0)","Dien a",
+            if(interactCount != 0) DialogueWD.SetMessages("...","Dung Lam phien ta");
+            if(interactCount == 3) DialogueWD.SetMessages("(0_0)","Dien a",
                     "Nguoi co bi dien khong",
                     "Ta mac ke nha nguoi ");
             if(interactCount == 4)  {
-                DialogueWD = new NarrativeMessageWD("game save!");
+                DialogueWD.SetMessages("game save!");
                 try {
                     GamePanel.instance.saveLoad.save();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
-
                 }
             }
-            //if(interactCount > 4) return;
+            if(interactCount > 4) return;
             HUD.AddWidget(DialogueWD);
             speedDefaultPlayer = GamePanel.GetInst().player.getSpeed();
             GamePanel.GetInst().player.setSpeed(0);

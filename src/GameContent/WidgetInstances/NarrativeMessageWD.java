@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class NarrativeMessageWD extends Widget
 {
-    private final String[] Messages;
-    private int CurrMessage = 0;
+    private String[] Messages;
+    private int CurrMessageIndex = 0;
     private final int x,y,widthBox, heightBox;
 
     public NarrativeMessageWD(String... Content)
@@ -33,23 +33,31 @@ public class NarrativeMessageWD extends Widget
 
         g2.setColor(Color.WHITE);
         if(Messages[0] == null) g2.drawString("Need add Messages to display", x + 32,y + 32);
-        else g2.drawString(Messages[CurrMessage],x + 32,y + 32 );
+        else g2.drawString(Messages[CurrMessageIndex],x + 32,y + 32 );
     }
 
-    public int getCurrMessage() {
-        return CurrMessage;
+    public void SetMessages(String... newContent){Messages = newContent;}
+    public void SetMessages(boolean bReset, String... newContent)
+    {
+        Messages = newContent;
+        if(bReset) CurrMessageIndex = 0;
     }
 
-    public void setCurrMessage(int currMessage) {
-        CurrMessage = currMessage;
+
+    public int getCurrMessageIndex() {
+        return CurrMessageIndex;
+    }
+
+    public void setCurrMessageIndex(int currMessageIndex) {
+        CurrMessageIndex = currMessageIndex;
     }
 
     public void NextContent()
     {
-        CurrMessage ++;
-        if (CurrMessage >= Messages.length)
+        CurrMessageIndex++;
+        if (CurrMessageIndex >= Messages.length)
         {
-            CurrMessage = 0;
+            CurrMessageIndex = 0;
             HUD.RemoveWidget(this);
         }
     }
