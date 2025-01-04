@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="temp Enemy1 - need fix">
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="Enemy1 basic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoreGame/EntityComponent/BaseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/EntityComponent/BaseObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameContent/NPC/Enemy/Monster1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/NPC/Enemy/Monster1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameContent/Object/FootTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Object/FootTrap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,24 +63,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ImageGridSplitter.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "workbranchEnemy",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/linh/dai hoc/cong nghe Java/IdeaProjects/gameTopdown/Resource/Mushroom",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "onboarding.tips.debug.path": "D:/ProjectSchool/OnClass/gameTopdown/src/Main.java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "inlay.hints"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ImageGridSplitter.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/linh/dai hoc/cong nghe Java/IdeaProjects/gameTopdown/Resource/Mushroom&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\linh\dai hoc\cong nghe Java\IdeaProjects\gameTopdown\Resource\Mushroom" />
@@ -339,7 +338,8 @@
     <MESSAGE value="- add simulate overlapping feature for base object&#10;- rename and sort file to folder" />
     <MESSAGE value="- Remove Singleton because no need instance properties" />
     <MESSAGE value="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long" />
+    <MESSAGE value="add FootTrap dialog" />
+    <option name="LAST_COMMIT_MESSAGE" value="add FootTrap dialog" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

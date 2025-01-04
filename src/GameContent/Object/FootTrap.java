@@ -4,6 +4,7 @@ import CoreGame.Data.Enums.Collision;
 import CoreGame.EntityComponent.Entity;
 import CoreGame.GamePanel;
 import CoreGame.PlayerComponent.Player;
+import CoreGame.WidgetComponent.HUD;
 import GameContent.MainPlayer;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
@@ -11,19 +12,19 @@ import GameContent.WidgetInstances.NarrativeMessageWD;
 import HelpDevGameTool.ImageUtility;
 
 public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
-    private boolean isActive = false; // Indicates if the trap is holding the player
+    private boolean isActive = false;
     private boolean isOpen = true;
     private final int requiredInteractions = 10; // Number of presses needed to escape
-    private int currentInteractions = 0; // Current number of presses
+    private int currentInteractions = 0;
     private MainPlayer trappedPlayer;
-    private NarrativeMessageWD DialogueWD = new NarrativeMessageWD("Press E to escape");
+    private NarrativeMessageWD DialogueWD = new NarrativeMessageWD("Come here");
 
     public FootTrap()
     {
         SetupAnimation();
         SpriteRenderSizeX = 16 * GamePanel.scale;
         SpriteRenderSizeY = 16 * GamePanel.scale;
-        setCollisionMode(Collision.Overlap); // Allow overlapping with the player
+        setCollisionMode(Collision.Overlap);
     }
 
     private void SetupAnimation() {
@@ -43,7 +44,8 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
     private void immobilizePlayer(MainPlayer player)
     {
         System.out.println("Can't move");
-        DialogueWD = new NarrativeMessageWD("Press E to escape");
+        DialogueWD = new NarrativeMessageWD("Haha You are trapped! Press E to escape");
+        HUD.AddWidget(DialogueWD);
         isActive = true;
         currentInteractions = 0; // Reset interactions
         trappedPlayer = player;
@@ -68,7 +70,6 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
         if (currentInteractions >= requiredInteractions) {
             releasePlayer(trappedPlayer);
         } else {
-            // Update the message to show progress
             DialogueWD.SetMessages("Press E to escape (" + currentInteractions + "/" + requiredInteractions + ")");
         }
     }
@@ -80,6 +81,8 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
         SetupAnimation();
         isActive = false;
         trappedPlayer.setLocked(false);
+        HUD.RemoveWidget(DialogueWD);
+        DialogueWD = null;
     }
 
 }

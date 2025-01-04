@@ -67,8 +67,12 @@ public class WorldManager
         GamePanel.GetInst().obj[0][10].setCollisionArea(-64*3/2,-64*3/2,64*3,84*3);
 
         GamePanel.GetInst().obj[0][11] = new FootTrap();
-        GamePanel.GetInst().obj[0][11].worldX = 7 * GamePanel.tileSize;
-        GamePanel.GetInst().obj[0][11].worldY = 15 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][11].worldX = 8 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][11].worldY = 13 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][12] = new FootTrap();
+        GamePanel.GetInst().obj[0][12].worldX = 9 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][12].worldY = 14 * GamePanel.tileSize;
 
     }
     public static void SimulateObject()
