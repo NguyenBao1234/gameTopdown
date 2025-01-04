@@ -17,7 +17,7 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
     private final int requiredInteractions = 10; // Number of presses needed to escape
     private int currentInteractions = 0;
     private MainPlayer trappedPlayer;
-    private NarrativeMessageWD DialogueWD = new NarrativeMessageWD("Come here");
+    private NarrativeMessageWD DialogueWD;
 
     public FootTrap()
     {
@@ -25,6 +25,7 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
         SpriteRenderSizeX = 16 * GamePanel.scale;
         SpriteRenderSizeY = 16 * GamePanel.scale;
         setCollisionMode(Collision.Overlap);
+        //setCollisionArea(x,y,a,b); chinh lai de nhan vat di sau vao hon
     }
 
     private void SetupAnimation() {
@@ -44,12 +45,12 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
     private void immobilizePlayer(MainPlayer player)
     {
         System.out.println("Can't move");
-        DialogueWD = new NarrativeMessageWD("Haha You are trapped! Press E to escape");
+        DialogueWD = new NarrativeMessageWD("Haha You are trapped! Spam E to escape");
         HUD.AddWidget(DialogueWD);
         isActive = true;
         currentInteractions = 0; // Reset interactions
         trappedPlayer = player;
-        trappedPlayer.setLocked(true);
+        trappedPlayer.SetFreeToControl(false);
         flipBook = ImageUtility.makeFlipBook("/Objects/FootTrap/trapclosing"); // Closing state
         fpsPerImage = 4;
     }
@@ -80,7 +81,7 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
         isOpen = false;
         SetupAnimation();
         isActive = false;
-        trappedPlayer.setLocked(false);
+        trappedPlayer.SetFreeToControl(true);
         HUD.RemoveWidget(DialogueWD);
         DialogueWD = null;
     }
