@@ -5,6 +5,7 @@ import GameContent.NPC.HangingNPC;
 import GameContent.NPC.NonThreatening.Morph_Idle;
 import GameContent.Object.DoorObj;
 import CoreGame.EntityComponent.BaseObject;
+import GameContent.Object.FootTrap;
 import GameContent.Object.MasterObject.BreakableObject;
 import GameContent.Object.MasterObject.KeyItemObject;
 
@@ -50,6 +51,10 @@ public class WorldManager
                 "/Objects/BrokenTree/FallenTreeBroken.png",20);
         GamePanel.GetInst().obj[0][7].worldX = (int)(3.5 * GamePanel.tileSize);
         GamePanel.GetInst().obj[0][7].worldY = 27 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][8] = new FootTrap();
+        GamePanel.GetInst().obj[0][8].worldX = 7 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][8].worldY = 15 * GamePanel.tileSize;
 
     }
     public static void SimulateObject()
