@@ -13,6 +13,13 @@ public abstract class Entity
     protected Rectangle CollisionArea;
 
     public final Rectangle getCollisionArea(){ return CollisionArea;}
+    public void setCollisionArea(int x, int y, int width, int height)
+    {
+        CollisionArea.x = x;
+        CollisionArea.y = y;
+        CollisionArea.width = width;
+        CollisionArea.height = height;
+    }
     public final Collision getCollisionMode(){return CollisionMode;}
     public final void setCollisionMode(Collision collision){
         CollisionMode = collision;}

@@ -1,28 +1,35 @@
 package GameContent.DataSave;
 
 import CoreGame.GamePanel;
-import GameContent.MainPlayer;
 
 import java.io.*;
 
-public class SaveLoad {
-    GamePanel GamePanel;
-    public SaveLoad (){
 
-    }
-    public void save() throws IOException {
+public class SaveLoad
+{
+    public void save() throws IOException
+    {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Resource/SaveLoad.dat"));
         DataStorage dataStorage = new DataStorage();
-        dataStorage.health = GamePanel.player.getHealth();
-        dataStorage.map = GamePanel.currentMapIndex;
+        //player
+        dataStorage.health = GamePanel.GetInst().player.getHealth();
+        dataStorage.map = GamePanel.GetInst().currentMapIndex;
+        dataStorage.playerX=GamePanel.GetInst().player.worldX;
+        dataStorage.playerY = GamePanel.GetInst().player.worldY;
 
+        //obj on maps
         oos.writeObject(dataStorage);
     }
     public void load() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Resource/SaveLoad.dat"));
 
         DataStorage dataStorage = (DataStorage)ois.readObject();
-        GamePanel.player.setHealth(dataStorage.health);
-        GamePanel.currentMapIndex = dataStorage.map;
+        //player
+        GamePanel.GetInst().player.setHealth(dataStorage.health);
+        GamePanel.GetInst().currentMapIndex = dataStorage.map;
+        GamePanel.GetInst().player.worldX = dataStorage.playerX;
+        GamePanel.GetInst().player.worldY = dataStorage.playerY;
+
+        //obj on maps
     }
 }

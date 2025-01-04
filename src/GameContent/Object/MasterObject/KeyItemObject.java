@@ -2,6 +2,7 @@ package GameContent.Object.MasterObject;
 
 import CoreGame.EntityComponent.Entity;
 import CoreGame.Data.Enums.Collision;
+import CoreGame.SoundComponent.SoundUtility;
 import HelpDevGameTool.ImageUtility;
 
 
@@ -28,6 +29,7 @@ public class KeyItemObject extends InteractObject
     {
         System.out.println("Key was interacted");
         if(targetInteractObject != null) targetInteractObject.SetUnlock(true);
+        SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
         Destroy(this);
     }
 }
