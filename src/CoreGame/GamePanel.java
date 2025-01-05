@@ -8,6 +8,7 @@ import GameContent.DataSave.SaveLoad;
 import GameContent.MainPlayer;
 import CoreGame.MapComponent.TileManager;
 import CoreGame.EntityComponent.BaseObject;
+import GameContent.WidgetInstances.HealthBar;
 import GameContent.WidgetInstances.MainMenuWD;
 
 import javax.swing.*;
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable
 
     public static final int maxMap = 10;
     public int currentMapIndex = 0;
+    private HealthBar healthBar;
 
     Thread gameThread;
 
@@ -71,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable
         WorldManager.SetUpObject();
         postProcessing.setup();
         HUD.AddWidget(mainMenuWD);
+        healthBar = new HealthBar(player.getMaxHealth(), player.getCurrentHealth());
 
     }
 
@@ -86,6 +89,7 @@ public class GamePanel extends JPanel implements Runnable
         if (gameState == GameState.Run)
         {
             player.Tick(DeltaTime);
+            healthBar.updateHealth(player.getCurrentHealth());
             WorldManager.SimulateObject();
         }
         if (gameState == GameState.Pause) return;
@@ -109,7 +113,8 @@ public class GamePanel extends JPanel implements Runnable
 
 
             player.Render(g2);
-            postProcessing.Render(g2);
+            healthBar.Draw(g2);
+            //postProcessing.Render(g2);
             HUD.Draw(g2); // need call after map for displaying head up
         }
         g2.dispose();
