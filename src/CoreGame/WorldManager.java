@@ -10,6 +10,7 @@ import GameContent.Object.FootTrap;
 import GameContent.Object.MasterObject.BreakableObject;
 import GameContent.Object.MasterObject.KeyItemObject;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
+import GameContent.Object.SwampArea;
 
 public class WorldManager
 {
@@ -74,6 +75,10 @@ public class WorldManager
         GamePanel.GetInst().obj[0][12] = new FootTrap();
         GamePanel.GetInst().obj[0][12].worldX = 9 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][12].worldY = 14 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][13] = new SwampArea();
+        GamePanel.GetInst().obj[0][13].worldX = 12 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][13].worldY = 25 * GamePanel.tileSize;
 
     }
     public static void SimulateObject()

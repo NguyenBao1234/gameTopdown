@@ -22,7 +22,8 @@ import java.awt.image.BufferedImage;
 
 public class MainPlayer extends Player
 {
-    public float speedFactor = 1;
+    public float currentSpeedFactor = 1.0f;
+    public float speedFactor = 1.0f;
     private final PauseWD pauseWD = new PauseWD();
     private float DamageWeapon = 4;
     private float health = 100;
@@ -83,8 +84,11 @@ public class MainPlayer extends Player
     void InputAxisMove()
     {
         if(!bFreeToControl) return;
-        if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
-        else speedFactor = 1;
+
+        float diagonalFactor = (vAxisX != 0 && vAxisY != 0) ? 0.75f : 1.0f;
+
+        // Combine base speed (affected by swamp) with diagonal movement
+        speedFactor = currentSpeedFactor * diagonalFactor;
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) UpdateCurrentDirectionX(0);
 
@@ -108,6 +112,10 @@ public class MainPlayer extends Player
         {
             UpdateCurrentDirectionY(1);
         }
+    }
+
+    public void setCurrentSpeedFactor(float factor) {
+        this.currentSpeedFactor = factor;
     }
 
     void handleLocationByCollision()

@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="Enemy1 basic">
+    <list default="true" id="072a3bad-9f41-43ec-a131-48b428e83134" name="Changes" comment="add new Foot trap and fix dialog">
+      <change afterPath="$PROJECT_DIR$/Resource/Objects/Swamp/swamp-ed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resource/Objects/Swamp/swamp-square.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameContent/Object/SwampArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoreGame/WorldManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/MainPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameContent/Object/FootTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameContent/Object/FootTrap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +76,7 @@
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;workbranch&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/linh/dai hoc/cong nghe Java/IdeaProjects/gameTopdown/Resource/Mushroom&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/linh/dai hoc/cong nghe Java/IdeaProjects/gameTopdown/Resource/Objects/Swamp&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;D:/ProjectSchool/OnClass/gameTopdown/src/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
@@ -83,6 +87,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\linh\dai hoc\cong nghe Java\IdeaProjects\gameTopdown\Resource\Objects\Swamp" />
       <recent name="D:\linh\dai hoc\cong nghe Java\IdeaProjects\gameTopdown\Resource\Mushroom" />
       <recent name="D:\ProjectSchool\OnClass\gameTopdown\resources\Player" />
     </key>
@@ -275,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735229030153</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="add new Foot trap and fix dialog">
+      <option name="closed" value="true" />
+      <created>1735979891351</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1735979891351</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -339,7 +352,8 @@
     <MESSAGE value="- Remove Singleton because no need instance properties" />
     <MESSAGE value="- Remove Singleton because no need instance properties and the old code changed to singleton will be too long" />
     <MESSAGE value="add FootTrap dialog" />
-    <option name="LAST_COMMIT_MESSAGE" value="add FootTrap dialog" />
+    <MESSAGE value="add new Foot trap and fix dialog" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new Foot trap and fix dialog" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
