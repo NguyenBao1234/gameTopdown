@@ -2,9 +2,11 @@ package CoreGame;
 
 import GameContent.EventTriggerBox.MapPortal;
 import GameContent.NPC.HangingNPC;
+import GameContent.NPC.NonThreatening.Loop_NPC;
 import GameContent.NPC.NonThreatening.Morph_Idle;
 import GameContent.Object.DoorObj;
 import CoreGame.EntityComponent.BaseObject;
+import GameContent.Object.FootTrap;
 import GameContent.Object.MasterObject.BreakableObject;
 import GameContent.Object.MasterObject.KeyItemObject;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
@@ -64,6 +66,15 @@ public class WorldManager
         GamePanel.GetInst().obj[0][10].worldX = 9 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][10].worldY = 18 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][10].setCollisionArea(-64*3/2,-64*3/2,64*3,84*3);
+
+        GamePanel.GetInst().obj[0][11] = new Loop_NPC();
+        GamePanel.GetInst().obj[0][11].worldX = 5 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][11].worldY = 13 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][12] = new FootTrap();
+        GamePanel.GetInst().obj[0][12].worldX = 9 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][12].worldY = 14 * GamePanel.tileSize;
+
     }
     public static void SimulateObject()
     {

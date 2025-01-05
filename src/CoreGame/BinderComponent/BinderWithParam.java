@@ -10,6 +10,10 @@ public class BinderWithParam<T>
     {
         assignedFunction = (Consumer<T>) function;
     }
+    public void unbind(Consumer<T> function)
+    {
+        if(assignedFunction == function) assignedFunction = null;
+    }
     public boolean execute(T param)
     {
         if(assignedFunction != null)

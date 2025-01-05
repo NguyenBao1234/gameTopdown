@@ -5,19 +5,15 @@ import CoreGame.GamePanel;
 import java.io.*;
 
 
-public class SaveLoad {
-    GamePanel GamePanel;
-    public SaveLoad ( GamePanel GamePanel){
-        this.GamePanel = GamePanel;
-
-    }
-
-    public void save() throws IOException {
+public class SaveLoad
+{
+    public void save() throws IOException
+    {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Resource/SaveLoad.dat"));
         DataStorage dataStorage = new DataStorage();
         //player
-        dataStorage.health = GamePanel.player.getHealth();
-        dataStorage.map = GamePanel.currentMapIndex;
+        dataStorage.health = GamePanel.GetInst().player.getHealth();
+        dataStorage.map = GamePanel.GetInst().currentMapIndex;
         dataStorage.playerX=GamePanel.GetInst().player.worldX;
         dataStorage.playerY = GamePanel.GetInst().player.worldY;
 
@@ -29,8 +25,8 @@ public class SaveLoad {
 
         DataStorage dataStorage = (DataStorage)ois.readObject();
         //player
-        GamePanel.player.setHealth(dataStorage.health);
-        GamePanel.currentMapIndex = dataStorage.map;
+        GamePanel.GetInst().player.setHealth(dataStorage.health);
+        GamePanel.GetInst().currentMapIndex = dataStorage.map;
         GamePanel.GetInst().player.worldX = dataStorage.playerX;
         GamePanel.GetInst().player.worldY = dataStorage.playerY;
 

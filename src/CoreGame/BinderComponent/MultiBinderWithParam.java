@@ -12,7 +12,10 @@ public class MultiBinderWithParam<T>
     {
         typeAssignedFunctions.add((Consumer<T>) function);
     }
-
+    public void unbind(Runnable function)
+    {
+        typeAssignedFunctions.remove(function);
+    }
     public boolean executeAll(T param)
     {
         if(!typeAssignedFunctions.isEmpty())

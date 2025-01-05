@@ -35,6 +35,12 @@ public class KeyHandler implements KeyListener
         System.out.println("Bind axis Success");
     }
 
+    public void UnbindAction(int KeyCode, Runnable function)
+    {
+        if(ActionBinder[KeyCode] == null) return;
+        ActionBinder[KeyCode].unbind(function);
+    }
+
     @Override
     public void keyPressed(KeyEvent e)
     {
