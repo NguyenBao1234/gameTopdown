@@ -15,11 +15,11 @@ public class Main
         gamePanel.setupGame();
         gamePanel.startGameThread();
 
-
         window.add(gamePanel);
         window.pack();
         window.setIconImage(ImageUtility.LoadImage("/game_icon.png"));
         window.setVisible(true);
+        window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

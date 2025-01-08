@@ -33,7 +33,7 @@ public class Monster1 extends Enemy {
     {
         super.Tick(delta);
         for (BaseObject object : CollisionChecker.GetOverlappedObjectsInBox(worldX, worldY, GamePanel.tileSize, GamePanel.tileSize)) {
-            object.ApplyPointDamage(this, getDamage(), worldX, worldY, object.worldX, object.worldY); // Apply damage to the object directly
+            //object.ApplyPointDamage(this, getDamage(), worldX, worldY, object.worldX, object.worldY); // Apply damage to the object directly
             attackPlayer();
             break;
         }

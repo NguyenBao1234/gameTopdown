@@ -74,7 +74,8 @@ public abstract class BaseCharacter extends BaseObject
                 {
                     animNotify.ReceiveNotifyBegin();
                 }
-                if(currFlipBookFrame >= animNotify.getFrameStart() * fpsPerImage && currFlipBookFrame <= animNotify.getFrameFinish() * fpsPerImage) animNotify.ReceiveNotifyTick();
+                if(currFlipBookFrame >= animNotify.getFrameStart() * fpsPerImage &&
+                        currFlipBookFrame <= animNotify.getFrameFinish() * fpsPerImage) animNotify.ReceiveNotifyTick();
                 if(animNotify.getFrameFinish() * fpsPerImage == currFlipBookFrame) animNotify.ReceiveNotifyEnd();
             }
         }

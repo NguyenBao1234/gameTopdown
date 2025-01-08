@@ -25,7 +25,7 @@ public class SaveLoad
 
         DataStorage dataStorage = (DataStorage)ois.readObject();
         //player
-        GamePanel.GetInst().player.setMaxHealth(dataStorage.health);
+        GamePanel.GetInst().player.setCurrentHealth(dataStorage.health);
         GamePanel.GetInst().currentMapIndex = dataStorage.map;
         GamePanel.GetInst().player.worldX = dataStorage.playerX;
         GamePanel.GetInst().player.worldY = dataStorage.playerY;

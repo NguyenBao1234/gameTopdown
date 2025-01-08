@@ -13,6 +13,7 @@ import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
 import GameContent.NotifyInstances.TraceDamageNotify;
 import GameContent.Object.MasterObject.InteractInterface;
+import GameContent.WidgetInstances.HealthBar;
 import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageUtility;
 
@@ -24,6 +25,7 @@ public class MainPlayer extends Player
 {
     public float speedFactor = 1;
     private final PauseWD pauseWD = new PauseWD();
+    private final HealthBar StateWD = new HealthBar(100, 22);
     private float DamageWeapon = 4;
     public float maxhealth = 100;
     public float currenthealth = 100;
@@ -65,6 +67,7 @@ public class MainPlayer extends Player
         ControllerComp.BindAction(KeyEvent.VK_P, true,this::PauseGame);
         ControllerComp.BindAction(KeyEvent.VK_J,true,this::Attack);
         ControllerComp.BindAction(KeyEvent.VK_SHIFT,true,this::Dash);
+        ControllerComp.BindAction(KeyEvent.VK_T,true,this::ToggleState);
         ControllerComp.BindAction(KeyEvent.VK_K,true,this::Dame);
     }
 
@@ -154,7 +157,7 @@ public class MainPlayer extends Player
 
     /**Choose animation*/
     void Dame(){
-        currenthealth -= 10;
+        ApplyPointDamage(this,null,5,0,0,0,0);
     }
     void handelAnimation()
     {
@@ -206,7 +209,11 @@ public class MainPlayer extends Player
     void Interact()
     {
         int BiasInteractBox = 8* GamePanel.scale;
-        for(BaseObject overlappedObject : CollisionChecker.GetOverlappedObjectsInBox(worldX + CollisionArea.x - BiasInteractBox,worldY + CollisionArea.y - BiasInteractBox, CollisionArea.width +BiasInteractBox*2, CollisionArea.height + BiasInteractBox*2))
+        for(BaseObject overlappedObject : CollisionChecker.GetOverlappedObjectsInBox(
+                worldX + CollisionArea.x - BiasInteractBox,
+                worldY + CollisionArea.y - BiasInteractBox,
+                CollisionArea.width +BiasInteractBox*2,
+                CollisionArea.height + BiasInteractBox*2))
         {
             if(overlappedObject instanceof InteractInterface)
             {
@@ -275,10 +282,31 @@ public class MainPlayer extends Player
         }
     }
 
+    private void ToggleState()
+    {
+        if (GamePanel.GetInst().gameState != GameState.Run) return;
+        if(StateWD.IsOnScreen()) HUD.RemoveWidget(StateWD);
+        else HUD.AddWidget(StateWD);
+    }
     @Override
     protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
         currenthealth -= Damage;
-        if(currenthealth > 0) ReceiveDamageAnim();
+        if(currenthealth > 0)
+        {
+            ReceiveDamageAnim();
+            StateWD.updateHealth(currenthealth);
+        }
+        else DeathAnim();
+    }
+
+    @Override
+    protected void OnAnyDamage(Entity Causer, float Damage, int SourceWorldX, int SourceWorldY) {
+        currenthealth -= Damage;
+        if(currenthealth > 0)
+        {
+            ReceiveDamageAnim();
+            StateWD.updateHealth(currenthealth);
+        }
         else DeathAnim();
     }
 
@@ -322,7 +350,7 @@ public class MainPlayer extends Player
 
 
 
-    public void setMaxHealth(float health) {
+    public void setCurrentHealth(float health) {
         this.currenthealth = health;
     }
     public float getMaxHealth() {

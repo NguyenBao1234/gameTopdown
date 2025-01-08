@@ -135,8 +135,10 @@ public abstract class BaseObject extends Entity
     @Override
     protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {}
 
-    public void ApplyPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
-        OnPointDamage(Causer, Damage, WorldX, WorldY, SourceWorldX, SourceWorldY);
+    @Override
+    public void ApplyPointDamage(Entity Receiver, Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
+        super.ApplyPointDamage(Receiver, Causer, Damage, WorldX, WorldY, SourceWorldX, SourceWorldY);
+        Receiver.OnPointDamage(Causer, Damage, WorldX, WorldY, SourceWorldX, SourceWorldY);
     }
 }
 

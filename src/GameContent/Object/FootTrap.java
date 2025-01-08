@@ -39,6 +39,7 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
     {
         if(otherEntity instanceof Player) {
             immobilizePlayer((MainPlayer) otherEntity);
+            ApplyDamage(otherEntity, this, 20);
         }
     }
 

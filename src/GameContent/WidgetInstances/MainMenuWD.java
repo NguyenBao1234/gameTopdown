@@ -53,7 +53,8 @@ public class MainMenuWD extends OptionalWidget
         // Áp dụng font tùy chỉnh
         g2.setFont(customFont.deriveFont(Font.BOLD, 64));
        // Vẽ hình nền
-        g2.drawImage(ImageUtility.LoadImage("/Player/MainMenu.png"), 0, 0, GamePanel.GetInst().getWidth(), GamePanel.GetInst().getHeight(), null);
+        g2.drawImage(ImageUtility.LoadImage("/Player/MainMenu.png"), 0, 0,
+                GamePanel.GetInst().getWidth(), GamePanel.GetInst().getHeight(), null);
 
         int x = 16 * GamePanel.scale + 96;
         int y = 32 * GamePanel.scale;

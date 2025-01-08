@@ -23,27 +23,17 @@ public class HealthBar extends Widget {
     @Override
     public void Draw(Graphics2D g2)
     {
-
-
         int barX = 20;
         int barY = 20;
         int barWidth = 200;
         int barHeight = 20;
-
-        // Tính phần trăm máu
         float healthPercentage = currenthealth / maxhealth;
 
         // Vẽ khung thanh máu
         g2.setColor(Color.BLACK);
         g2.drawRect(barX, barY, barWidth, barHeight);
 
-        // Vẽ thanh máu (màu đỏ)
-        g2.setColor(Color.RED);
-        g2.fillRect(barX + 1, barY + 1, (int) (healthPercentage * (barWidth - 1)), barHeight - 1);
-
         // Hiển thị số lượng máu
-        g2.setColor(Color.WHITE);
-        g2.drawString("HP: " + (int) currenthealth + " / " + (int) maxhealth, barX + 50, barY + 15);
         if (healthPercentage > 0.5) {
             g2.setColor(Color.GREEN);
         } else if (healthPercentage > 0.25) {
@@ -52,5 +42,7 @@ public class HealthBar extends Widget {
             g2.setColor(Color.RED);
         }
         g2.fillRect(barX, barY, (int) (healthPercentage * barWidth), barHeight);
+        g2.setColor(Color.WHITE);
+        g2.drawString("HP: " + (int) currenthealth + " / " + (int) maxhealth, barX + 50, barY + 15);
     }
 }

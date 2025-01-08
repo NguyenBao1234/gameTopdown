@@ -65,7 +65,8 @@ public class TileManager
                         && worldY < playerWorldY + normalizedPlayerScreenY + GamePanel.tileSize
                 )
                 {
-                    g2.drawImage(tiles[typeTileIndex].bufferedImage, screenX, screenY, GamePanel.tileSize, GamePanel.tileSize, null);
+                    g2.drawImage(tiles[typeTileIndex].bufferedImage, screenX, screenY, GamePanel.tileSize,
+                            GamePanel.tileSize, null);
                 }
             }
         }

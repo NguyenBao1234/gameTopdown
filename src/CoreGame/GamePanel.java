@@ -33,7 +33,6 @@ public class GamePanel extends JPanel implements Runnable
 
     public static final int maxMap = 10;
     public int currentMapIndex = 0;
-    private HealthBar healthBar;
 
     Thread gameThread;
 
@@ -73,8 +72,6 @@ public class GamePanel extends JPanel implements Runnable
         WorldManager.SetUpObject();
         postProcessing.setup();
         HUD.AddWidget(mainMenuWD);
-        healthBar = new HealthBar(player.getMaxHealth(), player.getCurrentHealth());
-
     }
 
     public void startGameThread()
@@ -89,7 +86,6 @@ public class GamePanel extends JPanel implements Runnable
         if (gameState == GameState.Run)
         {
             player.Tick(DeltaTime);
-            healthBar.updateHealth(player.getCurrentHealth());
             WorldManager.SimulateObject();
         }
         if (gameState == GameState.Pause) return;
@@ -110,11 +106,8 @@ public class GamePanel extends JPanel implements Runnable
                     obj[currentMapIndex][i].Render(g2); // add [currentMap] here too
                 }
             }
-
-
             player.Render(g2);
-            healthBar.Draw(g2);
-            //postProcessing.Render(g2);
+            postProcessing.Render(g2);
             HUD.Draw(g2); // need call after map for displaying head up
         }
         g2.dispose();
@@ -127,13 +120,11 @@ public class GamePanel extends JPanel implements Runnable
         double passedDelta = 0; //supper precise
         long lastTime = System.nanoTime();
         long currentTime;
-        long timer = 0;
         int drawCallCount = 0;
         while (gameThread != null)
         {
             currentTime = System.nanoTime();
             passedDelta += (currentTime - lastTime)/drawIntervalUnit;
-            timer += currentTime - lastTime;
             // 1 frame passed://
             if(passedDelta >= 1)
             {
@@ -144,12 +135,6 @@ public class GamePanel extends JPanel implements Runnable
                 //System.out.println("hellooooooooooooooooo");
             }
             lastTime = currentTime;
-            if(timer > 1000000000)
-            {
-                //System.out.println("Fps: "+ drawCallCount);
-                timer = 0;
-                drawCallCount = 0;
-            }
         }
     }
 

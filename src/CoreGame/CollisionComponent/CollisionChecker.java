@@ -131,7 +131,8 @@ public class CollisionChecker
             tile2Type = -1;
         }
         if(tile1Type < 0 || tile2Type < 0) return true;
-        return (TileManager.tiles[tile1Type].collision == Collision.Block || TileManager.tiles[tile2Type].collision == Collision.Block);
+        return (TileManager.tiles[tile1Type].collision == Collision.Block ||
+                TileManager.tiles[tile2Type].collision == Collision.Block);
     }
 
     public static boolean IsCollidingWithObjectInBox(int x, int y, int width, int height)

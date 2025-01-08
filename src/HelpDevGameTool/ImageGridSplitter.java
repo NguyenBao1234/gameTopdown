@@ -27,7 +27,8 @@ public class ImageGridSplitter {
     }
 
 
-    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath, String OutputDir, boolean bHorizontal, boolean bOneIndex, int numDigit, int StartIndex)
+    public static void SplitImage(int sizeGridX, int sizeGridY ,String ImagePath,
+                                  String OutputDir, boolean bHorizontal, boolean bOneIndex, int numDigit, int StartIndex)
     {
         try
         {
@@ -62,7 +63,8 @@ public class ImageGridSplitter {
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < cols; x++) {
                     // Crop the tile
-                    BufferedImage extractedImage = OriginalImageBf.getSubimage(x * gridSizeWidth,y * gridSizeHeight,gridSizeWidth,gridSizeHeight);
+                    BufferedImage extractedImage = OriginalImageBf.getSubimage(x * gridSizeWidth,
+                            y * gridSizeHeight,gridSizeWidth,gridSizeHeight);
                     // Optionally save each tile as a separate image file
                     String FinalIndex;
                     String fileName;
