@@ -25,7 +25,7 @@ public class WorldManager
         GamePanel.GetInst().obj[0][1].worldY = 34 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][2] = new BreakableObject("/Objects/BrokenTree/FallenTree.png",
-                "/Objects/BrokenTree/FallenTreeBroken.png",20, 90,"/Sound/SFX/wood_iron.wav", "/Sound/SFX/wood_break.wav");
+                "/Objects/BrokenTree/FallenTreeBroken.png",20, 90, "/Sound/SFX/Object/wood_iron.wav", "/Sound/SFX/Object/wood_break.wav");
         GamePanel.GetInst().obj[0][2].worldX = 37 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][2].worldY = (int) (15.5 * GamePanel.tileSize);
 
@@ -46,12 +46,12 @@ public class WorldManager
         GamePanel.GetInst().obj[0][5].worldY = 18 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][6] = new BreakableObject("/Objects/BrokenTree/FallenTree.png",
-                "/Objects/BrokenTree/FallenTreeBroken.png",20,"/Sound/SFX/wood_iron.wav", "/Sound/SFX/wood_break.wav");
+                "/Objects/BrokenTree/FallenTreeBroken.png",20, "/Sound/SFX/Object/wood_iron.wav", "/Sound/SFX/Object/wood_break.wav");
         GamePanel.GetInst().obj[0][6].worldX = (int)(9.5 * GamePanel.tileSize);
         GamePanel.GetInst().obj[0][6].worldY = 27 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][7] = new BreakableObject("/Objects/BrokenTree/FallenTree.png",
-                "/Objects/BrokenTree/FallenTreeBroken.png",20,"/Sound/SFX/wood_iron.wav", "/Sound/SFX/wood_break.wav");
+                "/Objects/BrokenTree/FallenTreeBroken.png",20, "/Sound/SFX/Object/wood_iron.wav", "/Sound/SFX/Object/wood_break.wav");
         GamePanel.GetInst().obj[0][7].worldX = (int)(5.5 * GamePanel.tileSize);
         GamePanel.GetInst().obj[0][7].worldY = 27 * GamePanel.tileSize;
 

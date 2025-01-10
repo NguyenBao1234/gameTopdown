@@ -11,8 +11,10 @@ import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.PlayerComponent.Player;
 import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
+import GameContent.NotifyInstances.NotifyWithBinder;
 import GameContent.NotifyInstances.TraceDamageNotify;
 import GameContent.Object.MasterObject.InteractInterface;
+import GameContent.WidgetInstances.GameOverWD;
 import GameContent.WidgetInstances.HealthBar;
 import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageUtility;
@@ -20,6 +22,7 @@ import HelpDevGameTool.ImageUtility;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class MainPlayer extends Player
 {
@@ -27,14 +30,17 @@ public class MainPlayer extends Player
     public float speedFactor = 1.0f;
     private final PauseWD pauseWD = new PauseWD();
     private final HealthBar StateWD = new HealthBar(100, 22);
+    private final GameOverWD GameOverScreen = new GameOverWD();
     private float DamageWeapon = 4;
     public float maxhealth = 100;
     public float currenthealth = 100;
     private boolean bFreeToControl = true;
 
-
-    private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
-    private final AnimMontage AttackMontage = new AnimMontage();
+    private NotifyWithBinder OnDeathNotify = new NotifyWithBinder(7,0);
+    private final TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
+    private final AnimMontage AttackMontage = new AnimMontage(DmgNotify);
+    private final AnimMontage DeathMontage = new AnimMontage(ImageUtility.MakeFlipBookFromSheet("/Player/spr_player_death.png",64,64),OnDeathNotify);
+    private final AnimMontage OnHitMontage = new AnimMontage();
 
     public MainPlayer()
     {
@@ -58,7 +64,7 @@ public class MainPlayer extends Player
         CollisionMode = Collision.Block;
 
         SetupPlayerInputComponent();
-        AttackMontage.AddNotify(DmgNotify);
+        OnDeathNotify.AddDynamic(this::OnGameOver);
     }
 
     private void SetupPlayerInputComponent()
@@ -164,9 +170,6 @@ public class MainPlayer extends Player
     }
 
     /**Choose animation*/
-    void Dame(){
-        ApplyPointDamage(this,null,5,0,0,0,0);
-    }
     void handelAnimation()
     {
         switch (GetCurrentDirection())
@@ -235,21 +238,21 @@ public class MainPlayer extends Player
         if (GamePanel.GetInst().gameState == GameState.Run)
         {
             GamePanel.GetInst().gameState = GameState.Pause;
-            SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
+            SoundUtility.playSound(1,false, "/Sound/SFX/Object/coin.wav");
             HUD.AddWidget(pauseWD);
         }
         else if (GamePanel.GetInst().gameState == GameState.Pause)
         {
             GamePanel.GetInst().gameState = GameState.Run;
             HUD.RemoveWidget(pauseWD);
-            SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
+            SoundUtility.playSound(1,false, "/Sound/SFX/Object/coin.wav");
         }
     }
 
     private void Attack()
     {
         if(animMontage != null || !bFreeToControl) return;
-        SoundUtility.playSound(1,false,"/Sound/SFX/SwordWhoose.wav");
+        SoundUtility.playSound(1,false, "/Sound/SFX/Object/SwordWhoose.wav");
         switch (GetCurrentDirection())
         {
             case up :
@@ -296,25 +299,24 @@ public class MainPlayer extends Player
         if(StateWD.IsOnScreen()) HUD.RemoveWidget(StateWD);
         else HUD.AddWidget(StateWD);
     }
-    @Override
-    protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
-        currenthealth -= Damage;
-        if(currenthealth > 0)
-        {
-            ReceiveDamageAnim();
-            StateWD.updateHealth(currenthealth);
-        }
-        else DeathAnim();
+
+    void Dame(){
+        ApplyPointDamage(this,null,5,0,0,0,0);
     }
 
     @Override
     protected void OnAnyDamage(Entity Causer, float Damage, int SourceWorldX, int SourceWorldY) {
         currenthealth -= Damage;
-        if(currenthealth > 0)
-        {
-            ReceiveDamageAnim();
-            StateWD.updateHealth(currenthealth);
-        }
+        StateWD.updateHealth(currenthealth);
+        if (Damage < 0 || currenthealth <= 0) return;
+
+        String SoundOnDamageSrc;
+        int randomNum = new Random().nextInt(0,6);
+        if(randomNum>2) SoundOnDamageSrc = "/Sound/SFX/Voice/Player/FemaleReceiveDamage1.wav";
+        else SoundOnDamageSrc = "/Sound/SFX/Voice/Player/FemaleReceiveDamage.wav";
+
+        SoundUtility.playSound(1, false,SoundOnDamageSrc);
+        if(currenthealth > 0) ReceiveDamageAnim();
         else DeathAnim();
     }
 
@@ -322,30 +324,30 @@ public class MainPlayer extends Player
     {
         switch (GetCurrentDirection())
         {
-            case up:
+            case up:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/back/hit"));
                 break;
-            case down:
+            case down:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/front/hit"));
                 break;
-            case left:
+            case left:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/left/hit"));
                 break;
-            case right:
+            case right:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/right/hit"));
                 break;
         }
+        PlayAnimMontage(OnHitMontage,3);
     }
 
     private void DeathAnim()
     {
-        switch (GetCurrentDirection())
-        {
-            case up:
-                break;
-            case down:
-                break;
-            case left:
-                break;
-            case right:
-                break;
-        }
+        CollisionMode = Collision.NoCollision;
+        if(StateWD.IsOnScreen()) HUD.RemoveWidget(StateWD);
+        PlayAnimMontage(DeathMontage,4);
+    }
+
+    private void OnGameOver()
+    {
+        GamePanel.GetInst().gameState = GameState.Pause;
+        if(GameOverScreen.IsOnScreen()) return;
+        HUD.AddWidget(GameOverScreen);
     }
 
     public float getDamageWeapon() {

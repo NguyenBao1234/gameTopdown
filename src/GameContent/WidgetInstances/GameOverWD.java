@@ -8,11 +8,12 @@ import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
-public class PauseWD extends OptionalWidget
+public class GameOverWD extends OptionalWidget
 {
     private Font customFont;
-    public PauseWD()
+    public GameOverWD()
     {
         SetMaxOption(2,0);
         SetupInputComponent();
@@ -23,7 +24,7 @@ public class PauseWD extends OptionalWidget
             e.printStackTrace();
             customFont = new Font("Arial", Font.BOLD, 64); // Dự phòng
         }
-        options = new String[]{"Resume", "Main Menu"};
+        options = new String[]{"Replay From Save Point", "Main Menu"};
     }
 
     public void SetupInputComponent()
@@ -40,12 +41,12 @@ public class PauseWD extends OptionalWidget
     public void Draw(Graphics2D g2)
     {
         g2.setFont(customFont.deriveFont(Font.BOLD, 64));
-        int x = 32 * GamePanel.scale;
-        int y = 64 * GamePanel.scale;
+        int x = 64 * GamePanel.scale;
+        int y = 45 * GamePanel.scale;
         g2.setColor(Color.BLACK); // Màu đổ bóng
-        g2.drawString("PAUSE GAME", x + 4, y + 4); // Dịch chuyển bóng
+        g2.drawString("GAME OVER", x + 4, y + 4); // Dịch chuyển bóng
         g2.setColor(Color.WHITE); // Màu chính
-        g2.drawString("PAUSE GAME", x, y);
+        g2.drawString("GAME OVER", x, y);
 
         // Hiển thị các tùy chọn
         g2.setFont(customFont.deriveFont(Font.BOLD, 32)); // Font nhỏ hơn cho các tùy chọn
@@ -59,11 +60,11 @@ public class PauseWD extends OptionalWidget
                 g2.setColor(Color.WHITE);
                 g2.setFont(customFont.deriveFont(Font.BOLD, 32)); // Font mặc định
             }
-            g2.drawString(options[i], x, y + GamePanel.tileSize * (2 + i));
+            g2.drawString(options[i], 33* 3, y + GamePanel.tileSize * (2 + i));
         }
 
         // Hiệu ứng hover cho dấu ">"
-        int iconX = x - GamePanel.tileSize;
+        int iconX = 33 * 3 - GamePanel.tileSize ;
         int iconY = y + GamePanel.tileSize * (2 + SelectingRowOption) - GamePanel.tileSize / 2;
 
         Image selectorIcon = ImageUtility.LoadImage("/Objects/skull.png");
@@ -77,15 +78,25 @@ public class PauseWD extends OptionalWidget
         if(!IsOnScreen()) return;
         if (SelectingRowOption == 0)
         {
-            GamePanel.GetInst().gameState = GameState.Run;
-            HUD.RemoveWidget(this);
+            try {
+                GamePanel.GetInst().saveLoad.load();
+                GamePanel.GetInst().gameState = GameState.Run;
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
         if(SelectingRowOption == 1 )
         {
-            HUD.RemoveWidget(this);
             HUD.AddWidget(GamePanel.GetInst().getMainMenuWD());
             GamePanel.GetInst().gameState = GameState.Tittle;
             GamePanel.GetInst().getMainMenuWD().PlayBGMusic();
         }
+        KeyHandler ControllerComp = KeyHandler.getInstance();
+        ControllerComp.UnbindAction(KeyEvent.VK_W, this::Up);
+        ControllerComp.UnbindAction(KeyEvent.VK_S, this::Down);
+        ControllerComp.UnbindAction(KeyEvent.VK_A, this::Left);
+        ControllerComp.UnbindAction(KeyEvent.VK_D, this::Right);
+        ControllerComp.UnbindAction(KeyEvent.VK_ENTER, this::SelectOption);
+        HUD.RemoveWidget(this);
     }
 }
