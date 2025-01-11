@@ -5,20 +5,25 @@ import CoreGame.BinderComponent.MultiBinder;
 
 public class NotifyWithBinder extends AnimNotify
 {
-    private MultiBinder BoundFunction = new MultiBinder();
+    private MultiBinder BoundFunctions = new MultiBinder();
 
     public NotifyWithBinder(int frameStart, int frameFinish) {
         super(frameStart, frameFinish);
     }
 
+    public NotifyWithBinder(int frameStart, int frameFinish, Runnable BoundFunction){
+        super(frameStart, frameFinish);
+        BoundFunctions.bind(BoundFunction);
+    }
+
     public void AddDynamic(Runnable FunctionToBind)
     {
-        BoundFunction.bind(FunctionToBind);
+        BoundFunctions.bind(FunctionToBind);
     }
     @Override
     public void ReceiveNotifyBegin()
     {
-        BoundFunction.executeAll();
+        BoundFunctions.executeAll();
     }
 
     @Override

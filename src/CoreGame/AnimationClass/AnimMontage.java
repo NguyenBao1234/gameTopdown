@@ -11,20 +11,31 @@ public class AnimMontage
 {
     private BufferedImage[] FlipBook;
     private final ArrayList<AnimNotify> Notifies = new ArrayList<>();
+    private int FpsPerImage = 1;
+
     public AnimMontage(){}
-    public AnimMontage(BufferedImage[] flipBook)
-    {
-        FlipBook = flipBook;
-    }
     public AnimMontage(AnimNotify... notifies)
     {
         Collections.addAll(Notifies, notifies);
     }
 
-    public AnimMontage(BufferedImage[] flipBook, AnimNotify... notifies)
+    public AnimMontage(int fpsPerImage){ FpsPerImage = fpsPerImage;}
+    public AnimMontage(int fpsPerImage, BufferedImage[] flipBook)
+    {
+        FlipBook = flipBook;
+        FpsPerImage = fpsPerImage;
+    }
+    public AnimMontage(int fpsPerImage, AnimNotify... notifies)
+    {
+        Collections.addAll(Notifies, notifies);
+        FpsPerImage = fpsPerImage;
+    }
+
+    public AnimMontage(int fpsPerImage, BufferedImage[] flipBook, AnimNotify... notifies)
     {
         FlipBook = flipBook;
         Collections.addAll(Notifies, notifies);
+        FpsPerImage = fpsPerImage;
     }
 
     public void AddNotify(AnimNotify Notify)
@@ -35,6 +46,8 @@ public class AnimMontage
     public ArrayList<AnimNotify> getNotifies() {return Notifies;}
 
     public BufferedImage[] getFlipBook() {return FlipBook;}
-
     public void setFlipBook(BufferedImage[] flipBook) {FlipBook = flipBook;}
+
+    public int getFpsPerImage(){return FpsPerImage;}
+    public void setFpsPerImage(int fps) {FpsPerImage = fps;}
 }

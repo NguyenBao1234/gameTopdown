@@ -100,6 +100,6 @@ public class ImageGridSplitter {
 
     public static void main(String[] args)
     {
-        SplitImage(384,64,"AssetSource/Orc/Orc1/orc1_attack_full.png","Resource/Character/Orc/Or1/attack", true, true,1,0);
+        SplitImage(384,64,"AssetSource/Orc/Orc1/orc1_hurt_full.png","Resource/Character/Orc/Or1/hurt", true, true,1,0);
     }
 }

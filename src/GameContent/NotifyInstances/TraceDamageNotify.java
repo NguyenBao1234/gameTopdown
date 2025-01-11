@@ -20,7 +20,7 @@ public class TraceDamageNotify extends AnimNotify
 
     public TraceDamageNotify(int frameStart, BaseCharacter entityContain, int BoxScaleX, int BoxScaleY)
     {
-        super(frameStart, 0);
+        super(frameStart, 2);
         Container = entityContain;
         scaleX = BoxScaleX;
         scaleY = BoxScaleY;
@@ -37,6 +37,8 @@ public class TraceDamageNotify extends AnimNotify
         int worldY = Container.worldY;
         width = GamePanel.tileSize * scaleX;
         height =  GamePanel.tileSize * scaleY;
+
+        boolean bHasSwapEdge = false;
         switch(Container.GetCurrentDirection())
         {
             case up :
@@ -49,11 +51,13 @@ public class TraceDamageNotify extends AnimNotify
                 break;
             case left:
                 SwapBoxDirect();
+                bHasSwapEdge = true;
                 worldX -= GamePanel.tileSize - BiasY;
                 worldY -= BiasX/2;
                 break;
             case right:
                 SwapBoxDirect();
+                bHasSwapEdge = true;
                 worldX += GamePanel.tileSize;
                 worldY -= BiasX/2;
                 break;
@@ -65,6 +69,7 @@ public class TraceDamageNotify extends AnimNotify
                     Container.worldX,Container.worldY );
             System.out.println(enemy);
         }
+        if(bHasSwapEdge) SwapBoxDirect();
     }
 
     private void SwapBoxDirect()

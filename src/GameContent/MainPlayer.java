@@ -36,11 +36,11 @@ public class MainPlayer extends Player
     public float currenthealth = 100;
     private boolean bFreeToControl = true;
 
-    private NotifyWithBinder OnDeathNotify = new NotifyWithBinder(7,0);
+    private NotifyWithBinder OnDeathNotify = new NotifyWithBinder(7,7);
     private final TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
-    private final AnimMontage AttackMontage = new AnimMontage(DmgNotify);
-    private final AnimMontage DeathMontage = new AnimMontage(ImageUtility.MakeFlipBookFromSheet("/Player/spr_player_death.png",64,64),OnDeathNotify);
-    private final AnimMontage OnHitMontage = new AnimMontage();
+    private final AnimMontage AttackMontage = new AnimMontage(4,DmgNotify);
+    private final AnimMontage DeathMontage = new AnimMontage(4,ImageUtility.MakeFlipBookFromSheet("/Player/spr_player_death.png",64,64),OnDeathNotify);
+    private final AnimMontage OnHitMontage = new AnimMontage(3);
 
     public MainPlayer()
     {
@@ -82,7 +82,7 @@ public class MainPlayer extends Player
     public void Tick(float delta) {
         super.Tick(delta);
         InputAxisMove();
-        handleLocationByCollision();
+        handleLocation();
         handelAnimation();
     }
 
@@ -130,7 +130,7 @@ public class MainPlayer extends Player
         this.currentSpeedFactor = factor;
     }
 
-    void handleLocationByCollision()
+    void handleLocation()
     {
         if(vAxisX == 0 && vAxisY == 0) return;
         int collX = worldX + CollisionArea.x;
@@ -251,20 +251,20 @@ public class MainPlayer extends Player
 
     private void Attack()
     {
-        if(animMontage != null || !bFreeToControl) return;
+        if(PlayingAnimationMontage != null || !bFreeToControl) return;
         SoundUtility.playSound(1,false, "/Sound/SFX/Object/SwordWhoose.wav");
         switch (GetCurrentDirection())
         {
             case up :
-                DmgNotify.setFrameStart(0);
+                DmgNotify.setFrameStart(1);
                 AttackMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/back/attack"));
                 break;
             case down:
-                DmgNotify.setFrameStart(0);
+                DmgNotify.setFrameStart(1);
                 AttackMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/front/attack"));
                 break;
             case left:
-                DmgNotify.setFrameStart(0);
+                DmgNotify.setFrameStart(1);
                 AttackMontage.setFlipBook( ImageUtility.makeFlipBook("/Player/left/attack"));
                 break;
             case right:
@@ -272,7 +272,7 @@ public class MainPlayer extends Player
                 AttackMontage.setFlipBook( ImageUtility.makeFlipBook("/Player/right/attack"));
                 break;
         }
-        PlayAnimMontage(AttackMontage, 4);
+        PlayAnimMontage(AttackMontage);
     }
 
     private void Dash()
@@ -333,14 +333,14 @@ public class MainPlayer extends Player
             case right:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/right/hit"));
                 break;
         }
-        PlayAnimMontage(OnHitMontage,3);
+        PlayAnimMontage(OnHitMontage);
     }
 
     private void DeathAnim()
     {
         CollisionMode = Collision.NoCollision;
         if(StateWD.IsOnScreen()) HUD.RemoveWidget(StateWD);
-        PlayAnimMontage(DeathMontage,4);
+        PlayAnimMontage(DeathMontage);
     }
 
     private void OnGameOver()
