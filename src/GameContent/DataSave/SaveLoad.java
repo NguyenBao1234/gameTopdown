@@ -29,6 +29,7 @@ public class SaveLoad
         GamePanel.GetInst().currentMapIndex = dataStorage.map;
         GamePanel.GetInst().getPlayer().worldX = dataStorage.playerX;
         GamePanel.GetInst().getPlayer().worldY = dataStorage.playerY;
+        GamePanel.GetInst().getPlayer().UpdateStateWD();
 
         //obj on maps
     }

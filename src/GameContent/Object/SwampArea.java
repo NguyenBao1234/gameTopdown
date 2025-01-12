@@ -18,7 +18,7 @@ public class SwampArea extends ObjectPendOnPlayer implements InteractInterface {
         SpriteRenderSizeX = 64 * GamePanel.scale;
         SpriteRenderSizeY = 64 * GamePanel.scale;
         setCollisionMode(Collision.Overlap);
-        setCollisionArea(-64*3/2,-64*3/2, 64*GamePanel.scale,64*GamePanel.scale);
+        setCollisionArea(-64*3/2 + 48,-64*3/2 + 48, 64*GamePanel.scale,64*GamePanel.scale);
     }
 
     @Override

@@ -2,6 +2,7 @@ package GameContent.Object;
 
 import CoreGame.Data.Enums.Collision;
 import CoreGame.GamePanel;
+import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
@@ -31,6 +32,7 @@ public class TempleMini extends ObjectPendOnPlayer implements InteractInterface 
         else
         {
             HUD.AddWidget(Dialogue);
+            SoundUtility.playSound(1,false,"/Sound/SFX/Object/confirmation-upward.wav");
         }
     }
 

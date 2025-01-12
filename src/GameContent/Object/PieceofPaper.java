@@ -1,6 +1,7 @@
 package GameContent.Object;
 
 import CoreGame.GamePanel;
+import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
@@ -19,10 +20,12 @@ public class PieceofPaper extends ObjectPendOnPlayer implements InteractInterfac
     @Override
     public void interact(){
         {
+
             if(Sprite == null) {
-                GamePanel.GetInst().player.SetFreeToControl(true);
+                GamePanel.GetInst().getPlayer().SetFreeToControl(true);
                 Dialogue.RemoveFromHUD();
             }
+            else SoundUtility.playSound(1,false,"/Sound/SFX/Object/pickup_note_03.wav");
             if(!claim){
                 if(Dialogue.IsOnScreen()){
                     Dialogue.NextContent();
@@ -32,7 +35,7 @@ public class PieceofPaper extends ObjectPendOnPlayer implements InteractInterfac
                     HUD.AddWidget(Dialogue);
                     claim = true;
                     Sprite = null;
-                    GamePanel.GetInst().player.SetFreeToControl(false);
+                    GamePanel.GetInst().getPlayer().SetFreeToControl(false);
                 }
             }
         }

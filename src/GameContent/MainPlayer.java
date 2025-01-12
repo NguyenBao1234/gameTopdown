@@ -378,4 +378,9 @@ public class MainPlayer extends Player
         UpdateCurrentDirectionX(0);
         UpdateCurrentDirectionY(0);
     }
+
+    public void UpdateStateWD()
+    {
+        StateWD.updateHealth(currenthealth);
+    }
 }

@@ -1,6 +1,7 @@
 package GameContent.NPC.NonThreatening;
 
 import CoreGame.GamePanel;
+import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
@@ -45,6 +46,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
                     "Nguoi co bi dien khong",
                     "Ta mac ke nha nguoi ");
             if(interactCount == 4)  {
+                SoundUtility.playSound(1,false,"/Sound/SFX/Object/confirmation-upward.wav");
                 DialogueWD.SetMessages("game save!");
                 try {
                     GamePanel.GetInst().saveLoad.save();

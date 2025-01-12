@@ -2,9 +2,11 @@ package GameContent.NPC.Enemy;
 
 import CoreGame.Data.Enums.Collision;
 import CoreGame.GamePanel;
+import CoreGame.SoundComponent.SoundUtility;
 import HelpDevGameTool.ImageUtility;
 
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Orc1 extends TracjectoryEnemy
 {
@@ -83,5 +85,23 @@ public class Orc1 extends TracjectoryEnemy
                 break;
         }
         PlayAnimMontage(DeathMontage);
+        int ranNum = new Random().nextInt(0,6);
+        if(ranNum>2)SoundUtility.playSound(1,false,"/Sound/SFX/Voice/Orc/DeathOrc_0.wav");
+        else SoundUtility.playSound(1,false,"/Sound/SFX/Voice/Orc/DeathOrc_1.wav");
+    }
+
+    @Override
+    protected void OnReceiveDamage() {
+        super.OnReceiveDamage();
+        int ranNum = new Random().nextInt(0,6);
+        if(ranNum>2)SoundUtility.playSound(1,false,"/Sound/SFX/Voice/Orc/OnHitOrc_0.wav");
+        else SoundUtility.playSound(1,false,"/Sound/SFX/Voice/Orc/OnHitOrc_1.wav");
+    }
+
+    @Override
+    protected void Attack()
+    {
+        if(PlayingAnimationMontage == null && bCanAttack) SoundUtility.playSound(1,false,"/Sound/SFX/Voice/Orc/orc-grunt-3.wav");
+        super.Attack();
     }
 }

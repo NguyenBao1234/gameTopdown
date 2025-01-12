@@ -107,7 +107,7 @@ public class GamePanel extends JPanel implements Runnable
                 }
             }
             player.Render(g2);
-            //postProcessing.Render(g2);
+            postProcessing.Render(g2);
             HUD.Draw(g2); // need call after map for displaying head up
         }
         g2.dispose();
