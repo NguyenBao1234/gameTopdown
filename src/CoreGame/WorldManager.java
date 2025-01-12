@@ -1,6 +1,7 @@
 package CoreGame;
 
 import GameContent.EventTriggerBox.MapPortal;
+import GameContent.NPC.Enemy.Orc1;
 import GameContent.NPC.HangingNPC;
 import GameContent.NPC.NonThreatening.Loop_NPC;
 import GameContent.NPC.NonThreatening.Morph_Idle;
@@ -29,12 +30,12 @@ public class WorldManager
         GamePanel.GetInst().obj[0][2].worldX = 37 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][2].worldY = (int) (15.5 * GamePanel.tileSize);
 
-        GamePanel.GetInst().obj[0][3] = new MapPortal(1, 12,6);
+        GamePanel.GetInst().obj[0][3] = new MapPortal(1, 12,5);
         GamePanel.GetInst().obj[0][3].worldX = 42 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][3].worldY = 16 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[1][0] = new MapPortal(0, 40,17);
-        GamePanel.GetInst().obj[1][0].worldX = 13 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[1][0].worldX = 11 * GamePanel.tileSize;
         GamePanel.GetInst().obj[1][0].worldY = 6 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][4] = new HangingNPC();
@@ -73,12 +74,24 @@ public class WorldManager
         GamePanel.GetInst().obj[0][11].worldY = 13 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][12] = new FootTrap();
-        GamePanel.GetInst().obj[0][12].worldX = 9 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][12].worldX = 13 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][12].worldY = 14 * GamePanel.tileSize;
 
         GamePanel.GetInst().obj[0][13] = new SwampArea();
         GamePanel.GetInst().obj[0][13].worldX = 12 * GamePanel.tileSize;
         GamePanel.GetInst().obj[0][13].worldY = 25 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][14] = new Orc1(false);
+        GamePanel.GetInst().obj[0][14].worldX = 8 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][14].worldY = 13 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][15] = new Orc1(true);
+        GamePanel.GetInst().obj[0][15].worldX = 9 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][15].worldY = 24 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[0][16] = new Orc1(true);
+        GamePanel.GetInst().obj[0][16].worldX = 39 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[0][16].worldY = (int)(15.5 * GamePanel.tileSize);
 
     }
     public static void SimulateObject()
@@ -87,7 +100,7 @@ public class WorldManager
         for(BaseObject object : Objects)
         {
             if (object == null) continue;
-            object.Simulate(GamePanel.GetInst().player);
+            object.Simulate(GamePanel.GetInst().getPlayer());
         }
     }
 }

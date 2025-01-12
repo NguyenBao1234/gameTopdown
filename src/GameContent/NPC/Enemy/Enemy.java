@@ -15,19 +15,18 @@ public abstract class Enemy extends BaseCharacterPendOnPlayer
 {
     protected float Damage = 5;
     protected float health = 40;
-
     protected boolean bCanAttack = false;
-    protected int AttackBoxScaleX = 1, AttackBoxScaleY = 2;
-    protected int AttackBoxWidth =48, AttackBoxHeight = 48;
-    protected TraceDamageNotify damageNotify= new TraceDamageNotify(0, this, AttackBoxScaleX, AttackBoxScaleY);
+    protected float AttackBoxScaleX = 1, AttackBoxScaleY = 1;
+    protected int AttackBoxWidth, AttackBoxHeight;
+    protected TraceDamageNotify damageNotify= new TraceDamageNotify(0, this, (int)AttackBoxScaleX, (int)AttackBoxScaleY);
     protected String AttackMontageSrc[] = new String[4];
-    protected AnimMontage AttackMontage = new AnimMontage(damageNotify);
+    protected AnimMontage AttackMontage = new AnimMontage(6,damageNotify);
 
     protected NotifyWithBinder DeathNotify = new NotifyWithBinder(5,0,this::DestroyThis);
     protected AnimMontage DeathMontage = new AnimMontage(DeathNotify);
 
     protected String OnHitMontageSrc[] = new String[4];
-    protected AnimMontage OnHitMontage;
+    protected AnimMontage OnHitMontage = new AnimMontage();
 
     protected int velocityDirection = 1;
 
@@ -36,6 +35,7 @@ public abstract class Enemy extends BaseCharacterPendOnPlayer
         super.Tick(delta);
         HandleLocomotion();
         HandleAbleAttack();
+        if(bCanAttack)Attack();
         HandleAIMoving();
     }
 
@@ -43,34 +43,35 @@ public abstract class Enemy extends BaseCharacterPendOnPlayer
     {
         int BoxWorldX = worldX;
         int BoxWorldY = worldY;
-        int BiasX = AttackBoxScaleX * GamePanel.tileSize - GamePanel.tileSize;
-        int BiasY = AttackBoxScaleY * GamePanel.tileSize - GamePanel.tileSize;
+        AttackBoxWidth = (int)(AttackBoxScaleX * GamePanel.tileSize);
+        AttackBoxHeight = (int)(AttackBoxScaleY * GamePanel.tileSize);
+
+        int BiasX = AttackBoxWidth - GamePanel.tileSize;
+        int BiasY = AttackBoxHeight - GamePanel.tileSize;
         boolean bHasSwapAttackBoxEdge = false;
         switch (GetCurrentDirection())
         {
             case up :
-                BoxWorldY -= GamePanel.tileSize - BiasY;
-                BoxWorldX -= BiasX/2;
+                BoxWorldY -= AttackBoxWidth;
                 break;
             case down:
-                BoxWorldY += GamePanel.tileSize;
-                BoxWorldX -= BiasX/2;
                 break;
             case left:
                 SwapBoxDirect();
                 bHasSwapAttackBoxEdge = true;
-                BoxWorldX -= GamePanel.tileSize - BiasY;
+                BoxWorldX -= 0;
                 BoxWorldY -= BiasX/2;
                 break;
             case right:
                 SwapBoxDirect();
                 bHasSwapAttackBoxEdge = true;
-                BoxWorldX += GamePanel.tileSize;
+                BoxWorldX += 0;
                 BoxWorldY -= BiasX/2;
                 break;
         }
         boolean DecideAttack = false;
-        for (BaseObject object: CollisionChecker.GetOverlappedObjectsInBox(BoxWorldX, BoxWorldY, AttackBoxWidth, AttackBoxHeight))
+        for (BaseObject object: CollisionChecker.GetOverlappedObjectsInBox(this, BoxWorldX, BoxWorldY,
+                AttackBoxWidth, AttackBoxHeight))
         {
             if(object instanceof MainPlayer) DecideAttack = true;
         }
@@ -85,44 +86,51 @@ public abstract class Enemy extends BaseCharacterPendOnPlayer
     }
 
     //Handle Moving by VelocityAxis
-    protected void HandleAIMoving()
+    protected boolean HandleAIMoving()
     {
-        if(PlayingAnimationMontage != null)return;
-        if(vAxisX == 0 && vAxisY == 0) return;
+        if(bCanAttack) return false;
+        if(PlayingAnimationMontage != null)return false;
+        if(vAxisX == 0 && vAxisY == 0) return false;
+
         int collX = worldX + CollisionArea.x;
         int collY = worldY + CollisionArea.y;
         if (vAxisY > 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this, collX, collY - Speed, CollisionArea.width, CollisionArea.height))
             {
                 worldY -= Speed;
+                return true;
             }
         }
         if (vAxisY < 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this,collX, collY + Speed, CollisionArea.width, CollisionArea.height))
             {
                 worldY += Speed;
+                return true;
             }
         }
         if (vAxisX > 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this,collX + Speed, collY, CollisionArea.width, CollisionArea.height))
             {
                 worldX += Speed;
+                return true;
             }
         }
         if (vAxisX < 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this,collX - Speed, collY, CollisionArea.width, CollisionArea.height))
             {
                 worldX -= Speed;
+                return true;
             }
         }
+        return false;
     }
 
     abstract protected void HandleLocomotion();
@@ -130,7 +138,11 @@ public abstract class Enemy extends BaseCharacterPendOnPlayer
     @Override
     protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY)
     {
-        if(health <=0) return;
+        if(health<=0)
+        {
+            OnDeath();
+            return;
+        }
         health -= Damage;
         if(health > 0) OnReceiveDamage();
         else OnDeath();
@@ -138,40 +150,41 @@ public abstract class Enemy extends BaseCharacterPendOnPlayer
 
     protected void Attack()
     {
+        if(health<=0) return;
         if(PlayingAnimationMontage != null) return;
         switch (GetCurrentDirection())
         {
-            case down :AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[0],SpriteRenderSizeX,SpriteRenderSizeY));
+            case down :AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[0],flipBookFrameSizeX,flipBookFrameSizeY));
                 break;
-            case up:AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[1],SpriteRenderSizeX,SpriteRenderSizeY));
+            case up:AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[1],flipBookFrameSizeX,flipBookFrameSizeY));
                 break;
-            case left:AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[2],SpriteRenderSizeX,SpriteRenderSizeY));
+            case left:AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[2],flipBookFrameSizeX,flipBookFrameSizeY));
                 break;
-            case right:AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[3],SpriteRenderSizeX,SpriteRenderSizeY));
+            case right:AttackMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(AttackMontageSrc[3],flipBookFrameSizeX,flipBookFrameSizeY));
                 break;
         }
         PlayAnimMontage(AttackMontage);
     }
     protected void OnReceiveDamage()
     {
-        if(PlayingAnimationMontage != null) return;
         if(OnHitMontage == null) return;
         switch (GetCurrentDirection())
         {
-            case up :OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[0],SpriteRenderSizeX,SpriteRenderSizeY));
+            case up :OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[0], flipBookFrameSizeX, flipBookFrameSizeY));
                 break;
-            case down:OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[1],SpriteRenderSizeX,SpriteRenderSizeY));
+            case down:OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[1],flipBookFrameSizeX, flipBookFrameSizeY));
                 break;
-            case left:OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[2],SpriteRenderSizeX,SpriteRenderSizeY));
+            case left:OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[2],flipBookFrameSizeX, flipBookFrameSizeY));
                 break;
-            case right:OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[3],SpriteRenderSizeX,SpriteRenderSizeY));
+            case right:OnHitMontage.setFlipBook(ImageUtility.MakeFlipBookFromSheet(OnHitMontageSrc[3],flipBookFrameSizeX, flipBookFrameSizeY));
                 break;
         }
         PlayAnimMontage(OnHitMontage);
     };
     abstract protected void OnDeath();
 
-    private void DestroyThis(){Destroy(this);}
+    private void DestroyThis(){Destroy(this);
+    System.out.println("Destroyed Enemy");}
 
     public float getDamage() {return Damage;}
 

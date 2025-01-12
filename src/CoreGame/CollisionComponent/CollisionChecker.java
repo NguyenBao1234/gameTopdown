@@ -135,11 +135,11 @@ public class CollisionChecker
                 TileManager.tiles[tile2Type].collision == Collision.Block);
     }
 
-    public static boolean IsCollidingWithObjectInBox(int x, int y, int width, int height)
+    public static boolean IsCollidingWithObjectInBox(BaseObject Owner, int x, int y, int width, int height)
     {
-        for( BaseObject object : GetOverlappedObjectsInBox(x,y,width,height))
+        for( BaseObject object : GetOverlappedObjectsInBox(Owner,x,y,width,height))
         {
-            if(object.getCollisionMode() == Collision.Overlap) continue;
+            if(object.getCollisionMode() != Collision.Block) continue;
             return true;
         }
         return false;
@@ -178,7 +178,7 @@ public class CollisionChecker
         return OverlappedObjects.toArray(Entity[]::new);
     }
 
-    public static BaseObject[] GetOverlappedObjectsInBox(int worldX, int worldY, int width, int height)
+    public static BaseObject[] GetOverlappedObjectsInBox(BaseObject Owner, int worldX, int worldY, int width, int height)
     {
         Rectangle Box = new Rectangle();
         Box.x = worldX;
@@ -190,11 +190,21 @@ public class CollisionChecker
 
         List <BaseObject> OverlappedObjects = new ArrayList<>();
         int curMap = GamePanel.GetInst().currentMapIndex;
+
+        if(GamePanel.GetInst().getPlayer() != Owner)
+        {
+            objectCollisionWorld.x = GamePanel.GetInst().getPlayer().worldX + GamePanel.GetInst().getPlayer().getCollisionArea().width;
+            objectCollisionWorld.y = GamePanel.GetInst().getPlayer().worldY + GamePanel.GetInst().getPlayer().getCollisionArea().height;
+            objectCollisionWorld.width = GamePanel.GetInst().getPlayer().getCollisionArea().width;
+            objectCollisionWorld.height = GamePanel.GetInst().getPlayer().getCollisionArea().height;
+            if (Box.intersects(objectCollisionWorld)) OverlappedObjects.add(GamePanel.GetInst().getPlayer());
+        }
         for(int i = 0; i< GamePanel.GetInst().obj[curMap].length; i++ )
         {
             if (GamePanel.GetInst().obj[curMap][i] != null )
             {
-                if(GamePanel.GetInst().obj[curMap][i].getCollisionMode() == Collision.NoCollision ) continue;
+                if(GamePanel.GetInst().obj[curMap][i].getCollisionMode() == Collision.NoCollision ||
+                        GamePanel.GetInst().obj[curMap][i] == Owner) continue;
                 objectCollisionWorld.x = GamePanel.GetInst().obj[curMap][i].worldX + GamePanel.GetInst().obj[curMap][i].getCollisionArea().x;
                 objectCollisionWorld.y = GamePanel.GetInst().obj[curMap][i].worldY + GamePanel.GetInst().obj[curMap][i].getCollisionArea().y;
                 objectCollisionWorld.height = GamePanel.GetInst().obj[curMap][i].getCollisionArea().height;

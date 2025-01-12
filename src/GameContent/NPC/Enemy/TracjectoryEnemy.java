@@ -26,60 +26,17 @@ public abstract class TracjectoryEnemy extends Enemy
     }
 
     @Override
-    protected void HandleAIMoving()
+    protected boolean HandleAIMoving()
     {
-        super.HandleAIMoving();
-        if(PlayingAnimationMontage != null)return;
-
+        if(PlayingAnimationMontage != null)return false;
+        if(bCanAttack) return false;
         if(HorizontalTrajectory) UpdateCurrentDirectionX(velocityDirection);
         else UpdateCurrentDirectionY(velocityDirection);
 
-        if(vAxisX == 0 && vAxisY == 0) return;
-
-        int collX = worldX + CollisionArea.x;
-        int collY = worldY + CollisionArea.y;
-        if (vAxisY > 0)
-        {
-            if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height))
-            {
-                velocityDirection = -1;
-            }
-        }
-        if (vAxisY < 0)
-        {
-            if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height))
-            {
-                velocityDirection = 1;
-            }
-        }
-        if (vAxisX > 0)
-        {
-            if(!CollisionChecker.IsCollidingWithTileInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height))
-            {
-                velocityDirection = - 1;
-            }
-        }
-        if (vAxisX < 0)
-        {
-            if(!CollisionChecker.IsCollidingWithTileInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height))
-            {
-                velocityDirection = 1;
-            }
-        }
+        if(!super.HandleAIMoving()) velocityDirection *=-1;
+        return true;
     }
 
-    @Override
-    protected void Attack()
-    {
-    }
-    //Handle on some special event occur:
-    @Override
-    protected void OnReceiveDamage() {
-    }
     @Override
     protected void OnDeath() {
     }

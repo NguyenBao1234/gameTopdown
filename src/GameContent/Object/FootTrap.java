@@ -22,10 +22,8 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
     public FootTrap()
     {
         SetupAnimation();
-        SpriteRenderSizeX = 16 * GamePanel.scale;
-        SpriteRenderSizeY = 16 * GamePanel.scale;
         setCollisionMode(Collision.Overlap);
-        setCollisionArea(0, 0, 10 * GamePanel.scale, 10 * GamePanel.scale);
+        setCollisionArea(0, 32, 10 * GamePanel.scale, 10 * GamePanel.scale);
         //setCollisionArea(x,y,a,b); chinh lai de nhan vat di sau vao hon
     }
 

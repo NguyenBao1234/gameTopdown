@@ -15,12 +15,12 @@ import java.util.ArrayList;
 public class TraceDamageNotify extends AnimNotify
 {
     private final BaseCharacter Container;
-    private int scaleX, scaleY;
+    private float scaleX, scaleY;
     int width, height;
 
-    public TraceDamageNotify(int frameStart, BaseCharacter entityContain, int BoxScaleX, int BoxScaleY)
+    public TraceDamageNotify(int frameStart, BaseCharacter entityContain, float BoxScaleX, float BoxScaleY)
     {
-        super(frameStart, 2);
+        super(frameStart, 0);
         Container = entityContain;
         scaleX = BoxScaleX;
         scaleY = BoxScaleY;
@@ -31,18 +31,18 @@ public class TraceDamageNotify extends AnimNotify
     {
         float damage = (Container instanceof Enemy) ? ((Enemy) Container).getDamage() : ((MainPlayer) Container).getDamageWeapon();
 
-        int BiasX = scaleX * GamePanel.tileSize - GamePanel.tileSize;
-        int BiasY = scaleY * GamePanel.tileSize - GamePanel.tileSize;
+        width = (int)(scaleX * GamePanel.tileSize);
+        height = (int)(scaleY * GamePanel.tileSize);
         int worldX = Container.worldX;
         int worldY = Container.worldY;
-        width = GamePanel.tileSize * scaleX;
-        height =  GamePanel.tileSize * scaleY;
+        int BiasX = width - GamePanel.tileSize;
+        int BiasY = height - GamePanel.tileSize;
 
         boolean bHasSwapEdge = false;
         switch(Container.GetCurrentDirection())
         {
             case up :
-                worldY -= GamePanel.tileSize - BiasY;
+                worldY -= (GamePanel.tileSize + BiasY);
                 worldX -= BiasX/2;
                 break;
             case down:
@@ -52,7 +52,7 @@ public class TraceDamageNotify extends AnimNotify
             case left:
                 SwapBoxDirect();
                 bHasSwapEdge = true;
-                worldX -= GamePanel.tileSize - BiasY;
+                worldX -= (GamePanel.tileSize + BiasY);
                 worldY -= BiasX/2;
                 break;
             case right:
@@ -62,12 +62,11 @@ public class TraceDamageNotify extends AnimNotify
                 worldY -= BiasX/2;
                 break;
         }
-        for (BaseObject enemy: CollisionChecker.GetOverlappedObjectsInBox(worldX, worldY, width, height))
+        for (BaseObject enemy: CollisionChecker.GetOverlappedObjectsInBox(Container,worldX, worldY, width, height))
         {
             Container.ApplyPointDamage( enemy,Container, damage,
                     enemy.getScreenX(), enemy.getScreenY(),
                     Container.worldX,Container.worldY );
-            System.out.println(enemy);
         }
         if(bHasSwapEdge) SwapBoxDirect();
     }

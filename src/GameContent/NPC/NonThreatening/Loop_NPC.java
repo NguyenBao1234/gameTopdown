@@ -43,14 +43,14 @@ public class Loop_NPC extends ObjectPendOnPlayer implements InteractInterface
         else
         {
             HUD.AddWidget(DialogueWD);
-            GamePanel.GetInst().player.SetFreeToControl(false);
+            GamePanel.GetInst().getPlayer().SetFreeToControl(false);
         }
     }
 
     private void QuitDialog()
     {
         DialogueWD.RemoveFromHUD();
-        GamePanel.GetInst().player.SetFreeToControl(true);
+        GamePanel.GetInst().getPlayer().SetFreeToControl(true);
         KeyHandler.getInstance().UnbindAction(KeyEvent.VK_Q,this::QuitDialog);
     }
 }

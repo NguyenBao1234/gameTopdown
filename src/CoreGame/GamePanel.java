@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable
 
 
     // ENTITY AND OBJECT
-    public MainPlayer player;
+    private MainPlayer player;
     public BaseObject obj[][] = new BaseObject[maxMap][25];//[amount of Maps][object each map]
     PostProcessing postProcessing = new PostProcessing();
     public SaveLoad saveLoad = new SaveLoad();
@@ -107,7 +107,7 @@ public class GamePanel extends JPanel implements Runnable
                 }
             }
             player.Render(g2);
-            postProcessing.Render(g2);
+            //postProcessing.Render(g2);
             HUD.Draw(g2); // need call after map for displaying head up
         }
         g2.dispose();
@@ -141,4 +141,5 @@ public class GamePanel extends JPanel implements Runnable
     public MainMenuWD getMainMenuWD() {
         return mainMenuWD;
     }
+    public MainPlayer getPlayer(){return player;}
 }

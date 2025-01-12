@@ -39,14 +39,14 @@ public class MapPortal extends ObjectPendOnPlayer
     public static void Telepot(int MapIndex, int StartLocationX, int StartLocationY)
     {
         GamePanel.GetInst().currentMapIndex = MapIndex;
-        GamePanel.GetInst().player.worldX = StartLocationX * GamePanel.tileSize;
-        GamePanel.GetInst().player.worldY = StartLocationY * GamePanel.tileSize;
+        GamePanel.GetInst().getPlayer().worldX = StartLocationX * GamePanel.tileSize;
+        GamePanel.GetInst().getPlayer().worldY = StartLocationY * GamePanel.tileSize;
     }
 
     public static void Telepot(int MapIndex, Point StartLocation)
     {
         GamePanel.GetInst().currentMapIndex = MapIndex;
-        GamePanel.GetInst().player.worldX = StartLocation.x * GamePanel.tileSize;
-        GamePanel.GetInst().player.worldY = StartLocation.y * GamePanel.tileSize;
+        GamePanel.GetInst().getPlayer().worldX = StartLocation.x * GamePanel.tileSize;
+        GamePanel.GetInst().getPlayer().worldY = StartLocation.y * GamePanel.tileSize;
     }
 }

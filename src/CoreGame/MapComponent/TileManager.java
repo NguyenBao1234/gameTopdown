@@ -43,8 +43,8 @@ public class TileManager
     public static void DrawTiles(final Graphics2D g2)
     {
         int currMapIndex = GamePanel.GetInst().currentMapIndex;
-        int playerWorldX = GamePanel.GetInst().player.worldX;
-        int playerWorldY = GamePanel.GetInst().player.worldY;
+        int playerWorldX = GamePanel.GetInst().getPlayer().worldX;
+        int playerWorldY = GamePanel.GetInst().getPlayer().worldY;
         if(tileTypeMap[currMapIndex] == null) return;
         for(int i = 0; i < tileTypeMap[currMapIndex].length; i++)
         {

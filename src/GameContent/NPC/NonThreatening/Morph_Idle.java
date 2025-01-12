@@ -35,7 +35,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             if(!DialogueWD.IsOnScreen())
             {
                 interactCount ++;
-                GamePanel.GetInst().player.SetFreeToControl(true);
+                GamePanel.GetInst().getPlayer().SetFreeToControl(true);
             }
         }
         else
@@ -54,7 +54,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             }
             if(interactCount > 4) return;
             HUD.AddWidget(DialogueWD);
-            GamePanel.GetInst().player.SetFreeToControl(false);
+            GamePanel.GetInst().getPlayer().SetFreeToControl(false);
         }
     }
 }

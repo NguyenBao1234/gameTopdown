@@ -95,6 +95,7 @@ public class MainPlayer extends Player
 
     void InputAxisMove()
     {
+        if(currenthealth<=0) return;
         if(!bFreeToControl) return;
 
         float diagonalFactor = (vAxisX != 0 && vAxisY != 0) ? 0.75f : 1.0f;
@@ -138,7 +139,7 @@ public class MainPlayer extends Player
         if (vAxisY > 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this, collX, collY - Speed, CollisionArea.width, CollisionArea.height))
             {
                 worldY -= (int) (Speed * speedFactor);
             }
@@ -146,7 +147,7 @@ public class MainPlayer extends Player
         if (vAxisY < 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this, collX, collY + Speed, CollisionArea.width, CollisionArea.height))
             {
                 worldY += (int) (Speed * speedFactor);
             }
@@ -154,7 +155,7 @@ public class MainPlayer extends Player
         if (vAxisX > 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this,collX + Speed, collY, CollisionArea.width, CollisionArea.height))
             {
                 worldX += (int) (Speed * speedFactor);
             }
@@ -162,7 +163,7 @@ public class MainPlayer extends Player
         if (vAxisX < 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this, collX - Speed, collY, CollisionArea.width, CollisionArea.height))
             {
                 worldX -= (int) (Speed * speedFactor);
             }
@@ -221,7 +222,7 @@ public class MainPlayer extends Player
     {
         int BiasInteractBox = 8* GamePanel.scale;
         for(BaseObject overlappedObject : CollisionChecker.GetOverlappedObjectsInBox(
-                worldX + CollisionArea.x - BiasInteractBox,
+                this,worldX + CollisionArea.x - BiasInteractBox,
                 worldY + CollisionArea.y - BiasInteractBox,
                 CollisionArea.width +BiasInteractBox*2,
                 CollisionArea.height + BiasInteractBox*2))
@@ -308,8 +309,8 @@ public class MainPlayer extends Player
     protected void OnAnyDamage(Entity Causer, float Damage, int SourceWorldX, int SourceWorldY) {
         currenthealth -= Damage;
         StateWD.updateHealth(currenthealth);
-        if (Damage < 0 || currenthealth <= 0) return;
-
+        if (Damage < 0 ) return;
+        if(currenthealth <= 0) DeathAnim();
         String SoundOnDamageSrc;
         int randomNum = new Random().nextInt(0,6);
         if(randomNum>2) SoundOnDamageSrc = "/Sound/SFX/Voice/Player/FemaleReceiveDamage1.wav";
