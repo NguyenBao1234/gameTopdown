@@ -9,6 +9,8 @@ import GameContent.Object.MasterObject.ObjectNeedKeyItem;
 import GameContent.WidgetInstances.NarrativeMessageWD;
 import HelpDevGameTool.ImageUtility;
 
+import java.awt.*;
+
 public class EyeChest extends ObjectNeedKeyItem
 {
     private final NarrativeMessageWD Dialogue;
@@ -39,7 +41,7 @@ public class EyeChest extends ObjectNeedKeyItem
                 {
                     discomfort = 7;
                     Sprite = ImageUtility.LoadImage(ImgDefaultPath);
-                    MapPortal.Telepot(2,8,25);
+                    MapPortal.Telepot(2,8,25, new Color(0x130208));
                 }
             }
             return;

@@ -44,6 +44,7 @@ public class Lightning {
         g2.dispose();
     }
     public void draw(Graphics2D g2){
+        if(GamePanel.GetInst().currentMapIndex >2 ) return;
         g2.drawImage(darknessFilter,0,0,null);
     }
 }

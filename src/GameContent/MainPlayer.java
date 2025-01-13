@@ -383,4 +383,9 @@ public class MainPlayer extends Player
     {
         StateWD.updateHealth(currenthealth);
     }
+    public void RestoreState()
+    {
+        currenthealth =  100;
+        UpdateStateWD();
+    }
 }

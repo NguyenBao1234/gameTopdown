@@ -37,6 +37,9 @@ public class EndGameWidget extends OptionalWidget
     @Override
     public void Draw(Graphics2D g2)
     {
+        g2.setColor(new Color(0,0,0,0.7f));
+        g2.fillRect(0, 0, GamePanel.screenWidth, GamePanel.screenHeight);
+
         g2.setFont(customFont.deriveFont(Font.BOLD, 64));
         int x = 64 * GamePanel.scale;
         int y = 45 * GamePanel.scale;

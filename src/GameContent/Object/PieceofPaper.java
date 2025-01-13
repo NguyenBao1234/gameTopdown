@@ -12,7 +12,7 @@ public class PieceofPaper extends ObjectPendOnPlayer implements InteractInterfac
     boolean claim = false;
     public NarrativeMessageWD Dialogue;
     public PieceofPaper(){
-        Sprite = ImageUtility.LoadImage("/PieceOfPaper/pieceofpaper.png");
+        Sprite = ImageUtility.LoadImage("/Objects/pieceofpaper.png");
         Dialogue = new NarrativeMessageWD(true,"The real exist did not exist " +
                 "\n HAHAHAAA...." );
 

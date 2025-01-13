@@ -57,7 +57,7 @@ public abstract class BaseObject extends Entity
         if(Sprite == null) return;
         SpriteRenderSizeX = Sprite.getWidth() * GamePanel.scale;
         SpriteRenderSizeY = Sprite.getHeight() * GamePanel.scale;
-        CollisionArea = new Rectangle(0,0,SpriteRenderSizeX,SpriteRenderSizeY);
+        CollisionArea = new Rectangle((GamePanel.tileSize-SpriteRenderSizeX)/2,(GamePanel.tileSize-SpriteRenderSizeY)/2,SpriteRenderSizeX,SpriteRenderSizeY);
         CollisionMode = Collision.Block;
     }
 

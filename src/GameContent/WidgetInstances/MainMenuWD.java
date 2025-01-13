@@ -98,7 +98,9 @@ public class MainMenuWD extends OptionalWidget
         {
             GamePanel.GetInst().gameState = GameState.Run;
             HUD.RemoveWidget(this);
-            GamePanel.GetInst().getPlayer().UpdateStateWD();
+            GamePanel.GetInst().currentMapIndex = 0;
+            GamePanel.GetInst().getPlayer().RestoreState();
+            GamePanel.GetInst().SetBackgroundColorDefault();
         }
         if(SelectingRowOption == 1) {
             try {

@@ -13,6 +13,8 @@ import GameContent.Object.MasterObject.BreakableObject;
 import GameContent.Object.MasterObject.KeyItemObject;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 
+import java.awt.*;
+
 public class WorldManager
 {
     public static void SetUpObject()
@@ -142,6 +144,19 @@ public class WorldManager
         GamePanel.GetInst().obj[1][13].worldX = 30 * GamePanel.tileSize;
         GamePanel.GetInst().obj[1][13].worldY = 30 * GamePanel.tileSize;
 
+        GamePanel.GetInst().obj[1][13] = new Orc1(false);
+        GamePanel.GetInst().obj[1][13].worldX = 30 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[1][13].worldY = 30 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[1][14] = new ObjectPendOnPlayer("/Objects/Lich_shadow3.png");
+        GamePanel.GetInst().obj[1][14].worldX = 15 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[1][14].worldY = 41 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[1][14].setCollisionArea(-128,-128,128*3,128*3);
+
+        GamePanel.GetInst().obj[1][15] = new MapPortal(4,4,7, new Color(0xFF73451E, true));
+        GamePanel.GetInst().obj[1][15].worldX = 8 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[1][15].worldY = 43 * GamePanel.tileSize;
+
         GamePanel.GetInst().obj[2][0] = new PortalObject(0,42, 14);
         GamePanel.GetInst().obj[2][0].worldX = 21 * GamePanel.tileSize;
         GamePanel.GetInst().obj[2][0].worldY = 16 * GamePanel.tileSize;
@@ -158,10 +173,13 @@ public class WorldManager
         GamePanel.GetInst().obj[2][3].worldX = 23 * GamePanel.tileSize;
         GamePanel.GetInst().obj[2][3].worldY = 4 * GamePanel.tileSize;
 
-        GamePanel.GetInst().obj[3][0] = new EndGameTrigger("Good Ending");
+        GamePanel.GetInst().obj[3][0] = new EndGameTrigger("Secret Ending");
         GamePanel.GetInst().obj[3][0].worldX = 42 * GamePanel.tileSize;
         GamePanel.GetInst().obj[3][0].worldY = 40 * GamePanel.tileSize;
 
+        GamePanel.GetInst().obj[4][0] = new EndGameTrigger("Normal Ending");
+        GamePanel.GetInst().obj[4][0].worldX = 45 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[4][0].worldY = 6 * GamePanel.tileSize;
     }
     public static void SimulateObject()
     {
