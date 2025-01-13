@@ -1175,11 +1175,11 @@ true
 TileSet_587.png
 true
 TileSet_588.png
-true
+false
 TileSet_589.png
-true
+false
 TileSet_590.png
-true
+false
 TileSet_591.png
 true
 TileSet_592.png

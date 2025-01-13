@@ -1,6 +1,8 @@
 package CoreGame;
 
+import GameContent.EventTriggerBox.EndGameTrigger;
 import GameContent.EventTriggerBox.MapPortal;
+import GameContent.EventTriggerBox.TextTrigger;
 import GameContent.NPC.Enemy.Orc1;
 import GameContent.NPC.HangingNPC;
 import GameContent.NPC.NonThreatening.Loop_NPC;
@@ -139,6 +141,26 @@ public class WorldManager
         GamePanel.GetInst().obj[1][13] = new Orc1(false);
         GamePanel.GetInst().obj[1][13].worldX = 30 * GamePanel.tileSize;
         GamePanel.GetInst().obj[1][13].worldY = 30 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[2][0] = new PortalObject(0,42, 14);
+        GamePanel.GetInst().obj[2][0].worldX = 21 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[2][0].worldY = 16 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[2][1] = new TextTrigger("Hang da bi chan");
+        GamePanel.GetInst().obj[2][1].worldX = 30 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[2][1].worldY = 16 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[2][2] = new TextTrigger("Le ra nguoi khong th o day","Bang cach nao co chu");
+        GamePanel.GetInst().obj[2][2].worldX = 11 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[2][2].worldY = 42 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[2][3] = new MapPortal(3, 16,8);
+        GamePanel.GetInst().obj[2][3].worldX = 23 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[2][3].worldY = 4 * GamePanel.tileSize;
+
+        GamePanel.GetInst().obj[3][0] = new EndGameTrigger("Good Ending");
+        GamePanel.GetInst().obj[3][0].worldX = 42 * GamePanel.tileSize;
+        GamePanel.GetInst().obj[3][0].worldY = 40 * GamePanel.tileSize;
 
     }
     public static void SimulateObject()

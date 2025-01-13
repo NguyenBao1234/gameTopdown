@@ -32,8 +32,6 @@ public class GameOverWD extends OptionalWidget
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.BindAction(KeyEvent.VK_W, true,this::Up);
         ControllerComp.BindAction(KeyEvent.VK_S, true,this::Down);
-        ControllerComp.BindAction(KeyEvent.VK_A, true,this::Left);
-        ControllerComp.BindAction(KeyEvent.VK_D, true,this::Right);
         ControllerComp.BindAction(KeyEvent.VK_ENTER, true,this::SelectOption);
     }
 
@@ -94,8 +92,6 @@ public class GameOverWD extends OptionalWidget
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.UnbindAction(KeyEvent.VK_W, this::Up);
         ControllerComp.UnbindAction(KeyEvent.VK_S, this::Down);
-        ControllerComp.UnbindAction(KeyEvent.VK_A, this::Left);
-        ControllerComp.UnbindAction(KeyEvent.VK_D, this::Right);
         ControllerComp.UnbindAction(KeyEvent.VK_ENTER, this::SelectOption);
         HUD.RemoveWidget(this);
     }

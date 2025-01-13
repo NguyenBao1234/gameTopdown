@@ -31,6 +31,8 @@ public class TileManager
         getTileImage();
         LoadMap("/Map/Abyss1.txt",0);
         LoadMap("/Map/Abyss2.txt",1);
+        LoadMap("/Map/OtherWorld.txt",2);
+        LoadMap("/Map/Grass1.txt",3);
         tileTypeMap = tileTypeMapList.toArray(new int[0][][]);
     }
 

@@ -4,6 +4,7 @@ import java.awt.*;
 
 import static CoreGame.WidgetComponent.HUD.IsWidgetOnScreen;
 import static CoreGame.WidgetComponent.HUD.RemoveWidget;
+import static CoreGame.WidgetComponent.HUD.AddWidget;
 
 public abstract class Widget
 {
@@ -17,5 +18,9 @@ public abstract class Widget
     public void RemoveFromHUD()
     {
         RemoveWidget(this);
+    }
+    public void AddToViewport()
+    {
+        AddWidget(this);
     }
 }

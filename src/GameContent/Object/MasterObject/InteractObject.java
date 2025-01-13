@@ -4,7 +4,7 @@ import HelpDevGameTool.ImageUtility;
 
 public class InteractObject extends ObjectPendOnPlayer implements InteractInterface
 {
-    String ImgInteractionPath, ImgDefaultPath;
+    protected String ImgInteractionPath, ImgDefaultPath;
 
     public InteractObject(){};
 
