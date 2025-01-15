@@ -1,6 +1,7 @@
 package GameContent.NPC.NonThreatening;
 
 import CoreGame.GamePanel;
+import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
@@ -35,7 +36,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             if(!DialogueWD.IsOnScreen())
             {
                 interactCount ++;
-                GamePanel.GetInst().player.SetFreeToControl(true);
+                GamePanel.GetInst().getPlayer().SetFreeToControl(true);
             }
         }
         else
@@ -45,6 +46,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
                     "Nguoi co bi dien khong",
                     "Ta mac ke nha nguoi ");
             if(interactCount == 4)  {
+                SoundUtility.playSound(1,false,"/Sound/SFX/Object/confirmation-upward.wav");
                 DialogueWD.SetMessages("game save!");
                 try {
                     GamePanel.GetInst().saveLoad.save();
@@ -54,7 +56,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             }
             if(interactCount > 4) return;
             HUD.AddWidget(DialogueWD);
-            GamePanel.GetInst().player.SetFreeToControl(false);
+            GamePanel.GetInst().getPlayer().SetFreeToControl(false);
         }
     }
 }

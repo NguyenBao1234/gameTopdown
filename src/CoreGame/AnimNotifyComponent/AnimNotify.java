@@ -8,6 +8,7 @@ public abstract class AnimNotify
     public int getFrameFinish(){return FrameFinish;}
     public void setFrameStart(int newFrame) {FrameStart = newFrame;}
     public void setFrameFinish(int newFrame) {FrameFinish = newFrame;}
+    public void setFrameRange(int StartFrame, int EndFrame){FrameStart = StartFrame; FrameFinish = EndFrame;}
 
     public AnimNotify(int frameStart, int frameFinish)
     {

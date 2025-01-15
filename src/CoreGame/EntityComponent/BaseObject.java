@@ -14,6 +14,8 @@ public abstract class BaseObject extends Entity
     protected BufferedImage[] flipBook;
     protected BufferedImage Sprite;
 
+    protected int flipBookFrameSizeX = 64;
+    protected int flipBookFrameSizeY = 64;
     protected boolean bVisible = true;
     protected int screenX,screenY;
     protected int SpriteRenderSizeX, SpriteRenderSizeY;
@@ -55,7 +57,7 @@ public abstract class BaseObject extends Entity
         if(Sprite == null) return;
         SpriteRenderSizeX = Sprite.getWidth() * GamePanel.scale;
         SpriteRenderSizeY = Sprite.getHeight() * GamePanel.scale;
-        CollisionArea = new Rectangle(0,0,SpriteRenderSizeX,SpriteRenderSizeY);
+        CollisionArea = new Rectangle((GamePanel.tileSize-SpriteRenderSizeX)/2,(GamePanel.tileSize-SpriteRenderSizeY)/2,SpriteRenderSizeX,SpriteRenderSizeY);
         CollisionMode = Collision.Block;
     }
 
@@ -74,6 +76,7 @@ public abstract class BaseObject extends Entity
     {
         if(!bVisible || Sprite == null) return;
         g2.drawImage(Sprite, screenX, screenY, SpriteRenderSizeX, SpriteRenderSizeY, null );
+        //g2.drawRect(screenX + CollisionArea.x,screenY + CollisionArea.y,CollisionArea.width,CollisionArea.height);
     }
 
 

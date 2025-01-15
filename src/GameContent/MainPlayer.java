@@ -11,8 +11,10 @@ import CoreGame.KeyHandlerComponent.KeyHandler;
 import CoreGame.PlayerComponent.Player;
 import CoreGame.SoundComponent.SoundUtility;
 import CoreGame.WidgetComponent.HUD;
+import GameContent.NotifyInstances.NotifyWithBinder;
 import GameContent.NotifyInstances.TraceDamageNotify;
 import GameContent.Object.MasterObject.InteractInterface;
+import GameContent.WidgetInstances.GameOverWD;
 import GameContent.WidgetInstances.HealthBar;
 import GameContent.WidgetInstances.PauseWD;
 import HelpDevGameTool.ImageUtility;
@@ -20,20 +22,25 @@ import HelpDevGameTool.ImageUtility;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class MainPlayer extends Player
 {
-    public float speedFactor = 1;
+    public float currentSpeedFactor = 1.0f;
+    public float speedFactor = 1.0f;
     private final PauseWD pauseWD = new PauseWD();
     private final HealthBar StateWD = new HealthBar(100, 22);
+    private final GameOverWD GameOverScreen = new GameOverWD();
     private float DamageWeapon = 4;
     public float maxhealth = 100;
     public float currenthealth = 100;
     private boolean bFreeToControl = true;
 
-
-    private TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
-    private final AnimMontage AttackMontage = new AnimMontage();
+    private NotifyWithBinder OnDeathNotify = new NotifyWithBinder(7,7);
+    private final TraceDamageNotify DmgNotify = new TraceDamageNotify(1,this,2,1);
+    private final AnimMontage AttackMontage = new AnimMontage(4,DmgNotify);
+    private final AnimMontage DeathMontage = new AnimMontage(4,ImageUtility.MakeFlipBookFromSheet("/Player/spr_player_death.png",64,64),OnDeathNotify);
+    private final AnimMontage OnHitMontage = new AnimMontage(3);
 
     public MainPlayer()
     {
@@ -57,7 +64,7 @@ public class MainPlayer extends Player
         CollisionMode = Collision.Block;
 
         SetupPlayerInputComponent();
-        AttackMontage.AddNotify(DmgNotify);
+        OnDeathNotify.AddDynamic(this::OnGameOver);
     }
 
     private void SetupPlayerInputComponent()
@@ -75,7 +82,7 @@ public class MainPlayer extends Player
     public void Tick(float delta) {
         super.Tick(delta);
         InputAxisMove();
-        handleLocationByCollision();
+        handleLocation();
         handelAnimation();
     }
 
@@ -88,9 +95,13 @@ public class MainPlayer extends Player
 
     void InputAxisMove()
     {
+        if(currenthealth<=0) return;
         if(!bFreeToControl) return;
-        if( vAxisX !=0 && vAxisY !=0 ) speedFactor = 3/4f;
-        else speedFactor = 1;
+
+        float diagonalFactor = (vAxisX != 0 && vAxisY != 0) ? 0.75f : 1.0f;
+
+        // Combine base speed (affected by swamp) with diagonal movement
+        speedFactor = currentSpeedFactor * diagonalFactor;
 
         if (!KeyHandler.isKeyPressed(KeyEvent.VK_A) && !KeyHandler.isKeyPressed(KeyEvent.VK_D)) UpdateCurrentDirectionX(0);
 
@@ -116,7 +127,11 @@ public class MainPlayer extends Player
         }
     }
 
-    void handleLocationByCollision()
+    public void setCurrentSpeedFactor(float factor) {
+        this.currentSpeedFactor = factor;
+    }
+
+    void handleLocation()
     {
         if(vAxisX == 0 && vAxisY == 0) return;
         int collX = worldX + CollisionArea.x;
@@ -124,7 +139,7 @@ public class MainPlayer extends Player
         if (vAxisY > 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY - Speed, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this, collX, collY - Speed, CollisionArea.width, CollisionArea.height))
             {
                 worldY -= (int) (Speed * speedFactor);
             }
@@ -132,7 +147,7 @@ public class MainPlayer extends Player
         if (vAxisY < 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX, collY + Speed, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this, collX, collY + Speed, CollisionArea.width, CollisionArea.height))
             {
                 worldY += (int) (Speed * speedFactor);
             }
@@ -140,7 +155,7 @@ public class MainPlayer extends Player
         if (vAxisX > 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX + Speed, collY, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this,collX + Speed, collY, CollisionArea.width, CollisionArea.height))
             {
                 worldX += (int) (Speed * speedFactor);
             }
@@ -148,7 +163,7 @@ public class MainPlayer extends Player
         if (vAxisX < 0)
         {
             if(!CollisionChecker.IsCollidingWithTileInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height) &
-                    !CollisionChecker.IsCollidingWithObjectInBox(collX - Speed, collY, CollisionArea.width, CollisionArea.height))
+                    !CollisionChecker.IsCollidingWithObjectInBox(this, collX - Speed, collY, CollisionArea.width, CollisionArea.height))
             {
                 worldX -= (int) (Speed * speedFactor);
             }
@@ -156,9 +171,6 @@ public class MainPlayer extends Player
     }
 
     /**Choose animation*/
-    void Dame(){
-        ApplyPointDamage(this,null,5,0,0,0,0);
-    }
     void handelAnimation()
     {
         switch (GetCurrentDirection())
@@ -210,7 +222,7 @@ public class MainPlayer extends Player
     {
         int BiasInteractBox = 8* GamePanel.scale;
         for(BaseObject overlappedObject : CollisionChecker.GetOverlappedObjectsInBox(
-                worldX + CollisionArea.x - BiasInteractBox,
+                this,worldX + CollisionArea.x - BiasInteractBox,
                 worldY + CollisionArea.y - BiasInteractBox,
                 CollisionArea.width +BiasInteractBox*2,
                 CollisionArea.height + BiasInteractBox*2))
@@ -227,33 +239,33 @@ public class MainPlayer extends Player
         if (GamePanel.GetInst().gameState == GameState.Run)
         {
             GamePanel.GetInst().gameState = GameState.Pause;
-            SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
+            SoundUtility.playSound(1,false, "/Sound/SFX/Object/coin.wav");
             HUD.AddWidget(pauseWD);
         }
         else if (GamePanel.GetInst().gameState == GameState.Pause)
         {
             GamePanel.GetInst().gameState = GameState.Run;
             HUD.RemoveWidget(pauseWD);
-            SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
+            SoundUtility.playSound(1,false, "/Sound/SFX/Object/coin.wav");
         }
     }
 
     private void Attack()
     {
-        if(animMontage != null || !bFreeToControl) return;
-        SoundUtility.playSound(1,false,"/Sound/SFX/SwordWhoose.wav");
+        if(PlayingAnimationMontage != null || !bFreeToControl) return;
+        SoundUtility.playSound(1,false, "/Sound/SFX/Object/SwordWhoose.wav");
         switch (GetCurrentDirection())
         {
             case up :
-                DmgNotify.setFrameStart(0);
+                DmgNotify.setFrameStart(1);
                 AttackMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/back/attack"));
                 break;
             case down:
-                DmgNotify.setFrameStart(0);
+                DmgNotify.setFrameStart(1);
                 AttackMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/front/attack"));
                 break;
             case left:
-                DmgNotify.setFrameStart(0);
+                DmgNotify.setFrameStart(1);
                 AttackMontage.setFlipBook( ImageUtility.makeFlipBook("/Player/left/attack"));
                 break;
             case right:
@@ -261,7 +273,7 @@ public class MainPlayer extends Player
                 AttackMontage.setFlipBook( ImageUtility.makeFlipBook("/Player/right/attack"));
                 break;
         }
-        PlayAnimMontage(AttackMontage, 4);
+        PlayAnimMontage(AttackMontage);
     }
 
     private void Dash()
@@ -288,25 +300,24 @@ public class MainPlayer extends Player
         if(StateWD.IsOnScreen()) HUD.RemoveWidget(StateWD);
         else HUD.AddWidget(StateWD);
     }
-    @Override
-    protected void OnPointDamage(Entity Causer, float Damage, int WorldX, int WorldY, int SourceWorldX, int SourceWorldY) {
-        currenthealth -= Damage;
-        if(currenthealth > 0)
-        {
-            ReceiveDamageAnim();
-            StateWD.updateHealth(currenthealth);
-        }
-        else DeathAnim();
+
+    void Dame(){
+        ApplyPointDamage(this,null,5,0,0,0,0);
     }
 
     @Override
     protected void OnAnyDamage(Entity Causer, float Damage, int SourceWorldX, int SourceWorldY) {
         currenthealth -= Damage;
-        if(currenthealth > 0)
-        {
-            ReceiveDamageAnim();
-            StateWD.updateHealth(currenthealth);
-        }
+        StateWD.updateHealth(currenthealth);
+        if (Damage < 0 ) return;
+        if(currenthealth <= 0) DeathAnim();
+        String SoundOnDamageSrc;
+        int randomNum = new Random().nextInt(0,6);
+        if(randomNum>2) SoundOnDamageSrc = "/Sound/SFX/Voice/Player/FemaleReceiveDamage1.wav";
+        else SoundOnDamageSrc = "/Sound/SFX/Voice/Player/FemaleReceiveDamage.wav";
+
+        SoundUtility.playSound(1, false,SoundOnDamageSrc);
+        if(currenthealth > 0) ReceiveDamageAnim();
         else DeathAnim();
     }
 
@@ -314,30 +325,30 @@ public class MainPlayer extends Player
     {
         switch (GetCurrentDirection())
         {
-            case up:
+            case up:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/back/hit"));
                 break;
-            case down:
+            case down:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/front/hit"));
                 break;
-            case left:
+            case left:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/left/hit"));
                 break;
-            case right:
+            case right:OnHitMontage.setFlipBook(ImageUtility.makeFlipBook("/Player/right/hit"));
                 break;
         }
+        PlayAnimMontage(OnHitMontage);
     }
 
     private void DeathAnim()
     {
-        switch (GetCurrentDirection())
-        {
-            case up:
-                break;
-            case down:
-                break;
-            case left:
-                break;
-            case right:
-                break;
-        }
+        CollisionMode = Collision.NoCollision;
+        if(StateWD.IsOnScreen()) HUD.RemoveWidget(StateWD);
+        PlayAnimMontage(DeathMontage);
+    }
+
+    private void OnGameOver()
+    {
+        GamePanel.GetInst().gameState = GameState.Pause;
+        if(GameOverScreen.IsOnScreen()) return;
+        HUD.AddWidget(GameOverScreen);
     }
 
     public float getDamageWeapon() {
@@ -366,5 +377,15 @@ public class MainPlayer extends Player
         bFreeToControl = bCanControl;
         UpdateCurrentDirectionX(0);
         UpdateCurrentDirectionY(0);
+    }
+
+    public void UpdateStateWD()
+    {
+        StateWD.updateHealth(currenthealth);
+    }
+    public void RestoreState()
+    {
+        currenthealth =  100;
+        UpdateStateWD();
     }
 }

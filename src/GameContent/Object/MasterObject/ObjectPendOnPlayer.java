@@ -25,8 +25,8 @@ public class ObjectPendOnPlayer extends BaseObject
     @Override
     public void Render(Graphics2D g2)
     {
-        screenX = worldX - GamePanel.GetInst().player.worldX + GamePanel.truePlayerScreenX - (SpriteRenderSizeX - GamePanel.tileSize)/2;
-        screenY = worldY - GamePanel.GetInst().player.worldY + GamePanel.truePlayerScreenY - (SpriteRenderSizeY - GamePanel.tileSize)/2;
+        screenX = worldX - GamePanel.GetInst().getPlayer().worldX + GamePanel.truePlayerScreenX - (SpriteRenderSizeX - GamePanel.tileSize)/2;
+        screenY = worldY - GamePanel.GetInst().getPlayer().worldY + GamePanel.truePlayerScreenY - (SpriteRenderSizeY - GamePanel.tileSize)/2;
         super.Render(g2);
     }
 

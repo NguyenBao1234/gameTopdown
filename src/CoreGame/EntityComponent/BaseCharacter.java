@@ -14,7 +14,7 @@ public abstract class BaseCharacter extends BaseObject
     protected int vAxisY;
     protected int Speed = 4;
 
-    protected AnimMontage animMontage;
+    protected AnimMontage PlayingAnimationMontage;
 
     private final ArrayList<Direction> directionList = new ArrayList<>(2);
 
@@ -45,7 +45,7 @@ public abstract class BaseCharacter extends BaseObject
     public void SetAnimationToUse(int index, int FPSPerImage)
     {
         if(index > flipBookArr.length-1) return;
-        if(animMontage != null) return;
+        if(PlayingAnimationMontage != null) return;
         flipBook = flipBookArr[index];
         fpsPerImage = FPSPerImage;
         //System.out.println("Setup Animation: successes");
@@ -56,9 +56,18 @@ public abstract class BaseCharacter extends BaseObject
     {
         currFlipBookFrame = -1;//ensure playing Full AnimMontage
         currFlipBookPage = -1;
-        this.animMontage = animMontage;
+        this.PlayingAnimationMontage = animMontage;
         flipBook = animMontage.getFlipBook();
         fpsPerImage = FPSPerImage;
+    }
+
+    public void PlayAnimMontage(AnimMontage animMontage)
+    {
+        currFlipBookFrame = -1;//ensure playing Full AnimMontage
+        currFlipBookPage = -1;
+        this.PlayingAnimationMontage = animMontage;
+        flipBook = animMontage.getFlipBook();
+        fpsPerImage = animMontage.getFpsPerImage();
     }
 
 
@@ -66,9 +75,9 @@ public abstract class BaseCharacter extends BaseObject
     protected void RunFlipBook(float dt)
     {
         super.RunFlipBook(dt);
-        if (animMontage != null)
+        if (PlayingAnimationMontage != null)
         {
-            for(AnimNotify animNotify : animMontage.getNotifies())
+            for(AnimNotify animNotify : PlayingAnimationMontage.getNotifies())
             {
                 if(animNotify.getFrameStart() * fpsPerImage == currFlipBookFrame)
                 {
@@ -80,7 +89,7 @@ public abstract class BaseCharacter extends BaseObject
             }
         }
         else return;
-        if(!(currFlipBookPage + 1 < flipBook.length)) animMontage = null;
+        if(!(currFlipBookPage + 1 < flipBook.length)) PlayingAnimationMontage = null;
     }
 
     protected void UpdateCurrentDirectionX(int AxisX)

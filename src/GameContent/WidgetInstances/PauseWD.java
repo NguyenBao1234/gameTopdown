@@ -74,7 +74,7 @@ public class PauseWD extends OptionalWidget
     protected void SelectOption()
     {
         super.SelectOption();
-        if(GamePanel.GetInst().gameState != GameState.Pause) return;
+        if(!IsOnScreen()) return;
         if (SelectingRowOption == 0)
         {
             GamePanel.GetInst().gameState = GameState.Run;

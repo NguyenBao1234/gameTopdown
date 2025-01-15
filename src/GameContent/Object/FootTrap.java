@@ -14,7 +14,7 @@ import HelpDevGameTool.ImageUtility;
 public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
     private boolean isActive = false;
     private boolean isOpen = true;
-    private final int requiredInteractions = 10; // Number of presses needed to escape
+    private final int requiredInteractions = 5; // Number of presses needed to escape
     private int currentInteractions = 0;
     private MainPlayer trappedPlayer;
     private NarrativeMessageWD DialogueWD;
@@ -22,9 +22,8 @@ public class FootTrap extends ObjectPendOnPlayer implements InteractInterface {
     public FootTrap()
     {
         SetupAnimation();
-        SpriteRenderSizeX = 16 * GamePanel.scale;
-        SpriteRenderSizeY = 16 * GamePanel.scale;
         setCollisionMode(Collision.Overlap);
+        setCollisionArea(0, 32, 10 * GamePanel.scale, 10 * GamePanel.scale);
         //setCollisionArea(x,y,a,b); chinh lai de nhan vat di sau vao hon
     }
 

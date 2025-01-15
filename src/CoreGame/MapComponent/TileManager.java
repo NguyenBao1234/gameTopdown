@@ -31,6 +31,9 @@ public class TileManager
         getTileImage();
         LoadMap("/Map/Abyss1.txt",0);
         LoadMap("/Map/Abyss2.txt",1);
+        LoadMap("/Map/OtherWorld.txt",2);
+        LoadMap("/Map/Grass1.txt",3);
+        LoadMap("/Map/Ground1.txt",4);
         tileTypeMap = tileTypeMapList.toArray(new int[0][][]);
     }
 
@@ -43,8 +46,8 @@ public class TileManager
     public static void DrawTiles(final Graphics2D g2)
     {
         int currMapIndex = GamePanel.GetInst().currentMapIndex;
-        int playerWorldX = GamePanel.GetInst().player.worldX;
-        int playerWorldY = GamePanel.GetInst().player.worldY;
+        int playerWorldX = GamePanel.GetInst().getPlayer().worldX;
+        int playerWorldY = GamePanel.GetInst().getPlayer().worldY;
         if(tileTypeMap[currMapIndex] == null) return;
         for(int i = 0; i < tileTypeMap[currMapIndex].length; i++)
         {

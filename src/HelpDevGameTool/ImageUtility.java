@@ -114,6 +114,42 @@ public class ImageUtility {
         }
     }
 
+    public static BufferedImage[] MakeFlipBookFromSheet(String imagePath, int gridSizeWidth, int tileHeight)
+    {
+        try
+        {
+            InputStream inputStream = ImageUtility.class.getResourceAsStream(imagePath);
+            if(inputStream == null)
+            {
+                Logger.logError("Invalid Image Sheet Path: " + imagePath, null);
+                return null;
+            }
+
+            BufferedImage OriginalImageBf = ImageIO.read(inputStream);
+            if(OriginalImageBf == null)
+            {
+                Logger.logError("Can't read file as Image: " + imagePath, null);
+                return null;
+            }
+            int rows = OriginalImageBf.getHeight() / tileHeight;
+            int cols = OriginalImageBf.getWidth() / gridSizeWidth;
+            ArrayList<BufferedImage> frameList = new ArrayList<>();
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < cols; x++)
+                {
+                    // Crop the tile
+                    BufferedImage extractedImage = OriginalImageBf.getSubimage(x * gridSizeWidth,y * tileHeight,gridSizeWidth,tileHeight);
+                    frameList.add(extractedImage);
+                }
+            }
+            return frameList.toArray(new BufferedImage[0]);
+        }
+        catch (IOException e){
+            Logger.logError("Failed to load" + imagePath, e);
+            throw new RuntimeException(e);
+        }
+    }
     public static BufferedImage RotateImage(BufferedImage image, int degree)
     {
         int width = image.getWidth();

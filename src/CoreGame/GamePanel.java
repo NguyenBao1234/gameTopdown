@@ -8,7 +8,6 @@ import GameContent.DataSave.SaveLoad;
 import GameContent.MainPlayer;
 import CoreGame.MapComponent.TileManager;
 import CoreGame.EntityComponent.BaseObject;
-import GameContent.WidgetInstances.HealthBar;
 import GameContent.WidgetInstances.MainMenuWD;
 
 import javax.swing.*;
@@ -18,6 +17,7 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable
 {
     private static GamePanel instance;
+    private final Color DefaultBackgroundColor = new Color(0x0F5A00);
     public static final int FPS = 60;
     //Screen Setting property://
     public static final int originalTileSize = 16;
@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable
 
 
     // ENTITY AND OBJECT
-    public MainPlayer player;
+    private MainPlayer player;
     public BaseObject obj[][] = new BaseObject[maxMap][25];//[amount of Maps][object each map]
     PostProcessing postProcessing = new PostProcessing();
     public SaveLoad saveLoad = new SaveLoad();
@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
-        this.setBackground(new Color(0x0F5A00));
+        this.setBackground(DefaultBackgroundColor);
         instance = this;
 
         addKeyListener(KeyHandler.getInstance());
@@ -141,4 +141,8 @@ public class GamePanel extends JPanel implements Runnable
     public MainMenuWD getMainMenuWD() {
         return mainMenuWD;
     }
+    public MainPlayer getPlayer(){return player;}
+    public void SetBackgroundColor(Color color){this.setBackground(color);}
+    public void SetBackgroundColorDefault(){this.setBackground(DefaultBackgroundColor);}
+
 }

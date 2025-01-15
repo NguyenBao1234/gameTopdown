@@ -29,7 +29,7 @@ public class KeyItemObject extends InteractObject
     {
         System.out.println("Key was interacted");
         if(targetInteractObject != null) targetInteractObject.SetUnlock(true);
-        SoundUtility.playSound(1,false,"/Sound/SFX/coin.wav");
+        SoundUtility.playSound(1,false, "/Sound/SFX/Object/pick-up-item-1.wav");
         Destroy(this);
     }
 }
