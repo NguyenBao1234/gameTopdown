@@ -1,13 +1,13 @@
+//Copyright POWGameStd
 package GameContent.Object.MasterObject;
 
-import CoreGame.EntityComponent.Entity;
-import CoreGame.GamePanel;
-import CoreGame.SoundComponent.Sound;
-import CoreGame.SoundComponent.SoundUtility;
+import POWJ.EntityComponent.Entity;
+import POWJ.GamePanel;
+import POWJ.SoundComponent.SoundUtility;
 import HelpDevGameTool.ImageUtility;
 
-import static CoreGame.Data.Enums.Collision.Block;
-import static CoreGame.Data.Enums.Collision.NoCollision;
+import static POWJ.Data.Enums.Collision.Block;
+import static POWJ.Data.Enums.Collision.NoCollision;
 
 public class BreakableObject extends ObjectPendOnPlayer
 {

@@ -1,8 +1,8 @@
+//Copyright POWGameStd
 package GameContent.WidgetInstances;
 
-import CoreGame.GamePanel;
-import CoreGame.WidgetComponent.HUD;
-import CoreGame.WidgetComponent.Widget;
+import POWJ.GamePanel;
+import POWJ.WidgetComponent.Widget;
 
 import java.awt.*;
 

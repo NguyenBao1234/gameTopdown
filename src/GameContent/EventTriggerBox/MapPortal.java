@@ -1,8 +1,9 @@
+//Copyright POWGameStd
 package GameContent.EventTriggerBox;
 
-import CoreGame.EntityComponent.Entity;
-import CoreGame.GamePanel;
-import CoreGame.PlayerComponent.Player;
+import POWJ.EntityComponent.Entity;
+import POWJ.GamePanel;
+import POWJ.PlayerComponent.Player;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 import HelpDevGameTool.ImageUtility;
 

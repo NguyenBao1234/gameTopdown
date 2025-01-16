@@ -1,15 +1,13 @@
+//Copyright POWGameStd
 package GameContent.NotifyInstances;
 
-import CoreGame.AnimNotifyComponent.AnimNotify;
-import CoreGame.CollisionComponent.CollisionChecker;
-import CoreGame.EntityComponent.BaseCharacter;
-import CoreGame.EntityComponent.BaseObject;
-import CoreGame.GamePanel;
+import POWJ.AnimNotifyComponent.AnimNotify;
+import POWJ.CollisionComponent.CollisionChecker;
+import POWJ.EntityComponent.BaseCharacter;
+import POWJ.EntityComponent.BaseObject;
+import POWJ.GamePanel;
 import GameContent.MainPlayer;
 import GameContent.NPC.Enemy.Enemy;
-
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 
 public class TraceDamageNotify extends AnimNotify

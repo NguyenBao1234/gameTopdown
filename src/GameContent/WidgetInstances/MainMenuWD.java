@@ -1,16 +1,17 @@
+//Copyright POWGameStd
 package GameContent.WidgetInstances;
 
-import CoreGame.Data.Enums.GameState;
-import CoreGame.GamePanel;
-import CoreGame.KeyHandlerComponent.KeyHandler;
-import CoreGame.SoundComponent.Sound;
-import CoreGame.SoundComponent.SoundUtility;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.Data.Enums.GameState;
+import POWJ.GamePanel;
+import POWJ.GameSaverComponent.SaveUtility;
+import POWJ.KeyHandlerComponent.KeyHandler;
+import POWJ.SoundComponent.Sound;
+import POWJ.SoundComponent.SoundUtility;
+import POWJ.WidgetComponent.HUD;
 import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 public class MainMenuWD extends OptionalWidget
 {
@@ -36,12 +37,8 @@ public class MainMenuWD extends OptionalWidget
         KeyHandler ControllerComp = KeyHandler.getInstance();
         ControllerComp.BindAction(KeyEvent.VK_W, true,this::Up);
         ControllerComp.BindAction(KeyEvent.VK_S, true,this::Down);
-        ControllerComp.BindAction(KeyEvent.VK_A, true,this::Left);
-        ControllerComp.BindAction(KeyEvent.VK_D, true,this::Right);
         ControllerComp.BindAction(KeyEvent.VK_UP, true,this::Up);
         ControllerComp.BindAction(KeyEvent.VK_DOWN, true,this::Down);
-        ControllerComp.BindAction(KeyEvent.VK_LEFT, true,this::Left);
-        ControllerComp.BindAction(KeyEvent.VK_RIGHT, true,this::Right);
         ControllerComp.BindAction(KeyEvent.VK_ENTER, true,this::SelectOption);
     }
 
@@ -102,16 +99,12 @@ public class MainMenuWD extends OptionalWidget
             GamePanel.GetInst().getPlayer().RestoreState();
             GamePanel.GetInst().SetBackgroundColorDefault();
         }
-        if(SelectingRowOption == 1) {
-            try {
-                GamePanel.GetInst().saveLoad.load();
-                GamePanel.GetInst().gameState = GameState.Run;
-                HUD.RemoveWidget(this);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+        if(SelectingRowOption == 1)
+        {
+            if(!SaveUtility.DoesGameSaveExist("GameSave")) return;
+            GamePanel.GetInst().saveLoad.load();
+            GamePanel.GetInst().gameState = GameState.Run;
+            HUD.RemoveWidget(this);
         }
 
         if(SelectingRowOption == 2 ){

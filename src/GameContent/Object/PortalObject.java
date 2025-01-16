@@ -1,3 +1,4 @@
+//Copyright POWGameStd
 package GameContent.Object;
 
 import GameContent.EventTriggerBox.MapPortal;

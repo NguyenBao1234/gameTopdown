@@ -1,13 +1,5 @@
+//Copyright POWGameStd
 package GameContent.NPC.Enemy;
-
-import CoreGame.CollisionComponent.CollisionChecker;
-import CoreGame.Data.Enums.Collision;
-import CoreGame.EntityComponent.BaseObject;
-import CoreGame.GamePanel;
-import GameContent.MainPlayer;
-import HelpDevGameTool.ImageUtility;
-
-import java.awt.image.BufferedImage;
 
 public abstract class TracjectoryEnemy extends Enemy
 {

@@ -1,7 +1,8 @@
+//Copyright POWGameStd
 package GameContent.NotifyInstances;
 
-import CoreGame.AnimNotifyComponent.AnimNotify;
-import CoreGame.BinderComponent.MultiBinder;
+import POWJ.AnimNotifyComponent.AnimNotify;
+import POWJ.BinderComponent.MultiBinder;
 
 public class NotifyWithBinder extends AnimNotify
 {

@@ -1,3 +1,4 @@
+//Copyright POWGameStd
 package HelpDevGameTool;
 
 import java.awt.image.BufferedImage;

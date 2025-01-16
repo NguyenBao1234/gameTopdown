@@ -1,8 +1,8 @@
 package GameContent.Object;
 
-import CoreGame.GamePanel;
-import CoreGame.SoundComponent.SoundUtility;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.GamePanel;
+import POWJ.SoundComponent.SoundUtility;
+import POWJ.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.NarrativeMessageWD;

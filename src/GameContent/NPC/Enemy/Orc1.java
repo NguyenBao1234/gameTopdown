@@ -1,8 +1,9 @@
+//Copyright POWGameStd
 package GameContent.NPC.Enemy;
 
-import CoreGame.Data.Enums.Collision;
-import CoreGame.GamePanel;
-import CoreGame.SoundComponent.SoundUtility;
+import POWJ.Data.Enums.Collision;
+import POWJ.GamePanel;
+import POWJ.SoundComponent.SoundUtility;
 import HelpDevGameTool.ImageUtility;
 
 import java.awt.image.BufferedImage;

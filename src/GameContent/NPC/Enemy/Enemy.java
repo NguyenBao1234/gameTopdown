@@ -1,10 +1,11 @@
+//Copyright POWGameStd
 package GameContent.NPC.Enemy;
 
-import CoreGame.AnimationClass.AnimMontage;
-import CoreGame.CollisionComponent.CollisionChecker;
-import CoreGame.EntityComponent.BaseObject;
-import CoreGame.EntityComponent.Entity;
-import CoreGame.GamePanel;
+import POWJ.AnimationClass.AnimMontage;
+import POWJ.CollisionComponent.CollisionChecker;
+import POWJ.EntityComponent.BaseObject;
+import POWJ.EntityComponent.Entity;
+import POWJ.GamePanel;
 import GameContent.MainPlayer;
 import GameContent.NPC.BaseCharacterPendOnPlayer;
 import GameContent.NotifyInstances.NotifyWithBinder;

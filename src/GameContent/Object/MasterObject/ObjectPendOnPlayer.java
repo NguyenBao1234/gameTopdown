@@ -1,9 +1,9 @@
+//Copyright POWGameStd
 package GameContent.Object.MasterObject;
 
-import CoreGame.EntityComponent.BaseObject;
-import CoreGame.EntityComponent.Entity;
-import CoreGame.GamePanel;
-import HelpDevGameTool.ImageUtility;
+import POWJ.EntityComponent.BaseObject;
+import POWJ.EntityComponent.Entity;
+import POWJ.GamePanel;
 
 import java.awt.*;
 

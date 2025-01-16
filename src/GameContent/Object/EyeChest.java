@@ -1,9 +1,10 @@
+//Copyright POWGameStd
 package GameContent.Object;
 
-import CoreGame.Data.Enums.Collision;
-import CoreGame.GamePanel;
-import CoreGame.SoundComponent.SoundUtility;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.Data.Enums.Collision;
+import POWJ.GamePanel;
+import POWJ.SoundComponent.SoundUtility;
+import POWJ.WidgetComponent.HUD;
 import GameContent.EventTriggerBox.MapPortal;
 import GameContent.Object.MasterObject.ObjectNeedKeyItem;
 import GameContent.WidgetInstances.NarrativeMessageWD;

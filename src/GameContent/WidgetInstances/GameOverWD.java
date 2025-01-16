@@ -1,14 +1,15 @@
+//Copyright POWGameStd
 package GameContent.WidgetInstances;
 
-import CoreGame.Data.Enums.GameState;
-import CoreGame.GamePanel;
-import CoreGame.KeyHandlerComponent.KeyHandler;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.Data.Enums.GameState;
+import POWJ.GamePanel;
+import POWJ.GameSaverComponent.SaveUtility;
+import POWJ.KeyHandlerComponent.KeyHandler;
+import POWJ.WidgetComponent.HUD;
 import HelpDevGameTool.ImageUtility;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 public class GameOverWD extends OptionalWidget
 {
@@ -76,12 +77,8 @@ public class GameOverWD extends OptionalWidget
         if(!IsOnScreen()) return;
         if (SelectingRowOption == 0)
         {
-            try {
-                GamePanel.GetInst().saveLoad.load();
-                GamePanel.GetInst().gameState = GameState.Run;
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            if(!SaveUtility.DoesGameSaveExist("GameSave")) return;
+            GamePanel.GetInst().gameState = GameState.Run;
         }
         if(SelectingRowOption == 1 )
         {

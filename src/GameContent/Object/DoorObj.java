@@ -1,7 +1,8 @@
+//Copyright POWGameStd
 package GameContent.Object;
 
-import CoreGame.Data.Enums.Collision;
-import CoreGame.SoundComponent.SoundUtility;
+import POWJ.Data.Enums.Collision;
+import POWJ.SoundComponent.SoundUtility;
 import GameContent.Object.MasterObject.ObjectNeedKeyItem;
 
 public class DoorObj extends ObjectNeedKeyItem

@@ -1,10 +1,10 @@
 package GameContent.Object;
 
-import CoreGame.Data.Enums.Collision;
-import CoreGame.EntityComponent.Entity;
-import CoreGame.GamePanel;
-import CoreGame.PlayerComponent.Player;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.Data.Enums.Collision;
+import POWJ.EntityComponent.Entity;
+import POWJ.GamePanel;
+import POWJ.PlayerComponent.Player;
+import POWJ.WidgetComponent.HUD;
 import GameContent.MainPlayer;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;

@@ -1,8 +1,9 @@
+//Copyright POWGameStd
 package GameContent.EventTriggerBox;
 
-import CoreGame.Data.Enums.GameState;
-import CoreGame.EntityComponent.Entity;
-import CoreGame.GamePanel;
+import POWJ.Data.Enums.GameState;
+import POWJ.EntityComponent.Entity;
+import POWJ.GamePanel;
 import GameContent.MainPlayer;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.EndGameWidget;

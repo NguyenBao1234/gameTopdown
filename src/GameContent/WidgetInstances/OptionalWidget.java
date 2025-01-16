@@ -1,8 +1,9 @@
+//Copyright POWGameStd
 package GameContent.WidgetInstances;
 
-import CoreGame.SoundComponent.SoundUtility;
-import CoreGame.WidgetComponent.Widget;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.SoundComponent.SoundUtility;
+import POWJ.WidgetComponent.Widget;
+import POWJ.WidgetComponent.HUD;
 
 public abstract class OptionalWidget extends Widget
 {

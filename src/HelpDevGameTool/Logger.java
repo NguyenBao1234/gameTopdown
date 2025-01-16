@@ -1,3 +1,4 @@
+//Copyright POWGameStd
 package HelpDevGameTool;
 
 public class Logger

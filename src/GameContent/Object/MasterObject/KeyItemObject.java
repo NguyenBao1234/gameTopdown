@@ -1,8 +1,8 @@
 package GameContent.Object.MasterObject;
 
-import CoreGame.EntityComponent.Entity;
-import CoreGame.Data.Enums.Collision;
-import CoreGame.SoundComponent.SoundUtility;
+import POWJ.EntityComponent.Entity;
+import POWJ.Data.Enums.Collision;
+import POWJ.SoundComponent.SoundUtility;
 import HelpDevGameTool.ImageUtility;
 
 

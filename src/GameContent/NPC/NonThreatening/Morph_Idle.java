@@ -1,14 +1,13 @@
+//Copyright POWGameStd
 package GameContent.NPC.NonThreatening;
 
-import CoreGame.GamePanel;
-import CoreGame.SoundComponent.SoundUtility;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.GamePanel;
+import POWJ.SoundComponent.SoundUtility;
+import POWJ.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.NarrativeMessageWD;
 import HelpDevGameTool.ImageUtility;
-
-import java.io.IOException;
 
 public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
 {
@@ -48,11 +47,7 @@ public class Morph_Idle extends ObjectPendOnPlayer implements InteractInterface
             if(interactCount == 4)  {
                 SoundUtility.playSound(1,false,"/Sound/SFX/Object/confirmation-upward.wav");
                 DialogueWD.SetMessages("game save!");
-                try {
-                    GamePanel.GetInst().saveLoad.save();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                GamePanel.GetInst().saveLoad.save();
             }
             if(interactCount > 4) return;
             HUD.AddWidget(DialogueWD);

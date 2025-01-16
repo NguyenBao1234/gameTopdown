@@ -1,7 +1,8 @@
+//Copyright POWGameStd
 package GameContent.EventTriggerBox;
 
-import CoreGame.Data.Enums.Collision;
-import CoreGame.EntityComponent.Entity;
+import POWJ.Data.Enums.Collision;
+import POWJ.EntityComponent.Entity;
 import GameContent.MainPlayer;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;

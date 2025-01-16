@@ -1,6 +1,6 @@
 package GameContent.WidgetInstances;
 
-import CoreGame.WidgetComponent.Widget;
+import POWJ.WidgetComponent.Widget;
 import java.awt.*;
 
 public class HealthBar extends Widget {

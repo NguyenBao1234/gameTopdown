@@ -1,8 +1,9 @@
+//Copyright POWGameStd
 package GameContent.NPC.NonThreatening;
 
-import CoreGame.GamePanel;
-import CoreGame.KeyHandlerComponent.KeyHandler;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.GamePanel;
+import POWJ.KeyHandlerComponent.KeyHandler;
+import POWJ.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.NarrativeMessageWD;

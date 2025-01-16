@@ -1,7 +1,8 @@
+//Copyright POWGameStd
 package GameContent.NPC;
 
-import CoreGame.EntityComponent.BaseCharacter;
-import CoreGame.GamePanel;
+import POWJ.EntityComponent.BaseCharacter;
+import POWJ.GamePanel;
 
 import java.awt.*;
 

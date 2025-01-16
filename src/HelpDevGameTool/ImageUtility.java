@@ -1,6 +1,4 @@
-/*
-    /
- */
+//Copyright POWGameStd
 package HelpDevGameTool;
 
 import javax.imageio.ImageIO;

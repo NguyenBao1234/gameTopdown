@@ -1,14 +1,11 @@
 package GameContent.Object;
 
-import CoreGame.Data.Enums.Collision;
-import CoreGame.GamePanel;
-import CoreGame.SoundComponent.SoundUtility;
-import CoreGame.WidgetComponent.HUD;
+import POWJ.GamePanel;
+import POWJ.SoundComponent.SoundUtility;
+import POWJ.WidgetComponent.HUD;
 import GameContent.Object.MasterObject.InteractInterface;
 import GameContent.Object.MasterObject.ObjectPendOnPlayer;
 import GameContent.WidgetInstances.NarrativeMessageWD;
-
-import java.io.IOException;
 
 public class TempleMini extends ObjectPendOnPlayer implements InteractInterface {
     public NarrativeMessageWD Dialogue;
@@ -21,18 +18,17 @@ public class TempleMini extends ObjectPendOnPlayer implements InteractInterface 
     @Override
     public void interact()
     {
-        if(Dialogue.IsOnScreen()) {
+        if(Dialogue.IsOnScreen())
+        {
             Dialogue.NextContent();
-            try {
-                GamePanel.GetInst().saveLoad.save();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            GamePanel.GetInst().saveLoad.save();
+            GamePanel.GetInst().getPlayer().SetFreeToControl(true);
         }
         else
         {
             HUD.AddWidget(Dialogue);
             SoundUtility.playSound(1,false,"/Sound/SFX/Object/confirmation-upward.wav");
+            GamePanel.GetInst().getPlayer().SetFreeToControl(false);
         }
     }
 
