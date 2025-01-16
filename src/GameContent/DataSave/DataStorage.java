@@ -1,8 +1,9 @@
 package GameContent.DataSave;
 
-import java.io.Serializable;
+import POWJ.GameSaverComponent.GameSaver;
 
-public class DataStorage implements Serializable {
+
+public class DataStorage extends GameSaver {
     //player stats
     float health;
     int map;
